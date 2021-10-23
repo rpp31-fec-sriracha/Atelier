@@ -1,7 +1,7 @@
 import React from 'react';
-import Overview from './Overview/Overview.jsx';
-import Questions from './Questions/Questions.jsx';
-import Reviews from './Reviews/Reviews.jsx';
+import Overview from './components/Overview/Overview.jsx';
+import Questions from './components/Questions/Questions.jsx';
+import Reviews from './components/Reviews/Reviews.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -20,3 +20,5 @@ class App extends React.Component {
     </div>);
   }
 }
+
+export default App;
