@@ -4,7 +4,8 @@
   "description": "FEC",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "webpack --watch --config webpack.config.js"
   },
   "repository": {
     "type": "git",
