@@ -1,7 +1,9 @@
 import React from 'react';
 
 const Reviews = function(props) {
-  return 'Reviews';
+  return (<div className="Reviews">
+    'Reviews';
+  </div>);
 };
 
 export default Reviews;

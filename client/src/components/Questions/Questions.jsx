@@ -1,7 +1,9 @@
 import React from 'react';
 
-const Reviews = function(props) {
-  return 'Questions';
+const Questions = function(props) {
+  return (<div className="Questions">
+    'Questions'
+  </div>);
 };
 
 export default Questions;
