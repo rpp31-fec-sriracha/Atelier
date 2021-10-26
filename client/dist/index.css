@@ -1,4 +1,60 @@
+html {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  min-height: 100vh;
+  width: 100%;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  height: 20%;
+  background-color: gray;
+  color: white;
+  font-family: sans-serif
+}
+
+.logo {
+  height: 100px;
+  padding: 4px;
+}
+
+#app {
+  width: 75%;
+  margin: 0 auto 0;
+  padding: 10px;
+}
+
 .appContainer {
   display: flex;
   flex-direction: column;
+}
+
+.overview {
+  margin: 5px;
+}
+
+.questions {
+  margin: 5px;
+}
+
+.reviews {
+  margin: 5px;
+}
+
+.col-1-3 {
+  width: 33%
+}
+
+.col-2-3 {
+  width: 66%
 }
