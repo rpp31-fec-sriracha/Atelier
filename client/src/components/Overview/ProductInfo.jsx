@@ -4,7 +4,8 @@ import ImageGallery from './ImageGallery.jsx';
 const ProductInfo = function(props) {
   return (
     <div id="productInfo">
-      {this.props.styles ? <ImageGallery styles={this.props.styles.results} /> : 'Image Gallery'}
+      <h1>Image Gallery</h1>
+      {/* {this.props.styles ? <ImageGallery styles={this.props.styles.results} /> : 'Image Gallery'} */}
       <div id="productInfoTop">
         <h4>STARS Read all # reviews</h4>
         <h4>{props.product.category}</h4>

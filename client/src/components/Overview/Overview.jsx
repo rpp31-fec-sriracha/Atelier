@@ -2,7 +2,7 @@ import React from 'react';
 import ProductInfo from './ProductInfo.jsx';
 
 const getData = function(endpoint, params, callback) {
-  const TOKEN = 'APITOKEN';
+  const TOKEN = '';
   const axios = require('axios').default;
 
   const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
@@ -60,8 +60,7 @@ class Overview extends React.Component {
 
   render() {
     return (<div className="overview">
-      'Overview'
-      {this.loadProductInfo ? <ProductInfo product={this.state.product} styles={this.state.styles} /> : 'Product Info'}
+      <ProductInfo product={this.state.product} styles={this.state.styles} />
     </div>);
   }
 }
