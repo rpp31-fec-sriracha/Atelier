@@ -28,6 +28,25 @@ header {
   padding: 4px;
 }
 
+/* Styling classes - add a class to apply that style to your element */
+.flex-row {
+  display: flex;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.col-1-3 {
+  width: 33%
+}
+
+.col-2-3 {
+  width: 66%
+}
+/* End of styling classes */
+
 #app {
   height: 100%;
   width: 75%;
@@ -62,12 +81,4 @@ header {
 
 .reviews {
   margin: 5px;
-}
-
-.col-1-3 {
-  width: 33%
-}
-
-.col-2-3 {
-  width: 66%
 }

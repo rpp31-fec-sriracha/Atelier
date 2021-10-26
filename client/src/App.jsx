@@ -8,12 +8,23 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      results: [],
+      currentProductId: '',
+      productInfo: {},
+      productStyles: {},
+      productReviews: {
+        reviews: {},
+        meta: {},
+      },
+      productQA: {
+        questions: {},
+        answers: {},
+      },
+      cart: [],
     };
   }
 
   render() {
-    return (<div className="appContainer">
+    return (<div id="appContainer" classname="flex-column">
       <Overview />
       <Questions />
       <Reviews />
