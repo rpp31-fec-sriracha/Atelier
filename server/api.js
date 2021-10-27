@@ -7,13 +7,13 @@ const apiCall = function(endpoint, params, callback) {
     headers: { 'Authorization': API_KEY },
     params: params,
   })
-    .then((response) => callback(null, response))
+    .then((response) => callback(null, response.data))
     .catch((err) => callback(err, null));
 };
 
 const defaultParams = { responseType: 'json' };
 
-const productList = (page, count, callback) => {
+const getProductList = (page, count, callback) => {
   apiCall('/products', {
     page,
     count,
@@ -22,16 +22,16 @@ const productList = (page, count, callback) => {
   callback);
 };
 
-const productInfo = (productId, callback) => {
+const getProductInfo = (productId, callback) => {
   apiCall(`/products/${productId}`, defaultParams, callback);
 };
 
-const productStyles = (productId, callback) => {
+const getProductStyles = (productId, callback) => {
   apiCall(`/products/${productId}/styles`, defaultParams, callback);
 };
 
 const getReviews = (productId, page, count, callback) => {
-  apiCall(`/reviews`,
+  apiCall('/reviews',
     {
       product_id: productId,
       page,
@@ -41,7 +41,48 @@ const getReviews = (productId, page, count, callback) => {
     callback);
 };
 
+const getReviewMeta = (productId, callback) => {
+  apiCall('/reviews/meta',
+    {
+      product_id: productId,
+      responseType: 'json',
+    },
+    callback);
+};
+
+// function for adding review
+
+// function for marking review as helpful
+
+const getQuestions = (productId, page, count, callback) => {
+  apiCall('qa/questions',
+    {
+      product_id: productId,
+      page,
+      count,
+      responseType: 'json',
+    },
+    callback);
+};
+
+const getAnswers = (questionId, page, count, callback) => {
+  apiCall(`qa/questions/${questionId}/answers`,
+    {
+      page,
+      count
+    },
+    callback);
+};
+
+// need to add POST functions for QA
 
 
-
-// productList(1, 5, (err, data) => console.log(data));
+module.exports = {
+  getProductList,
+  getProductInfo,
+  getProductStyles,
+  getReviews,
+  getReviewMeta,
+  getQuestions,
+  getAnswers,
+};
