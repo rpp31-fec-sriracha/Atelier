@@ -71,9 +71,9 @@ header {
   padding: 0.25em;
 }
 
-#productInfo {
+/* #productInfo {
   display: flex;
-}
+} */
 
 .questions {
   margin: 5px;
