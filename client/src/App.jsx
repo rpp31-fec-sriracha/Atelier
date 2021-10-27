@@ -8,7 +8,15 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      results: [],
+      currentProductId: '',
+      productInfo: {},
+      productStyles: {},
+      productReviews: {
+        reviews: {},
+        meta: {},
+      },
+      productQA: [],
+      cart: [],
     };
   }
 
