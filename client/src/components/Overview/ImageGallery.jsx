@@ -10,11 +10,13 @@ class ImageGallery extends React.Component {
   }
 
   componentDidMount() {
-    // this.props.styles.map((style) => {
-    //   if (style['default?']) {
-    //     this.setState({ default: style });
-    //   }
-    // });
+    this.props.styles.map((style) => {
+      console.log(style);
+      if (style['default?']) {
+        console.log(style);
+        this.setState({ default: style });
+      }
+    });
   }
 
   render() {

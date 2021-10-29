@@ -3,8 +3,9 @@ import ImageGallery from './ImageGallery.jsx';
 
 const ProductInfo = function(props) {
   return (
-    <div id="productInfo">
-      <h1>Image Gallery</h1>
+    <div className="flex-row" id="productInfo">
+      {/* <h1>Image Gallery</h1> */}
+      <ImageGallery styles={props.styles} />
       {/* {this.props.styles ? <ImageGallery styles={this.props.styles.results} /> : 'Image Gallery'} */}
       <div id="productInfoTop">
         <h4>STARS Read all # reviews</h4>

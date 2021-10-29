@@ -3,49 +3,53 @@ import ProductInfo from './ProductInfo.jsx';
 import sampleData from './sampleData.js';
 import axios from 'axios';
 
-// const getData = function(endpoint, params, callback) {
-//   const TOKEN = '';
-//   const axios = require('axios').default;
-
-//   const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
-
-//   axios.get(`${url}${endpoint}`, {
-//     headers: { 'Authorization': TOKEN },
-//     params: params,
-//   })
-//     .then((response) => callback(null, response.data))
-//     .catch((error) => callback(error, null));
-
-// };
-
 class Overview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       currentProduct: '',
-      product: sampleData.product,
-      styles: sampleData.styles,
+      product: {},
+      styles: [],
       loadProductInfo: false,
     };
   }
 
   componentDidMount() {
-    let apiCalls = [
-      Promise.resolve(axios({
-        url: '/productInfo',
-        method: 'get',
-        params: { productId: this.state.currentProduct }
-      })),
-      Promise.resolve(axios({
-        url: '/productStyles',
-        method: 'get',
-        params: { productId: this.state.currentProduct }
-      })),
-    ];
+    // let apiCalls = [
+    //   Promise.resolve(axios({
+    //     url: '/productInfo',
+    //     method: 'get',
+    //     params: { productId: this.state.currentProduct }
+    //   })),
+    //   Promise.resolve(axios({
+    //     url: '/productStyles',
+    //     method: 'get',
+    //     params: { productId: this.state.currentProduct }
+    //   })),
+    // ];
+    let product;
 
     Promise.resolve(this.setState( { currentProduct: 59556 } ))
-      .then(() => Promise.all(apiCalls))
-      .then((data) => console.log(data))
+      .then(() => {
+        return axios({
+          url: '/productInfo',
+          method: 'get',
+          params: { productId: this.state.currentProduct }
+        });
+      })
+      .then((response) => product = response.data)
+      // .then((response) => this.setState( { product: response.data } ))
+      .then(() => {
+        return axios({
+          url: '/productStyles',
+          method: 'get',
+          params: { productId: this.state.currentProduct }
+        });
+      })
+      .then((response) => this.setState( {
+        product: product,
+        styles: response.data.results
+      }))
       .catch((err) => console.log(err));
     // getData(
     //   '/products', {
@@ -79,7 +83,7 @@ class Overview extends React.Component {
   }
 
   render() {
-    console.log(sampleData);
+    // console.log(sampleData);
     return (<div className="overview">
       <ProductInfo product={this.state.product} styles={this.state.styles} />
     </div>);
