@@ -1,6 +1,7 @@
 import React from 'react';
 import ProductInfo from './ProductInfo.jsx';
 import sampleData from './sampleData.js';
+import axios from 'axios';
 
 // const getData = function(endpoint, params, callback) {
 //   const TOKEN = '';
@@ -21,6 +22,7 @@ class Overview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      currentProduct: '',
       product: sampleData.product,
       styles: sampleData.styles,
       loadProductInfo: false,
@@ -28,6 +30,23 @@ class Overview extends React.Component {
   }
 
   componentDidMount() {
+    let apiCalls = [
+      Promise.resolve(axios({
+        url: '/productInfo',
+        method: 'get',
+        params: { productId: this.state.currentProduct }
+      })),
+      Promise.resolve(axios({
+        url: '/productStyles',
+        method: 'get',
+        params: { productId: this.state.currentProduct }
+      })),
+    ];
+
+    Promise.resolve(this.setState( { currentProduct: 59556 } ))
+      .then(() => Promise.all(apiCalls))
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
     // getData(
     //   '/products', {
     //     page: 1,

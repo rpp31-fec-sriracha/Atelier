@@ -10,7 +10,7 @@ app.use(express.static(path.resolve(__dirname, '../client/dist')));
 app.get('/products', (req, res) => {
   let page = 1;
   let count = 5;
-  if (req.body.page) {
+  if (req.query.page) {
     page = page;
   }
   if (req.body.count) {
@@ -27,7 +27,9 @@ app.get('/products', (req, res) => {
 });
 
 app.get('/productInfo', (req, res) => {
-  let productId = body.productId;
+  console.log(req.url);
+  console.log(req.query);
+  let productId = req.query.productId;
 
   api.getProductInfo(productId, (err, data) => {
     if (err) {
@@ -39,7 +41,7 @@ app.get('/productInfo', (req, res) => {
 });
 
 app.get('/productStyles', (req, res) => {
-  let productId = body.productId;
+  let productId = req.query.productId;
 
   api.getProductStyles(productId, (err, data) => {
     if (err) {
@@ -51,7 +53,7 @@ app.get('/productStyles', (req, res) => {
 });
 
 app.get('/reviews', (req, res) => {
-  let productId = body.productId;
+  let productId = req.query.productId;
   let page = 1;
   let count = 5;
   if (req.body.page) {
@@ -71,7 +73,7 @@ app.get('/reviews', (req, res) => {
 });
 
 app.get('/reviews/meta', (req, res) => {
-  let productId = body.productId;
+  let productId = req.query.productId;
 
   api.getReviewMeta(productId, (err, data) => {
     if (err) {
@@ -83,7 +85,7 @@ app.get('/reviews/meta', (req, res) => {
 });
 
 app.get('/questions', (req, res) => {
-  let productId = body.productId;
+  let productId = req.query.productId;
   let page = 1;
   let count = 5;
   if (req.body.page) {
@@ -103,7 +105,7 @@ app.get('/questions', (req, res) => {
 });
 
 app.get('/answers', (req, res) => {
-  let productId = body.productId;
+  let productId = req.query.productId;
   let page = 1;
   let count = 5;
   if (req.body.page) {
