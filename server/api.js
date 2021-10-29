@@ -57,7 +57,7 @@ const getReviewMeta = (productId, callback) => {
 const getQuestions = (productId, page, count, callback) => {
   apiCall('qa/questions',
     {
-      product_id: productId,
+      productId: productId,
       page,
       count,
       responseType: 'json',
