@@ -6,7 +6,6 @@ import Reviews from './components/Reviews/Reviews.jsx';
 class App extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       currentProductId: '',
       productInfo: {},
@@ -21,9 +20,11 @@ class App extends React.Component {
   }
 
   render() {
+    const { productQA, currentProductId } = this.state;
+
     return (<div className="appContainer">
       <Overview />
-      <Questions />
+      <Questions currentProductId={currentProductId} productQA={productQA} />
       <Reviews />
     </div>);
   }
