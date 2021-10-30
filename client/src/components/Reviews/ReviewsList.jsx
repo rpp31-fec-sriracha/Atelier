@@ -8,7 +8,8 @@ class ReviewsList extends React.Component {
     super(props);
 
     this.state = {
-      numReviewsVisible: 2
+      numReviewsVisible: 2,
+      sortOption: 'relevance'
     };
   }
 
@@ -16,7 +17,9 @@ class ReviewsList extends React.Component {
     return (<div className="reviewsList">
       <div>'Reviews List Component'</div>
       <div>'Sort options - make its own component?</div>
-      <div><IndividualReviewTile/></div>
+      <div>3 reviews, sorted by relevance</div>
+      <div><IndividualReviewTile currentReview={this.props.reviews[0]}/></div>
+      <div><IndividualReviewTile currentReview={this.props.reviews[1]}/></div>
       <div><NewReview/></div>
       <div><KeywordSearch/></div>
 

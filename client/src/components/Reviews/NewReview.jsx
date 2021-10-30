@@ -2,7 +2,7 @@ import React from 'react';
 
 const NewReview = function(props) {
   return (<div className="newReview">
-    'New Review Button';
+    <button>ADD A REVIEW +</button>
   </div>);
 };
 
