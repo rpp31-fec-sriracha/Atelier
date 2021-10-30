@@ -9,7 +9,7 @@ const QuestionEntry = ({ question }) => {
         <span className="Q">Q:</span>
         <span className="Q-body">{question.question_body}</span>
         <div>
-          <div className="helful">Helpful? <span>Yes({question.question_helpfulness})</span></div>
+          <div className="helful">Helpful? <a>Yes({question.question_helpfulness})</a></div>
           <div className="add-answer">Add Answer</div>
         </div>
         <div className="answers-list">

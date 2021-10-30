@@ -1,13 +1,19 @@
 import React from 'react';
 
-const AnswerEntry = (props) => {
-  console.log(props);
+const AnswerEntry = ({ answer }) => {
+
   return (
     <>
-      <div className="A-body">answer body</div>
-      <span className="userInfo"></span>
-      <span className="selection"></span>
-      <span className="report"></span>
+      <div className="A-body">{answer.body}</div>
+      <div className="photos">
+        {answer.photos.map((photo, i) => <img key={i} src={photo.url}></img>)}
+      </div>
+      <div className="userInfo">by
+        <span className="username">{answer.answerer_name}</span>
+        <span className="date">{answer.date}</span>
+      </div>
+      <span className="helpfulness">| Helpful? <a>Yes({answer.helpfulness})</a></span>
+      <a className="report">| </a>
     </>
   );
 };
