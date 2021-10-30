@@ -1,8 +1,8 @@
 import React from 'react';
 import QuestionEntry from './QuestionEntry.jsx';
 
-const QuestionList = function () {
-
+const QuestionList = function (props) {
+  console.log(props)
   return (
     <>
       <QuestionEntry />

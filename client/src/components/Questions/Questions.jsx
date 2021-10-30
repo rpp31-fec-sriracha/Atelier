@@ -2,7 +2,7 @@ import React from 'react';
 import QuestionList from './QuestionList.jsx';
 import SearchQuestions from './SearchQuestions.jsx';
 import AddQuestion from './AddQuestion.jsx';
-import axios from 'axios';
+import fetchQuestion from './httpRequest.js';
 
 class Questions extends React.Component {
   constructor() {
@@ -14,21 +14,14 @@ class Questions extends React.Component {
 
   componentDidMount() {
     const { currentProductId } = this.props;
-    axios
-      .request({
-        url: '/questions',
-        method: 'get',
-        baseURL: 'http://localhost:3000',
-        params: {
-          productId: currentProductId
-        }
-      })
-      .then((questions) =>
+
+    fetchQuestion(currentProductId)
+      .then((data) =>
         this.setState({
-          productQA: questions.data.results
+          productQA: data
         })
       )
-      .catch((error) => console.log(error));
+      .catch((error) => conosle.log(error));
   }
 
   render() {
