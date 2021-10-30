@@ -1,5 +1,6 @@
 import React from 'react';
 import ProductInfo from './ProductInfo.jsx';
+import ProductInfoBottom from './ProductInfoBottom.jsx';
 import sampleData from './sampleData.js';
 import axios from 'axios';
 
@@ -7,29 +8,24 @@ class Overview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentProduct: '',
+      currentProduct: 59556,
       product: {},
       styles: [],
       loadProductInfo: false,
+      defaultStyle: '',
     };
   }
 
   componentDidMount() {
-    // let apiCalls = [
-    //   Promise.resolve(axios({
-    //     url: '/productInfo',
-    //     method: 'get',
-    //     params: { productId: this.state.currentProduct }
-    //   })),
-    //   Promise.resolve(axios({
-    //     url: '/productStyles',
-    //     method: 'get',
-    //     params: { productId: this.state.currentProduct }
-    //   })),
-    // ];
     let product;
 
-    Promise.resolve(this.setState( { currentProduct: 59556 } ))
+    Promise.resolve(()=> {
+      if (this.state.currentProduct !== 59556) {
+        this.setState( { currentProduct: 59556 } );
+      } else {
+        return null;
+      }
+    })
       .then(() => {
         return axios({
           url: '/productInfo',
@@ -38,7 +34,6 @@ class Overview extends React.Component {
         });
       })
       .then((response) => product = response.data)
-      // .then((response) => this.setState( { product: response.data } ))
       .then(() => {
         return axios({
           url: '/productStyles',
@@ -51,41 +46,17 @@ class Overview extends React.Component {
         styles: response.data.results
       }))
       .catch((err) => console.log(err));
-    // getData(
-    //   '/products', {
-    //     page: 1,
-    //     count: 5,
-    //     responseType: 'json'
-    //   },
-    //   (err, data) => {
-    //     if (err) {
-    //       console.log(err);
-    //     } else {
-    //       this.setState({ product: data[1] });
-    //       getData(
-    //         `/products/${data[1].id}/styles`,
-    //         { responseType: 'json' },
-    //         (err, styles) => {
-    //           if (err) {
-    //             console.log(err);
-    //           } else {
-    //             this.setState({
-    //               styles,
-    //               loadProductInfo: true,
-    //             });
-    //             this.render();
-    //           }
-    //         }
-    //       );
-    //     }
-    //   });
-
   }
 
   render() {
     // console.log(sampleData);
-    return (<div className="overview">
+
+    return (<div className="overview flex-column">
       <ProductInfo product={this.state.product} styles={this.state.styles} />
+      <ProductInfoBottom
+        description={this.state.product.description}
+        features={this.state.product.features} />
+
     </div>);
   }
 }

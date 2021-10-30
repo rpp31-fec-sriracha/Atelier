@@ -50,30 +50,96 @@ header {
 #app {
   height: 100%;
   width: 75%;
+  max-width: 100%;
   margin: 0 auto 0;
   padding: 10px;
 }
 
-/* #appContainer {
-  display: flex;
-  flex-direction: column;
-} */
+.appContainer {
+  min-height: 100%;
+}
 
 .overview {
-  height: 50%;
+  min-height: 500px;
   width: 100%;
   margin: 5px;
   display: flex;
+  font-family: Helvetica, Arial, sans-serif;
 }
 
 .overview * {
-  font-family: Helvetica, Arial, sans-serif;
   padding: 0.25em;
 }
 
-/* #productInfo {
+.overview h2 {
+  font-size: 2em;
+}
+
+.overview h3 {
+  font-size: 1.5em;
+}
+
+.overview h4 {
+  font-size: 1em;
+}
+
+#productInfo {
+  width: 100%;
+  height: 100%;
+  min-width: 100%;
+  max-height: 100%;
+}
+
+#image-gallery {
+  /* width: 100%; */
+  /* height: 100%; */
+  background-size: contain;
+}
+
+#productInfoTop {
+  width: 33%;
+  flex: 1 auto;
+}
+
+#productInfoBottom {
+  justify-content: center;
   display: flex;
-} */
+}
+
+#productInfoBottom div {
+  margin: 1.5em;
+}
+
+#productInfoBottom ul {
+  width: 33%;
+}
+
+#main-image {
+  width: 60%;
+  /* height: auto; */
+  max-height: 100%;
+  min-width: 100%;
+  min-width: 100%;
+}
+
+.thumb {
+  width: 100px;
+  height: auto;
+  border: 1px solid black;
+  padding: 0;
+}
+.styleThumbs {
+  flex-wrap: wrap;
+
+}
+
+.styleThumb {
+  margin: 10px;
+  height: 100px;
+  width: 100px;
+  background-color: gray;
+  border-radius: 50%;
+}
 
 .questions {
   margin: 5px;
