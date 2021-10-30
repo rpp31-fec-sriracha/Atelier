@@ -2,7 +2,7 @@ import React from 'react';
 import QuestionList from './QuestionList.jsx';
 import SearchQuestions from './SearchQuestions.jsx';
 import AddQuestion from './AddQuestion.jsx';
-import fetchQuestion from './httpRequest.js';
+import httpRequest from './httpRequest.js';
 
 class Questions extends React.Component {
   constructor() {
@@ -15,7 +15,7 @@ class Questions extends React.Component {
   componentDidMount() {
     const { currentProductId } = this.props;
 
-    fetchQuestion(currentProductId)
+    httpRequest.fetchQuestion(currentProductId)
       .then((data) =>
         this.setState({
           productQA: data
