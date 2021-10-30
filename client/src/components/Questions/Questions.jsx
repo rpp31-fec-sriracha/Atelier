@@ -1,24 +1,40 @@
-import { React, useState, useEffect } from 'react';
+import React from 'react';
 import QuestionList from './QuestionList.jsx';
 import getQuestions from './../../../../server/api.js';
 
-const Questions = function (props) {
-  const { productQA, currentProductId } = this.props;
+class Questions extends React.Component {
 
-  useEffect(() => {
+  constructor() {
+    super();
+    this.state = {
+      productQA: []
+    };
+  }
+
+  componentDidMount() {
     // fetch getQuestions
-    getQuestions(currentProductId, 1, 2, () => {
+    getQuestions(currentProductId, (data) => {
       // update the state of productQA
+      this.setState({
+        productQA: data
+      });
     });
-  }, []);
+  }
 
+  render() {
+    const { currentProductId } = this.props;
+    const { productQA } = this.state;
 
-  return (
-    <>
-      <QuestionList />
-      <div className="questions">'Questions'</div>
-    </>
-  );
-};
+    return (
+      <>
+        <div className="questions">
+          <SearchQuestions />
+          <QuestionList productQA={productQA} />
+          <AddQuestion />
+        </div>
+      </>
+    );
+  }
+}
 
 export default Questions;
