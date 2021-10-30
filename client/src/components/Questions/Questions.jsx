@@ -8,7 +8,7 @@ class Questions extends React.Component {
   constructor() {
     super();
     this.state = {
-      productQA: []
+      questions: []
     };
   }
 
@@ -23,6 +23,7 @@ class Questions extends React.Component {
       )
       .catch((error) => conosle.log(error));
   }
+  // handle load more questions
 
   render() {
     const { productQA } = this.state;
@@ -30,7 +31,8 @@ class Questions extends React.Component {
       <>
         <div className="questions">
           <SearchQuestions />
-          <QuestionList productQA={productQA} />
+          <QuestionList questions={questions} />
+          {(questions.length > 2) ? <button>MORE ANSWERED QUESTIONS</button> : null}
           <AddQuestion />
         </div>
       </>

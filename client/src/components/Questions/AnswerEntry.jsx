@@ -1,7 +1,8 @@
 import React from 'react';
 
 const AnswerEntry = ({ answer }) => {
-
+  // handle mark helpful
+  // handle report answer
   return (
     <>
       <div className="A-body">{answer.body}</div>
@@ -12,8 +13,8 @@ const AnswerEntry = ({ answer }) => {
         <span className="username">{answer.answerer_name}</span>
         <span className="date">{answer.date}</span>
       </div>
-      <span className="helpfulness">| Helpful? <a>Yes({answer.helpfulness})</a></span>
-      <a className="report">| </a>
+      <span className="helpfulness">Helpful? <a>Yes({answer.helpfulness})</a></span>
+      <a className="report"></a>
     </>
   );
 };

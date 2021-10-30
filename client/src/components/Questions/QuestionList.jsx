@@ -1,12 +1,12 @@
 import React from 'react';
 import QuestionEntry from './QuestionEntry.jsx';
 
-const QuestionList = function ({ productQA }) {
+const QuestionList = function ({ questions }) {
   return (
     <>
-      {(productQA.length > 0) ?
-        productQA.map((question, i) => <QuestionEntry key={i} question={question} /> ) :
-        <div className="questions">'QuestionList'</div>}
+      {(questions.length > 0) ?
+        questions.map((question, i) => <QuestionEntry key={i} question={question} />)
+        : <div className="questions">'QuestionList'</div>}
     </>
   );
 };

@@ -2,7 +2,9 @@ import React from 'react';
 import AnswerEntry from './AnswerEntry.jsx';
 
 const QuestionEntry = ({ question }) => {
-
+  // handle report question
+  // handle mark helpful
+  // handle add answer
   return (
     <>
       <div className="question">
@@ -10,7 +12,7 @@ const QuestionEntry = ({ question }) => {
         <span className="Q-body">{question.question_body}</span>
         <div>
           <div className="helful">Helpful? <a>Yes({question.question_helpfulness})</a></div>
-          <div className="add-answer">Add Answer</div>
+          <a className="add-answer">Add Answer</a>
         </div>
         <div className="answers-list">
           <span className="A">A:</span>

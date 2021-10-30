@@ -16,13 +16,19 @@ const httpRequest = {
         .catch((error) => reject(error));
     });
   },
-  QuestionHelpfulness: () => {
+  markQuestionHelpfulness: () => {
 
   },
-  AnswerHelpfulness: () => {
+  markAnswerHelpfulness: () => {
+
+  },
+  reportQuestion: () => {
 
   },
   reportAnswer: () => {
+
+  },
+  addAnswer: () => {
 
   }
 };
