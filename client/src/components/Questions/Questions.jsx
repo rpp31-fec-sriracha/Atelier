@@ -1,9 +1,10 @@
 import React from 'react';
 import QuestionList from './QuestionList.jsx';
-import getQuestions from './../../../../server/api.js';
+import SearchQuestions from './SearchQuestions.jsx';
+import AddQuestion from './AddQuestion.jsx';
+import axios from 'axios';
 
 class Questions extends React.Component {
-
   constructor() {
     super();
     this.state = {
@@ -12,19 +13,26 @@ class Questions extends React.Component {
   }
 
   componentDidMount() {
-    // fetch getQuestions
-    getQuestions(currentProductId, (data) => {
-      // update the state of productQA
-      this.setState({
-        productQA: data
-      });
-    });
+    const { currentProductId } = this.props;
+    axios
+      .request({
+        url: '/questions',
+        method: 'get',
+        baseURL: 'http://localhost:3000',
+        params: {
+          productId: currentProductId
+        }
+      })
+      .then((questions) =>
+        this.setState({
+          productQA: questions.data.results
+        })
+      )
+      .catch((error) => console.log(error));
   }
 
   render() {
-    const { currentProductId } = this.props;
     const { productQA } = this.state;
-
     return (
       <>
         <div className="questions">

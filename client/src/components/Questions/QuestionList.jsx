@@ -3,11 +3,10 @@ import QuestionEntry from './QuestionEntry.jsx';
 
 const QuestionList = function () {
 
-
   return (
     <>
       <QuestionEntry />
-      <div className="questions">'Questions'</div>
+      <div className="questions">'QuestionList'</div>
     </>
   );
 };

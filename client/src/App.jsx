@@ -7,24 +7,23 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentProductId: '',
+      currentProductId: 59556,
       productInfo: {},
       productStyles: {},
       productReviews: {
         reviews: {},
         meta: {},
       },
-      productQA: [],
       cart: [],
     };
   }
 
   render() {
-    const { productQA, currentProductId } = this.state;
+    const { currentProductId } = this.state;
 
     return (<div className="appContainer">
       <Overview />
-      <Questions currentProductId={currentProductId} productQA={productQA} />
+      <Questions currentProductId={currentProductId} />
       <Reviews />
     </div>);
   }

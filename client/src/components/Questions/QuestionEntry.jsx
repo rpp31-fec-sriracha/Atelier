@@ -1,10 +1,10 @@
 import React from 'react';
 
-const QuestionEntry = function () {
+const QuestionEntry = () => {
 
   return (
     <>
-      <div className="questions">'Questions'</div>
+      <div className="questions">'QuestionEntry'</div>
     </>
   );
 };
