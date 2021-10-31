@@ -1,9 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const SearchQuestions = () => {
+const SearchQuestions = ({ searchTerm, handleSearch }) => {
+  const [search, setSearch] = useState('');
+
   return (
     <>
-      <div className="questions">'SearchQuestions'</div>
+      <div className="searchQuestion">
+        <input
+          type="text"
+          placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            // only start filter when search.length >= 3
+            if (search.length >= 3) {
+              handleSearch(search);
+            }
+          }}></input>
+      </div>
     </>
   );
 };

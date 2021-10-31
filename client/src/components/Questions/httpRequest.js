@@ -30,6 +30,9 @@ const httpRequest = {
   },
   addAnswer: () => {
 
+  },
+  searchQuestion: () => {
+
   }
 };
 

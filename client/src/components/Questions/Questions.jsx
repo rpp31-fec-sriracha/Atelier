@@ -8,7 +8,7 @@ class Questions extends React.Component {
   constructor() {
     super();
     this.state = {
-      questions: []
+      questions: [],
     };
   }
 
@@ -18,19 +18,23 @@ class Questions extends React.Component {
     httpRequest.fetchQuestion(currentProductId)
       .then((data) =>
         this.setState({
-          productQA: data
+          questions: data
         })
       )
       .catch((error) => conosle.log(error));
   }
   // handle load more questions
 
+  // handle search
+  handleSearch(term) {
+    console.log(term);
+  }
   render() {
-    const { productQA } = this.state;
+    const { questions } = this.state;
     return (
       <>
         <div className="questions">
-          <SearchQuestions />
+          <SearchQuestions handleSearch={this.handleSearch.bind(this)} />
           <QuestionList questions={questions} />
           {(questions.length > 2) ? <button>MORE ANSWERED QUESTIONS</button> : null}
           <AddQuestion />
