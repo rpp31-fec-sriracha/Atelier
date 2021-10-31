@@ -5,7 +5,7 @@ const SearchQuestions = ({ searchTerm, handleSearch }) => {
 
   return (
     <>
-      <div className="searchQuestion">
+      <div className="search-question">
         <input
           type="text"
           placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."

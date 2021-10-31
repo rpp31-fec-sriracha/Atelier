@@ -31,13 +31,15 @@ class Questions extends React.Component {
   }
   render() {
     const { questions } = this.state;
+    const { productInfo } = this.props;
+
     return (
       <>
         <div className="questions">
           <SearchQuestions handleSearch={this.handleSearch.bind(this)} />
           <QuestionList questions={questions} />
           {(questions.length > 2) ? <button>MORE ANSWERED QUESTIONS</button> : null}
-          <AddQuestion />
+          <AddQuestion productInfo={productInfo} />
         </div>
       </>
     );
