@@ -37,7 +37,7 @@ class Questions extends React.Component {
       <>
         <div className="questions">
           <SearchQuestions handleSearch={this.handleSearch.bind(this)} />
-          <QuestionList questions={questions} />
+          <QuestionList questions={questions} productInfo={productInfo} />
           {(questions.length > 2) ? <button>MORE ANSWERED QUESTIONS</button> : null}
           <AddQuestion productInfo={productInfo} />
         </div>

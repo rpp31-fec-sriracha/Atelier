@@ -12,6 +12,9 @@ class AddQuestion extends React.Component {
 
   // handle add question
   handleAddQuestion() {
+    // validate form inputs
+    // if there's any invalid entries,
+    // render warning message "You must enter the following:”
     // post request to server
   }
   // handle input change
@@ -35,7 +38,7 @@ class AddQuestion extends React.Component {
             <label>Your email</label><span id="mandatory-asterisk">*</span>
             <input type="email" name="email"></input>
 
-            <input type="submit" value="Submit question"></input><span id="mandatory-asterisk">*</span>
+            <input type="submit" value="Submit question"></input>
           </form>
         </div>
       </>

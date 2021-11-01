@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AnswerEntry from './AnswerEntry.jsx';
+import AnswerModal from './AnswerModal.jsx';
 
-const QuestionEntry = ({ question }) => {
+const QuestionEntry = ({ question, productInfo }) => {
+  const [isOpen, setOpen] = useState(false);
+  // handle open modal
+  // handle close modal
   // handle report question
   // handle mark helpful
   // handle add answer
+  // render < AnswerModal >
   return (
     <>
       <div className="question">
@@ -13,6 +18,7 @@ const QuestionEntry = ({ question }) => {
         <div>
           <div className="helful">Helpful? <a>Yes({question.question_helpfulness})</a></div>
           <a className="add-answer">Add Answer</a>
+          <AnswerModal question={question} productInfo={productInfo} isOpen={isOpen} />
         </div>
         <div className="answers-list">
           <span className="A">A:</span>
