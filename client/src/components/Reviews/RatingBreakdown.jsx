@@ -6,14 +6,12 @@ class RatingBreakdown extends React.Component {
 
     this.state = {
       starsSelected: [],
-      //or a state for 1,2,3,4, and 5?
       fiveStarCount: this.props.metadata.ratings[5],
       fourStarCount: this.props.metadata.ratings[4],
       threeStarCount: this.props.metadata.ratings[3],
       twoStarCount: this.props.metadata.ratings[2],
       oneStarCount: this.props.metadata.ratings[1],
-      totalReviews: this.props.metadata.recommended.false + this.props.metadata.recommended.true
-
+      totalReviews: parseInt(this.props.metadata.recommended.false) + parseInt(this.props.metadata.recommended.true)
     };
   }
 

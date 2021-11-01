@@ -30,12 +30,13 @@ const getProductStyles = (productId, callback) => {
   apiCall(`/products/${productId}/styles`, defaultParams, callback);
 };
 
-const getReviews = (productId, page, count, callback) => {
+const getReviews = (productId, page, count, sort, callback) => {
   apiCall('/reviews',
     {
       product_id: productId,
       page,
       count,
+      sort,
       responseType: 'json',
     },
     callback);

@@ -56,6 +56,7 @@ app.get('/reviews', (req, res) => {
   let productId = req.query.productId;
   let page = 1;
   let count = 5;
+  let sortType = req.query.sortType;
 
   if (req.query.page) {
     page = page;
@@ -64,7 +65,7 @@ app.get('/reviews', (req, res) => {
     count = count;
   }
 
-  api.getReviews(productId, page, count, (err, data) => {
+  api.getReviews(productId, page, count, sortType, (err, data) => {
     if (err) {
       res.status(500).json(err);
     } else {

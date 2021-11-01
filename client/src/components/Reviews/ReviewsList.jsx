@@ -26,8 +26,6 @@ class ReviewsList extends React.Component {
 
     return (<div className="reviewsList">
       <div>'Reviews List Component'</div>
-      <div>'Sort options - make its own component?</div>
-      <div>3 reviews, sorted by relevance</div>
       {this.props.reviews.slice(0, this.state.numReviewsVisible).map((review) => {
         return <IndividualReviewTile currentReview={review} />;
       })}
