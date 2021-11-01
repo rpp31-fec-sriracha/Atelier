@@ -1,6 +1,6 @@
 import React from 'react';
 
-//use _.map
+//use _.map to address all categories
 
 const ProductBreakdown = function(props) {
   if (props.metadata.length === 0) {

@@ -19,7 +19,6 @@ class SortSelector extends React.Component {
   render() {
     return (
       <select id="select" onChange={this.handleChange.bind(this)}>
-        {/* <select id="select" onSelect = {() => { this.props.updateSortType(event.target.value); } }> */}
         <option>relevant</option>
         <option>newest</option>
         <option>helpful</option>

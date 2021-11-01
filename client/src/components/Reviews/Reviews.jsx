@@ -28,8 +28,6 @@ class Reviews extends React.Component {
       }
     })
       .then((response) => {
-        // console.log('success');
-        // console.log(response.data.results);
         this.setState({
           reviews: response.data.results
         });
@@ -73,7 +71,6 @@ class Reviews extends React.Component {
       <div>'Reviews Container'</div>
       <div><RatingBreakdown metadata={this.state.meta}/></div>
       <div><ProductBreakdown metadata={this.state.meta}/></div>
-      {/* <div> {this.state.reviews.length} reviews, sorted by {this.state.sortType}</div> */}
       <div> {this.state.reviews.length} reviews, sorted by <SortSelector updateSortType = {this.updateSortType}/></div>
       <div><ReviewsList reviews={this.state.reviews}/></div>
     </div>);
