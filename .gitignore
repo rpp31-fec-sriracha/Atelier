@@ -3,3 +3,4 @@ server/config.js
 client/dist/*
 !client/dist/index.css
 !client/dist/index.html
+!client/dist/sriracha32x32.png
