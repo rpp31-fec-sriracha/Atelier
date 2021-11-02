@@ -21,23 +21,22 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    const { currentProductId } = this.state;
     let product;
     axios({
-      url: '/api/products',
+      url: `/api/products/${currentProductId}`,
       method: 'get',
-      params: { productId: this.state.currentProductId }
     })
       .then((response) => product = response.data)
       .then(() => {
         return axios({
-          url: '/api/productStyles',
+          url: `/api/products/${currentProductId}/styles`,
           method: 'get',
-          params: { productId: this.state.currentProductId }
         });
       })
       .then((response) => this.setState( {
-        product: product,
-        styles: response.data.results
+        productInfo: product,
+        productStyles: response.data.results
       }))
       .catch((err) => console.log(err));
   }

@@ -7,6 +7,24 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.resolve(__dirname, '../client/dist')));
 
+app.all('/api/*', (req, res, next) => {
+  console.log('ALL --->', req.method, req.url);
+  let method = req.method;
+  let reqUrl = (req.url.replace(/^\/api/, ''));
+  reqUrl = reqUrl.replace(/\?.*$/, '');
+  let params = req.query;
+  let data = req.body;
+  // method, endpoint, params, body, callback
+  api.apiWrap(method, reqUrl, params, data, (err, data) => {
+    if (err) {
+      res.status(500).json(err);
+    } else {
+      res.status(201).json(data);
+    }
+  });
+  next();
+});
+
 app.get('/api/*', (req, res) => {
   let reqUrl = (req.url.replace(/^\/api/, ''));
   reqUrl = reqUrl.replace(/\?.*$/, '');

@@ -3,6 +3,7 @@ const API_KEY = require('./config.js');
 const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
 
 const apiCall = function(endpoint, params, callback) {
+  console.log(params);
   axios.get(`${url}${endpoint}`, {
     headers: { 'Authorization': API_KEY },
     params: params,
@@ -11,13 +12,18 @@ const apiCall = function(endpoint, params, callback) {
     .catch((err) => callback(err, null));
 };
 
-const apiPost = function(endpoint, params, body, callback) {
-  axios.get(`${url}${endpoint}`, {
+const apiWrap = function(method, endpoint, params, body, callback) {
+  axios({
+    method: method,
+    url: url + endpoint,
     headers: { 'Authorization': API_KEY },
     params: params,
     data: body,
   })
-    .then((response) => callback(null, response.data))
+    .then((response) => {
+      console.log(response);
+      callback(null, response.data);
+    })
     .catch((err) => callback(err, null));
 };
 
@@ -90,6 +96,7 @@ const getAnswers = (questionId, page, count, callback) => {
 
 module.exports = {
   apiCall,
+  apiWrap,
   getProductList,
   getProductInfo,
   getProductStyles,
