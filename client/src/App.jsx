@@ -3,6 +3,7 @@ import Overview from './components/Overview/Overview.jsx';
 import Questions from './components/Questions/Questions.jsx';
 import productInfo from './components/Questions/dummyData.js';
 import Reviews from './components/Reviews/Reviews.jsx';
+import axios from 'axios';
 
 class App extends React.Component {
   constructor(props) {
@@ -22,14 +23,14 @@ class App extends React.Component {
   componentDidMount() {
     let product;
     axios({
-      url: '/productInfo',
+      url: '/api/products',
       method: 'get',
       params: { productId: this.state.currentProductId }
     })
       .then((response) => product = response.data)
       .then(() => {
         return axios({
-          url: '/productStyles',
+          url: '/api/productStyles',
           method: 'get',
           params: { productId: this.state.currentProductId }
         });

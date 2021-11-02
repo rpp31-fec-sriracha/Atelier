@@ -79,6 +79,7 @@ const getAnswers = (questionId, page, count, callback) => {
 
 
 module.exports = {
+  apiCall,
   getProductList,
   getProductInfo,
   getProductStyles,
