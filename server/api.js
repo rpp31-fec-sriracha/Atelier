@@ -57,24 +57,12 @@ const getReviewMeta = (productId, callback) => {
 // function for marking review as helpful
 
 const getQuestions = (productId, page, count, callback) => {
-<<<<<<< HEAD
-  apiCall('qa/questions',
-    {
-      // eslint-disable-next-line camelcase
-      product_id: productId,
-      page,
-      count,
-      responseType: 'json',
-    },
-    callback);
-=======
   apiCall('/qa/questions', {
     product_id: productId,
     page: page,
     count: count
   },
   callback);
->>>>>>> main
 };
 
 const getAnswers = (questionId, page, count, callback) => {
