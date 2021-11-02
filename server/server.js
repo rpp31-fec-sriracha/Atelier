@@ -7,6 +7,35 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.resolve(__dirname, '../client/dist')));
 
+app.get('/api/*', (req, res) => {
+  let reqUrl = (req.url.replace(/^\/api/, ''));
+  reqUrl = reqUrl.replace(/\?.*$/, '');
+  let params = req.query;
+
+  api.apiCall(reqUrl, params, (err, data) => {
+    if (err) {
+      res.status(500).json(err);
+    } else {
+      res.status(200).json(data);
+    }
+  });
+});
+
+app.post('/api/*', (req, res) => {
+  let reqUrl = (req.url.replace(/^\/api/, ''));
+  reqUrl = reqUrl.replace(/\?.*$/, '');
+  let params = req.query;
+  let data = req.body;
+
+  api.apiPost(reqUrl, params, data, (err, data) => {
+    if (err) {
+      res.status(500).json(err);
+    } else {
+      res.status(201).json(data);
+    }
+  });
+});
+
 app.get('/products', (req, res) => {
   let page = 1;
   let count = 5;

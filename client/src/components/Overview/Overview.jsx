@@ -1,7 +1,7 @@
 import React from 'react';
 import ProductInfo from './ProductInfo.jsx';
 import ProductInfoBottom from './ProductInfoBottom.jsx';
-import sampleData from './sampleData.js';
+// import sampleData from './sampleData.js';
 import axios from 'axios';
 
 class Overview extends React.Component {
