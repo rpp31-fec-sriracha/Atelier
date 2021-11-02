@@ -17,9 +17,9 @@ app.all('/api/*', (req, res, next) => {
   // method, endpoint, params, body, callback
   api.apiWrap(method, reqUrl, params, data, (err, data) => {
     if (err) {
-      res.status(500).json(err);
+      res.status(err.status).json(err);
     } else {
-      res.status(201).json(data);
+      res.status(data.status).json(data.data);
     }
   });
   next();

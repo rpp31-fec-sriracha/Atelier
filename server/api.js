@@ -22,7 +22,7 @@ const apiWrap = function(method, endpoint, params, body, callback) {
   })
     .then((response) => {
       console.log(response);
-      callback(null, response.data);
+      callback(null, response);
     })
     .catch((err) => callback(err, null));
 };
