@@ -55,21 +55,19 @@ const getReviewMeta = (productId, callback) => {
 // function for marking review as helpful
 
 const getQuestions = (productId, page, count, callback) => {
-  apiCall('qa/questions',
-    {
-      product_id: productId,
-      page,
-      count,
-      responseType: 'json',
-    },
-    callback);
+  apiCall('/qa/questions', {
+    product_id: productId,
+    page: page,
+    count: count
+  },
+  callback);
 };
 
 const getAnswers = (questionId, page, count, callback) => {
-  apiCall(`qa/questions/${questionId}/answers`,
+  apiCall(`/qa/questions/${questionId}/answers`,
     {
-      page,
-      count
+      page: page,
+      count: count
     },
     callback);
 };
