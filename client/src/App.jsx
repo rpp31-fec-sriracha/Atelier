@@ -20,9 +20,31 @@ class App extends React.Component {
     };
   }
 
+  componentDidMount() {
+    let product;
+    axios({
+      url: '/productInfo',
+      method: 'get',
+      params: { productId: this.state.currentProductId }
+    })
+      .then((response) => product = response.data)
+      .then(() => {
+        return axios({
+          url: '/productStyles',
+          method: 'get',
+          params: { productId: this.state.currentProductId }
+        });
+      })
+      .then((response) => this.setState( {
+        product: product,
+        styles: response.data.results
+      }))
+      .catch((err) => console.log(err));
+  }
+
   render() {
     return (<div className="appContainer">
-      <Overview />
+      <Overview productInfo={this.state.productInfo} productStyles={this.state.productStyles} />
       <Questions />
       <Reviews />
     </div>);
