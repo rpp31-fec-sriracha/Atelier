@@ -11,6 +11,16 @@ const apiCall = function(endpoint, params, callback) {
     .catch((err) => callback(err, null));
 };
 
+const apiPost = function(endpoint, params, body, callback) {
+  axios.get(`${url}${endpoint}`, {
+    headers: { 'Authorization': API_KEY },
+    params: params,
+    data: body,
+  })
+    .then((response) => callback(null, response.data))
+    .catch((err) => callback(err, null));
+};
+
 const defaultParams = { responseType: 'json' };
 
 const getProductList = (page, count, callback) => {
