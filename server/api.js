@@ -58,6 +58,7 @@ const getReviewMeta = (productId, callback) => {
 
 const getQuestions = (productId, page, count, callback) => {
   apiCall('/qa/questions', {
+    // eslint-disable-next-line camelcase
     product_id: productId,
     page: page,
     count: count
