@@ -88,10 +88,10 @@ app.get('/questions', (req, res) => {
   let productId = req.query.productId;
   let page = 1;
   let count = 5;
-  if (req.body.page) {
+  if (req.query.page) {
     page = page;
   }
-  if (req.body.count) {
+  if (req.query.count) {
     count = count;
   }
 
