@@ -19,20 +19,11 @@ class Overview extends React.Component {
   componentDidMount() {
     let product;
 
-    Promise.resolve(()=> {
-      if (this.state.currentProduct !== 59556) {
-        this.setState( { currentProduct: 59556 } );
-      } else {
-        return null;
-      }
+    axios({
+      url: '/productInfo',
+      method: 'get',
+      params: { productId: this.state.currentProduct }
     })
-      .then(() => {
-        return axios({
-          url: '/productInfo',
-          method: 'get',
-          params: { productId: this.state.currentProduct }
-        });
-      })
       .then((response) => product = response.data)
       .then(() => {
         return axios({

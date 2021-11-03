@@ -17,7 +17,6 @@ class ImageGallery extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log(this.props.styles);
     this.props.styles.map((style) => {
       if (style['default?'] && this.state.default !== style) {
         this.setState({
