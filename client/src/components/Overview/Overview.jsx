@@ -40,11 +40,10 @@ class Overview extends React.Component {
   }
 
   render() {
-    // console.log(sampleData);
-
     return (<div className="overview flex-column">
       <ProductInfo product={this.state.product} styles={this.state.styles} />
       <ProductInfoBottom
+        slogan={this.state.product.slogan}
         description={this.state.product.description}
         features={this.state.product.features} />
 

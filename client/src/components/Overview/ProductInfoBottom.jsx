@@ -13,6 +13,7 @@ const ProductInfoBottom = function(props) {
   return (
     <div id="productInfoBottom">
       <div>
+        <h2>{props.slogan}</h2>
         <h3>{props.description}</h3>
       </div>
       <ul>
