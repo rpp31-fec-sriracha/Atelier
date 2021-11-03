@@ -13,8 +13,8 @@ const ProductInfoBottom = function(props) {
   return (
     <div id="productInfoBottom">
       <div>
-        <h2>{props.slogan}</h2>
-        <h3>{props.description}</h3>
+        <h3>{props.slogan}</h3>
+        <h4>{props.description}</h4>
       </div>
       <ul>
         {featureList}
