@@ -33,6 +33,7 @@ const getProductStyles = (productId, callback) => {
 const getReviews = (productId, page, count, callback) => {
   apiCall('/reviews',
     {
+      // eslint-disable-next-line camelcase
       product_id: productId,
       page,
       count,
@@ -44,6 +45,7 @@ const getReviews = (productId, page, count, callback) => {
 const getReviewMeta = (productId, callback) => {
   apiCall('/reviews/meta',
     {
+      // eslint-disable-next-line camelcase
       product_id: productId,
       responseType: 'json',
     },
@@ -56,6 +58,7 @@ const getReviewMeta = (productId, callback) => {
 
 const getQuestions = (productId, page, count, callback) => {
   apiCall('/qa/questions', {
+    // eslint-disable-next-line camelcase
     product_id: productId,
     page: page,
     count: count
