@@ -12,7 +12,6 @@ Screen captures can go here
 In the terminal, run "npm install"
 
 ## Team Members
-Jake Caughern
-Maxine Seo
-Rick Kunz
-
+Jake Caughern - responsible for implementing the Overview widget
+Maxine Seo - responsible for implementing the Questions & Answers widget
+Rick Kunz - responsible for implementing the Reviews widget
