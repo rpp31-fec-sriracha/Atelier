@@ -16,9 +16,13 @@ const QuestionEntry = ({ question, productInfo }) => {
         <span className="Q">Q:</span>
         <span className="Q-body">{question.question_body}</span>
         <div>
-          <div className="helful">Helpful? <a>Yes({question.question_helpfulness})</a></div>
-          <a className="add-answer">Add Answer</a>
-          <AnswerModal question={question} productInfo={productInfo} isOpen={isOpen} />
+          <div className="helpful">
+            <span>Helpful?</span>
+            <button className="increment-helpful">Yes({question.question_helpfulness})</button>
+            <span class="_divider">|</span>
+            <a href="#answer-modal" className="add-answer">Add Answer</a>
+          </div>
+          <AnswerModal id="#answer-modal" question={question} productInfo={productInfo} isOpen={isOpen} />
         </div>
         <div className="answers-list">
           <span className="A">A:</span>

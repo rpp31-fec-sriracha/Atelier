@@ -9,11 +9,15 @@ const AnswerEntry = ({ answer }) => {
       <div className="photos">
         {answer.photos.map((photo, i) => <img key={i} src={photo.url}></img>)}
       </div>
-      <div className="userInfo">by
-        <span className="username">{answer.answerer_name}</span>
+      <div className="userInfo">
+        <span className="username">by {answer.answerer_name} </span>
+        <span class="_divider">|</span>
         <span className="date">{answer.date}</span>
+        <span class="_divider">|</span>
+        <span className="helpful">Helpful?</span>
+        <span class="_divider">|</span>
+        <button className="increment-helpful">Yes({answer.helpfulness})</button>
       </div>
-      <span className="helpfulness">Helpful? <a>Yes({answer.helpfulness})</a></span>
       <a className="report"></a>
     </>
   );
