@@ -8,7 +8,7 @@ class Questions extends React.Component {
   constructor() {
     super();
     this.state = {
-      questions: [],
+      questions: []
     };
   }
 
@@ -23,7 +23,6 @@ class Questions extends React.Component {
       )
       .catch((error) => conosle.log(error));
   }
-  // handle load more questions
 
   // handle search
   handleSearch(term) {
@@ -38,7 +37,6 @@ class Questions extends React.Component {
         <div className="questions">
           <SearchQuestions handleSearch={this.handleSearch.bind(this)} />
           <QuestionList questions={questions} productInfo={productInfo} />
-          {(questions.length > 2) ? <button>MORE ANSWERED QUESTIONS</button> : null}
           <AddQuestion productInfo={productInfo} />
         </div>
       </>

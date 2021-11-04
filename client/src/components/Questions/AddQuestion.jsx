@@ -1,4 +1,5 @@
 import React from 'react';
+import QuestionModal from './QuestionModal.jsx';
 
 class AddQuestion extends React.Component {
   constructor() {
@@ -28,18 +29,7 @@ class AddQuestion extends React.Component {
     return (
       <>
         <div className="add-question">
-          <form onSubmit={this.handleAddQuestion}>
-            <div className="modal-title">Ask Your Question</div>
-            <div className="modal-subtitle">About the {productInfo}.</div>
-            <label>Your Question</label><span id="mandatory-asterisk">*</span>
-            <input type="text" name="question"></input>
-            <label>What is your nickname</label><span id="mandatory-asterisk">*</span>
-            <input type="text" name="nickname"></input>
-            <label>Your email</label><span id="mandatory-asterisk">*</span>
-            <input type="email" name="email"></input>
-
-            <input type="submit" value="Submit question"></input>
-          </form>
+          <QuestionModal productInfo={productInfo} handleAddQuestion={this.handleAddQuestion.bind(this)} />
         </div>
       </>
     );
