@@ -32,7 +32,7 @@ class QuestionEntry extends React.Component {
             <div className="helpful">
               <span>Helpful?</span>
               <button className="increment-helpful">Yes({question.question_helpfulness})</button>
-              <span class="_divider">|</span>
+              <span className="_divider">|</span>
               <a href="#answer-modal" className="add-answer" onClick={() => this.openModal()}>Add Answer</a>
             </div>
             <AnswerModal isOpen={isOpen} id="#answer-modal" closeModal={this.closeModal.bind(this)} question={question} productInfo={productInfo}></AnswerModal>

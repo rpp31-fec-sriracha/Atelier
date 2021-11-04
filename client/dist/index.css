@@ -162,7 +162,7 @@ header {
   background-color: rgba(0, 0, 0, 0.7);
   z-Index: 1000;
 }
-.modal {
+.modal-style {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -170,5 +170,5 @@ header {
   background-color: #FFF;
   padding: 50px;
   z-Index: 1000;
-  border-radius: 15px;
+  border-radius: 1px;
 }

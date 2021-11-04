@@ -1,6 +1,7 @@
 import React from 'react';
 import QuestionList from './QuestionList.jsx';
 import SearchQuestions from './SearchQuestions.jsx';
+import QuestionModal from './QuestionModal.jsx';
 import httpRequest from './httpRequest.js';
 
 class Questions extends React.Component {
@@ -33,7 +34,7 @@ class Questions extends React.Component {
     // validate form inputs
     // if there's any invalid entries,
     // render warning message "You must enter the following:”
-    // post request to server
+    // post HTTP request to server
   }
   openModal() {
     this.setState({ isOpen: true });
@@ -51,8 +52,13 @@ class Questions extends React.Component {
         <div className="questions">
           <SearchQuestions handleSearch={this.handleSearch.bind(this)} />
           <QuestionList questions={questions} productInfo={productInfo} />
-          <button onClick={() => openModal()}>AddQuestion</button>
-          <QuestionModal isOpen={isOpen} productInfo={productInfo} closeModal={this.closeModal.bind(this)} handleAddQuestion={this.handleAddQuestion.bind(this)}></QuestionModal>
+          <button onClick={() => this.openModal()}>AddQuestion</button>
+          <QuestionModal
+            isOpen={isOpen}
+            productInfo={productInfo}
+            closeModal={this.closeModal.bind(this)}
+            handleAddQuestion={this.handleAddQuestion.bind(this)}>
+          </QuestionModal>
         </div>
       </>
     );

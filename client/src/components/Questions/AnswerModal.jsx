@@ -14,9 +14,13 @@ class AnswerModal extends React.Component {
   // handle photo(file) upload
   // invoke handle add answer
   // handle input change
+  handleInputChange(e) {
+    this.setState({
+      [name]: e.target.value
+    });
+  }
   render() {
     const { question, productInfo, isOpen, closeModal } = this.props;
-    console.log(closeModal);
     const { answer, nickname, email, photos } = this.state;
 
     return ReactDom.createPortal(
@@ -24,18 +28,18 @@ class AnswerModal extends React.Component {
         {isOpen ? (
           <>
             <div className="overlay-style"></div>
-            <div className="modal">
+            <div className="modal-style">
               <form onSubmit={() => closeModal()}>
                 <div className="modal-title">Submit your Answer</div>
                 <div className="modal-subtitle">{productInfo}: {question.question_body}</div>
                 <label>Your Answer</label><span id="mandatory-asterisk">*</span>
-                <textarea value={answer} name="answer"></textarea>
+                <textarea value={answer} name="answer" onChange={(e) => this.handleInputChange(e)}></textarea>
                 <label>What is your nickname</label><span id="mandatory-asterisk">*</span>
-                <input type="text" value={nickname} name="nickname" placeholder="Example: jack543!"></input>
+                <input type="text" value={nickname} name="nickname" onChange={(e) => this.handleInputChange(e)} placeholder="Example: jack543!"></input>
                 <label>Your email</label><span id="mandatory-asterisk">*</span>
-                <input type="email" value={email} name="email" placeholder="Example: jack@email.com"></input>
+                <input type="email" value={email} name="email" onChange={(e) => this.handleInputChange(e)} placeholder="Example: jack@email.com"></input>
                 <label>Upload your photos</label>
-                <input type="file" name="photo"></input>
+                <input type="file" name="photo" onChange={(e) => this.handleInputChange(e)}></input>
 
                 <input type="submit" value="Submit answer"></input>
               </form>

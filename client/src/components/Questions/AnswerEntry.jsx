@@ -11,11 +11,11 @@ const AnswerEntry = ({ answer }) => {
       </div>
       <div className="userInfo">
         <span className="username">by {answer.answerer_name} </span>
-        <span class="_divider">|</span>
+        <span className="_divider">|</span>
         <span className="date">{answer.date}</span>
-        <span class="_divider">|</span>
+        <span className="_divider">|</span>
         <span className="helpful">Helpful?</span>
-        <span class="_divider">|</span>
+        <span className="_divider">|</span>
         <button className="increment-helpful">Yes({answer.helpfulness})</button>
       </div>
       <a className="report"></a>
