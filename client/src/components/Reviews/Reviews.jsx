@@ -77,7 +77,7 @@ class Reviews extends React.Component {
           <div><ProductBreakdown metadata={this.state.meta}/></div>
         </div>
         <div class="flex-column">
-          <div> {this.state.reviews.length} reviews, sorted by <SortSelector updateSortType = {this.updateSortType}/></div>
+          <div data-testid="numReviews"> {this.state.reviews.length} reviews, sorted by <SortSelector updateSortType = {this.updateSortType}/></div>
           <div class="flex-column"><ReviewsList reviews={this.state.reviews}/></div>
         </div>
       </div>
