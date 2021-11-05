@@ -13,7 +13,7 @@ const ProductInfoBottom = function(props) {
   return (
     <div id="productInfoBottom">
       <div>
-        <h3>{props.slogan}</h3>
+        <h3 data-testid="slogan">{props.slogan}</h3>
         <h4>{props.description}</h4>
       </div>
       <ul>

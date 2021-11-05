@@ -9,6 +9,13 @@ import '@testing-library/jest-dom';
 import { unmountComponentAtNode } from 'react-dom';
 import Overview from '../client/src/components/Overview/Overview.jsx';
 import dummyData from './overviewData.js';
+import ImageGallery from '../client/src/components/Overview/ImageGallery.jsx';
+
+jest.mock('../client/src/components/Overview/ImageGallery.jsx', () => {
+  return function DummyGallery(props) {
+    return (<div><p>Image Gallery</p></div>);
+  };
+});
 
 const server = setupServer(
   rest.get('/productInfo', (req, res, ctx) => {
@@ -25,11 +32,7 @@ afterAll(() => server.close());
 
 it('should render with dummy data', () => {
   render(<Overview />);
-  waitFor(() => expect(screen.findAllByRole('heading', {level: 3}).filter((h) => h === 'Slacker\'s Slacks'))[0].toHaveTextContent('Slacker\'s Slacks'))
-  // waitFor(() => screen.findAllByRole('heading', {level: 3}))
-    .then((m) => {
-      // expect(screen.findAllByRole('heading', {level: 3}).some((h) => h === 'Slacker\'s Slacks').toBeTrue());
-      console.log(m);
-    })
+  waitFor(() => findByText('Selected Style'))
+    .then(() => expect(screen.findByTestId('productName')).toHaveTextContent('Slacker\'s Slacks'))
     .catch((err) => console.log(err));
 });
