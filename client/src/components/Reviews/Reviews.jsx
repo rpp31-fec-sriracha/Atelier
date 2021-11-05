@@ -58,6 +58,8 @@ class Reviews extends React.Component {
     this.setState({
       sortType: event
     });
+
+    //after the state is set, add logic to repull the reviews with the new sort type
   }
 
   render() {
@@ -68,11 +70,17 @@ class Reviews extends React.Component {
     }
 
     return (<div className="reviewsContainer">
-      <div>'Reviews Container'</div>
-      <div><RatingBreakdown metadata={this.state.meta}/></div>
-      <div><ProductBreakdown metadata={this.state.meta}/></div>
-      <div> {this.state.reviews.length} reviews, sorted by <SortSelector updateSortType = {this.updateSortType}/></div>
-      <div><ReviewsList reviews={this.state.reviews}/></div>
+      <div>'RATINGS & REVIEWS'</div>
+      <div class="flex-row">
+        <div class="flex-column">
+          <div><RatingBreakdown metadata={this.state.meta}/></div>
+          <div><ProductBreakdown metadata={this.state.meta}/></div>
+        </div>
+        <div class="flex-column">
+          <div> {this.state.reviews.length} reviews, sorted by <SortSelector updateSortType = {this.updateSortType}/></div>
+          <div class="flex-column"><ReviewsList reviews={this.state.reviews}/></div>
+        </div>
+      </div>
     </div>);
   }
 }

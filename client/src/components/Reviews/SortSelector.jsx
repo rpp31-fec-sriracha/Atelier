@@ -19,9 +19,9 @@ class SortSelector extends React.Component {
   render() {
     return (
       <select id="select" onChange={this.handleChange.bind(this)}>
-        <option>relevant</option>
-        <option>newest</option>
-        <option>helpful</option>
+        <option value="relevant">relevant</option>
+        <option value="newest">newest</option>
+        <option value="helpful">helpful</option>
       </select>
     );
   }
