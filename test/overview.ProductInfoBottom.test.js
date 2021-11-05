@@ -1,18 +1,11 @@
 /**
  * @jest-environment jsdom
  */
-// import dependencies
 import React from 'react';
-// import API mocking utilities from Mock Service Worker
-// import {rest} from 'msw';
-// import {setupServer} from 'msw/node';
-
-// import react-testing methods
-import {render, fireEvent, waitFor, screen} from '@testing-library/react';
+import {render} from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { unmountComponentAtNode } from 'react-dom';
 import ProductInfoBottom from '../client/src/components/Overview/ProductInfoBottom.jsx';
-// import dummyData from './overviewData.js';
 
 it('should render the slogan, description and feature list in ProductInfoBottom', () => {
   let slogan = 'slogan';
