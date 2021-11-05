@@ -29,12 +29,10 @@ class QuestionEntry extends React.Component {
           <span className="Q">Q:</span>
           <span className="Q-body">{question.question_body}</span>
           <div>
-            <div className="helpful">
-              <span>Helpful?</span>
-              <button className="increment-helpful">Yes({question.question_helpfulness})</button>
-              <span className="_divider">|</span>
-              <a href="#answer-modal" className="add-answer" onClick={() => this.openModal()}>Add Answer</a>
-            </div>
+            <span>Helpful?</span>
+            <button className="helpful-and-report">Yes({question.question_helpfulness})</button>
+            <span className="_divider">|</span>
+            <a href="#answer-modal" className="add-answer" onClick={() => this.openModal()}>Add Answer</a>
             <AnswerModal isOpen={isOpen} id="#answer-modal" closeModal={this.closeModal.bind(this)} question={question} productInfo={productInfo}></AnswerModal>
           </div>
           <div className="answers-list">
