@@ -147,12 +147,13 @@ header {
 }
 
 /* QA */
-.increment-helpful {
+.helpful-and-report{
   background: none;
   border: none;
   cursor: pointer;
   text-decoration: underline;
 }
+
 .overlay-style{
   position: fixed;
   top: 0;

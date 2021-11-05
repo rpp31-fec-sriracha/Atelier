@@ -16,7 +16,9 @@ const AnswerEntry = ({ answer }) => {
         <span className="_divider">|</span>
         <span className="helpful">Helpful?</span>
         <span className="_divider">|</span>
-        <button className="increment-helpful">Yes({answer.helpfulness})</button>
+        <button className="helpful-and-report">Yes({answer.helpfulness})</button>
+        <span className="_divider">|</span>
+        <button className="helpful-and-report">Report</button>
       </div>
       <a className="report"></a>
     </>
