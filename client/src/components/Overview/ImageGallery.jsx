@@ -2,7 +2,7 @@ import React from 'react';
 
 const Thumbnail = function(props) {
   return (
-    props.thumbImg ? <img className="thumb" onClick={(e) => console.log(e.target)} src={props.thumbImg}></img> : <div className="thumb"></div>
+    props.thumbImg ? <div className="thumb"><img onClick={(e) => console.log(e.target)} src={props.thumbImg}></img></div> : <div className="thumb"></div>
   );
 };
 
@@ -17,14 +17,17 @@ class ImageGallery extends React.Component {
   }
 
   componentDidUpdate() {
-    this.props.styles.map((style) => {
-      if (style['default?'] && this.state.default !== style) {
-        this.setState({
-          default: style,
-          updated: true,
-        });
-      }
-    });
+    if (this.props.styles !== {}) {
+      this.props.styles.map((style) => {
+        if (style['default?'] && this.state.default !== style) {
+          this.setState({
+            default: style,
+            updated: true,
+          });
+        }
+      });
+    }
+
     if (this.state.updated) {
       let thumbs = this.state.default.photos.map((photo) => (photo.thumbnail_url));
       if (JSON.stringify(this.state.thumbnails) !== JSON.stringify(thumbs)) {

@@ -17,11 +17,12 @@ class App extends React.Component {
         meta: {},
       },
       cart: [],
+      productLoaded: false,
     };
   }
 
-  componentDidMount() {
-    const { currentProductId } = this.state;
+  getProductInfo() {
+    let { currentProductId } = this.state;
     let product;
     axios({
       url: `/api/products/${currentProductId}`,
@@ -36,16 +37,21 @@ class App extends React.Component {
       })
       .then((response) => this.setState( {
         productInfo: product,
-        productStyles: response.data.results
+        productStyles: response.data.results,
+        productLoaded: true,
       }))
       .catch((err) => console.log(err));
   }
 
+  componentDidMount() {
+    this.getProductInfo();
+  }
+
   render() {
-    const { currentProductId, productInfo } = this.state;
+    const { currentProductId, productInfo, productStyles} = this.state;
 
     return (<div className="appContainer">
-      <Overview productInfo={this.state.productInfo} productStyles={this.state.productStyles} />
+      <Overview productInfo={productInfo} productStyles={productStyles} />
       <Questions currentProductId={currentProductId} productInfo={productInfo.name} />
       <Reviews />
     </div>);

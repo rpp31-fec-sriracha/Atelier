@@ -16,7 +16,7 @@ const ProductInfo = function(props) {
 
         <p>{props.product.default_price}</p>
 
-        <StyleSelector />
+        <StyleSelector styles={props.styles} />
         <AddToCart />
         <p>{props.product.description}</p>
       </div>
