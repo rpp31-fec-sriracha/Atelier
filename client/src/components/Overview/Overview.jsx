@@ -20,8 +20,9 @@ class Overview extends React.Component {
   }
 
   componentDidMount() {
+    console.log('Overview props', this.props);
     if (this.props !== undefined) {
-      this.props.styles.map((style) => {
+      this.props.productStyles.map((style) => {
         if (style['default?'] && this.state.default !== style) {
           this.setState({
             default: style,
