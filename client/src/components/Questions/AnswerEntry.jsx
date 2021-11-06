@@ -10,17 +10,16 @@ const AnswerEntry = ({ answer }) => {
         {answer.photos.map((photo, i) => <img key={i} src={photo.url}></img>)}
       </div>
       <div className="userInfo">
-        <span className="username">by {answer.answerer_name} </span>
+        <span data-testid="answerer_name" className="username">by {answer.answerer_name} </span>
         <span className="_divider">|</span>
-        <span className="date">{answer.date}</span>
+        <span data-testid="date" className="date">{answer.date}</span>
         <span className="_divider">|</span>
-        <span className="helpful">Helpful?</span>
+        <span data-testid="answerer_name" className="helpful">Helpful?</span>
         <span className="_divider">|</span>
-        <button className="helpful-and-report">Yes({answer.helpfulness})</button>
+        <button data-testid="helpfulness" className="helpful-and-report">Yes({answer.helpfulness})</button>
         <span className="_divider">|</span>
         <button className="helpful-and-report">Report</button>
       </div>
-      <a className="report"></a>
     </>
   );
 };
