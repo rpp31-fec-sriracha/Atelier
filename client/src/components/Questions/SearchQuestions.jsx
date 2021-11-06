@@ -7,6 +7,7 @@ const SearchQuestions = ({ searchTerm, handleSearch }) => {
     <>
       <div className="search-question">
         <input
+          role="search"
           type="text"
           placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."
           value={search}
