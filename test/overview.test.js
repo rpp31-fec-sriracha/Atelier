@@ -31,7 +31,7 @@ afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
 it('should render with dummy data', () => {
-  render(<Overview />);
+  render(<Overview productInfo={dummyData[0]} productStyles={dummyData[1]} />);
   waitFor(() => findByText('Selected Style'))
     .then(() => expect(screen.findByTestId('productName')).toHaveTextContent('Slacker\'s Slacks'))
     .catch((err) => console.log(err));
