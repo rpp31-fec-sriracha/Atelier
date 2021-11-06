@@ -11,6 +11,21 @@ const apiCall = function(endpoint, params, callback) {
     .catch((err) => callback(err, null));
 };
 
+const apiWrap = function(method, endpoint, params, body, callback) {
+  axios({
+    method: method,
+    url: url + endpoint,
+    headers: { 'Authorization': API_KEY },
+    params: params,
+    data: body,
+  })
+    .then((response) => {
+      // console.log(response);
+      callback(null, response);
+    })
+    .catch((err) => callback(err, null));
+};
+
 const defaultParams = { responseType: 'json' };
 
 const getProductList = (page, count, callback) => {
