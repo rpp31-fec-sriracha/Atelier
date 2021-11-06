@@ -23,10 +23,14 @@
     "@babel/core": "^7.15.8",
     "@babel/preset-env": "^7.15.8",
     "@babel/preset-react": "^7.14.5",
+<<<<<<< HEAD
     "@testing-library/dom": "^8.11.0",
     "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+=======
+    "@testing-library/react": "^12.1.2",
+>>>>>>> 185a485c2d628119d71c2920ba1f194e4b7c0b79
     "babel-loader": "^8.2.3",
     "msw": "^0.35.0",
     "nodemon": "^2.0.14",
@@ -34,6 +38,7 @@
     "webpack-cli": "^4.9.1"
   },
   "dependencies": {
+    "@testing-library/jest-dom": "^5.15.0",
     "axios": "^0.23.0",
     "body-parser": "^1.19.0",
     "eslint": "^8.0.1",
@@ -41,7 +46,6 @@
     "jest": "^27.3.1",
     "jquery": "^3.6.0",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "underscore": "^1.13.1"
+    "react-dom": "^17.0.2"
   }
 }
