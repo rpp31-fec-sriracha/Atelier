@@ -7,7 +7,7 @@ const ProductInfo = function(props) {
   return (
     <div className="flex-row" id="productInfo">
       {/* <h1>Image Gallery</h1> */}
-      <ImageGallery styles={props.styles} />
+      <ImageGallery  currentStyle={props.currentStyle} styles={props.styles} />
       {/* {this.props.styles ? <ImageGallery styles={this.props.styles.results} /> : 'Image Gallery'} */}
       <div className="flex-column" id="productInfoTop">
         <h4>STARS Read all # reviews</h4>

@@ -17,15 +17,15 @@ class ImageGallery extends React.Component {
   }
 
   componentDidMount() {
-    this.props.styles.map((style) => {
-      if (style['default?'] && this.state.default !== style) {
-        this.setState({
-          default: style,
-          updated: true,
-        });
-      }
-    });
-  }
+  //   this.props.styles.map((style) => {
+  //     if (style['default?'] && this.state.default !== style) {
+  //       this.setState({
+  //         default: style,
+  //         updated: true,
+  //       });
+  //     }
+  //   });
+  // }
 
   componentDidUpdate() {
     if (this.state.updated) {

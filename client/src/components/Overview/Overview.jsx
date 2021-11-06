@@ -25,7 +25,7 @@ class Overview extends React.Component {
       this.props.productStyles.map((style) => {
         if (style['default?'] && this.state.default !== style) {
           this.setState({
-            default: style,
+            defaultStyle: style,
             // updated: true,
           });
         }
@@ -38,7 +38,8 @@ class Overview extends React.Component {
     return (<div className="overview flex-column">
       <ProductInfo product={this.props.productInfo}
         styles={this.props.productStyles}
-        styleClick={this.handleStyleClick} />
+        styleClick={this.handleStyleClick}
+        defaultStyle = this.state.defaultStyle />
       <ProductInfoBottom
         slogan={this.props.productInfo.slogan}
         description={this.props.productInfo.description}
