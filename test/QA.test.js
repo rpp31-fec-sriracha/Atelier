@@ -14,9 +14,9 @@ import dummyData from './QA-dummydata.js';
 afterEach(cleanup);
 
 describe('Individual Question', () => {
-  test('should display question body that is fetched data from API', async () => {
+  test('should display question body that is fetched data from API', () => {
     const { container, getByTestId } = render(<QuestionEntry />);
-    expect(await getByTestId('q-body')).toHaveTextContent('What fabric is the bottom made of?');
+    expect(getByTestId('q-body')).toHaveTextContent('What fabric is the bottom made of?');
   });
   // test('a', () => {
   //   render(<QuestionEntry />);

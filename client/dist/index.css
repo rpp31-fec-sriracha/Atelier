@@ -152,6 +152,7 @@ header {
   flex-direction: column;
   flex-wrap: nowrap;
   justify-content: center;
+  border: 1px solid black;
 }
 .search-question {
   max-width: 70%;
