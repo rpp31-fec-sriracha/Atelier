@@ -25,18 +25,23 @@ class QuestionEntry extends React.Component {
 
     return (
       <>
-        <div id="question">
-          <span className="Q">Q:</span>
-          <span data-testid="q-body" className="Q-body">{question.question_body}</span>
-          <div>
-            <span>Helpful?</span>
-            <button className="helpful-and-report">Yes({question.question_helpfulness})</button>
-            <span className="_divider">|</span>
-            <button className="helpful-and-report" onClick={() => this.openModal()}>Add Answer</button>
-            <AnswerModal isOpen={isOpen} id="#answer-modal" closeModal={this.closeModal.bind(this)} question={question} productInfo={productInfo}></AnswerModal>
+        <div className="question">
+          <div className="question-flex-row">
+            <div className="QA-title">
+              <span>Q: </span>
+              <span data-testid="q-body" className="Q-body">{question.question_body}</span>
+            </div>
+            <div className="right">
+              <span>Helpful?</span>
+              <button className="helpful-and-report">Yes({question.question_helpfulness})</button>
+              <span className="_divider">|</span>
+              <button className="helpful-and-report" onClick={() => this.openModal()}>Add Answer</button>
+              <AnswerModal isOpen={isOpen} id="#answer-modal" closeModal={this.closeModal.bind(this)} question={question} productInfo={productInfo}></AnswerModal>
+            </div>
           </div>
+
+          <span className="QA-title">A:</span>
           <div className="answers-list">
-            <span className="A">A:</span>
             {Object.keys(question.answers).map((id, i) => {
               let answer = question.answers[id];
               return <AnswerEntry key={i} answer={answer} />;
