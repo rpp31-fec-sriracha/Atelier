@@ -8,7 +8,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.resolve(__dirname, '../client/dist')));
 
 app.all('/api/*', (req, res, next) => {
-  console.log('ALL --->', req.method, req.url);
+  // console.log('ALL --->', req.method, req.url);
   let method = req.method;
   let reqUrl = (req.url.replace(/^\/api/, ''));
   reqUrl = reqUrl.replace(/\?.*$/, '');
@@ -17,39 +17,10 @@ app.all('/api/*', (req, res, next) => {
   // method, endpoint, params, body, callback
   api.apiWrap(method, reqUrl, params, data, (err, data) => {
     if (err) {
-      res.status(err.status).json(err);
+      console.log(err);
+      res.status(err.response.status).json(err);
     } else {
       res.status(data.status).json(data.data);
-    }
-  });
-  next();
-});
-
-app.get('/api/*', (req, res) => {
-  let reqUrl = (req.url.replace(/^\/api/, ''));
-  reqUrl = reqUrl.replace(/\?.*$/, '');
-  let params = req.query;
-
-  api.apiCall(reqUrl, params, (err, data) => {
-    if (err) {
-      res.status(500).json(err);
-    } else {
-      res.status(200).json(data);
-    }
-  });
-});
-
-app.post('/api/*', (req, res) => {
-  let reqUrl = (req.url.replace(/^\/api/, ''));
-  reqUrl = reqUrl.replace(/\?.*$/, '');
-  let params = req.query;
-  let data = req.body;
-
-  api.apiPost(reqUrl, params, data, (err, data) => {
-    if (err) {
-      res.status(500).json(err);
-    } else {
-      res.status(201).json(data);
     }
   });
 });
@@ -74,8 +45,8 @@ app.get('/products', (req, res) => {
 });
 
 app.get('/productInfo', (req, res) => {
-  console.log(req.url);
-  console.log(req.query);
+  // console.log(req.url);
+  // console.log(req.query);
   let productId = req.query.productId;
 
   api.getProductInfo(productId, (err, data) => {
