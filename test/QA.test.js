@@ -9,14 +9,14 @@ import QuestionList from '../client/src/components/Questions/QuestionList.jsx';
 import QuestionEntry from '../client/src/components/Questions/QuestionList.jsx';
 import AnswerModal from '../client/src/components/Questions/AnswerModal.jsx';
 import QuestionModal from '../client/src/components/Questions/QuestionModal.jsx';
-import dummyData from './QA-dummydata.js'
+import dummyData from './QA-dummydata.js';
 
 afterEach(cleanup);
 
 describe('Individual Question', () => {
-  test('should display question body that is fetched data from API', () => {
+  test('should display question body that is fetched data from API', async () => {
     const { container, getByTestId } = render(<QuestionEntry />);
-    expect(getByTestId('q-body')).toHaveTextContent('What fabric is the bottom made of?');
+    expect(await getByTestId('q-body')).toHaveTextContent('What fabric is the bottom made of?');
   });
   // test('a', () => {
   //   render(<QuestionEntry />);
@@ -31,7 +31,7 @@ describe('Individual Question', () => {
 
 
 
-describe.only('Search Question', () => {
+describe('Search Question', () => {
   const placeholderText = 'HAVE A QUESTION? SEARCH FOR ANSWERS...';
 
   test(`should display input field for user to enter & placeholder reading text reading ${placeholderText}`, () => {
@@ -41,10 +41,10 @@ describe.only('Search Question', () => {
   });
 });
 
-describe('Questions', () => {
+describe.only('Questions', () => {
   test('should display add question button', () => {
     const { getByRole } = render(<Questions />);
-    expect(screen.getByRole('add-quesiton')).toBeInTheDocument();
+    expect(screen.getByRole('add-question')).toBeInTheDocument();
   });
   // test('should display Modal window upon clicking', () => {
   //   const { container, queryByRole } = render(<Questions />);
