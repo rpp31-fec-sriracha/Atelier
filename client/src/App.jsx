@@ -48,17 +48,16 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     const { currentProductId, productInfo, productStyles} = this.state;
-
     return (<div className="appContainer">
-      {
-        this.state.productLoaded ?
-          <Overview productInfo={productInfo} productStyles={productStyles} /> :
-          <p>Loading product info...</p>
+      {(this.state.productLoaded) ?
+        <>
+          <Overview productInfo={productInfo} productStyles={productStyles} />
+          <Questions currentProductId={currentProductId} productInfo={productInfo.name} />
+          <Reviews />
+        </>
+        : <p>Loading product info...</p>
       }
-      <Questions currentProductId={currentProductId} productInfo={productInfo.name} />
-      <Reviews />
     </div>);
   }
 }

@@ -5,19 +5,18 @@ const SearchQuestions = ({ searchTerm, handleSearch }) => {
 
   return (
     <>
-      <div className="search-question">
-        <input
-          type="text"
-          placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."
-          value={search}
-          onChange={(e) => {
-            setSearch(e.target.value);
-            // only start filter when search.length >= 3
-            if (search.length >= 3) {
-              handleSearch(search);
-            }
-          }}></input>
-      </div>
+      <input className="search-question"
+        role="search"
+        type="text"
+        placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."
+        value={search}
+        onChange={(e) => {
+          setSearch(e.target.value);
+          // only start filter when search.length >= 3
+          if (search.length >= 3) {
+            handleSearch(search);
+          }
+        }}></input>
     </>
   );
 };
