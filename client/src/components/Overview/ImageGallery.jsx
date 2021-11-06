@@ -25,7 +25,7 @@ class ImageGallery extends React.Component {
   //       });
   //     }
   //   });
-  // }
+  }
 
   componentDidUpdate() {
     if (this.state.updated) {

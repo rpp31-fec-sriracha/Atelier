@@ -39,7 +39,7 @@ class Overview extends React.Component {
       <ProductInfo product={this.props.productInfo}
         styles={this.props.productStyles}
         styleClick={this.handleStyleClick}
-        defaultStyle = this.state.defaultStyle />
+        defaultStyle={this.state.defaultStyle} />
       <ProductInfoBottom
         slogan={this.props.productInfo.slogan}
         description={this.props.productInfo.description}
