@@ -68,11 +68,17 @@ class Reviews extends React.Component {
     }
 
     return (<div className="reviewsContainer">
-      <div>'Reviews Container'</div>
-      <div><RatingBreakdown metadata={this.state.meta}/></div>
-      <div><ProductBreakdown metadata={this.state.meta}/></div>
-      <div> {this.state.reviews.length} reviews, sorted by <SortSelector updateSortType = {this.updateSortType}/></div>
-      <div><ReviewsList reviews={this.state.reviews}/></div>
+      <div>'RATINGS & REVIEWS'</div>
+      <div className="flex-row-reviews">
+        <div className="flex-column">
+          <div><RatingBreakdown metadata={this.state.meta}/></div>
+          <div><ProductBreakdown metadata={this.state.meta}/></div>
+        </div>
+        <div className="flex-column">
+          <div> {this.state.reviews.length} reviews, sorted by <SortSelector updateSortType = {this.updateSortType}/></div>
+          <div className="flex-column"><ReviewsList reviews={this.state.reviews}/></div>
+        </div>
+      </div>
     </div>);
   }
 }

@@ -146,6 +146,7 @@ header {
   margin: 5px;
 }
 
+
 /* QA */
 .questions {
   display: flex;
@@ -159,6 +160,10 @@ header {
   flex-direction: column;
 }
 .question-flex-row {
+  display: flex;
+  justify-content: space-between;
+}
+.flex-row-reviews {
   display: flex;
   justify-content: space-between;
 }
@@ -215,4 +220,27 @@ header {
   padding: 50px;
   z-Index: 1000;
   border-radius: 1px;
+  individual-review-tile {
+  border-bottom: 2px solid black;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #FFF;
+  padding: 50px;
+  z-Index: 1000;
+  border-radius: 1px;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, .5);
+  z-index: 1000;
 }

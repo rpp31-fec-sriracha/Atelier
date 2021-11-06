@@ -25,6 +25,25 @@ app.all('/api/*', (req, res, next) => {
   });
 });
 
+app.get('/products', (req, res) => {
+  let page = 1;
+  let count = 5;
+  if (req.query.page) {
+    page = page;
+  }
+  if (req.body.count) {
+    count = count;
+  }
+
+  api.getProductList(page, count, (err, data) => {
+    if (err) {
+      res.status(500).json(err);
+    } else {
+      res.status(200).json(data);
+    }
+  });
+});
+
 app.get('/productInfo', (req, res) => {
   // console.log(req.url);
   // console.log(req.query);
