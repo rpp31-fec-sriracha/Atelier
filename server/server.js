@@ -22,7 +22,6 @@ app.all('/api/*', (req, res, next) => {
       res.status(data.status).json(data.data);
     }
   });
-  next();
 });
 
 app.get('/api/*', (req, res) => {

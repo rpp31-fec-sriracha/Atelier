@@ -9,7 +9,8 @@ class ReviewsList extends React.Component {
 
     this.state = {
       numReviewsVisible: 2,
-      sortOption: 'relevance'
+      sortOption: 'relevance',
+      newReviewOpen: false
     };
   }
 
@@ -28,9 +29,12 @@ class ReviewsList extends React.Component {
       {this.props.reviews.slice(0, this.state.numReviewsVisible).map((review) => {
         return <IndividualReviewTile currentReview={review} />;
       })}
-      <div class="flex-row">
+      <div className="flex-row">
         <button onClick={() => this.moreReviews()}>MORE REVIEWS</button>
-        <div><NewReview/></div>
+        <div>
+          <button onClick={() => this.setState({newReviewOpen: true})}>ADD A REVIEW +</button>
+          <NewReview open={this.state.newReviewOpen} onClose={() => this.setState({newReviewOpen: false})}></NewReview>
+        </div>
       </div>
       <div><KeywordSearch/></div>
     </div>);

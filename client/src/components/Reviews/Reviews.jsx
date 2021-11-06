@@ -71,14 +71,14 @@ class Reviews extends React.Component {
 
     return (<div className="reviewsContainer">
       <div>'RATINGS & REVIEWS'</div>
-      <div class="flex-row">
-        <div class="flex-column">
+      <div className="flex-row-reviews">
+        <div className="flex-column">
           <div><RatingBreakdown metadata={this.state.meta}/></div>
           <div><ProductBreakdown metadata={this.state.meta}/></div>
         </div>
-        <div class="flex-column">
+        <div className="flex-column">
           <div> {this.state.reviews.length} reviews, sorted by <SortSelector updateSortType = {this.updateSortType}/></div>
-          <div class="flex-column"><ReviewsList reviews={this.state.reviews}/></div>
+          <div className="flex-column"><ReviewsList reviews={this.state.reviews}/></div>
         </div>
       </div>
     </div>);
