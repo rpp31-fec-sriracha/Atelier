@@ -6,7 +6,7 @@ const QuestionList = function ({ questions, productInfo }) {
 
   return (
     <>
-      <div className="questions">
+      <div className="list-container">
         {(questions.length > 0) ?
           questions.slice(0, visibleCount).map((question, i) =>
             <QuestionEntry role="single-question" key={i} question={question} productInfo={productInfo} />)
