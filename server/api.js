@@ -3,7 +3,7 @@ const API_KEY = require('./config.js');
 const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
 
 const apiCall = function(endpoint, params, callback) {
-  console.log(params);
+  // console.log(params);
   axios.get(`${url}${endpoint}`, {
     headers: { 'Authorization': API_KEY },
     params: params,
@@ -21,7 +21,7 @@ const apiWrap = function(method, endpoint, params, body, callback) {
     data: body,
   })
     .then((response) => {
-      console.log(response);
+      // console.log(response);
       callback(null, response);
     })
     .catch((err) => callback(err, null));
