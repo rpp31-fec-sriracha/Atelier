@@ -49,11 +49,13 @@ class Questions extends React.Component {
 
     return (
       <>
-        <div className="questions">
+        <div className="questions flex-column">
+          <p>QUESTIONS & ANSWERS</p>
           <SearchQuestions handleSearch={this.handleSearch.bind(this)} />
           <QuestionList questions={questions} productInfo={productInfo} />
-          <button onClick={() => this.openModal()}>AddQuestion</button>
+          <button className="col-1-3" role="add-quesiton" onClick={() => this.openModal()}>AddQuestion</button>
           <QuestionModal
+            role="q-modal"
             isOpen={isOpen}
             productInfo={productInfo}
             closeModal={this.closeModal.bind(this)}

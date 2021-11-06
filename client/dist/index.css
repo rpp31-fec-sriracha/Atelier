@@ -1,6 +1,6 @@
 html {
   box-sizing: border-box;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: "adobe-clean", sans-serif;;
 }
 * {
   margin: 0;
@@ -147,13 +147,25 @@ header {
 }
 
 /* QA */
+.questions {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+.search-question {
+  max-width: 70%;
+  height: 50px;
+}
+.add-answer {
+  color:black;
+}
 .helpful-and-report{
   background: none;
   border: none;
   cursor: pointer;
   text-decoration: underline;
 }
-
 .overlay-style{
   position: fixed;
   top: 0;

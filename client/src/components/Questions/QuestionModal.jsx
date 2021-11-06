@@ -16,7 +16,7 @@ const QuestionModal = ({ isOpen, productInfo, handleAddQuestion, closeModal }) =
           <div className="modal-style">
             <form onSubmit={() => closeModal()}>
               <div className="modal-title">Ask Your Question</div>
-              <div className="modal-subtitle">About the {productInfo}.</div>
+              <div data-testid="product-name" className="modal-subtitle">About the {productInfo}.</div>
               <label>Your Question</label><span id="mandatory-asterisk">*</span>
               <input type="text" name="question" onChange={(e) => setQuestion(e.target.value)}></input>
               <label>What is your nickname</label><span id="mandatory-asterisk">*</span>

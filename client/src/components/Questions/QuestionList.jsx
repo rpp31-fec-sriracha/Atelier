@@ -12,7 +12,7 @@ const QuestionList = function ({ questions, productInfo }) {
             <QuestionEntry role="single-question" key={i} question={question} productInfo={productInfo} />)
           : <div></div>}
         {(questions.length > 0) ?
-          <button onClick={() => setVisibleCount(visibleCount + 2)}>MORE ANSWERED QUESTIONS</button>
+          <button className="col-1-3" onClick={() => setVisibleCount(visibleCount + 2)}>MORE ANSWERED QUESTIONS</button>
           : <div></div>}
       </div>
     </>

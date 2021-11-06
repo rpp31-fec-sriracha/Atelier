@@ -10,7 +10,7 @@ const AnswerEntry = ({ answer }) => {
         {answer.photos.map((photo, i) => <img key={i} src={photo.url}></img>)}
       </div>
       <div className="userInfo">
-        <span data-testid="answerer_name" className="username">by {answer.answerer_name} </span>
+        <span data-testid="answerer-name" className="username">by {answer.answerer_name} </span>
         <span className="_divider">|</span>
         <span data-testid="date" className="date">{answer.date}</span>
         <span className="_divider">|</span>

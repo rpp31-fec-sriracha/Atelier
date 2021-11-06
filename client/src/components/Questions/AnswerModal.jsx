@@ -31,7 +31,7 @@ class AnswerModal extends React.Component {
             <div className="modal-style">
               <form onSubmit={() => closeModal()}>
                 <div className="modal-title">Submit your Answer</div>
-                <div className="modal-subtitle">{productInfo}: {question.question_body}</div>
+                <div className="modal-subtitle"><b>{productInfo}</b>: {question.question_body}</div>
                 <label>Your Answer</label><span id="mandatory-asterisk">*</span>
                 <textarea value={answer} name="answer" onChange={(e) => this.handleInputChange(e)}></textarea>
                 <label>What is your nickname</label><span id="mandatory-asterisk">*</span>
