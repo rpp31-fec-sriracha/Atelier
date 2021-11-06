@@ -1,9 +1,58 @@
 import React from 'react';
 
 const NewReview = function(props) {
-  return (<div className="newReview">
-    <button>ADD A REVIEW +</button>
-  </div>);
+  if (props.open !== true) {
+    return null;
+  }
+
+  return (
+    <>
+      <div className="overlay"/>
+      <div className="modal">
+        <div className="new-review">
+          <form>
+            <div className="modal-title">Write Your Review</div>
+            <div></div>
+            <div className="modal-subtitle">About the product.</div>
+            <div>
+              <label>Overall rating</label><span id="mandatory-asterisk">*</span>
+              <input type="text" name="question"></input></div>
+            <div>
+              <label>Do you recommend this product?</label><span id="mandatory-asterisk">*</span>
+              <input type="text" name="recommend"></input>
+            </div>
+            <div>
+              <label>Characteristics</label><span id="mandatory-asterisk">*</span>
+              <input type="text" name="characteristics"></input>
+            </div>
+            <div>
+              <label>Review Summary</label>
+              <input type="text" name="summary" placeholder="Example: Best purchase ever!"></input>
+            </div>
+            <div>
+              <span id="mandatory-asterisk">*</span>
+              <input type="text" name="summary" placeholder="Why did you like the product or not?"></input>
+            </div>
+            <div>
+              <label>Upload photos</label>
+              <input type="file" name="photos"></input>
+            </div>
+            <div>
+              <label>What is your nickname?</label><span id="mandatory-asterisk">*</span>
+              <input type="text" name="nickname" placeholder="Example: jackson11!"></input>
+              <div>For privacy reasons, do not use your full name or email address</div>
+            </div>
+            <div>
+              <label>Your email</label><span id="mandatory-asterisk">*</span>
+              <input type="text" name="email" placeholder="Example: jackson11@email.com"></input>
+              <div>For authentication reasons, you will not be emailed</div>
+            </div>
+            <input type="submit" value="Submit review" onClick={props.onClose}></input>
+          </form>
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default NewReview;
