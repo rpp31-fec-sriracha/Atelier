@@ -17,7 +17,6 @@ class App extends React.Component {
         meta: {},
       },
       cart: [],
-      productLoaded: false,
     };
   }
 
@@ -38,7 +37,6 @@ class App extends React.Component {
       .then((response) => this.setState( {
         productInfo: product,
         productStyles: response.data.results,
-        productLoaded: true,
       }))
       .catch((err) => console.log(err));
   }

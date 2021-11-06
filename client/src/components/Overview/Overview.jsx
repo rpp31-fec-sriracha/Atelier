@@ -20,7 +20,9 @@ class Overview extends React.Component {
 
   render() {
     return (<div className="overview flex-column">
-      <ProductInfo product={this.props.productInfo} styles={this.props.productStyles} />
+      <ProductInfo product={this.props.productInfo}
+        styles={this.props.productStyles}
+        styleClick={this.handleStyleClick} />
       <ProductInfoBottom
         slogan={this.props.productInfo.slogan}
         description={this.props.productInfo.description}
