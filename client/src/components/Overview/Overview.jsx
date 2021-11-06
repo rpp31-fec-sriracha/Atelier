@@ -7,44 +7,42 @@ class Overview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentProduct: 59556,
-      product: {},
-      styles: [],
-      loadProductInfo: false,
       defaultStyle: '',
+      currentStyle: '',
+      selectedThumb: '',
     };
+    this.handleStyleClick = this.handleStyleClick.bind(this);
+  }
+
+  handleStyleClick(e, styleId) {
+    e.preventDefault();
+    this.setState({ currentStyle: styleId });
   }
 
   componentDidMount() {
-    let product;
-
-    axios({
-      url: '/productInfo',
-      method: 'get',
-      params: { productId: this.state.currentProduct }
-    })
-      .then((response) => product = response.data)
-      .then(() => {
-        return axios({
-          url: '/productStyles',
-          method: 'get',
-          params: { productId: this.state.currentProduct }
-        });
-      })
-      .then((response) => this.setState( {
-        product: product,
-        styles: response.data.results
-      }))
-      .catch((err) => console.log(err));
+    console.log('Overview props', this.props);
+    if (this.props !== undefined) {
+      this.props.productStyles.map((style) => {
+        if (style['default?'] && this.state.default !== style) {
+          this.setState({
+            default: style,
+            // updated: true,
+          });
+        }
+      });
+    }
   }
 
   render() {
+    console.log(this.props);
     return (<div className="overview flex-column">
-      <ProductInfo product={this.state.product} styles={this.state.styles} />
+      <ProductInfo product={this.props.productInfo}
+        styles={this.props.productStyles}
+        styleClick={this.handleStyleClick} />
       <ProductInfoBottom
-        slogan={this.state.product.slogan}
-        description={this.state.product.description}
-        features={this.state.product.features} />
+        slogan={this.props.productInfo.slogan}
+        description={this.props.productInfo.description}
+        features={this.props.productInfo.features} />
 
     </div>);
   }

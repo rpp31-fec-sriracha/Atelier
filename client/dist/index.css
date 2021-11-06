@@ -120,21 +120,43 @@ header {
 }
 
 .thumb {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 100px;
-  height: auto;
-  border: 1px solid black;
+  height: 75px;
+  /* border: 1px solid black; */
+  padding: 0;
+  margin: 0.25em 0;
+  background-color: rgba(50, 50, 50, 0.6);
+  filter: drop-shadow(5px 5px 8px black)
+}
+
+.thumb img {
+  max-height: 100%;
+  max-width: 100%;
   padding: 0;
 }
+
 .styleThumbs {
   flex-wrap: wrap;
 }
 
 .styleThumb {
+  display: flex;
   margin: 10px;
   height: 100px;
   width: 100px;
-  background-color: gray;
+  background-color: rgba(20, 20, 20, .4);
   border-radius: 50%;
+  background-size: cover;
+}
+
+.styleThumb img {
+  /* max-height: 100%; */
+  /* max-width: 100%; */
+  margin: auto;
+  object-fit: cover;
 }
 
 .questions {
