@@ -1,14 +1,13 @@
 import React from 'react';
 
 const StyleThumb = function(props) {
-  return (<div className="styleThumb" style={{backgroundImage: `url(${props.thumbnailUrl})`}}></div>);
+  return (<div onClick={(e) => props.onClick(e, props.styleId)} className="styleThumb" style={{backgroundImage: `url(${props.thumbnailUrl})`}}></div>);
 };
 
 const StyleSelector = function(props) {
   if (Object.keys(props.styles).length !== 0) {
-    console.log(props);
     let styleThumbs = props.styles.map((style, index) => {
-      return (<StyleThumb className="styleThumb" thumbnailUrl={style.photos[0].thumbnail_url} key={'StyleThumb' + index} />);
+      return (<StyleThumb styleId={style.style_id} className="styleThumb" onClick={props.styleClick} thumbnailUrl={style.photos[0].thumbnail_url} key={'StyleThumb' + index} />);
     });
 
     return (

@@ -14,11 +14,26 @@ class Overview extends React.Component {
     this.handleStyleClick = this.handleStyleClick.bind(this);
   }
 
-  handleStyleClick(e) {
-    this.setState({ currentStyle: e.target });
+  handleStyleClick(e, styleId) {
+    e.preventDefault();
+    this.setState({ currentStyle: styleId });
+  }
+
+  componentDidMount() {
+    if (this.props !== undefined) {
+      this.props.styles.map((style) => {
+        if (style['default?'] && this.state.default !== style) {
+          this.setState({
+            default: style,
+            // updated: true,
+          });
+        }
+      });
+    }
   }
 
   render() {
+    console.log(this.props);
     return (<div className="overview flex-column">
       <ProductInfo product={this.props.productInfo}
         styles={this.props.productStyles}

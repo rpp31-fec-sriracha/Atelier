@@ -1,7 +1,7 @@
 import React from 'react';
 import Overview from './components/Overview/Overview.jsx';
 import Questions from './components/Questions/Questions.jsx';
-import productInfo from './components/Questions/dummyData.js';
+// import productInfo from './components/Questions/dummyData.js';
 import Reviews from './components/Reviews/Reviews.jsx';
 import axios from 'axios';
 
@@ -10,13 +10,14 @@ class App extends React.Component {
     super(props);
     this.state = {
       currentProductId: 59556,
-      productInfo: productInfo,
-      productStyles: {},
+      productInfo: null,
+      productStyles: null,
       productReviews: {
         reviews: {},
         meta: {},
       },
       cart: [],
+      productLoaded: false,
     };
   }
 
@@ -37,6 +38,7 @@ class App extends React.Component {
       .then((response) => this.setState( {
         productInfo: product,
         productStyles: response.data.results,
+        productLoaded: true
       }))
       .catch((err) => console.log(err));
   }
@@ -46,12 +48,17 @@ class App extends React.Component {
   }
 
   render() {
+    console.log(this.state);
     const { currentProductId, productInfo, productStyles} = this.state;
 
     return (<div className="appContainer">
-      <Overview productInfo={productInfo} productStyles={productStyles} />
-      <Questions currentProductId={currentProductId} productInfo={productInfo.name} />
-      <Reviews />
+      {
+        this.state.productLoaded ?
+          <Overview productInfo={productInfo} productStyles={productStyles} /> :
+          <p>Loading product info...</p>
+      }
+      {/* <Questions currentProductId={currentProductId} productInfo={productInfo.name} />
+      <Reviews /> */}
     </div>);
   }
 }

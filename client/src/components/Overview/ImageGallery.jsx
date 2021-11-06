@@ -16,18 +16,18 @@ class ImageGallery extends React.Component {
     };
   }
 
-  componentDidUpdate() {
-    if (this.props.styles !== {}) {
-      this.props.styles.map((style) => {
-        if (style['default?'] && this.state.default !== style) {
-          this.setState({
-            default: style,
-            updated: true,
-          });
-        }
-      });
-    }
+  componentDidMount() {
+    this.props.styles.map((style) => {
+      if (style['default?'] && this.state.default !== style) {
+        this.setState({
+          default: style,
+          updated: true,
+        });
+      }
+    });
+  }
 
+  componentDidUpdate() {
     if (this.state.updated) {
       let thumbs = this.state.default.photos.map((photo) => (photo.thumbnail_url));
       if (JSON.stringify(this.state.thumbnails) !== JSON.stringify(thumbs)) {

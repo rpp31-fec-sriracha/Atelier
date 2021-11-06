@@ -16,7 +16,8 @@ const ProductInfo = function(props) {
 
         <p>{props.product.default_price}</p>
 
-        <StyleSelector styles={props.styles} />
+        {props.styles !== undefined ? <StyleSelector styleClick={props.styleClick} styles={props.styles} /> :
+          <div></div>}
         <AddToCart />
         <p>{props.product.description}</p>
       </div>
