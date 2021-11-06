@@ -40,7 +40,7 @@ class ImageGallery extends React.Component {
     let thumbList = this.state.thumbnails.map((t, index) => (<Thumbnail key={'thumb' + index} thumbImg={t} />));
 
     return (<div className="flex-column col-2-3" id="image-gallery" style={this.state.updated ?
-      {backgroundImage: `url(${this.state.default.photos[0].url})`,
+      {backgroundImage: `url(${this.props.currentStyle.photos[0].url})`,
         backgroundRepeat: 'no-repeat'} :
       {backgroundColor: 'black'}}>
       {thumbList ? thumbList : <Thumbnail thumbImg="" />}
