@@ -11,9 +11,8 @@ const NewReview = function(props) {
       <div className="modal">
         <div className="new-review">
           <form>
-            <div className="modal-title">Write Your Review</div>
-            <div></div>
-            <div className="modal-subtitle">About the product.</div>
+            <h3 className="modal-title">Write Your Review</h3>
+            <h4 className="modal-subtitle">About the {props.productName}.</h4>
             <div>
               <label>Overall rating</label><span id="mandatory-asterisk">*</span>
               <input type="text" name="question"></input></div>

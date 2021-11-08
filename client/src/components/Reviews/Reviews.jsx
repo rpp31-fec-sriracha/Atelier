@@ -11,7 +11,7 @@ class Reviews extends React.Component {
     super(props);
 
     this.state = {
-      currentProduct: 59556,
+      currentProduct: this.props.currentProductId,
       reviews: [],
       meta: {},
       sortType: 'relevant'
@@ -78,7 +78,7 @@ class Reviews extends React.Component {
         </div>
         <div className="flex-column">
           <div> {this.state.reviews.length} reviews, sorted by <SortSelector updateSortType = {this.updateSortType}/></div>
-          <div className="flex-column"><ReviewsList reviews={this.state.reviews}/></div>
+          <div className="flex-column"><ReviewsList reviews={this.state.reviews} productName={this.props.productName}/></div>
         </div>
       </div>
     </div>);

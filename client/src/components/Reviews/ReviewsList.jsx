@@ -33,7 +33,7 @@ class ReviewsList extends React.Component {
         <button onClick={() => this.moreReviews()}>MORE REVIEWS</button>
         <div>
           <button onClick={() => this.setState({newReviewOpen: true})}>ADD A REVIEW +</button>
-          <NewReview open={this.state.newReviewOpen} onClose={() => this.setState({newReviewOpen: false})}></NewReview>
+          <NewReview productName={this.props.productName} open={this.state.newReviewOpen} onClose={() => this.setState({newReviewOpen: false})}></NewReview>
         </div>
       </div>
       <div><KeywordSearch/></div>

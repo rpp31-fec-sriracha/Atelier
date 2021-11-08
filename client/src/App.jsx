@@ -54,7 +54,7 @@ class App extends React.Component {
         <>
           <Overview productInfo={productInfo} productStyles={productStyles} />
           <Questions currentProductId={currentProductId} productInfo={productInfo.name} />
-          <Reviews />
+          <Reviews currentProductId={currentProductId} productName={productInfo.name}/>
         </>
         : <p>Loading product info...</p>
       }
