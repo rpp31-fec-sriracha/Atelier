@@ -18,7 +18,6 @@ class RatingBreakdown extends React.Component {
     if (this.state.averageReview === 0) {
       this.calculateAverage();
     }
-
   }
 
   calculateAverage() {
