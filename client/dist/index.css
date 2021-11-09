@@ -198,12 +198,13 @@ header {
 }
 
 
-/* QA */
+/* ----------- QA ----------- */
 .questions {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: 1px dashed grey;
+  font-size: 18px;
+  /* border: 1px dashed grey; */
 }
 
 .question {
@@ -216,14 +217,23 @@ header {
   align-items: center;
   justify-content: space-between;
 }
+
+.left{
+  display: flex;
+  font-size: 18px;
+  font-weight: bolder;
+}
 .title {
   margin-right: 10px;
+}
+.Q-body {
+  font-size: 18px;
 }
 .right {
   display: flex;
   align-items: flex-start;
   font-weight: lighter;
-  border: 1px dashed grey;
+  /* border: 1px dashed grey; */
 }
 .answers {
   display: flex;
@@ -232,7 +242,7 @@ header {
 .answer-flex-row {
   display: flex;
   align-items: baseline;
-  border: 1px dashed grey;
+  /* border: 1px dashed grey; */
 }
 .answer {
   display: flex;
@@ -245,11 +255,6 @@ header {
 .answers-list {
   display: flex;
 }
-.left{
-  display: flex;
-  font-weight: bolder;
-}
-
 ._divider {
   font-weight: bolder;
   padding-left: 10px;
@@ -260,7 +265,7 @@ header {
 }
 .search-question {
   max-width: 100%;
-  height: 50px;
+  height: 60px;
   font-size: 18px;
 }
 
@@ -274,7 +279,18 @@ header {
   cursor: pointer;
   text-decoration: underline;
 }
-
+.buttons {
+  display: flex;
+}
 .add-q {
-  background-color: none;
+  background-color: white;
+  color:black;
+  height: 60px;
+  font-size: 18px;
+}
+.b-left {
+  width: 20%;
+}
+.b-right {
+  width: 12%;
 }

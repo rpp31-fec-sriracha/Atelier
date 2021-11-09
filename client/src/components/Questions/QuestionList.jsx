@@ -21,10 +21,13 @@ const QuestionList = function ({ questions, productInfo, handleAddQuestion }) {
           questions.slice(0, visibleCount).map((question, i) =>
             <QuestionEntry role="single-question" key={i} question={question} productInfo={productInfo} />)
           : <div></div>}
-        {(questions.length > 0) ?
-          <button className="col-1-3" onClick={() => setVisibleCount(visibleCount + 2)}>MORE ANSWERED QUESTIONS</button>
-          : <div></div>}
-        <button className="add-q" role="add-quesiton" onClick={() => openModal()}>AddQuestion</button>
+        <div className="buttons">
+          {(questions.length > 0) ?
+            <button className="col-1-3 add-q b-left" onClick={() => setVisibleCount(visibleCount + 2)}>MORE ANSWERED QUESTIONS</button>
+            : <div></div>}
+          <span className="_divider"></span>
+          <button className="add-q b-right" role="add-quesiton" onClick={() => openModal()}>ADD A QUESTION +</button>
+        </div>
         <QuestionModal
           role="q-modal"
           isOpen={isOpen}
