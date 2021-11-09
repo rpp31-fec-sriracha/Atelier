@@ -274,3 +274,7 @@ header {
   cursor: pointer;
   text-decoration: underline;
 }
+
+.add-q {
+  background-color: none;
+}
