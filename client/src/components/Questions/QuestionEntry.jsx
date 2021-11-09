@@ -27,25 +27,29 @@ class QuestionEntry extends React.Component {
       <>
         <div className="question">
           <div className="question-flex-row">
-            <div className="QA-title">
-              <span>Q: </span>
-              <span data-testid="q-body" className="Q-body">{question.question_body}</span>
+            <div className="left">
+              <div className="title">Q:  </div>
+              <div data-testid="q-body" className="Q-body">{question.question_body}</div>
             </div>
             <div className="right">
               <span>Helpful?</span>
+              <span className="_divider"></span>
               <button className="helpful-and-report">Yes({question.question_helpfulness})</button>
               <span className="_divider">|</span>
               <button className="helpful-and-report" onClick={() => this.openModal()}>Add Answer</button>
               <AnswerModal isOpen={isOpen} id="#answer-modal" closeModal={this.closeModal.bind(this)} question={question} productInfo={productInfo}></AnswerModal>
             </div>
           </div>
-
-          <span className="QA-title">A:</span>
-          <div className="answers-list">
-            {Object.keys(question.answers).map((id, i) => {
-              let answer = question.answers[id];
-              return <AnswerEntry key={i} answer={answer} />;
-            })}
+        </div>
+        <div className="answers">
+          <div className="answer-flex-row">
+            <div className="left">A:  </div>
+            <div>
+              {Object.keys(question.answers).map((id, i) => {
+                let answer = question.answers[id];
+                return <AnswerEntry key={i} answer={answer} />;
+              })}
+            </div>
           </div>
         </div>
       </>
