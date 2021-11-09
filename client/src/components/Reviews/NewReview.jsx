@@ -19,6 +19,7 @@ class NewReview extends React.Component {
 
 
   render () {
+    // console.log(this.props.characteristics);
     if (this.props.open !== true) {
       return null;
     }
@@ -48,7 +49,7 @@ class NewReview extends React.Component {
               <div>
                 <label>Review Summary</label>
                 <input type="text" name="summary" placeholder="Example: Best purchase ever!" maxLength="60"></input>
-                <div>Minimum required characters left: {}</div>
+                <div>Minimum required characters left: {this.state.charactersRemaining}</div>
               </div>
               <div>
                 <span id="mandatory-asterisk">*</span>

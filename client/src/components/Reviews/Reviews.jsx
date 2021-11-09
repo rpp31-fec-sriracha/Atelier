@@ -78,7 +78,8 @@ class Reviews extends React.Component {
         </div>
         <div className="flex-column">
           <div> {this.state.reviews.length} reviews, sorted by <SortSelector updateSortType = {this.updateSortType}/></div>
-          <div className="flex-column"><ReviewsList reviews={this.state.reviews} productName={this.props.productName}/></div>
+          <div className="flex-column"><ReviewsList reviews={this.state.reviews} productName={this.props.productName}
+            characteristics={this.state.meta.characteristics}/></div>
         </div>
       </div>
     </div>);
