@@ -32,8 +32,8 @@ class ReviewsList extends React.Component {
     }
 
     return (<div className="reviewsList">
-      {this.props.reviews.slice(0, this.state.numReviewsVisible).map((review) => {
-        return <IndividualReviewTile currentReview={review} />;
+      {this.props.reviews.slice(0, this.state.numReviewsVisible).map((review, i) => {
+        return <IndividualReviewTile key={i} currentReview={review} />;
       })}
       <div className="flex-row">
         <button onClick={() => this.moreReviews()}>MORE REVIEWS</button>

@@ -5,7 +5,6 @@ import ReviewsList from './ReviewsList.jsx';
 import SortSelector from './SortSelector.jsx';
 const axios = require('axios');
 
-
 class Reviews extends React.Component {
   constructor(props) {
     super(props);
@@ -21,45 +20,47 @@ class Reviews extends React.Component {
   }
 
   getReviews() {
-    axios.get('/reviews', {
+    return axios.get('/reviews', {
       params: {
         productId: this.state.currentProduct,
         sortType: this.state.sortType
       }
-    })
-      .then((response) => {
-        this.setState({
-          reviews: response.data.results
-        });
-      })
-      .catch((err) => console.log(err));
+    });
   }
 
   getMetadata() {
-    axios.get('/reviews/meta', {
+    return axios.get('/reviews/meta', {
       params: {
         productId: this.state.currentProduct
       }
-    })
-      .then((response) => {
-        this.setState({
-          meta: response.data
-        });
-      })
-      .catch((err) => console.log(err));
+    });
   }
 
   componentDidMount() {
-    this.getReviews();
-    this.getMetadata();
+    Promise.all([this.getReviews(), this.getMetadata()])
+      .then((response) => {
+        this.setState({
+          reviews: response[0].data.results,
+          meta: response[1].data
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   updateSortType(event) {
     this.setState({
       sortType: event
+    }, () => {
+      this.getReviews()
+        .then((response) => {
+          this.setState({
+            reviews: response.data.results
+          });
+        })
+        .catch((err) => console.log(err));
     });
-
-    //after the state is set, add logic to repull the reviews with the new sort type
   }
 
   render() {
