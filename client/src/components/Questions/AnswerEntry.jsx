@@ -1,6 +1,7 @@
 import React from 'react';
 
 const AnswerEntry = ({ answer }) => {
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
   // handle mark helpful
   // handle report answer
   return (
@@ -14,7 +15,7 @@ const AnswerEntry = ({ answer }) => {
           <div>
             <span data-testid="answerer-name" className="userInfos">by {answer.answerer_name}</span>
             <span className="_divider">  |  </span>
-            <span data-testid="date" className="userInfos">{answer.date}</span>
+            <span data-testid="date" className="userInfos">{new Intl.DateTimeFormat('en-US', options).format(Date.parse(answer.date))}</span>
             <span className="_divider">  |  </span>
             <span data-testid="answerer_name" className="userInfos">Helpful?</span>
             <span className="_divider">  |  </span>
