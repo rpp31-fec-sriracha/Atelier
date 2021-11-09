@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDom from 'react-dom';
 
 class NewReview extends React.Component {
   constructor(props) {
@@ -9,12 +10,23 @@ class NewReview extends React.Component {
       charactersRemaining: 50,
       minReviewLength: false
     };
+
+    // this.handleFormSubmit = this.props.updateSortType.bind(this);
   }
 
   checkReviewLength() {
 
+
   }
 
+
+  handleFormSubmit(e) {
+    e.preventDefault();
+
+    console.log('You have submitted the form');
+
+    this.props.onClose();
+  }
 
 
 
@@ -24,7 +36,7 @@ class NewReview extends React.Component {
       return null;
     }
 
-    return (
+    return ReactDom.createPortal(
       <>
         <div className="overlay"/>
         <div className="modal">
@@ -69,13 +81,14 @@ class NewReview extends React.Component {
                 <input type="text" name="email" placeholder="Example: jackson11@email.com"></input>
                 <div>For authentication reasons, you will not be emailed</div>
               </div>
-              <input type="submit" value="Submit review" onClick={this.props.onClose}></input>
+              <input type="submit" value="Submit review" onClick={this.handleFormSubmit.bind(this)}></input>
             </form>
           </div>
         </div>
-      </>
+      </>,
+      document.getElementById('review-portal')
     );
-  };
+  }
 }
 
 export default NewReview;

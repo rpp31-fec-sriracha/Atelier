@@ -24,7 +24,7 @@ const QuestionModal = ({ isOpen, productInfo, handleAddQuestion, closeModal }) =
               <label>Your email</label><span id="mandatory-asterisk">*</span>
               <input type="email" name="email" onChange={(e) => setQuestion(e.target.value)}></input>
 
-              <input type="submit" value="Submit question"></input>
+              <button type="submit" value="Submit question"></button>
             </form>
           </div>
         </>
