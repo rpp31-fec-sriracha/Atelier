@@ -14,6 +14,10 @@ class RatingBreakdown extends React.Component {
       totalReviews: parseInt(this.props.metadata.recommended.false) + parseInt(this.props.metadata.recommended.true),
       averageReview: 0
     };
+
+    if (this.state.averageReview === 0) {
+      this.calculateAverage();
+    }
   }
 
   calculateAverage() {
@@ -27,18 +31,12 @@ class RatingBreakdown extends React.Component {
     let average = sum / this.state.totalReviews;
     let roundedAverage = Math.round(average * 10) / 10;
 
-    this.setState({
-      averageReview: roundedAverage
-    });
+    this.state.averageReview = roundedAverage;
   }
 
   render() {
     if (this.props.metadata.length === 0) {
       return <div/>;
-    }
-
-    if (this.state.averageReview === 0) {
-      this.calculateAverage();
     }
 
     return (<div className="ratingBreakdown">

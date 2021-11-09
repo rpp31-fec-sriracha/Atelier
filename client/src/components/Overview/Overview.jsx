@@ -20,7 +20,7 @@ class Overview extends React.Component {
   }
 
   componentDidMount() {
-    console.log('Overview props', this.props);
+    // console.log('Overview props', this.props);
     if (this.props !== undefined) {
       this.props.productStyles.map((style) => {
         if (style['default?'] && this.state.default !== style) {
@@ -34,7 +34,7 @@ class Overview extends React.Component {
   }
 
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     return (<div className="overview flex-column">
       <ProductInfo product={this.props.productInfo}
         styles={this.props.productStyles}
