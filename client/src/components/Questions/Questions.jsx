@@ -41,13 +41,13 @@ class Questions extends React.Component {
     const { productInfo } = this.props;
 
     return (
-      <>
+      <React.Fragment>
         <div className="questions flex-column">
           <p>QUESTIONS & ANSWERS</p>
           <SearchQuestions handleSearch={this.handleSearch.bind(this)} />
-          <QuestionList questions={questions} productInfo={productInfo} handleAddQuestion={this.handleAddQuestion.bind(this)} />
+          <QuestionList role="q-list" questions={questions} productInfo={productInfo} handleAddQuestion={this.handleAddQuestion.bind(this)} />
         </div>
-      </>
+      </React.Fragment>
     );
   }
 }

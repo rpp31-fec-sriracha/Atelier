@@ -9,28 +9,34 @@ const QuestionModal = ({ isOpen, productInfo, handleAddQuestion, closeModal }) =
   // invoke hadnle add question onsubmit
 
   return ReactDom.createPortal(
-    <>
+    <React.Fragment>
       {isOpen ?
-        <>
+        <React.Fragment>
           <div className="overlay"></div>
           <div className="modal">
-            <form onSubmit={() => closeModal()}>
-              <div className="modal-title">Ask Your Question</div>
-              <div data-testid="product-name" className="modal-subtitle">About the {productInfo}.</div>
-              <label>Your Question</label><span id="mandatory-asterisk">*</span>
-              <input type="text" name="question" onChange={(e) => setQuestion(e.target.value)}></input>
-              <label>What is your nickname</label><span id="mandatory-asterisk">*</span>
-              <input type="text" name="nickname" onChange={(e) => setQuestion(e.target.value)}></input>
-              <label>Your email</label><span id="mandatory-asterisk">*</span>
-              <input type="email" name="email" onChange={(e) => setQuestion(e.target.value)}></input>
-
-              <input type="submit" value="Submit question"></input>
-            </form>
+            <div className="modal-flex-column">
+              <div className="modal-header">
+                <h2>Ask Your Question</h2>
+                <br></br>
+                <h3 data-testid="product-name" style={{textDecoration: 'underline'}}>About the {productInfo}.</h3>
+              </div>
+              <div className="modal-body userInfos">
+                <label style={{ marginBottom: '5px'}} for="question">Your Question<span className="mandatory-asterisk">*</span></label>
+                <input id="question" className="input-field" value={question} type="text" onChange={(e) => setQuestion(e.target.value)}></input>
+                <br></br>
+                <label style={{ marginBottom: '5px'}} for="nickname">What is your nickname<span className="mandatory-asterisk">*</span></label>
+                <input id="nickname" className="input-field" value={nickname} type="text" onChange={(e) => setNickname(e.target.value)}></input>
+                <br></br>
+                <label style={{ marginBottom: '5px'}} for="email">Your email<span className="mandatory-asterisk">*</span></label>
+                <input id="email" className="input-field" value={email} type="email" onChange={(e) => setEmail(e.target.value)}></input>
+              </div>
+              <button className="modal-button" onClick={() => closeModal()}>Submit question</button>
+            </div>
           </div>
-        </>
+        </React.Fragment>
         : null
       }
-    </>,
+    </React.Fragment>,
     document.getElementById('question-modal')
   );
 };
