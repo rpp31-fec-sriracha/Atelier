@@ -1,15 +1,14 @@
 import React from 'react';
 import QuestionList from './QuestionList.jsx';
 import SearchQuestions from './SearchQuestions.jsx';
-import QuestionModal from './QuestionModal.jsx';
+
 import httpRequest from './httpRequest.js';
 
 class Questions extends React.Component {
   constructor() {
     super();
     this.state = {
-      questions: [],
-      isOpen: false
+      questions: []
     };
   }
 
@@ -36,33 +35,19 @@ class Questions extends React.Component {
     // render warning message "You must enter the following:”
     // post HTTP request to server
   }
-  openModal() {
-    this.setState({ isOpen: true });
-  }
-  closeModal() {
-    this.setState({ isOpen: false });
-  }
 
   render() {
-    const { questions, isOpen } = this.state;
+    const { questions } = this.state;
     const { productInfo } = this.props;
 
     return (
-      <>
+      <React.Fragment>
         <div className="questions flex-column">
           <p>QUESTIONS & ANSWERS</p>
           <SearchQuestions handleSearch={this.handleSearch.bind(this)} />
-          <QuestionList questions={questions} productInfo={productInfo} />
-          <button className="col-1-3" role="add-quesiton" onClick={() => this.openModal()}>AddQuestion</button>
-          <QuestionModal
-            role="q-modal"
-            isOpen={isOpen}
-            productInfo={productInfo}
-            closeModal={this.closeModal.bind(this)}
-            handleAddQuestion={this.handleAddQuestion.bind(this)}>
-          </QuestionModal>
+          <QuestionList role="q-list" questions={questions} productInfo={productInfo} handleAddQuestion={this.handleAddQuestion.bind(this)} />
         </div>
-      </>
+      </React.Fragment>
     );
   }
 }
