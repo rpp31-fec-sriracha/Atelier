@@ -178,12 +178,13 @@ header {
 }
 
 .modal {
+  display: flex;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #FFF;
-  padding: 50px;
+  padding: 30px;
   z-index: 1000;
 }
 
@@ -313,6 +314,34 @@ header {
 .b-right {
   width: 18%;
 }
+.modal-flex-column {
+  display: flex;
+  flex-direction: column;
+  font-family: Helvetica, Arial, sans-serif;
+  padding: 50px;
+}
+.modal-header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+.mandatory-asterisk{
+  color: red;
+}
 
+.modal-button {
+  font-family: Helvetica, Arial, sans-serif;
+  background-color: black;
+  height: 30px;
+  font-size: 16px;
+  color: white;
+}
 
-
+.input-field {
+  height: 30px;
+}
