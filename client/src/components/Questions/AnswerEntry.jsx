@@ -8,8 +8,13 @@ const AnswerEntry = ({ answer }) => {
     <>
       <div className="answer">
         <div className="A-body">{answer.body}</div>
-        <div className="photos">
-          {answer.photos.map((photo, i) => <img key={i} src={photo.url}></img>)}
+        <div className="photo-list">
+          {/* {answer.photos.map((photo, i) => <img key={i} src={photo.url}></img>)} */}
+          <img className="photos" src=''></img>
+          <img className="photos" src=''></img>
+          <img className="photos" src=''></img>
+          <img className="photos" src=''></img>
+          <img className="photos" src=''></img>
         </div>
         <div className="userInfos">
           <span data-testid="answerer-name">by {answer.answerer_name}, </span>
