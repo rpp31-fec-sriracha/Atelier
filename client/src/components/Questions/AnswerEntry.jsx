@@ -13,8 +13,8 @@ const AnswerEntry = ({ answer }) => {
           <img className="photos" src=''></img>
           <img className="photos" src=''></img>
           <img className="photos" src=''></img>
-          <img className="photos" src=''></img>
-          <img className="photos" src=''></img>
+          {/* <img className="photos" src=''></img>
+          <img className="photos" src=''></img> */}
         </div>
         <div className="userInfos">
           <span data-testid="answerer-name">by {answer.answerer_name}, </span>

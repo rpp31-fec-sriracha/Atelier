@@ -250,6 +250,7 @@ header {
   padding: 10px;
 }
 .A-body {
+  font-size: 16px;
   padding-bottom: 5px;
 }
 .photo-list {
@@ -271,6 +272,7 @@ header {
 }
 .userInfos {
   font-weight: lighter;
+  font-size: 16px;
 }
 .search-question {
   max-width: 100%;
@@ -287,6 +289,14 @@ header {
   border: none;
   cursor: pointer;
   text-decoration: underline;
+}
+.load-more-a {
+  font-size: 15px;
+  font-weight: bold;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
 }
 .buttons {
   display: flex;
