@@ -93,6 +93,8 @@ class NewReview extends React.Component {
 
     console.log('You have submitted the form');
 
+    
+
     this.props.onClose();
   }
 
