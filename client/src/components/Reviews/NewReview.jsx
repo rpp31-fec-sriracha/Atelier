@@ -1,29 +1,30 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import _ from 'underscore';
+const axios = require('axios');
+
+//NEED TO ADD VALIDATION
 
 class NewReview extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      reviewLength: 0,
       reviewLengthMessage: 'Minimum required characters left: 50',
       minReviewLength: false,
       recommend: true,
       currentCharacteristic: 'none selected',
-      // size: 0,
-      // width: 0,
-      comfort: 0,
-      quality: 0,
-      length: 0,
-      fit: 0,
+      characteristics: {},
     };
 
     // this.handleFormSubmit = this.props.updateSortType.bind(this);
     this.setRecommend = this.setRecommend.bind(this);
     this.setCharacteristic = this.setCharacteristic.bind(this);
     this.checkReviewLength = this.checkReviewLength.bind(this);
+    this.setRating = this.setRating.bind(this);
+    this.setSummary = this.setSummary.bind(this);
+    this.setName = this.setName.bind(this);
+    this.setEmail = this.setEmail.bind(this);
   }
 
   checkReviewLength(e) {
@@ -33,13 +34,38 @@ class NewReview extends React.Component {
 
     if (charsNeeded > 0) {
       this.setState({
-        reviewLengthMessage: `Minimum required characters left: ${charsNeeded}`
+        reviewLengthMessage: `Minimum required characters left: ${charsNeeded}`,
       });
     } else {
       this.setState({
-        reviewLengthMessage: 'Minimum reached'
+        reviewLengthMessage: 'Minimum reached',
+        message: e.target.value
       });
     }
+  }
+
+  setSummary(e) {
+    this.setState({
+      summary: e.target.value
+    });
+  }
+
+  setRating(e) {
+    this.setState({
+      rating: Number(e.target.value)
+    });
+  }
+
+  setName(e) {
+    this.setState({
+      name: e.target.value
+    });
+  }
+
+  setEmail(e) {
+    this.setState({
+      email: e.target.value
+    });
   }
 
   setRecommend(e) {
@@ -49,42 +75,13 @@ class NewReview extends React.Component {
   }
 
   setCharacteristic(e) {
-    // console.log(e);
-    // console.log(e.target.name);
-    let selectedChar = '';
-
-    switch (e.target.name) {
-    case 'Size':
-      console.log('size');
-      selectedChar = 'size';
-      break;
-    case 'Fit':
-      console.log('width');
-      selectedChar = 'width';
-      break;
-    case 'Fit':
-      console.log('fit');
-      selectedChar = 'fit';
-      break;
-    case 'Length':
-      console.log('length');
-      selectedChar = 'length';
-      break;
-    case 'Comfort':
-      console.log('comfort');
-      selectedChar = 'comfort';
-      break;
-    case 'Quality':
-      console.log('quality');
-      selectedChar = 'quality';
-      break;
-    default:
-      console.log('Not an option');
-    }
+    let selectedID = this.props.characteristics[e.target.name].id;
+    let newCharacteristics = this.state.characteristics;
+    newCharacteristics[selectedID] = Number(e.target.value);
 
     this.setState({
       currentCharacteristic: e.target.value,
-      [selectedChar]: e.target.value
+      characteristics: newCharacteristics
     });
   }
 
@@ -93,7 +90,27 @@ class NewReview extends React.Component {
 
     console.log('You have submitted the form');
 
-    
+    let formData = {
+      product_id: this.props.productID,
+      rating: this.state.rating,
+      summary: this.state.summary,
+      body: this.state.message,
+      recommend: this.state.recommend,
+      name: this.state.name,
+      email: this.state.email,
+      characteristics: this.state.characteristics
+    };
+
+    console.log(formData);
+
+    axios.post('/addReview', formData)
+      .then(function (response) {
+        console.log(response);
+        //get reviews and metadata again?
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
 
     this.props.onClose();
   }
@@ -101,7 +118,6 @@ class NewReview extends React.Component {
 
 
   render () {
-    console.log(this.props.characteristics);
     if (this.props.open !== true) {
       return null;
     }
@@ -114,9 +130,29 @@ class NewReview extends React.Component {
             <form>
               <h3 className="modal-title">Write Your Review</h3>
               <h4 className="modal-subtitle">About the {this.props.productName}.</h4>
-              <div>
+              <div onChange={this.setRating}>
                 <label>Overall rating</label><span id="mandatory-asterisk">*</span>
-                <input type="text" name="rating"></input></div>
+                <label>
+                  <input type="radio" id="1" name="rating" value="1"></input>
+                  1
+                </label>
+                <label>
+                  <input type="radio" id="2" name="rating" value="2"></input>
+                  2
+                </label>
+                <label>
+                  <input type="radio" id="3" name="rating" value="3"></input>
+                  3
+                </label>
+                <label>
+                  <input type="radio" id="4" name="rating" value="4"></input>
+                  4
+                </label>
+                <label>
+                  <input type="radio" id="5" name="rating" value="5"></input>
+                  5
+                </label>
+              </div>
               <div onChange={this.setRecommend}>
                 <label>Do you recommend this product?</label><span id="mandatory-asterisk">*</span>
                 <label>
@@ -130,10 +166,7 @@ class NewReview extends React.Component {
               </div>
               <div>
                 <label>Characteristics</label><span id="mandatory-asterisk">*</span>
-                <input type="text" name="characteristics"></input>
                 <div>{this.state.currentCharacteristic}</div>
-              </div>
-              <div>
                 {_.map(this.props.characteristics, (characteristic, i) => {
                   return (
                     <div key={i} onChange={this.setCharacteristic}>
@@ -162,7 +195,7 @@ class NewReview extends React.Component {
                   );
                 })}
               </div>
-              <div>
+              <div onChange={this.setSummary}>
                 <label>Review Summary</label>
                 <input type="text" name="summary" placeholder="Example: Best purchase ever!" maxLength="60"></input>
               </div>
@@ -175,12 +208,12 @@ class NewReview extends React.Component {
                 <label>Upload photos</label>
                 <input type="file" name="photos"></input>
               </div>
-              <div>
+              <div onChange={this.setName}>
                 <label>What is your nickname?</label><span id="mandatory-asterisk">*</span>
                 <input type="text" name="nickname" placeholder="Example: jackson11!"></input>
                 <div>For privacy reasons, do not use your full name or email address</div>
               </div>
-              <div>
+              <div onChange={this.setEmail}>
                 <label>Your email</label><span id="mandatory-asterisk">*</span>
                 <input type="text" name="email" placeholder="Example: jackson11@email.com"></input>
                 <div>For authentication reasons, you will not be emailed</div>

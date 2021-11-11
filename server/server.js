@@ -104,6 +104,17 @@ app.get('/reviews/meta', (req, res) => {
   });
 });
 
+app.post('/addReview', (req, res) => {
+  // console.log(req);
+  api.addReview(req.body, (err, data) => {
+    if (err) {
+      res.status(500).json(err);
+    } else {
+      res.status(200).json(data);
+    }
+  });
+});
+
 app.get('/questions', (req, res) => {
   let productId = req.query.productId;
   let page = 1;

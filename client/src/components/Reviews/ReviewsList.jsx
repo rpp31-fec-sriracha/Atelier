@@ -40,7 +40,7 @@ class ReviewsList extends React.Component {
         <div>
           <button onClick={() => this.setState({newReviewOpen: true})}>ADD A REVIEW +</button>
           <NewReview productName={this.props.productName} open={this.state.newReviewOpen}
-            onClose={this.onClose} characteristics={this.props.characteristics}></NewReview>
+            onClose={this.onClose} characteristics={this.props.characteristics} productID={this.props.productID}></NewReview>
         </div>
       </div>
       <div><KeywordSearch/></div>

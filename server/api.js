@@ -70,6 +70,10 @@ const getReviewMeta = (productId, callback) => {
 };
 
 // function for adding review
+const addReview = (data, callback) => {
+  apiCall('/reviews', data,
+    callback);
+};
 
 // function for marking review as helpful
 
@@ -103,6 +107,7 @@ module.exports = {
   getProductStyles,
   getReviews,
   getReviewMeta,
+  addReview,
   getQuestions,
   getAnswers,
 };
