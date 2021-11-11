@@ -20,15 +20,9 @@ class Overview extends React.Component {
     this.setState({ selectedStyleId: styleId });
   }
 
-<<<<<<< HEAD
   componentDidUpdate() {
     console.log('Overview props', this.props);
     if (this.props.productStyles !== undefined) {
-=======
-  componentDidMount() {
-    // console.log('Overview props', this.props);
-    if (this.props !== undefined) {
->>>>>>> main
       this.props.productStyles.map((style) => {
         if (style['default?'] && this.state.defaultStyle.style_id !== style.style_id) {
           let currentStyle = Object.keys(this.state.currentStyle).length === 0 ? style : this.state.currentStyle;
