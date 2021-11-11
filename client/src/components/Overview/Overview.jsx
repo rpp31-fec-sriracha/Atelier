@@ -7,8 +7,9 @@ class Overview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      defaultStyle: '',
-      currentStyle: '',
+      defaultStyle: {},
+      currentStyle: {},
+      selectedStyleId: null,
       selectedThumb: '',
     };
     this.handleStyleClick = this.handleStyleClick.bind(this);
@@ -16,22 +17,40 @@ class Overview extends React.Component {
 
   handleStyleClick(e, styleId) {
     e.preventDefault();
-    this.setState({ currentStyle: styleId });
+    this.setState({ selectedStyleId: styleId });
   }
 
-  componentDidMount() {
+  componentDidUpdate() {
     console.log('Overview props', this.props);
-    if (this.props !== undefined) {
+    if (this.props.productStyles !== undefined) {
       this.props.productStyles.map((style) => {
-        if (style['default?'] && this.state.default !== style) {
+        if (style['default?'] && this.state.defaultStyle.style_id !== style.style_id) {
+          let currentStyle = Object.keys(this.state.currentStyle).length === 0 ? style : this.state.currentStyle;
           this.setState({
             defaultStyle: style,
-            // updated: true,
+            currentStyle: currentStyle,
+          });
+        }
+        if (
+          this.state.selectedStyleId &&
+          this.state.selectedStyleId === style.style_id &&
+          this.state.currentStyle.style_id !== style.style_id) {
+
+          this.setState({
+            currentStyle: style
           });
         }
       });
     }
   }
+
+  // componentDidUpdate() {
+  //   if (this.state.selectedStyleId && this.state.selectedStyleId === style.style_id) {
+  //     this.setState({
+  //       currentStyle: style
+  //     });
+  //   }
+  // }
 
   render() {
     console.log(this.props);
