@@ -5,39 +5,6 @@ import Questions from './components/Questions/Questions.jsx';
 import Reviews from './components/Reviews/Reviews.jsx';
 import axios from 'axios';
 
-class ErrorBoundary extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      hasError: false,
-      componentStack: ''
-    };
-  }
-
-  static getDerivedStateFromError(error) {
-    // Update state so the next render will show the fallback UI.
-    return { hasError: true };
-  }
-
-  componentDidCatch(error, errorInfo) {
-    // You can also log the error to an error reporting service
-    console.log(error, errorInfo.componentStack);
-    this.setState({ componentStack: errorInfo.componentStack });
-  }
-
-  render() {
-    if (this.state.hasError) {
-      // You can render any custom fallback UI
-      return (<>
-        <h1>Something went wrong.</h1>
-        <p>{this.state.componentStack}</p>
-      </>);
-    }
-
-    return this.props.children;
-  }
-}
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -84,11 +51,11 @@ class App extends React.Component {
     const { currentProductId, productInfo, productStyles} = this.state;
     return (<div className="appContainer">
       {(this.state.productLoaded) ?
-        <ErrorBoundary>
+        <>
           <Overview productInfo={productInfo} productStyles={productStyles} currentProductId={currentProductId} />
           <Questions currentProductId={currentProductId} productInfo={productInfo.name} />
           <Reviews />
-        </ErrorBoundary>
+        </>
         : <p>Loading product info...</p>
       }
     </div>);

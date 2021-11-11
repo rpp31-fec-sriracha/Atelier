@@ -6,8 +6,10 @@ import AddToCart from './AddToCart.jsx';
 { /* <ProductInfo product={this.props.productInfo}
         styles={this.props.productStyles}
         styleClick={this.handleStyleClick}
+        thumbClick={this.handleThumbClick}
         defaultStyle={this.state.defaultStyle}
-        currentStyle={this.state.currentStyle} /> */ }
+        currentStyle={this.state.currentStyle}
+        selectedThumb={this.state.selectedThumb} /> */ }
 
 const ProductInfo = function(props) {
   console.log('current style ----->', props.currentStyle);
@@ -15,7 +17,13 @@ const ProductInfo = function(props) {
     <div className="flex-row" id="productInfo">
       {/* <h1>Image Gallery</h1> */}
       {/* <ImageGallery currentStyle={props.currentStyle} styles={props.styles} /> */}
-      {Object.keys(props.currentStyle).length > 0 ? <ImageGallery currentStyle={props.currentStyle} styles={props.styles} /> : 'Image Gallery'}
+      {Object.keys(props.currentStyle).length > 0 ?
+        <ImageGallery thumbClick={props.thumbClick}
+          currentStyle={props.currentStyle}
+          styles={props.styles}
+          selectedThumb={props.selectedThumb} /> :
+        'Image Gallery'}
+
       <div className="flex-column" id="productInfoTop">
         <h4>STARS Read all # reviews</h4>
         <h4 data-testid="productCategory">{props.product.category}</h4>
