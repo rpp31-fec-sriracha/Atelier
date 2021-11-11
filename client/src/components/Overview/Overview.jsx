@@ -11,9 +11,11 @@ class Overview extends React.Component {
       currentStyle: {},
       selectedStyleId: null,
       selectedThumb: 0,
+      cart: [],
     };
     this.handleStyleClick = this.handleStyleClick.bind(this);
     this.handleThumbClick = this.handleThumbClick.bind(this);
+    this.handleAddToCart = this.handleAddToCart.bind(this);
   }
 
   handleStyleClick(e, styleId) {
@@ -25,6 +27,15 @@ class Overview extends React.Component {
     e.preventDefault();
     let selectedThumb = parseInt(thumbId.replace('thumb', ''), 10);
     this.setState({ selectedThumb });
+  }
+
+  handleAddToCart(e, sku, qty) {
+    e.preventDefault();
+    let cart = this.state.cart.concat([{
+      sku_id: sku,
+      count: qty
+    }]);
+    this.setState({ cart: this.state });
   }
 
   componentDidMount() {
@@ -65,7 +76,8 @@ class Overview extends React.Component {
         thumbClick={this.handleThumbClick}
         defaultStyle={this.state.defaultStyle}
         currentStyle={this.state.currentStyle}
-        selectedThumb={this.state.selectedThumb} />
+        selectedThumb={this.state.selectedThumb}
+        handleAddToCart={this.handleAddToCart} />
       <ProductInfoBottom
         slogan={this.props.productInfo.slogan}
         description={this.props.productInfo.description}
