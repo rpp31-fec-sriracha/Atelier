@@ -12,7 +12,6 @@ import AddToCart from './AddToCart.jsx';
         selectedThumb={this.state.selectedThumb} /> */ }
 
 const ProductInfo = function(props) {
-  console.log('current style ----->', props.currentStyle);
   return (
     <div className="flex-row" id="productInfo">
       {/* <h1>Image Gallery</h1> */}
@@ -31,7 +30,7 @@ const ProductInfo = function(props) {
 
         <p>{props.product.default_price}</p>
 
-        {props.styles !== undefined ? <StyleSelector styleClick={props.styleClick} styles={props.styles} /> :
+        {props.styles !== undefined ? <StyleSelector styleClick={props.styleClick} styles={props.styles} currentStyle={props.currentStyle} /> :
           <div></div>}
         <AddToCart />
         <p>{props.product.description}</p>
