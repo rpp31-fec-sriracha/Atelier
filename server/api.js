@@ -27,6 +27,7 @@ const apiWrap = function(method, endpoint, params, body, callback) {
     .catch((err) => callback(err, null));
 };
 
+
 const defaultParams = { responseType: 'json' };
 
 const getProductList = (page, count, callback) => {
@@ -71,7 +72,7 @@ const getReviewMeta = (productId, callback) => {
 
 // function for adding review
 const addReview = (data, callback) => {
-  apiCall('/reviews', data,
+  apiWrap('post', '/reviews', defaultParams, data,
     callback);
 };
 
