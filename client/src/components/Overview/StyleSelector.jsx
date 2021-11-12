@@ -5,6 +5,8 @@ const StyleThumb = function(props) {
 };
 
 const StyleSelector = function(props) {
+  let styleName = props.currentStyle.name;
+
   if (Object.keys(props.styles).length !== 0) {
     let styleThumbs = props.styles.map((style, index) => {
       return (<StyleThumb styleId={style.style_id} className="styleThumb" onClick={props.styleClick} thumbnailUrl={style.photos[0].thumbnail_url} key={'StyleThumb' + index} />);
@@ -13,7 +15,7 @@ const StyleSelector = function(props) {
     return (
       <React.Fragment>
         <div className="flex-row">
-          <h3>{'Style >'} </h3><h4>Selected Style</h4>
+          <h3>{'Style >'} </h3><h4>{styleName}</h4>
         </div>
         <div className="flex-row styleThumbs">
           {styleThumbs}

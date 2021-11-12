@@ -52,7 +52,7 @@ class App extends React.Component {
     return (<div className="appContainer">
       {(this.state.productLoaded) ?
         <>
-          <Overview productInfo={productInfo} productStyles={productStyles} />
+          <Overview productInfo={productInfo} productStyles={productStyles} currentProductId={currentProductId} />
           <Questions currentProductId={currentProductId} productInfo={productInfo.name} />
           <Reviews />
         </>

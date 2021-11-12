@@ -7,26 +7,49 @@ class Overview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      defaultStyle: '',
-      currentStyle: '',
-      selectedThumb: '',
+      defaultStyle: {},
+      currentStyle: {},
+      selectedStyleId: null,
+      selectedThumb: 0,
     };
     this.handleStyleClick = this.handleStyleClick.bind(this);
+    this.handleThumbClick = this.handleThumbClick.bind(this);
   }
 
   handleStyleClick(e, styleId) {
     e.preventDefault();
-    this.setState({ currentStyle: styleId });
+    this.setState({ selectedStyleId: styleId });
+  }
+
+  handleThumbClick(e, thumbId) {
+    e.preventDefault();
+    let selectedThumb = parseInt(thumbId.replace('thumb', ''), 10);
+    this.setState({ selectedThumb });
   }
 
   componentDidMount() {
-    // console.log('Overview props', this.props);
-    if (this.props !== undefined) {
-      this.props.productStyles.map((style) => {
-        if (style['default?'] && this.state.default !== style) {
+    if (this.props.productStyles !== undefined) {
+      this.props.productStyles.map((style, index) => {
+        if (style['default?'] && this.state.defaultStyle.style_id !== style.style_id) {
+          let currentStyle = Object.keys(this.state.currentStyle).length === 0 ? style : this.state.currentStyle;
           this.setState({
-            default: style,
-            // updated: true,
+            defaultStyle: style,
+            currentStyle: style,
+          });
+        }
+      });
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.props.productStyles !== undefined) {
+      this.props.productStyles.map((style, index) => {
+        if (this.state.selectedStyleId &&
+          this.state.selectedStyleId === style.style_id &&
+          this.state.currentStyle.style_id !== style.style_id) {
+
+          this.setState({
+            currentStyle: style
           });
         }
       });
@@ -38,7 +61,11 @@ class Overview extends React.Component {
     return (<div className="overview flex-column">
       <ProductInfo product={this.props.productInfo}
         styles={this.props.productStyles}
-        styleClick={this.handleStyleClick} />
+        styleClick={this.handleStyleClick}
+        thumbClick={this.handleThumbClick}
+        defaultStyle={this.state.defaultStyle}
+        currentStyle={this.state.currentStyle}
+        selectedThumb={this.state.selectedThumb} />
       <ProductInfoBottom
         slogan={this.props.productInfo.slogan}
         description={this.props.productInfo.description}
