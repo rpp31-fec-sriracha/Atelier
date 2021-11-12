@@ -16,6 +16,27 @@ const httpRequest = {
         .catch((error) => reject(error));
     });
   },
+  addAnswer: (questionId, answer) => {
+    return new Promise((resolve, reject) => {
+      axios
+        .request({
+          url: `/api/qa/questions/${questionId}/answers`,
+          method: 'post',
+          baseURL: 'http://localhost:3000',
+          data: {
+            body: answer.body,
+            name: answer.name,
+            email: answer.email,
+            photos: answer.photos
+          }
+        })
+        .then(() => resolve())
+        .catch((error) => reject(error));
+    });
+  },
+  addQuestion: () => {
+
+  },
   markQuestionHelpfulness: () => {
 
   },
@@ -26,12 +47,6 @@ const httpRequest = {
 
   },
   reportAnswer: () => {
-
-  },
-  addAnswer: () => {
-
-  },
-  addQuestion: () => {
 
   },
   searchQuestion: () => {

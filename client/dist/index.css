@@ -337,11 +337,21 @@ header {
 .modal-button {
   font-family: Helvetica, Arial, sans-serif;
   background-color: black;
-  height: 30px;
+  height: 40px;
   font-size: 16px;
   color: white;
 }
 
 .input-field {
   height: 30px;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: lighter;
+  font-size: 16px;
+}
+
+.text-field {
+  height: 142px;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: lighter;
+  font-size: 16px;
 }

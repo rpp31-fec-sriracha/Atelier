@@ -21,13 +21,13 @@ const QuestionModal = ({ isOpen, productInfo, handleAddQuestion, closeModal }) =
                 <h3 data-testid="product-name" style={{textDecoration: 'underline'}}>About the {productInfo}.</h3>
               </div>
               <div className="modal-body userInfos">
-                <label style={{ marginBottom: '5px'}} for="question">Your Question<span className="mandatory-asterisk">*</span></label>
+                <label style={{ marginBottom: '5px'}}>Your Question<span className="mandatory-asterisk">*</span></label>
                 <input id="question" className="input-field" value={question} type="text" onChange={(e) => setQuestion(e.target.value)}></input>
                 <br></br>
-                <label style={{ marginBottom: '5px'}} for="nickname">What is your nickname<span className="mandatory-asterisk">*</span></label>
+                <label style={{ marginBottom: '5px'}}>What is your nickname<span className="mandatory-asterisk">*</span></label>
                 <input id="nickname" className="input-field" value={nickname} type="text" onChange={(e) => setNickname(e.target.value)}></input>
                 <br></br>
-                <label style={{ marginBottom: '5px'}} for="email">Your email<span className="mandatory-asterisk">*</span></label>
+                <label style={{ marginBottom: '5px'}}>Your email<span className="mandatory-asterisk">*</span></label>
                 <input id="email" className="input-field" value={email} type="email" onChange={(e) => setEmail(e.target.value)}></input>
               </div>
               <button className="modal-button" onClick={() => closeModal()}>Submit question</button>

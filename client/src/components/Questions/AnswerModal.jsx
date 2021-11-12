@@ -23,7 +23,7 @@ const AnswerModal = ({ question, productInfo, isOpen, closeModal }) => {
               </div>
               <div className="modal-body userInfos">
                 <label style={{ marginBottom: '5px'}}>Your Answer<span className="mandatory-asterisk">*</span></label>
-                <textarea name="answer" style={{ width: '472px', height: '142px' }} onChange={(e) => setAnswer(e.target.value)}></textarea>
+                <textarea className="text-field" onChange={(e) => setAnswer(e.target.value)}></textarea>
                 <br></br>
                 <label style={{ marginBottom: '5px'}}>What is your nickname<span className="mandatory-asterisk">*</span></label>
                 <input type="text" className="input-field" onChange={(e) => setNickname(e.target.value)} placeholder="Example: jack543!"></input>
