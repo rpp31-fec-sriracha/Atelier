@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const api = require('./api.js');
+var bodyParser = require('body-parser');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -105,7 +106,7 @@ app.get('/reviews/meta', (req, res) => {
 });
 
 app.post('/addReview', (req, res) => {
-  // console.log(req);
+  console.log(req.body);
   api.addReview(req.body, (err, data) => {
     if (err) {
       res.status(500).json(err);

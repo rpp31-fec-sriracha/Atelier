@@ -103,6 +103,7 @@ class NewReview extends React.Component {
 
     console.log(formData);
 
+    // axios.post('/addReview', JSON.stringify(formData))
     axios.post('/addReview', formData)
       .then(function (response) {
         console.log(response);

@@ -72,7 +72,8 @@ const getReviewMeta = (productId, callback) => {
 
 // function for adding review
 const addReview = (data, callback) => {
-  apiWrap('post', '/reviews', defaultParams, data,
+  //maybe null or undefined for params instead of defaultParams??
+  apiWrap('post', '/reviews', undefined, data,
     callback);
 };
 
