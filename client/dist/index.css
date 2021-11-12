@@ -345,13 +345,28 @@ header {
 .input-field {
   height: 30px;
   font-family: Helvetica, Arial, sans-serif;
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
+  color: #4f565c;
   font-weight: lighter;
   font-size: 16px;
+  padding-left: 10px;
 }
 
 .text-field {
   height: 142px;
   font-family: Helvetica, Arial, sans-serif;
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
+  color:  #4f565c;
   font-weight: lighter;
   font-size: 16px;
+  padding: 10px;
+}
+
+.thumbnails{
+  width: 100px;
+  height: 65px;
+  margin: 5px;
+  border-radius: 5px;
 }
