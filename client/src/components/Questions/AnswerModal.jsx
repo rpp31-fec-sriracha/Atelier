@@ -11,7 +11,6 @@ const AnswerModal = ({ question, productInfo, isOpen, closeModal, handleAddAnswe
   const [message, setMessage] = useState('');
   const [invalid, setValidation] = useState(false);
 
-
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
@@ -29,7 +28,6 @@ const AnswerModal = ({ question, productInfo, isOpen, closeModal, handleAddAnswe
       });
     }
   };
-
 
   const handleValidate = (e) => {
 
@@ -61,13 +59,13 @@ const AnswerModal = ({ question, productInfo, isOpen, closeModal, handleAddAnswe
               <br></br>
               <div className="modal-body userInfos">
                 <label htmlFor="answer-text">Your Answer<span className="mandatory">*</span></label>
-                <textarea style={(invalid) ? {border: 'red solid 1px'} : {border: '#e6e6e6 solid 1px'}} name="answer" required id="answer-text" className="text-field" onChange={handleChange}></textarea>
+                <textarea style={(invalid && !values['answer']) ? {border: 'red solid 1px'} : {border: '#e6e6e6 solid 1px'}} name="answer" required id="answer-text" className="text-field" onChange={handleChange}></textarea>
                 <br></br>
                 <label>What is your nickname<span className="mandatory">*</span></label>
-                <input style={(invalid) ? {border: 'red solid 1px'} : {border: '#e6e6e6 solid 1px'}} name="nickname" required type="text" className="input-field" onChange={handleChange} placeholder="Example: jack543!"></input>
+                <input style={(invalid&& !values['nickname']) ? {border: 'red solid 1px'} : {border: '#e6e6e6 solid 1px'}} name="nickname" required type="text" className="input-field" onChange={handleChange} placeholder="Example: jack543!"></input>
                 <br></br>
                 <label>Your email<span className="mandatory">*</span></label>
-                <input style={(invalid) ? {border: 'red solid 1px'} : {border: '#e6e6e6 solid 1px'}} name="email" required type="email" className="input-field" onChange={handleChange} placeholder="Example: jack@email.com"></input>
+                <input style={(invalid && !values['email']) ? {border: 'red solid 1px'} : {border: '#e6e6e6 solid 1px'}} name="email" required type="email" className="input-field" onChange={handleChange} placeholder="Example: jack@email.com"></input>
                 <br></br>
                 <label>Upload your photos</label>
                 <div className="preview">
