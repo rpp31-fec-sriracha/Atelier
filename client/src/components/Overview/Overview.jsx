@@ -7,11 +7,12 @@ class Overview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      defaultStyle: {},
-      currentStyle: {},
+      defaultStyle: null,
+      currentStyle: null,
       selectedStyleId: null,
       selectedThumb: 0,
       cart: [],
+      loaded: false,
     };
     this.handleStyleClick = this.handleStyleClick.bind(this);
     this.handleThumbClick = this.handleThumbClick.bind(this);
@@ -32,28 +33,37 @@ class Overview extends React.Component {
   handleAddToCart(e, sku, qty) {
     e.preventDefault();
     let cart = this.state.cart.concat([{
+      // eslint-disable-next-line camelcase
       sku_id: sku,
       count: qty
     }]);
-    this.setState({ cart: this.state });
+    this.setState({ cart: cart });
   }
 
   componentDidMount() {
-    if (this.props.productStyles !== undefined) {
-      this.props.productStyles.map((style, index) => {
-        if (style['default?'] && this.state.defaultStyle.style_id !== style.style_id) {
-          let currentStyle = Object.keys(this.state.currentStyle).length === 0 ? style : this.state.currentStyle;
-          this.setState({
-            defaultStyle: style,
-            currentStyle: style,
-          });
+    console.log(this.props);
+
+    this.setState((state, props) => {
+      if (props.productStyles) {
+        for (let style of props.productStyles) {
+          if (style['default?']) {
+            let newStyle = !state.currentStyle ? style : state.currentStyle;
+
+            return ({
+              defaultStyle: style,
+              currentStyle: newStyle,
+              loaded: true,
+            });
+          }
         }
-      });
-    }
+      } else {
+        return state;
+      }
+    });
   }
 
   componentDidUpdate() {
-    if (this.props.productStyles !== undefined) {
+    if (this.props.productStyles) {
       this.props.productStyles.map((style, index) => {
         if (this.state.selectedStyleId &&
           this.state.selectedStyleId === style.style_id &&
@@ -69,6 +79,9 @@ class Overview extends React.Component {
 
   render() {
     // console.log(this.props);
+    if (!this.state.loaded) {
+      return (null);
+    }
     return (<div className="overview flex-column">
       <ProductInfo product={this.props.productInfo}
         styles={this.props.productStyles}
