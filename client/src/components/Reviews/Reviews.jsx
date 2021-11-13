@@ -13,12 +13,10 @@ class Reviews extends React.Component {
       currentProduct: this.props.currentProductId,
       reviews: [],
       meta: {},
-      sortType: 'relevant',
-      averageReview: null
+      sortType: 'relevant'
     };
 
     this.updateSortType = this.updateSortType.bind(this);
-    // this.setAverageReview = this.setAverageReview.bind(this);
   }
 
   getReviews() {
@@ -51,17 +49,6 @@ class Reviews extends React.Component {
       });
   }
 
-  // setAverageReview(average) {
-  //   this.setState({
-  //     averageReview: average
-  //   });
-
-  //   setTimeout(() => {
-  //     console.log(this.state.averageReview);
-  //   }, 1000);
-
-  // }
-
   updateSortType(event) {
     this.setState({
       sortType: event
@@ -77,7 +64,6 @@ class Reviews extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     if (Object.keys(this.state.meta).length === 0 || Object.keys(this.state.meta.ratings).length === 0) {
       return (
         <div><ReviewsList reviews={this.state.reviews}/></div>

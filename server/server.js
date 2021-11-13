@@ -110,7 +110,7 @@ app.post('/addReview', (req, res) => {
     if (err) {
       res.status(500).json(err);
     } else {
-      res.status(200).json(data);
+      res.status(200).send(data);
     }
   });
 });

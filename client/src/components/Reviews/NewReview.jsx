@@ -28,8 +28,6 @@ class NewReview extends React.Component {
   }
 
   checkReviewLength(e) {
-    // console.log(this.state.charactersRemaining);
-    // console.log(e.target.value);
     let charsNeeded = 50 - e.target.value.length;
 
     if (charsNeeded > 0) {
@@ -69,7 +67,6 @@ class NewReview extends React.Component {
   }
 
   setRecommend(e) {
-
     if (e.target.value === 'Yes') {
       this.setState({
         recommend: true
@@ -79,7 +76,6 @@ class NewReview extends React.Component {
         recommend: false
       });
     }
-
   }
 
   setCharacteristic(e) {

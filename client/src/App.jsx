@@ -41,21 +41,10 @@ class App extends React.Component {
       .catch((err) => console.log(err));
   }
 
-  // setAverageReview(average) {
-  //   this.setState({
-  //     averageReview: average
-  //   });
-  // }
-
   setAverageReview(average) {
     this.setState({
       averageReview: average
     });
-
-    setTimeout(() => {
-      console.log('yay', this.state.averageReview);
-    }, 1000);
-
   }
 
   componentDidMount() {

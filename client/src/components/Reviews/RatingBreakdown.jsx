@@ -32,7 +32,6 @@ class RatingBreakdown extends React.Component {
     let roundedAverage = Math.round(average * 10) / 10;
 
     this.state.averageReview = roundedAverage;
-    console.log(roundedAverage);
     this.props.setAverageReview(roundedAverage);
   }
 
