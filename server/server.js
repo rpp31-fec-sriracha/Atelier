@@ -28,7 +28,7 @@ app.all('/api/*', (req, res, next) => {
 
 app.get('/products', (req, res) => {
   let page = 1;
-  let count = 5;
+  let count = 15;
   if (req.query.page) {
     page = page;
   }
@@ -74,7 +74,7 @@ app.get('/productStyles', (req, res) => {
 app.get('/reviews', (req, res) => {
   let productId = req.query.productId;
   let page = 1;
-  let count = 5;
+  let count = 20;
   let sortType = req.query.sortType;
 
   if (req.query.page) {
@@ -106,7 +106,6 @@ app.get('/reviews/meta', (req, res) => {
 });
 
 app.post('/addReview', (req, res) => {
-  console.log(req.body);
   api.addReview(req.body, (err, data) => {
     if (err) {
       res.status(500).json(err);

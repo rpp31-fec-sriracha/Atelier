@@ -72,9 +72,19 @@ const getReviewMeta = (productId, callback) => {
 
 // function for adding review
 const addReview = (data, callback) => {
-  //maybe null or undefined for params instead of defaultParams??
-  apiWrap('post', '/reviews', undefined, data,
-    callback);
+  axios({
+    method: 'post',
+    url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews',
+    headers: { 'Authorization': API_KEY },
+    params: null,
+    data: data,
+  })
+    .then(({data: response}) => {
+      callback(null, response);
+    })
+    .catch((err) => {
+      callback(err, null);
+    });
 };
 
 // function for marking review as helpful

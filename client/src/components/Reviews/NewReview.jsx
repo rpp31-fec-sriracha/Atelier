@@ -69,9 +69,17 @@ class NewReview extends React.Component {
   }
 
   setRecommend(e) {
-    this.setState({
-      recommend: e.target.value
-    });
+
+    if (e.target.value === 'Yes') {
+      this.setState({
+        recommend: true
+      });
+    } else {
+      this.setState({
+        recommend: false
+      });
+    }
+
   }
 
   setCharacteristic(e) {
@@ -87,10 +95,9 @@ class NewReview extends React.Component {
 
   handleFormSubmit(e) {
     e.preventDefault();
-
-    console.log('You have submitted the form');
-
+    // console.log('You have submitted the form');
     let formData = {
+      // eslint-disable-next-line camelcase
       product_id: this.props.productID,
       rating: this.state.rating,
       summary: this.state.summary,
@@ -101,9 +108,6 @@ class NewReview extends React.Component {
       characteristics: this.state.characteristics
     };
 
-    console.log(formData);
-
-    // axios.post('/addReview', JSON.stringify(formData))
     axios.post('/addReview', formData)
       .then(function (response) {
         console.log(response);
