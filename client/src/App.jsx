@@ -59,7 +59,7 @@ class App extends React.Component {
           <Overview productInfo={productInfo} productStyles={productStyles} />
           <Questions currentProductId={currentProductId} productInfo={productInfo.name} />
           <Reviews currentProductId={currentProductId} productName={productInfo.name}
-            setAverageReview={this.setAverageReview}/>
+            setAverageReview={this.setAverageReview} averageStars={this.state.averageReview}/>
         </>
         : <p>Loading product info...</p>
       }

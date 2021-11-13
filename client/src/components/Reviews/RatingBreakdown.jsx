@@ -12,12 +12,9 @@ class RatingBreakdown extends React.Component {
       twoStarCount: this.props.metadata.ratings[2],
       oneStarCount: this.props.metadata.ratings[1],
       totalReviews: parseInt(this.props.metadata.recommended.false) + parseInt(this.props.metadata.recommended.true),
-      averageReview: 0
     };
 
-    if (this.state.averageReview === 0) {
-      this.calculateAverage();
-    }
+    this.calculateAverage();
   }
 
   calculateAverage() {
@@ -31,7 +28,6 @@ class RatingBreakdown extends React.Component {
     let average = sum / this.state.totalReviews;
     let roundedAverage = Math.round(average * 10) / 10;
 
-    this.state.averageReview = roundedAverage;
     this.props.setAverageReview(roundedAverage);
   }
 
@@ -41,7 +37,7 @@ class RatingBreakdown extends React.Component {
     }
 
     return (<div className="ratingBreakdown">
-      <div>{this.state.averageReview} Stars</div>
+      <div>{this.props.averageStars} Stars</div>
       <div>{this.props.metadata.recommended.true / this.state.totalReviews * 100}% of reviews recommend this product</div>
       <div>5 stars: {this.state.fiveStarCount / this.state.totalReviews * 100 || 0}%</div>
       <div>4 stars: {this.state.fourStarCount / this.state.totalReviews * 100 || 0}%</div>

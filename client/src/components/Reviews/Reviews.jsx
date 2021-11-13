@@ -74,7 +74,8 @@ class Reviews extends React.Component {
       <div>'RATINGS & REVIEWS'</div>
       <div className="flex-row-reviews">
         <div className="flex-column">
-          <div><RatingBreakdown metadata={this.state.meta} setAverageReview={this.props.setAverageReview}/></div>
+          <div><RatingBreakdown metadata={this.state.meta} setAverageReview={this.props.setAverageReview}
+            averageStars={this.props.averageStars}/></div>
           <div><ProductBreakdown metadata={this.state.meta}/></div>
         </div>
         <div className="flex-column">
