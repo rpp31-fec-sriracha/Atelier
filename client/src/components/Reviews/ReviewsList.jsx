@@ -12,12 +12,18 @@ class ReviewsList extends React.Component {
       sortOption: 'relevance',
       newReviewOpen: false
     };
+
+    this.onClose = this.onClose.bind(this);
   }
 
   moreReviews() {
     this.setState({
       numReviewsVisible: this.state.numReviewsVisible + 2
     });
+  }
+
+  onClose() {
+    this.setState({newReviewOpen: false});
   }
 
   render() {
@@ -33,7 +39,8 @@ class ReviewsList extends React.Component {
         <button onClick={() => this.moreReviews()}>MORE REVIEWS</button>
         <div>
           <button onClick={() => this.setState({newReviewOpen: true})}>ADD A REVIEW +</button>
-          <NewReview open={this.state.newReviewOpen} onClose={() => this.setState({newReviewOpen: false})}></NewReview>
+          <NewReview productName={this.props.productName} open={this.state.newReviewOpen}
+            onClose={this.onClose} characteristics={this.props.characteristics} productID={this.props.productID}></NewReview>
         </div>
       </div>
       <div><KeywordSearch/></div>
