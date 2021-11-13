@@ -314,6 +314,10 @@ header {
 .b-right {
   width: 18%;
 }
+
+
+
+/* Answer Modal */
 .modal-flex-column {
   display: flex;
   flex-direction: column;
@@ -330,10 +334,9 @@ header {
   flex-direction: column;
   margin-bottom: 30px;
 }
-.mandatory-asterisk{
+.mandatory{
   color: red;
 }
-
 .modal-button {
   font-family: Helvetica, Arial, sans-serif;
   background-color: black;
@@ -341,7 +344,6 @@ header {
   font-size: 16px;
   color: white;
 }
-
 .input-field {
   height: 30px;
   font-family: Helvetica, Arial, sans-serif;
@@ -352,7 +354,6 @@ header {
   font-size: 16px;
   padding-left: 10px;
 }
-
 .text-field {
   height: 142px;
   font-family: Helvetica, Arial, sans-serif;
@@ -363,10 +364,20 @@ header {
   font-size: 16px;
   padding: 10px;
 }
-
+label {
+  margin-bottom: 5px;
+}
 .thumbnails{
   width: 100px;
   height: 65px;
   margin: 5px;
   border-radius: 5px;
+  /* object-fit: cover; */
+}
+.warning {
+ display: flex;
+ font-style: italic;
+ font-weight: lighter;
+ justify-content: center;
+ color: red;
 }

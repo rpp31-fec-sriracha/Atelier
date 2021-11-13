@@ -2,13 +2,20 @@ import React, { useState } from 'react';
 import ReactDom from 'react-dom';
 
 const AnswerModal = ({ question, productInfo, isOpen, closeModal, handleAddAnswer }) => {
-  const [answer, setAnswer] = useState('');
-  const [nickname, setNickname] = useState('');
-  const [email, setEmail] = useState('');
+  const [values, setValues] = useState({
+    answer: '',
+    nickname: '',
+    email: ''
+  });
   const [photos, setPhotos] = useState([]);
-  const [valid, setValidation] = useState(false);
+  const [message, setMessage] = useState('');
+  const [invalid, setValidation] = useState(false);
 
-  // handle photo(file) upload
+
+  const handleChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
   const handleFileUpload = (e) => {
     const files = e.target.files;
 
@@ -23,14 +30,20 @@ const AnswerModal = ({ question, productInfo, isOpen, closeModal, handleAddAnswe
     }
   };
 
-  // add alt attribute for accessibility
 
+  const handleValidate = (e) => {
 
-  // invoke handle add answer
-  // validation should happend at the client side
-  // validate form inputs
-  // if there's any invalid entries,
-  // render warning message "You must enter the following:”
+    if (Object.values(values).every((v) => v !== '')) {
+      handleAddAnswer(question.question_id, { ...values, photos });
+      setValidation(false);
+      closeModal();
+    } else {
+      e.preventDefault();
+      setMessage('You must enter the following: ');
+      setValidation(true);
+    }
+  };
+
   return ReactDom.createPortal(
     <>
       {isOpen ?
@@ -39,34 +52,30 @@ const AnswerModal = ({ question, productInfo, isOpen, closeModal, handleAddAnswe
           <div className="modal">
             <div className="modal-flex-column">
               <div className="modal-header">
-                <h2 style={{marginBottom: '20px'}}>Submit your Answer</h2>
+                <h2 style={{marginBottom: 20}}>Submit your Answer</h2>
                 <h3 style={{textDecoration: 'underline'}}><b>{productInfo}</b>: {question.question_body}</h3>
               </div>
+              <div className="warning">
+                <p>{message}</p>
+              </div>
+              <br></br>
               <div className="modal-body userInfos">
-                <label htmlFor="answer-text" style={{ marginBottom: '5px'}}>Your Answer<span className="mandatory-asterisk">*</span></label>
-                <textarea id="answer-text" className="text-field" onChange={(e) => setAnswer(e.target.value)}></textarea>
+                <label htmlFor="answer-text">Your Answer<span className="mandatory">*</span></label>
+                <textarea style={(invalid) ? {border: 'red solid 1px'} : {border: '#e6e6e6 solid 1px'}} name="answer" required id="answer-text" className="text-field" onChange={handleChange}></textarea>
                 <br></br>
-                <label style={{ marginBottom: '5px'}}>What is your nickname<span className="mandatory-asterisk">*</span></label>
-                <input type="text" className="input-field" onChange={(e) => setNickname(e.target.value)} placeholder="Example: jack543!"></input>
+                <label>What is your nickname<span className="mandatory">*</span></label>
+                <input style={(invalid) ? {border: 'red solid 1px'} : {border: '#e6e6e6 solid 1px'}} name="nickname" required type="text" className="input-field" onChange={handleChange} placeholder="Example: jack543!"></input>
                 <br></br>
-                <label style={{ marginBottom: '5px'}}>Your email<span className="mandatory-asterisk">*</span></label>
-                <input type="email" className="input-field" onChange={(e) => setEmail(e.target.value)} placeholder="Example: jack@email.com"></input>
+                <label>Your email<span className="mandatory">*</span></label>
+                <input style={(invalid) ? {border: 'red solid 1px'} : {border: '#e6e6e6 solid 1px'}} name="email" required type="email" className="input-field" onChange={handleChange} placeholder="Example: jack@email.com"></input>
                 <br></br>
-                <label style={{ marginBottom: '5px'}}>Upload your photos</label>
+                <label>Upload your photos</label>
                 <div className="preview">
                   {photos.map((photo, i) => <img className="thumbnails" key={i} src={photo}></img>)}
                 </div>
                 {(photos.length >= 5) ? <div></div> : <input type="file" accept="image/*" multiple onChange={handleFileUpload}></input>}
               </div>
-              <button className="modal-button" onClick={(e) => {
-                if (valid) {
-                  handleAddAnswer(question.question_id, { answer, nickname, email, photos });
-                  closeModal();
-                } else {
-                  e.preventDefault();
-                }
-              }}>Submit answer</button>
-              <div>You must enter the following:</div>
+              <button className="modal-button" onClick={handleValidate}>Submit answer</button>
             </div>
           </div>
         </> : null}
