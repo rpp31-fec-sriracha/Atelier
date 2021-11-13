@@ -6,7 +6,7 @@ const QuestionModal = ({ isOpen, productInfo, handleAddQuestion, closeModal }) =
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
 
-  // invoke hadnle add question onsubmit
+  // invoke handle add question onsubmit
 
   return ReactDom.createPortal(
     <React.Fragment>

@@ -12,13 +12,11 @@ class App extends React.Component {
       currentProductId: 59556,
       productInfo: null,
       productStyles: null,
-      productReviews: {
-        reviews: {},
-        meta: {},
-      },
       cart: [],
       productLoaded: false,
+      averageReview: null,
     };
+    this.setAverageReview = this.setAverageReview.bind(this);
   }
 
   getProductInfo() {
@@ -43,6 +41,12 @@ class App extends React.Component {
       .catch((err) => console.log(err));
   }
 
+  setAverageReview(average) {
+    this.setState({
+      averageReview: average
+    });
+  }
+
   componentDidMount() {
     this.getProductInfo();
   }
@@ -54,7 +58,8 @@ class App extends React.Component {
         <>
           <Overview productInfo={productInfo} productStyles={productStyles} currentProductId={currentProductId} />
           <Questions currentProductId={currentProductId} productInfo={productInfo.name} />
-          <Reviews />
+          <Reviews currentProductId={currentProductId} productName={productInfo.name}
+            setAverageReview={this.setAverageReview} averageStars={this.state.averageReview}/>
         </>
         : <p>Loading product info...</p>
       }
