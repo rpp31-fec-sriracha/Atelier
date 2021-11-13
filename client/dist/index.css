@@ -92,6 +92,7 @@ header {
 
 #image-gallery {
   background-size: contain;
+  background-position: top;
 }
 
 #productInfoTop {
@@ -136,6 +137,7 @@ header {
   max-height: 100%;
   max-width: 100%;
   padding: 0;
+  object-fit: cover;
 }
 
 .styleThumbs {
@@ -161,7 +163,7 @@ header {
 
 .questions {
   font-family: Helvetica, Arial, sans-serif;
-  margin: 5px;
+  margin: 100px;
 }
 
 .reviews {
@@ -178,12 +180,13 @@ header {
 }
 
 .modal {
+  display: flex;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #FFF;
-  padding: 50px;
+  padding: 30px;
   z-index: 1000;
 }
 
@@ -198,44 +201,85 @@ header {
 }
 
 
-/* QA */
+/* ----------- QA ----------- */
 .questions {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  font-size: 18px;
   /* border: 1px dashed grey; */
 }
 
 .question {
   display: flex;
   flex-direction: column;
+  /* border: 1px dashed grey; */
 }
 .question-flex-row {
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }
 
-.QA-title {
+.left{
+  display: flex;
+  font-size: 18px;
   font-weight: bolder;
+}
+.title {
+  margin-right: 10px;
+}
+.Q-body {
+  font-size: 18px;
+}
+.right {
+  display: flex;
+  align-items: flex-start;
+  font-weight: lighter;
+  /* border: 1px dashed grey; */
+}
+.answers {
+  display: flex;
+  flex-direction: column;
+}
+.answer-flex-row {
+  display: flex;
+  align-items: baseline;
+  /* border: 1px dashed grey; */
+}
+.answer {
+  display: flex;
+  flex-direction: column;
   padding: 10px;
+}
+.A-body {
+  font-size: 16px;
+  padding-bottom: 5px;
+}
+.photo-list {
+  display: flex;
+}
+.photos {
+  background-color: lightgrey;
+  margin-right: 15px;
+  width: 100px;
+  height: 65px;
 }
 .answers-list {
   display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
-}
-.answer {
-  margin-left: 20px;
 }
 ._divider {
   font-weight: bolder;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 .userInfos {
   font-weight: lighter;
+  font-size: 16px;
 }
 .search-question {
   max-width: 100%;
-  height: 50px;
+  height: 60px;
   font-size: 18px;
 }
 
@@ -248,4 +292,58 @@ header {
   border: none;
   cursor: pointer;
   text-decoration: underline;
+}
+.load-more-a {
+  font-size: 15px;
+  font-weight: bold;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+}
+.buttons {
+  display: flex;
+}
+.add-q {
+  background-color: white;
+  color:black;
+  height: 60px;
+  font-size: 18px;
+}
+.b-left {
+  width: 25%;
+}
+.b-right {
+  width: 18%;
+}
+.modal-flex-column {
+  display: flex;
+  flex-direction: column;
+  font-family: Helvetica, Arial, sans-serif;
+  padding: 50px;
+}
+.modal-header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+.mandatory-asterisk{
+  color: red;
+}
+
+.modal-button {
+  font-family: Helvetica, Arial, sans-serif;
+  background-color: black;
+  height: 30px;
+  font-size: 16px;
+  color: white;
+}
+
+.input-field {
+  height: 30px;
 }

@@ -1,55 +1,49 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDom from 'react-dom';
 
-class AnswerModal extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      answer: '',
-      nickname: '',
-      email: '',
-      photos: ''
-    };
-  }
+const AnswerModal = ({ question, productInfo, isOpen, closeModal }) => {
+  const [answer, setAnswer] = useState('');
+  const [nickname, setNickname] = useState('');
+  const [email, setEmail] = useState('');
+  const [photos, setPhotos] = useState('');
+
   // handle photo(file) upload
   // invoke handle add answer
-  // handle input change
-  handleInputChange(e) {
-    this.setState({
-      [name]: e.target.value
-    });
-  }
-  render() {
-    const { question, productInfo, isOpen, closeModal } = this.props;
-    const { answer, nickname, email, photos } = this.state;
 
-    return ReactDom.createPortal(
-      <>
-        {isOpen ? (
-          <>
-            <div className="overlay"></div>
-            <div className="modal">
-              <form onSubmit={() => closeModal()}>
-                <div className="modal-title">Submit your Answer</div>
-                <div className="modal-subtitle"><b>{productInfo}</b>: {question.question_body}</div>
-                <label>Your Answer</label><span id="mandatory-asterisk">*</span>
-                <textarea value={answer} name="answer" onChange={(e) => this.handleInputChange(e)}></textarea>
-                <label>What is your nickname</label><span id="mandatory-asterisk">*</span>
-                <input type="text" value={nickname} name="nickname" onChange={(e) => this.handleInputChange(e)} placeholder="Example: jack543!"></input>
-                <label>Your email</label><span id="mandatory-asterisk">*</span>
-                <input type="email" value={email} name="email" onChange={(e) => this.handleInputChange(e)} placeholder="Example: jack@email.com"></input>
-                <label>Upload your photos</label>
-                <input type="file" name="photo" onChange={(e) => this.handleInputChange(e)}></input>
-
-                <input type="submit" value="Submit answer"></input>
-              </form>
+  return ReactDom.createPortal(
+    <>
+      {isOpen ?
+        <>
+          <div className="overlay"></div>
+          <div className="modal">
+            <div className="modal-flex-column">
+              <div className="modal-header">
+                <h2 style={{marginBottom: '20px'}}>Submit your Answer</h2>
+                <h3 style={{textDecoration: 'underline'}}><b>{productInfo}</b>: {question.question_body}</h3>
+              </div>
+              <div className="modal-body userInfos">
+                <label style={{ marginBottom: '5px'}}>Your Answer<span className="mandatory-asterisk">*</span></label>
+                <textarea name="answer" style={{ width: '472px', height: '142px' }} onChange={(e) => setAnswer(e.target.value)}></textarea>
+                <br></br>
+                <label style={{ marginBottom: '5px'}}>What is your nickname<span className="mandatory-asterisk">*</span></label>
+                <input type="text" className="input-field" onChange={(e) => setNickname(e.target.value)} placeholder="Example: jack543!"></input>
+                <br></br>
+                <label style={{ marginBottom: '5px'}}>Your email<span className="mandatory-asterisk">*</span></label>
+                <input type="email" className="input-field" onChange={(e) => setEmail(e.target.value)} placeholder="Example: jack@email.com"></input>
+                <br></br>
+                <label style={{ marginBottom: '5px'}}>Upload your photos</label>
+                <input type="file" onChange={(e) => setPhotos(e.target.value)}></input>
+              </div>
+              <button className="modal-button" onClick={() => closeModal()}>Submit answer</button>
             </div>
-          </>) : null}
 
-      </>,
-      document.getElementById('answer-portal')
-    );
-  }
-}
+          </div>
+        </> : null}
+
+    </>,
+    document.getElementById('answer-portal')
+  );
+};
+
 
 export default AnswerModal;
