@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const api = require('./api.js');
-var bodyParser = require('body-parser');
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -110,7 +110,7 @@ app.post('/addReview', (req, res) => {
     if (err) {
       res.status(500).json(err);
     } else {
-      res.status(200).send(data);
+      res.status(200).json(data);
     }
   });
 });
