@@ -41,7 +41,7 @@ class Overview extends React.Component {
           // eslint-disable-next-line camelcase
           sku_id: sku
         })
-      )
+      );
     }
     axios.all(requests)
       .then(() => (axios.get('/api/cart')))
@@ -99,6 +99,7 @@ class Overview extends React.Component {
     }
     return (<div className="overview flex-column">
       <ProductInfo product={this.props.productInfo}
+        averageReview={this.props.averageReview}
         styles={this.props.productStyles}
         styleClick={this.handleStyleClick}
         thumbClick={this.handleThumbClick}

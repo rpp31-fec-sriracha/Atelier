@@ -52,11 +52,11 @@ class App extends React.Component {
   }
 
   render() {
-    const { currentProductId, productInfo, productStyles} = this.state;
+    const { averageReview, currentProductId, productInfo, productStyles} = this.state;
     return (<div className="appContainer">
       {(this.state.productLoaded) ?
         <>
-          <Overview productInfo={productInfo} productStyles={productStyles} currentProductId={currentProductId} />
+          <Overview productInfo={productInfo} productStyles={productStyles} averageReview={averageReview} currentProductId={currentProductId} />
           <Questions currentProductId={currentProductId} productInfo={productInfo.name} />
           <Reviews currentProductId={currentProductId} productName={productInfo.name}
             setAverageReview={this.setAverageReview} averageStars={this.state.averageReview}/>

@@ -16,7 +16,7 @@ const ProductInfo = function(props) {
         'Image Gallery'}
 
       <div className="flex-column" id="productInfoTop">
-        <h4>STARS Read all # reviews</h4>
+        <h4>{props.averageReview} stars Read all # reviews</h4>
         <h4 data-testid="productCategory">{props.product.category}</h4>
         <h3 data-testid="productName">{props.product.name}</h3>
 
