@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const QtyOptions = function(props) {
   let options = [];
-  for (let i = 1; i <= props.sizeQty; i++) {
+  for (let i = 1; i <= props.sizeQty && i <= 15; i++) {
     options.push((<option key={i} value={i}>{i}</option>));
   }
   return options;
@@ -24,7 +24,7 @@ const AddToCart = function(props) {
   return (
     <form onSubmit={(e) => {
       e.preventDefault();
-      props.handleAddToCart(e, sizes[value][1], selectedQty);
+      props.handleAddToCart(e, parseInt(sizes[value][1], 10), selectedQty);
     }}>
       <div className="flex-row">
 
@@ -40,7 +40,7 @@ const AddToCart = function(props) {
         </select>
 
         <select value={selectedQty}
-          onChange={(e) => setSelectedQty(e.target.value)}
+          onChange={(e) => setSelectedQty(parseInt(e.target.value, 10))}
           name="quantity"
           id="quantity-select">
 

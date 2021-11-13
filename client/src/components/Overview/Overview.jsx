@@ -3,6 +3,8 @@ import ProductInfo from './ProductInfo.jsx';
 import ProductInfoBottom from './ProductInfoBottom.jsx';
 import axios from 'axios';
 
+axios.defaults.headers.post['Content-Type'] = 'application/json';
+
 class Overview extends React.Component {
   constructor(props) {
     super(props);
@@ -32,18 +34,30 @@ class Overview extends React.Component {
 
   handleAddToCart(e, sku, qty) {
     e.preventDefault();
-    let cart = this.state.cart.concat([{
-      // eslint-disable-next-line camelcase
-      sku_id: sku,
-      count: qty
-    }]);
-    this.setState({ cart: cart });
+    let requests = [];
+    for (let i = 0; i < qty; i++) {
+      requests.push(
+        axios.post('/api/cart', {
+          // eslint-disable-next-line camelcase
+          sku_id: sku
+        })
+      )
+    }
+    axios.all(requests)
+      .then(() => (axios.get('/api/cart')))
+      .then((response) => this.setState({ cart: response.data }))
+      .catch((e) => console.log(e));
   }
 
   componentDidMount() {
-    console.log(this.props);
+    axios.get('/api/cart')
+      .then((response) => {
+        this.setState({ cart: response.data });
+      })
+      .catch((e) => console.log(e));
 
     this.setState((state, props) => {
+      let cart;
       if (props.productStyles) {
         for (let style of props.productStyles) {
           if (style['default?']) {
@@ -52,6 +66,7 @@ class Overview extends React.Component {
             return ({
               defaultStyle: style,
               currentStyle: newStyle,
+              cart: cart,
               loaded: true,
             });
           }
