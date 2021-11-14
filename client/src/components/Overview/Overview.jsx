@@ -3,8 +3,6 @@ import ProductInfo from './ProductInfo.jsx';
 import ProductInfoBottom from './ProductInfoBottom.jsx';
 import axios from 'axios';
 
-axios.defaults.headers.post['Content-Type'] = 'application/json';
-
 class Overview extends React.Component {
   constructor(props) {
     super(props);
@@ -95,7 +93,7 @@ class Overview extends React.Component {
   render() {
     // console.log(this.props);
     if (!this.state.loaded) {
-      return (null);
+      return null;
     }
     return (<div className="overview flex-column">
       <ProductInfo product={this.props.productInfo}
