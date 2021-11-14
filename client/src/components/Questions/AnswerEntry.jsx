@@ -4,17 +4,14 @@ const AnswerEntry = ({ answer }) => {
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
   // handle mark helpful
   // handle report answer
+  console.log(answer);
   return (
     <>
       <div className="answer">
         <div className="A-body">{answer.body}</div>
         <div className="photo-list">
-          {/* {answer.photos.map((photo, i) => <img key={i} src={photo.url}></img>)} */}
-          <img className="photos" src=''></img>
-          <img className="photos" src=''></img>
-          <img className="photos" src=''></img>
-          {/* <img className="photos" src=''></img>
-          <img className="photos" src=''></img> */}
+          {answer.photos.map((photo, i) => <img className="photos" key={i} src={photo}></img>)}
+          {/* <img className="photos" src="http://localhost:3000/ed3516f7-0bc8-4f78-a111-4e490975d676"></img> */}
         </div>
         <div className="userInfos">
           <span data-testid="answerer-name">by {answer.answerer_name}, </span>
