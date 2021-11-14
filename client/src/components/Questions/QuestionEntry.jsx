@@ -19,9 +19,9 @@ class QuestionEntry extends React.Component {
   // handle report question
   // handle mark helpful
   // handle add answer
-  // render < AnswerModal >
+
   render() {
-    const { question, productInfo } = this.props;
+    const { question, productInfo, handleAddAnswer } = this.props;
     const { isOpen, visibleCount } = this.state;
 
     return (
@@ -38,7 +38,7 @@ class QuestionEntry extends React.Component {
               <button className="helpful-and-report">Yes({question.question_helpfulness})</button>
               <span className="_divider">|</span>
               <button className="helpful-and-report" onClick={() => this.openModal()}>Add Answer</button>
-              <AnswerModal isOpen={isOpen} closeModal={this.closeModal.bind(this)} question={question} productInfo={productInfo} />
+              <AnswerModal isOpen={isOpen} closeModal={this.closeModal.bind(this)} question={question} productInfo={productInfo} handleAddAnswer={handleAddAnswer} />
             </div>
           </div>
         </div>

@@ -16,7 +16,7 @@ const httpRequest = {
         .catch((error) => reject(error));
     });
   },
-  addAnswer: (questionId, answer) => {
+  addAnswer: (questionId, newAnswer) => {
     return new Promise((resolve, reject) => {
       axios
         .request({
@@ -24,10 +24,10 @@ const httpRequest = {
           method: 'post',
           baseURL: 'http://localhost:3000',
           data: {
-            body: answer.body,
-            name: answer.name,
-            email: answer.email,
-            photos: answer.photos
+            body: newAnswer.answer,
+            name: newAnswer.nickname,
+            email: newAnswer.email,
+            photos: newAnswer.photos
           }
         })
         .then(() => resolve())

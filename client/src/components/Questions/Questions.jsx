@@ -21,7 +21,7 @@ class Questions extends React.Component {
           questions: data
         })
       )
-      .catch((error) => conosle.log(error));
+      .catch((error) => console.log(error));
   }
 
   // handle search
@@ -30,12 +30,16 @@ class Questions extends React.Component {
   }
   // handle add question
   handleAddQuestion() {
-    // validate form inputs
-    // if there's any invalid entries,
-    // render warning message "You must enter the following:”
+
     // post HTTP request to server
   }
-
+  handleAddAnswer(questionId, answer) {
+    console.log(questionId, answer);
+    // post HTTP request to server
+    httpRequest.addAnswer(questionId, answer)
+      .then((r) => console.log(r))
+      .catch((error) => conosle.log(error));
+  }
   render() {
     const { questions } = this.state;
     const { productInfo } = this.props;
@@ -45,7 +49,13 @@ class Questions extends React.Component {
         <div className="questions flex-column">
           <p>QUESTIONS & ANSWERS</p>
           <SearchQuestions handleSearch={this.handleSearch.bind(this)} />
-          <QuestionList role="q-list" questions={questions} productInfo={productInfo} handleAddQuestion={this.handleAddQuestion.bind(this)} />
+          <QuestionList
+            role="q-list"
+            questions={questions}
+            productInfo={productInfo}
+            handleAddQuestion={this.handleAddQuestion.bind(this)}
+            handleAddAnswer={this.handleAddAnswer.bind(this)}
+          />
         </div>
       </React.Fragment>
     );

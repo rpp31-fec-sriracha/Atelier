@@ -17,16 +17,24 @@ const AnswerModal = ({ question, productInfo, isOpen, closeModal, handleAddAnswe
 
   const handleFileUpload = (e) => {
     const files = e.target.files;
+    console.log(files[0])
 
     if (files) {
       Array.from(files).forEach((file) => {
-        const reader = new FileReader();
-        reader.onload = () => {
-          setPhotos([reader.result, ...photos]); // right now only 1 by 1 user can add images.
-        };
-        reader.readAsDataURL(file);
+        const imageUrl = URL.createObjectURL(file)
+        setPhotos([imageUrl, ...photos]); // right now only 1 by 1 user can add images.
       });
     }
+
+    // if (files) {
+    //   Array.from(files).forEach((file) => {
+    //     const reader = new FileReader();
+    //     reader.onload = () => {
+    //       setPhotos([reader.result, ...photos]); // right now only 1 by 1 user can add images.
+    //     };
+    //     reader.readAsDataURL(file);
+    //   });
+    // }
   };
 
   const handleValidate = (e) => {
@@ -69,9 +77,9 @@ const AnswerModal = ({ question, productInfo, isOpen, closeModal, handleAddAnswe
                 <br></br>
                 <label>Upload your photos</label>
                 <div className="preview">
-                  {photos.map((photo, i) => <img className="thumbnails" key={i} src={photo}></img>)}
+                  {photos.map((photo, i) => <img src={photo} onLoad={() => URL.revokeObjectURL(photo)} className="thumbnails" key={i} ></img>)}
                 </div>
-                {(photos.length >= 5) ? <div></div> : <input type="file" accept="image/*" multiple onChange={handleFileUpload}></input>}
+                {(photos.length >= 5) ? <div></div> : <input type="file" name="photos" accept="image/*" multiple onChange={handleFileUpload}></input>}
               </div>
               <button className="modal-button" onClick={handleValidate}>Submit answer</button>
             </div>
