@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ReactDom from 'react-dom';
+import httpRequest from './httpRequest.js'
 
 const AnswerModal = ({ question, productInfo, isOpen, closeModal, handleAddAnswer }) => {
   const [values, setValues] = useState({
@@ -17,12 +18,23 @@ const AnswerModal = ({ question, productInfo, isOpen, closeModal, handleAddAnswe
 
   const handleFileUpload = (e) => {
     const files = e.target.files;
-    console.log(files[0])
 
+
+    // if (files) {
+    //   Array.from(files).forEach((file) => {
+    //     const imageUrl = URL.createObjectURL(file)
+    //     setPhotos([imageUrl, ...photos]); // right now only 1 by 1 user can add images.
+    //   });
+    // }
     if (files) {
       Array.from(files).forEach((file) => {
-        const imageUrl = URL.createObjectURL(file)
-        setPhotos([imageUrl, ...photos]); // right now only 1 by 1 user can add images.
+        httpRequest.uploadFile(file)
+          .then(result => {
+            const { file } = result.data;
+            const delivery = `https://ucarecdn.com/${file}`;
+          })
+        .catch(error => console.log(error))
+        // setPhotos([reader.result, ...photos]); // right now only 1 by 1 user can add images.
       });
     }
 
@@ -30,11 +42,21 @@ const AnswerModal = ({ question, productInfo, isOpen, closeModal, handleAddAnswe
     //   Array.from(files).forEach((file) => {
     //     const reader = new FileReader();
     //     reader.onload = () => {
-    //       setPhotos([reader.result, ...photos]); // right now only 1 by 1 user can add images.
+
+    //       httpRequest.uploadcare(reader.result.slice(23))
+    //       .then((uuid) => console.log(uuid))
+    //       .catch(error => console.log(error))
+    //       // setPhotos([reader.result, ...photos]); // right now only 1 by 1 user can add images.
     //     };
     //     reader.readAsDataURL(file);
     //   });
     // }
+
+    // make http request to uploadcare
+    // httpRequest.uploadcare().then().catch()
+    // get uuid
+    // send those group of uuids of image to atelier server to post
+
   };
 
   const handleValidate = (e) => {
@@ -77,7 +99,7 @@ const AnswerModal = ({ question, productInfo, isOpen, closeModal, handleAddAnswe
                 <br></br>
                 <label>Upload your photos</label>
                 <div className="preview">
-                  {photos.map((photo, i) => <img src={photo} onLoad={() => URL.revokeObjectURL(photo)} className="thumbnails" key={i} ></img>)}
+                  {photos.map((photo, i) => <img src={photo} className="thumbnails" key={i} ></img>)}
                 </div>
                 {(photos.length >= 5) ? <div></div> : <input type="file" name="photos" accept="image/*" multiple onChange={handleFileUpload}></input>}
               </div>
