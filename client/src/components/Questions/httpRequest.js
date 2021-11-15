@@ -27,7 +27,7 @@ const httpRequest = {
             body: newAnswer.answer,
             name: newAnswer.nickname,
             email: newAnswer.email,
-            photos: newAnswer.photos
+            photos: newAnswer.temp
           }
         })
         .then(() => resolve())

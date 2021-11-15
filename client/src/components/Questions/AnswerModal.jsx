@@ -9,6 +9,7 @@ const AnswerModal = ({ question, productInfo, isOpen, closeModal, handleAddAnswe
     email: ''
   });
   const [photos, setPhotos] = useState([]);
+  const [urls, setUrls] = useState([]);
   const [message, setMessage] = useState('');
   const [invalid, setValidation] = useState(false);
 
@@ -19,50 +20,26 @@ const AnswerModal = ({ question, productInfo, isOpen, closeModal, handleAddAnswe
   const handleFileUpload = (e) => {
     const files = e.target.files;
 
-
-    // if (files) {
-    //   Array.from(files).forEach((file) => {
-    //     const imageUrl = URL.createObjectURL(file)
-    //     setPhotos([imageUrl, ...photos]); // right now only 1 by 1 user can add images.
-    //   });
-    // }
     if (files) {
       Array.from(files).forEach((file) => {
+        setPhotos([URL.createObjectURL(file), ...photos]);
+
         httpRequest.uploadFile(file)
           .then(result => {
             const { file } = result.data;
-            const delivery = `https://ucarecdn.com/${file}`;
+            const delivery = `https://ucarecdn.com/${file}/`;
+            setUrls([delivery, ...urls]);
           })
         .catch(error => console.log(error))
-        // setPhotos([reader.result, ...photos]); // right now only 1 by 1 user can add images.
       });
     }
-
-    // if (files) {
-    //   Array.from(files).forEach((file) => {
-    //     const reader = new FileReader();
-    //     reader.onload = () => {
-
-    //       httpRequest.uploadcare(reader.result.slice(23))
-    //       .then((uuid) => console.log(uuid))
-    //       .catch(error => console.log(error))
-    //       // setPhotos([reader.result, ...photos]); // right now only 1 by 1 user can add images.
-    //     };
-    //     reader.readAsDataURL(file);
-    //   });
-    // }
-
-    // make http request to uploadcare
-    // httpRequest.uploadcare().then().catch()
-    // get uuid
     // send those group of uuids of image to atelier server to post
-
   };
 
   const handleValidate = (e) => {
 
     if (Object.values(values).every((v) => v !== '')) {
-      handleAddAnswer(question.question_id, { ...values, photos });
+      handleAddAnswer(question.question_id, { ...values, urls });
       setValidation(false);
       closeModal();
     } else {

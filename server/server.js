@@ -14,6 +14,7 @@ app.all('/api/*', (req, res, next) => {
   reqUrl = reqUrl.replace(/\?.*$/, '');
   let params = req.query;
   let data = req.body;
+
   // method, endpoint, params, body, callback
   api.apiWrap(method, reqUrl, params, data, (err, data) => {
     if (err) {
