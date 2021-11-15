@@ -2,6 +2,7 @@ import React from 'react';
 import ProductInfo from './ProductInfo.jsx';
 import ProductInfoBottom from './ProductInfoBottom.jsx';
 import axios from 'axios';
+import products from './products.js';
 
 class Overview extends React.Component {
   constructor(props) {
@@ -48,6 +49,9 @@ class Overview extends React.Component {
   }
 
   componentDidMount() {
+    let productIds = products.map((p) => p.id);
+    console.log(productIds);
+
     axios.get('/api/cart')
       .then((response) => {
         this.setState({ cart: response.data });

@@ -1,7 +1,11 @@
 import React from 'react';
 
 const StyleThumb = function(props) {
-  return (<div onClick={(e) => props.onClick(e, props.styleId)} className="styleThumb" style={{backgroundImage: `url(${props.thumbnailUrl})`}}></div>);
+  return (<div>
+    <span role="img" aria-label={props.styleName} onClick={(e) => props.onClick(e, props.styleId)} className={props.currentStyleId === props.styleId ?
+      'styleThumb current-style' :
+      'styleThumb'} style={{backgroundImage: `url(${props.thumbnailUrl})`}}></span>
+  </div>);
 };
 
 const StyleSelector = function(props) {
@@ -9,7 +13,7 @@ const StyleSelector = function(props) {
 
   if (Object.keys(props.styles).length !== 0) {
     let styleThumbs = props.styles.map((style, index) => {
-      return (<StyleThumb styleId={style.style_id} className="styleThumb" onClick={props.styleClick} thumbnailUrl={style.photos[0].thumbnail_url} key={'StyleThumb' + index} />);
+      return (<StyleThumb styleId={style.style_id} styleName={styleName} currentStyleId={props.currentStyle.style_id} onClick={props.styleClick} thumbnailUrl={style.photos[0].thumbnail_url} key={'StyleThumb' + index} />);
     });
 
     return (

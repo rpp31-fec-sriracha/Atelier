@@ -140,8 +140,19 @@ header {
   object-fit: cover;
 }
 
+.current-thumb {
+  border: 2px solid black;
+  border-bottom: 5px solid black;
+}
+
 .styleThumbs {
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-template-rows: auto;
+}
+
+.current-style {
+  border: 3px solid black;
 }
 
 .styleThumb {
@@ -155,10 +166,21 @@ header {
 }
 
 .styleThumb img {
-  /* max-height: 100%; */
-  /* max-width: 100%; */
   margin: auto;
   object-fit: cover;
+}
+
+.thumb-arrow {
+  display: flex;
+  width: 100px;
+  justify-content: center;
+}
+
+.fa-chevron-up, .fa-chevron-down {
+  font-size: 1.5em;
+  text-shadow: 1px 2px 3px #000;
+  color: lightgray;
+  background-color: transparent;
 }
 
 .questions {
