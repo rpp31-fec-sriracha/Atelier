@@ -12,12 +12,15 @@ class Overview extends React.Component {
       currentStyle: null,
       selectedStyleId: null,
       selectedThumb: 0,
+      thumbStart: 0,
+      thumbEnd: 7,
       cart: [],
       loaded: false,
     };
     this.handleStyleClick = this.handleStyleClick.bind(this);
     this.handleThumbClick = this.handleThumbClick.bind(this);
     this.handleAddToCart = this.handleAddToCart.bind(this);
+    this.handleArrowDown = this.handleArrowDown.bind(this);
   }
 
   handleStyleClick(e, styleId) {
@@ -46,6 +49,22 @@ class Overview extends React.Component {
       .then(() => (axios.get('/api/cart')))
       .then((response) => this.setState({ cart: response.data }))
       .catch((e) => console.log(e));
+  }
+
+  handleArrowDown(e) {
+    let { selectedThumb, thumbStart, thumbEnd, currentStyle } = this.state;
+    if (selectedThumb < currentStyle.photos.length - 1) {
+      selectedThumb++;
+    }
+    if (selectedThumb > thumbEnd - 1) {
+      thumbStart++;
+      thumbEnd++;
+    }
+    this.setState({
+      selectedThumb,
+      thumbStart,
+      thumbEnd
+    });
   }
 
   componentDidMount() {
@@ -80,14 +99,21 @@ class Overview extends React.Component {
   }
 
   componentDidUpdate() {
+    let { thumbStart, thumbEnd } = this.state;
+    let thumbs = this.state.currentStyle.photos.map((photo, index) => {
+      if (index >= thumbStart && index < thumbEnd) {
+        return photo.thumbnail_url;
+      }
+    });
+
     if (this.props.productStyles) {
       this.props.productStyles.map((style, index) => {
         if (this.state.selectedStyleId &&
           this.state.selectedStyleId === style.style_id &&
           this.state.currentStyle.style_id !== style.style_id) {
-
           this.setState({
-            currentStyle: style
+            currentStyle: style,
+            // currentThumbs: thumbs
           });
         }
       });
@@ -95,10 +121,10 @@ class Overview extends React.Component {
   }
 
   render() {
-    // console.log(this.props);
     if (!this.state.loaded) {
       return null;
     }
+
     return (<div className="overview flex-column">
       <ProductInfo product={this.props.productInfo}
         averageReview={this.props.averageReview}
@@ -108,7 +134,10 @@ class Overview extends React.Component {
         defaultStyle={this.state.defaultStyle}
         currentStyle={this.state.currentStyle}
         selectedThumb={this.state.selectedThumb}
-        handleAddToCart={this.handleAddToCart} />
+        handleAddToCart={this.handleAddToCart}
+        handleArrowDown={this.handleArrowDown}
+        thumbStart={this.state.thumbStart}
+        thumbEnd={this.state.thumbEnd} />
       <ProductInfoBottom
         slogan={this.props.productInfo.slogan}
         description={this.props.productInfo.description}

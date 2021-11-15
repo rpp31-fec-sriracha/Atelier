@@ -95,6 +95,13 @@ header {
   background-position: top;
 }
 
+.fa-expand {
+  font-size: 2em;
+  margin-left: auto;
+  text-shadow: 1px 2px 3px #000;
+  color: lightgray;
+}
+
 #productInfoTop {
   width: 33%;
   flex: 1 auto;
@@ -124,9 +131,9 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 100px;
+  width: 75px;
   height: 75px;
-  /* border: 1px solid black; */
+  border: 1px solid black;
   padding: 0;
   margin: 0.25em 0;
   background-color: rgba(50, 50, 50, 0.6);
@@ -135,14 +142,14 @@ header {
 
 .thumb img {
   max-height: 100%;
-  max-width: 100%;
+  min-width: 100%;
   padding: 0;
   object-fit: cover;
 }
 
 .current-thumb {
   border: 2px solid black;
-  border-bottom: 5px solid black;
+  border-bottom: 5px solid yellow;
 }
 
 .styleThumbs {
@@ -176,7 +183,7 @@ header {
   justify-content: center;
 }
 
-.fa-chevron-up, .fa-chevron-down {
+.fa-chevron-up, .fa-chevron-down .fa-expand{
   font-size: 1.5em;
   text-shadow: 1px 2px 3px #000;
   color: lightgray;
