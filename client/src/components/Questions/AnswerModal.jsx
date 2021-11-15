@@ -69,16 +69,16 @@ const AnswerModal = ({ question, productInfo, isOpen, closeModal, handleAddAnswe
                 <textarea style={(invalid && !values['answer']) ? {border: 'red solid 1px'} : {border: '#e6e6e6 solid 1px'}} name="answer" required id="answer-text" className="text-field" onChange={handleChange}></textarea>
                 <br></br>
                 <label>What is your nickname<span className="mandatory">*</span></label>
-                <input style={(invalid&& !values['nickname']) ? {border: 'red solid 1px'} : {border: '#e6e6e6 solid 1px'}} name="nickname" required type="text" className="input-field" onChange={handleChange} placeholder="Example: jack543!"></input>
+                <input style={(invalid&& !values['nickname']) ? {border: 'red solid 1px'} : {border: '#e6e6e6 solid 1px'}} name="nickname" required type="text" onChange={handleChange} placeholder="Example: jack543!"></input>
                 <br></br>
                 <label>Your email<span className="mandatory">*</span></label>
-                <input style={(invalid && !values['email']) ? {border: 'red solid 1px'} : {border: '#e6e6e6 solid 1px'}} name="email" required type="email" className="input-field" onChange={handleChange} placeholder="Example: jack@email.com"></input>
+                <input style={(invalid && !values['email']) ? {border: 'red solid 1px'} : {border: '#e6e6e6 solid 1px'}} name="email" required type="email" onChange={handleChange} placeholder="Example: jack@email.com"></input>
                 <br></br>
                 <label>Upload your photos</label>
                 <div className="preview">
                   {photos.map((photo, i) => <img src={photo} className="thumbnails" key={i} ></img>)}
                 </div>
-                {(photos.length >= 5) ? <div></div> : <input type="file" name="photos" accept="image/*" multiple onChange={handleFileUpload}></input>}
+                {(photos.length >= 5) ? <div></div> : <input className="input-file" type="file" name="photos" accept="image/*" multiple onChange={handleFileUpload}></input>}
               </div>
               <button className="modal-button" onClick={handleValidate}>Submit answer</button>
             </div>

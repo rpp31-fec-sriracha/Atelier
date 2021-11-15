@@ -344,7 +344,7 @@ header {
   font-size: 16px;
   color: white;
 }
-.input-field {
+.modal-body input:not(.input-file) {
   height: 30px;
   font-family: Helvetica, Arial, sans-serif;
   border: 1px solid #e6e6e6;
@@ -354,7 +354,7 @@ header {
   font-size: 16px;
   padding-left: 10px;
 }
-.text-field {
+.modal-body textarea {
   height: 142px;
   font-family: Helvetica, Arial, sans-serif;
   border: 1px solid #e6e6e6;
@@ -372,7 +372,6 @@ label {
   height: 65px;
   margin: 5px;
   border-radius: 5px;
-  /* object-fit: cover; */
 }
 .warning {
  display: flex;
