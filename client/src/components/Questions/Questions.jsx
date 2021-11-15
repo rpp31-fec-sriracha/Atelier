@@ -30,12 +30,10 @@ class Questions extends React.Component {
   }
   // handle add question
   handleAddQuestion() {
-
     // post HTTP request to server
   }
+
   handleAddAnswer(questionId, answer) {
-    console.log(questionId, answer);
-    // post HTTP request to server
     httpRequest.addAnswer(questionId, answer)
       .then((r) => console.log(r))
       .catch((error) => conosle.log(error));

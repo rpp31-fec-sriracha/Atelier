@@ -32,7 +32,7 @@ class QuestionEntry extends React.Component {
               <div className="title">Q:  </div>
               <div data-testid="q-body" className="Q-body">{question.question_body}</div>
             </div>
-            <div className="right">
+            <div className="right userInfos">
               <span>Helpful?</span>
               <span className="_divider"></span>
               <button className="helpful-and-report">Yes({question.question_helpfulness})</button>

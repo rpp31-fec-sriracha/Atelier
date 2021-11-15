@@ -3,7 +3,8 @@ import React from 'react';
 const AnswerEntry = ({ answer }) => {
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
   // handle mark helpful
-  // handle report answer
+  // handle report answe
+  console.log(answer);
   return (
     <>
       <div className="answer">

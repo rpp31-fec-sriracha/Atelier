@@ -17,6 +17,8 @@ const httpRequest = {
     });
   },
   addAnswer: (questionId, newAnswer) => {
+
+    console.log(newAnswer);
     return new Promise((resolve, reject) => {
       axios
         .request({
@@ -27,7 +29,7 @@ const httpRequest = {
             body: newAnswer.answer,
             name: newAnswer.nickname,
             email: newAnswer.email,
-            photos: newAnswer.temp
+            photos: newAnswer.urls
           }
         })
         .then(() => resolve())
