@@ -3,14 +3,6 @@ import ImageGallery from './ImageGallery.jsx';
 import StyleSelector from './StyleSelector.jsx';
 import AddToCart from './AddToCart.jsx';
 
-{ /* <ProductInfo product={this.props.productInfo}
-        styles={this.props.productStyles}
-        styleClick={this.handleStyleClick}
-        thumbClick={this.handleThumbClick}
-        defaultStyle={this.state.defaultStyle}
-        currentStyle={this.state.currentStyle}
-        selectedThumb={this.state.selectedThumb} /> */ }
-
 const ProductInfo = function(props) {
   return (
     <div className="flex-row" id="productInfo">
@@ -24,7 +16,7 @@ const ProductInfo = function(props) {
         'Image Gallery'}
 
       <div className="flex-column" id="productInfoTop">
-        <h4>STARS Read all # reviews</h4>
+        <h4>{props.averageReview} stars Read all # reviews</h4>
         <h4 data-testid="productCategory">{props.product.category}</h4>
         <h3 data-testid="productName">{props.product.name}</h3>
 
@@ -32,7 +24,7 @@ const ProductInfo = function(props) {
 
         {props.styles !== undefined ? <StyleSelector styleClick={props.styleClick} styles={props.styles} currentStyle={props.currentStyle} /> :
           <div></div>}
-        <AddToCart />
+        <AddToCart handleAddToCart={props.handleAddToCart} currentStyle={props.currentStyle} />
         <p>{props.product.description}</p>
       </div>
 
