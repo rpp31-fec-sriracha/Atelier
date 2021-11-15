@@ -9,7 +9,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentProductId: 59556,
+      currentProductId: window.location.pathname.replaceAll('/', '') || 59556,
       productInfo: null,
       productStyles: null,
       cart: [],

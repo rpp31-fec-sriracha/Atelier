@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.resolve(__dirname, '../client/dist')));
+app.use(/\/\d+/, express.static(path.resolve(__dirname, '../client/dist')));
 
 app.all('/api/*', (req, res, next) => {
   // console.log('ALL --->', req.method, req.url);
@@ -154,5 +155,9 @@ app.get('/answers', (req, res) => {
     }
   });
 });
+
+// app.get(/\/\d+\/?/, (req, res) => {
+//   res.sendFile('index.html');
+// });
 
 app.listen(3000, () => console.log('Running server on http://localhost:3000'));
