@@ -36,7 +36,7 @@ class ReviewsList extends React.Component {
         return <IndividualReviewTile key={i} currentReview={review} />;
       })}
       <div className="flex-row">
-        {this.props.reviews.length > 2 ? <button onClick={() => this.moreReviews()}>MORE REVIEWS</button> : null}
+        {(this.props.reviews.length > 2 && this.state.numReviewsVisible < this.props.reviews.length) ? <button onClick={() => this.moreReviews()}>MORE REVIEWS</button> : null}
         <div>
           <button onClick={() => this.setState({newReviewOpen: true})}>ADD A REVIEW +</button>
           <NewReview productName={this.props.productName} open={this.state.newReviewOpen}
