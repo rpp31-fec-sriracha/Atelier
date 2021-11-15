@@ -4,7 +4,6 @@ const AnswerEntry = ({ answer }) => {
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
   // handle mark helpful
   // handle report answer
-  console.log(answer);
   return (
     <>
       <div className="answer">
