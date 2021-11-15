@@ -9,12 +9,12 @@ const ProductBreakdown = function(props) {
   }
 
   return (<div className="productBreakdown">
-    {props.metadata.characteristics.Size ? <Slider name={'Size'} charValue={props.metadata.characteristics.Size.value}/> : null}
-    {props.metadata.characteristics.Width ? <Slider name={'Width'} charValue={props.metadata.characteristics.Width.value}/> : null}
-    {props.metadata.characteristics.Comfort ? <Slider name={'Comfort'} charValue={props.metadata.characteristics.Comfort.value}/> : null}
-    {props.metadata.characteristics.Quality ? <Slider name={'Quality'} charValue={props.metadata.characteristics.Quality.value}/> : null}
-    {props.metadata.characteristics.Length ? <Slider name={'Length'} charValue={props.metadata.characteristics.Length.value}/> : null}
-    {props.metadata.characteristics.Fit.value ? <Slider name={'Fit'} charValue={props.metadata.characteristics.Fit.value}/> : null}
+    {props.metadata.characteristics.Size ? <div>Size: {props.metadata.characteristics.Size.value}</div> : null}
+    {props.metadata.characteristics.Width ? <div>Width: {props.metadata.characteristics.Width.value}</div> : null}
+    {props.metadata.characteristics.Comfort ? <div>Comfort: {props.metadata.characteristics.Comfort.value}</div> : null}
+    {props.metadata.characteristics.Quality ? <div>Quality: {props.metadata.characteristics.Quality.value}</div> : null}
+    {props.metadata.characteristics.Length ? <div>Length: {props.metadata.characteristics.Length.value}</div> : null}
+    {props.metadata.characteristics.Fit ? <div>Fit: {props.metadata.characteristics.Fit.value}</div> : null}
   </div>);
 };
 
