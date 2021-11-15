@@ -13,7 +13,7 @@ const ProductBreakdown = function(props) {
     {props.metadata.characteristics.Comfort ? <div>Comfort: {props.metadata.characteristics.Comfort.value}</div> : null}
     {props.metadata.characteristics.Quality ? <div>Quality: {props.metadata.characteristics.Quality.value}</div> : null}
     {props.metadata.characteristics.Length ? <div>Length: {props.metadata.characteristics.Length.value}</div> : null}
-    {props.metadata.characteristics.Fit.value ? <div>Fit: {props.metadata.characteristics.Fit.value}</div> : null}
+    {props.metadata.characteristics.Fit ? <div>Fit: {props.metadata.characteristics.Fit.value}</div> : null}
   </div>);
 };
 
