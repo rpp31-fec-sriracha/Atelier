@@ -42,7 +42,7 @@ const httpRequest = {
             photos: newAnswer.urls
           }
         })
-        .then(() => resolve('Thank you for submitting your answer'))
+        .then(() => resolve('Thank you for submitting your answer!'))
         .catch(error => reject(error));
     });
   },
@@ -79,7 +79,7 @@ const httpRequest = {
             product_id: currentProductId
           }
         })
-        .then(() => resolve('Thank you for submitting your question'))
+        .then(() =>resolve('Thank you for submitting your question!'))
         .catch(error => reject(error));
     });
   },

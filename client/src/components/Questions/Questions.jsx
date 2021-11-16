@@ -35,8 +35,7 @@ class Questions extends React.Component {
       .then((result) => {
         httpRequest
           .getQuestion(this.props.currentProductId)
-          .then((a) =>
-            this.setState({ questions: a }));
+          .then((a) => this.setState({ questions: a }));
         return result;
       })
       .then((result) => window.alert(result))
@@ -46,7 +45,7 @@ class Questions extends React.Component {
   handleAddAnswer(questionId, answer) {
     httpRequest
       .addAnswer(questionId, answer)
-      .then(() => {
+      .then((result) => {
         httpRequest
           .getQuestion(this.props.currentProductId)
           .then((a) => this.setState({ questions: a }));

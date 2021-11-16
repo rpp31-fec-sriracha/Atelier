@@ -85,7 +85,7 @@ const AnswerModal = ({ question, productInfo, isOpen, closeModal, handleAddAnswe
             <div className="modal-flex-column">
               <div className="modal-header">
                 <h2 style={{marginBottom: 20}}>Submit your Answer</h2>
-                <h3 style={{textDecoration: 'underline'}}><b>{productInfo}</b>: {question.question_body}</h3>
+                <h3 style={{textDecoration: 'underline'}}>{productInfo}: {question.question_body}</h3>
               </div>
               <div className="warning">
                 <p>{messages['warning']}</p>
