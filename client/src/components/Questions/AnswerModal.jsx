@@ -79,6 +79,9 @@ const AnswerModal = ({ question, productInfo, isOpen, closeModal, handleAddAnswe
         <>
           <div className="overlay"></div>
           <div className="modal">
+            <div className="exit">
+            <button onClick={() => closeModal()}>X</button>
+            </div>
             <div className="modal-flex-column">
               <div className="modal-header">
                 <h2 style={{marginBottom: 20}}>Submit your Answer</h2>
