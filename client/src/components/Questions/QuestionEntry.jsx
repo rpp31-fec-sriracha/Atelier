@@ -8,6 +8,7 @@ class QuestionEntry extends React.Component {
     this.state = {
       isOpen: false,
       visibleCount: 2,
+      count: 0
     };
   }
   openModal() {
@@ -17,13 +18,17 @@ class QuestionEntry extends React.Component {
     this.setState({ isOpen: false });
   }
   // handle report question
+
   // handle mark helpful
-  // handle add answer
+  handleCount() {
+    this.setState({
+      count: this.state.count + 1
+    });
+  }
 
   render() {
-    const { question, productInfo, handleAddAnswer } = this.props;
-    const { isOpen, visibleCount } = this.state;
-
+    const { question, productInfo, handleAddAnswer, handleMark } = this.props;
+    const { isOpen, visibleCount, count } = this.state;
     return (
       <>
         <div className="question">
@@ -35,7 +40,14 @@ class QuestionEntry extends React.Component {
             <div className="right userInfos">
               <span>Helpful?</span>
               <span className="_divider"></span>
-              <button className="helpful-and-report">Yes({question.question_helpfulness})</button>
+              <button className="helpful-and-report" onClick={(e) => {
+                if (count === 1) {
+                  e.preventDefault();
+                } else {
+                  handleMark(question.question_id, 'q');
+                  this.handleCount();
+                }
+              }}>Yes({question.question_helpfulness})</button>
               <span className="_divider">|</span>
               <button className="helpful-and-report" onClick={() => this.openModal()}>Add Answer</button>
               <AnswerModal isOpen={isOpen} closeModal={this.closeModal.bind(this)} question={question} productInfo={productInfo} handleAddAnswer={handleAddAnswer} />
@@ -47,7 +59,7 @@ class QuestionEntry extends React.Component {
             <div className="left">A:  </div>
             <div>
               {Object.values(question.answers).slice(0, visibleCount).map((answer, i) => {
-                return <AnswerEntry key={i} answer={answer} />;
+                return <AnswerEntry key={i} answer={answer} handleMark={handleMark} />;
               })}
               {(Object.values(question.answers).length > 2) ?
                 <button className="load-more-a" onClick={() => this.setState({ visibleCount: this.state.visibleCount + 2 })}>LOAD MORE ANSWERS</button>

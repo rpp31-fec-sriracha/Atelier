@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import QuestionEntry from './QuestionEntry.jsx';
 import QuestionModal from './QuestionModal.jsx';
 
-const QuestionList = function ({ questions, productInfo, handleAddQuestion, handleAddAnswer}) {
+const QuestionList = function ({ questions, productInfo, handleAddQuestion, handleAddAnswer, handleMark}) {
   const [visibleCount, setVisibleCount] = useState(2);
   const [isOpen, setModal] = useState(false);
   const openModal = () => {
@@ -17,7 +17,7 @@ const QuestionList = function ({ questions, productInfo, handleAddQuestion, hand
       <div className="list-container">
         {(questions.length > 0) ?
           questions.slice(0, visibleCount).map((question, i) =>
-            <QuestionEntry role="single-question" key={i} question={question} productInfo={productInfo} handleAddAnswer={handleAddAnswer} />)
+            <QuestionEntry role="single-question" key={i} question={question} productInfo={productInfo} handleMark={handleMark} handleAddAnswer={handleAddAnswer} />)
           : <div></div>}
         <div className="buttons">
           {(questions.length > 2) ?

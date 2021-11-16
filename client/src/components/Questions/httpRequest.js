@@ -83,16 +83,28 @@ const httpRequest = {
         .catch(error => reject(error));
     });
   },
-  markQuestionHelpfulness: () => {
+  mark: (id, subject) => {
+    let endpoint;
 
+    switch (subject) {
+    case 'q':
+      endpoint = 'questions';
+      break;
+    case 'a':
+      endpoint = 'answers';
+      break;
+    }
+    return new Promise((resolve, reject) => {
+      axios.request({
+        url: `api/qa/${endpoint}/${id}/helpful`,
+        method: 'put',
+        baseURL: 'http://localhost:3000'
+      })
+        .then(() => resolve())
+        .catch(error => reject(error));
+    });
   },
-  markAnswerHelpfulness: () => {
-
-  },
-  reportQuestion: () => {
-
-  },
-  reportAnswer: () => {
+  report: () => {
 
   },
   searchQuestion: () => {
