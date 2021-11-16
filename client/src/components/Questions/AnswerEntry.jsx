@@ -1,10 +1,24 @@
 import React, { useState } from 'react';
+import httpRequest from './httpRequest.js';
 
-const AnswerEntry = ({ answer, handleMark }) => {
+const AnswerEntry = ({ answer }) => {
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
-  const [count, setCount] = useState(0);
-  // handle mark helpful
-  // handle report answer
+  const [markCount, setMarkCount] = useState(0);
+  const [reportCount, setReportCount] = useState(0);
+  const [report, setReport] = useState('Report');
+  const [mark, setMark] = useState(answer.helpfulness);
+
+  const handleReport = (id, subject) => {
+    httpRequest.report(id, subject)
+      .then(() => setReport('Reported'))
+      .catch((error) => window.alert(error));
+  };
+
+  const handleMark = (id, subject) => {
+    httpRequest.mark(id, subject)
+      .then(() => setMarkCount(markCount + 1))
+      .catch((error) => window.alert(error));
+  };
 
   return (
     <>
@@ -20,15 +34,22 @@ const AnswerEntry = ({ answer, handleMark }) => {
           <span data-testid="answerer_name">Helpful?</span>
           <span className="_divider">|</span>
           <button data-testid="helpfulness" onClick={(e) => {
-            if (count === 1) {
+            if (markCount === 1) {
               e.preventDefault();
             } else {
               handleMark(answer.id, 'a');
-              setCount(count + 1);
+              setMarkCount(markCount + 1);
             }
-          }} className="helpful-and-report">Yes({answer.helpfulness})</button>
+          }} className="helpful-and-report">Yes({mark})</button>
           <span className="_divider">|</span>
-          <button className="helpful-and-report">Report</button>
+          <button className="helpful-and-report" onClick={(e) => {
+            if (reportCount === 1) {
+              e.preventDefault();
+            } else {
+              handleReport(answer.id, 'a');
+              setReportCount(reportCount + 1);
+            }
+          }}>{report}</button>
         </div>
       </div>
     </>

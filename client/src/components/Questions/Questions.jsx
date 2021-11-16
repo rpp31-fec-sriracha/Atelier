@@ -51,15 +51,6 @@ class Questions extends React.Component {
       .then((result) => window.alert(result))
       .catch((error) => conosle.log(error));
   }
-  handleMark(id, subject) {
-    httpRequest.mark(id, subject)
-      .then(() => httpRequest.getQuestion(this.props.currentProductId)
-        .then((a) => this.setState({ questions: a })))
-      .catch((error) => console.log(error));
-  }
-  handleReport(subject) {
-
-  }
 
   render() {
     const { questions } = this.state;
@@ -74,7 +65,6 @@ class Questions extends React.Component {
             role="q-list"
             questions={questions}
             productInfo={productInfo}
-            handleMark={this.handleMark.bind(this)}
             handleAddQuestion={this.handleAddQuestion.bind(this)}
             handleAddAnswer={this.handleAddAnswer.bind(this)}
           />

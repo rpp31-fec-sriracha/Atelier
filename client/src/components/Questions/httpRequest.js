@@ -104,8 +104,26 @@ const httpRequest = {
         .catch(error => reject(error));
     });
   },
-  report: () => {
+  report: (id, subject) => {
+    let endpoint;
 
+    switch (subject) {
+    case 'q':
+      endpoint = 'questions';
+      break;
+    case 'a':
+      endpoint = 'answers';
+      break;
+    }
+    return new Promise((resolve, reject) => {
+      axios.request({
+        url: `api/qa/${endpoint}/${id}/report`,
+        method: 'put',
+        baseURL: 'http://localhost:3000'
+      })
+        .then(() => resolve())
+        .catch(error => reject(error));
+    });
   },
   searchQuestion: () => {
 
