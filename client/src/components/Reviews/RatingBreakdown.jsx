@@ -38,7 +38,7 @@ class RatingBreakdown extends React.Component {
 
     return (<div className="ratingBreakdown">
       <div>{this.props.averageStars} Stars</div>
-      <div>{this.props.metadata.recommended.true / this.state.totalReviews * 100}% of reviews recommend this product</div>
+      <div>{Math.round(this.props.metadata.recommended.true / this.state.totalReviews * 1000) / 10}% of reviews recommend this product</div>
       <div>5 stars: {this.state.fiveStarCount / this.state.totalReviews * 100 || 0}%</div>
       <div>4 stars: {this.state.fourStarCount / this.state.totalReviews * 100 || 0}%</div>
       <div>3 stars: {this.state.threeStarCount / this.state.totalReviews * 100 || 0}%</div>
