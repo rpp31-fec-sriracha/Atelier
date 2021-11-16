@@ -182,6 +182,10 @@ header {
   margin-bottom: 15px;
 }
 
+progress {
+    background: green;
+}
+
 input[type=range] {
   width: 75%;
 }
