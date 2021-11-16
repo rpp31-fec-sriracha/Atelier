@@ -32,14 +32,18 @@ it('should render with sample data', () => {
 });
 
 describe('Individual Reviews', () => {
-  describe('renders an individual review', () => {
-    let sampleReview = sampleReviewData[0].results[0];
+  describe('Single Review', () => {
+    test('renders how helpful the review is', () => {
+      let sampleReview = sampleReviewData[0].results[0];
 
-    render(<IndividualReviewTile currentReview={sampleReview}></IndividualReviewTile>);
-    // screen.debug();
+      render(<IndividualReviewTile currentReview={sampleReview}></IndividualReviewTile>);
+      screen.debug();
+      // screen.getByText
+      // screen.getByRole
 
-    waitFor(() => findByText('Report'))
-      .then(() => expect(screen.findByTestId('helpful-count')).toHaveTextContent('2'))
-      .catch((err) => console.log(err));
+      // waitFor(() => findByText('Report'))
+      //   .then(() => expect(screen.findByTestId('helpful-count')).toHaveTextContent('2'))
+      //   .catch((err) => console.log(err));
+    });
   });
 });
