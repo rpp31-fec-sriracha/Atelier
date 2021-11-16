@@ -39,11 +39,11 @@ class RatingBreakdown extends React.Component {
     return (<div className="ratingBreakdown">
       <div>{this.props.averageStars} Stars</div>
       <div>{Math.round(this.props.metadata.recommended.true / this.state.totalReviews * 1000) / 10}% of reviews recommend this product</div>
-      <div>5 stars: {this.state.fiveStarCount / this.state.totalReviews * 100 || 0}%</div>
-      <div>4 stars: {this.state.fourStarCount / this.state.totalReviews * 100 || 0}%</div>
-      <div>3 stars: {this.state.threeStarCount / this.state.totalReviews * 100 || 0}%</div>
-      <div>2 stars: {this.state.twoStarCount / this.state.totalReviews * 100 || 0}%</div>
-      <div>1 stars: {this.state.oneStarCount / this.state.totalReviews * 100 || 0}%</div>
+      <div><u>5 stars</u> <progress value={this.state.fiveStarCount / this.state.totalReviews * 100 || 0} max="100"></progress></div>
+      <div><u>4 stars</u> <progress value={this.state.fourStarCount / this.state.totalReviews * 100 || 0} max="100"></progress></div>
+      <div><u>3 stars</u> <progress value={this.state.threeStarCount / this.state.totalReviews * 100 || 0} max="100"></progress></div>
+      <div><u>2 stars</u> <progress value={this.state.twoStarCount / this.state.totalReviews * 100 || 0} max="100"></progress></div>
+      <div><u>1 stars</u> <progress value={this.state.oneStarCount / this.state.totalReviews * 100 || 0} max="100"></progress></div>
     </div>);
   }
 }
