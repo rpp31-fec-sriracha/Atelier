@@ -10,6 +10,7 @@ class IndividualReviewTile extends React.Component {
   }
 
   render() {
+    console.log(this.props);
     const options = {year: 'numeric', month: 'long', day: 'numeric'};
 
     return (<div className="individual-review-tile">
@@ -23,7 +24,7 @@ class IndividualReviewTile extends React.Component {
       <h4>{this.props.currentReview.summary}</h4>
       <div>{this.props.currentReview.body}</div>
       <div>{this.props.currentReview.response}</div>
-      <div>Helpful? Yes ({this.props.currentReview.helpfulness}) | Report</div>
+      <div data-testid="helpful-count">Helpful? Yes ({this.props.currentReview.helpfulness}) | Report</div>
       <div>Photos</div>
     </div>);
   }
