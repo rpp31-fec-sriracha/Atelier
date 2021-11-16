@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const httpRequest = {
-  fetchQuestion: (currentProductId) => {
+  getQuestion: (currentProductId) => {
     return new Promise((resolve, reject) => {
       axios
         .request({
@@ -16,9 +16,19 @@ const httpRequest = {
         .catch((error) => reject(error));
     });
   },
+  getAnswers: (questionId) => {
+    return new Promise((resolve, reject) => {
+      axios
+        .request({
+          url: `/api/qa/questions/${questionId}/answers`,
+          method: 'get',
+          baseURL: 'http://localhost:3000'
+        })
+        .then((data) => resolve(data))
+        .catch((error) => reject(error));
+    });
+  },
   addAnswer: (questionId, newAnswer) => {
-
-    console.log(newAnswer);
     return new Promise((resolve, reject) => {
       axios
         .request({

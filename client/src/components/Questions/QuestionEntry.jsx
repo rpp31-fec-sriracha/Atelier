@@ -7,7 +7,7 @@ class QuestionEntry extends React.Component {
     super();
     this.state = {
       isOpen: false,
-      visibleCount: 2
+      visibleCount: 2,
     };
   }
   openModal() {

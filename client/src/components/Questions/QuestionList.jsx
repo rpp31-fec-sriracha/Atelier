@@ -5,7 +5,6 @@ import QuestionModal from './QuestionModal.jsx';
 const QuestionList = function ({ questions, productInfo, handleAddQuestion, handleAddAnswer}) {
   const [visibleCount, setVisibleCount] = useState(2);
   const [isOpen, setModal] = useState(false);
-
   const openModal = () => {
     setModal(true);
   };

@@ -15,7 +15,7 @@ class Questions extends React.Component {
   componentDidMount() {
     const { currentProductId } = this.props;
 
-    httpRequest.fetchQuestion(currentProductId)
+    httpRequest.getQuestion(currentProductId)
       .then((data) =>
         this.setState({
           questions: data
@@ -28,16 +28,22 @@ class Questions extends React.Component {
   handleSearch(term) {
     console.log(term);
   }
-  // handle add question
+
   handleAddQuestion() {
     // post HTTP request to server
+    httpRequest.addQuestion().then().catch();
   }
 
   handleAddAnswer(questionId, answer) {
     httpRequest.addAnswer(questionId, answer)
-      .then((r) => console.log(r))
+      .then(() =>
+        httpRequest
+          .getQuestion(this.props.currentProductId)
+          .then((a) => this.setState({ questions: a }))
+      )
       .catch((error) => conosle.log(error));
   }
+
   render() {
     const { questions } = this.state;
     const { productInfo } = this.props;
