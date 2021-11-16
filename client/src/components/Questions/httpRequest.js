@@ -12,8 +12,8 @@ const httpRequest = {
             productId: currentProductId
           }
         })
-        .then((q) => resolve(q.data.results))
-        .catch((error) => reject(error));
+        .then(q => resolve(q.data.results))
+        .catch(error => reject(error));
     });
   },
   getAnswers: (questionId) => {
@@ -24,8 +24,8 @@ const httpRequest = {
           method: 'get',
           baseURL: 'http://localhost:3000'
         })
-        .then((data) => resolve(data))
-        .catch((error) => reject(error));
+        .then(data => resolve(data))
+        .catch(error => reject(error));
     });
   },
   addAnswer: (questionId, newAnswer) => {
@@ -42,8 +42,8 @@ const httpRequest = {
             photos: newAnswer.urls
           }
         })
-        .then(() => resolve())
-        .catch((error) => reject(error));
+        .then(() => resolve('Thank you for submitting your answer'))
+        .catch(error => reject(error));
     });
   },
   uploadFile: (file) => {
@@ -61,12 +61,27 @@ const httpRequest = {
         },
         data: form
       })
-        .then((result) => resolve(result))
+        .then(result => resolve(result))
         .catch(error => reject(error));
     });
   },
-  addQuestion: () => {
-
+  addQuestion: (currentProductId, q) => {
+    return new Promise((resolve, reject) => {
+      axios
+        .request({
+          url: '/api/qa/questions',
+          method: 'post',
+          baseURL: 'http://localhost:3000',
+          data: {
+            body: q.question,
+            name: q.nickname,
+            email: q.email,
+            product_id: currentProductId
+          }
+        })
+        .then(() => resolve('Thank you for submitting your question'))
+        .catch(error => reject(error));
+    });
   },
   markQuestionHelpfulness: () => {
 

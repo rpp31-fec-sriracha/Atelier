@@ -30,7 +30,10 @@ const QuestionModal = ({ isOpen, productInfo, handleAddQuestion, closeModal }) =
                 <label style={{ marginBottom: '5px'}}>Your email<span className="mandatory">*</span></label>
                 <input id="email" className="input-field" value={email} type="email" onChange={(e) => setEmail(e.target.value)}></input>
               </div>
-              <button className="modal-button" onClick={() => closeModal()}>Submit question</button>
+              <button className="modal-button" onClick={() => {
+                handleAddQuestion({question, nickname, email});
+                closeModal();
+              }}>Submit question</button>
             </div>
           </div>
         </React.Fragment>

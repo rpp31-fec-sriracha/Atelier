@@ -29,18 +29,30 @@ class Questions extends React.Component {
     console.log(term);
   }
 
-  handleAddQuestion() {
-    // post HTTP request to server
-    httpRequest.addQuestion().then().catch();
+  handleAddQuestion(question) {
+    httpRequest
+      .addQuestion(this.props.currentProductId, question)
+      .then((result) => {
+        httpRequest
+          .getQuestion(this.props.currentProductId)
+          .then((a) =>
+            this.setState({ questions: a }));
+        return result;
+      })
+      .then((result) => window.alert(result))
+      .catch((error) => console.log(error));
   }
 
   handleAddAnswer(questionId, answer) {
-    httpRequest.addAnswer(questionId, answer)
-      .then(() =>
+    httpRequest
+      .addAnswer(questionId, answer)
+      .then(() => {
         httpRequest
           .getQuestion(this.props.currentProductId)
-          .then((a) => this.setState({ questions: a }))
-      )
+          .then((a) => this.setState({ questions: a }));
+        return result;
+      })
+      .then((result) => window.alert(result))
       .catch((error) => conosle.log(error));
   }
 
