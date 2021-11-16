@@ -1,14 +1,14 @@
 import React from 'react';
 import QuestionList from './QuestionList.jsx';
 import SearchQuestions from './SearchQuestions.jsx';
-import AddQuestion from './AddQuestion.jsx';
+
 import httpRequest from './httpRequest.js';
 
 class Questions extends React.Component {
   constructor() {
     super();
     this.state = {
-      questions: [],
+      questions: []
     };
   }
 
@@ -23,25 +23,31 @@ class Questions extends React.Component {
       )
       .catch((error) => conosle.log(error));
   }
-  // handle load more questions
 
   // handle search
   handleSearch(term) {
     console.log(term);
   }
+  // handle add question
+  handleAddQuestion() {
+    // validate form inputs
+    // if there's any invalid entries,
+    // render warning message "You must enter the following:”
+    // post HTTP request to server
+  }
+
   render() {
     const { questions } = this.state;
     const { productInfo } = this.props;
 
     return (
-      <>
-        <div className="questions">
+      <React.Fragment>
+        <div className="questions flex-column">
+          <p>QUESTIONS & ANSWERS</p>
           <SearchQuestions handleSearch={this.handleSearch.bind(this)} />
-          <QuestionList questions={questions} productInfo={productInfo} />
-          {(questions.length > 2) ? <button>MORE ANSWERED QUESTIONS</button> : null}
-          <AddQuestion productInfo={productInfo} />
+          <QuestionList role="q-list" questions={questions} productInfo={productInfo} handleAddQuestion={this.handleAddQuestion.bind(this)} />
         </div>
-      </>
+      </React.Fragment>
     );
   }
 }

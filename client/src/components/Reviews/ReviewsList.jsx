@@ -9,8 +9,11 @@ class ReviewsList extends React.Component {
 
     this.state = {
       numReviewsVisible: 2,
-      sortOption: 'relevance'
+      sortOption: 'relevance',
+      newReviewOpen: false
     };
+
+    this.onClose = this.onClose.bind(this);
   }
 
   moreReviews() {
@@ -19,18 +22,26 @@ class ReviewsList extends React.Component {
     });
   }
 
+  onClose() {
+    this.setState({newReviewOpen: false});
+  }
+
   render() {
     if (this.props.reviews.length === 0) {
       return <div></div>;
     }
 
     return (<div className="reviewsList">
-      {this.props.reviews.slice(0, this.state.numReviewsVisible).map((review) => {
-        return <IndividualReviewTile currentReview={review} />;
+      {this.props.reviews.slice(0, this.state.numReviewsVisible).map((review, i) => {
+        return <IndividualReviewTile key={i} currentReview={review} />;
       })}
-      <div class="flex-row">
+      <div className="flex-row">
         <button onClick={() => this.moreReviews()}>MORE REVIEWS</button>
-        <div><NewReview/></div>
+        <div>
+          <button onClick={() => this.setState({newReviewOpen: true})}>ADD A REVIEW +</button>
+          <NewReview productName={this.props.productName} open={this.state.newReviewOpen}
+            onClose={this.onClose} characteristics={this.props.characteristics} productID={this.props.productID}></NewReview>
+        </div>
       </div>
       <div><KeywordSearch/></div>
     </div>);

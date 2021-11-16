@@ -92,6 +92,7 @@ header {
 
 #image-gallery {
   background-size: contain;
+  background-position: top;
 }
 
 #productInfoTop {
@@ -120,27 +121,229 @@ header {
 }
 
 .thumb {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 100px;
-  height: auto;
-  border: 1px solid black;
+  height: 75px;
+  /* border: 1px solid black; */
   padding: 0;
+  margin: 0.25em 0;
+  background-color: rgba(50, 50, 50, 0.6);
+  filter: drop-shadow(5px 5px 8px black)
 }
+
+.thumb img {
+  max-height: 100%;
+  max-width: 100%;
+  padding: 0;
+  object-fit: cover;
+}
+
 .styleThumbs {
   flex-wrap: wrap;
 }
 
 .styleThumb {
+  display: flex;
   margin: 10px;
   height: 100px;
   width: 100px;
-  background-color: gray;
+  background-color: rgba(20, 20, 20, .4);
   border-radius: 50%;
+  background-size: cover;
+}
+
+.styleThumb img {
+  /* max-height: 100%; */
+  /* max-width: 100%; */
+  margin: auto;
+  object-fit: cover;
 }
 
 .questions {
-  margin: 5px;
+  font-family: Helvetica, Arial, sans-serif;
+  margin: 100px;
 }
 
 .reviews {
   margin: 5px;
+}
+
+.flex-row-reviews {
+  display: flex;
+  justify-content: space-between;
+}
+
+.individual-review-tile {
+  border-bottom: 2px solid black;
+}
+
+.modal {
+  display: flex;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #FFF;
+  padding: 30px;
+  z-index: 1000;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, .5);
+  z-index: 1000;
+}
+
+
+/* ----------- QA ----------- */
+.questions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 18px;
+  /* border: 1px dashed grey; */
+}
+
+.question {
+  display: flex;
+  flex-direction: column;
+  /* border: 1px dashed grey; */
+}
+.question-flex-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.left{
+  display: flex;
+  font-size: 18px;
+  font-weight: bolder;
+}
+.title {
+  margin-right: 10px;
+}
+.Q-body {
+  font-size: 18px;
+}
+.right {
+  display: flex;
+  align-items: flex-start;
+  font-weight: lighter;
+  /* border: 1px dashed grey; */
+}
+.answers {
+  display: flex;
+  flex-direction: column;
+}
+.answer-flex-row {
+  display: flex;
+  align-items: baseline;
+  /* border: 1px dashed grey; */
+}
+.answer {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+.A-body {
+  font-size: 16px;
+  padding-bottom: 5px;
+}
+.photo-list {
+  display: flex;
+}
+.photos {
+  background-color: lightgrey;
+  margin-right: 15px;
+  width: 100px;
+  height: 65px;
+}
+.answers-list {
+  display: flex;
+}
+._divider {
+  font-weight: bolder;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.userInfos {
+  font-weight: lighter;
+  font-size: 16px;
+}
+.search-question {
+  max-width: 100%;
+  height: 60px;
+  font-size: 18px;
+}
+
+.add-answer {
+  color:black;
+}
+.helpful-and-report {
+  font-size: 15px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.load-more-a {
+  font-size: 15px;
+  font-weight: bold;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+}
+.buttons {
+  display: flex;
+}
+.add-q {
+  background-color: white;
+  color:black;
+  height: 60px;
+  font-size: 18px;
+}
+.b-left {
+  width: 25%;
+}
+.b-right {
+  width: 18%;
+}
+.modal-flex-column {
+  display: flex;
+  flex-direction: column;
+  font-family: Helvetica, Arial, sans-serif;
+  padding: 50px;
+}
+.modal-header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+.mandatory-asterisk{
+  color: red;
+}
+
+.modal-button {
+  font-family: Helvetica, Arial, sans-serif;
+  background-color: black;
+  height: 30px;
+  font-size: 16px;
+  color: white;
+}
+
+.input-field {
+  height: 30px;
 }

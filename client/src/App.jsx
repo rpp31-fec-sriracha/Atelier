@@ -1,7 +1,7 @@
 import React from 'react';
 import Overview from './components/Overview/Overview.jsx';
 import Questions from './components/Questions/Questions.jsx';
-import productInfo from './components/Questions/dummyData.js';
+// import productInfo from './components/Questions/dummyData.js';
 import Reviews from './components/Reviews/Reviews.jsx';
 import axios from 'axios';
 
@@ -9,19 +9,18 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentProductId: 59556,
-      productInfo: productInfo,
-      productStyles: {},
-      productReviews: {
-        reviews: {},
-        meta: {},
-      },
+      currentProductId: window.location.pathname.replaceAll('/', '') || 59556,
+      productInfo: null,
+      productStyles: null,
       cart: [],
+      productLoaded: false,
+      averageReview: null,
     };
+    this.setAverageReview = this.setAverageReview.bind(this);
   }
 
-  componentDidMount() {
-    const { currentProductId } = this.state;
+  getProductInfo() {
+    let { currentProductId } = this.state;
     let product;
     axios({
       url: `/api/products/${currentProductId}`,
@@ -36,18 +35,34 @@ class App extends React.Component {
       })
       .then((response) => this.setState( {
         productInfo: product,
-        productStyles: response.data.results
+        productStyles: response.data.results,
+        productLoaded: true
       }))
       .catch((err) => console.log(err));
   }
 
-  render() {
-    const { currentProductId, productInfo } = this.state;
+  setAverageReview(average) {
+    this.setState({
+      averageReview: average
+    });
+  }
 
+  componentDidMount() {
+    this.getProductInfo();
+  }
+
+  render() {
+    const { averageReview, currentProductId, productInfo, productStyles} = this.state;
     return (<div className="appContainer">
-      <Overview productInfo={this.state.productInfo} productStyles={this.state.productStyles} />
-      <Questions currentProductId={currentProductId} productInfo={productInfo.name} />
-      <Reviews />
+      {(this.state.productLoaded) ?
+        <>
+          <Overview productInfo={productInfo} productStyles={productStyles} averageReview={averageReview} currentProductId={currentProductId} />
+          <Questions currentProductId={currentProductId} productInfo={productInfo.name} />
+          <Reviews currentProductId={currentProductId} productName={productInfo.name}
+            setAverageReview={this.setAverageReview} averageStars={this.state.averageReview}/>
+        </>
+        : <p>Loading product info...</p>
+      }
     </div>);
   }
 }
