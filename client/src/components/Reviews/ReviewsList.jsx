@@ -28,7 +28,14 @@ class ReviewsList extends React.Component {
 
   render() {
     if (this.props.reviews.length === 0) {
-      return <div></div>;
+      return (
+        <div>
+          <h2>There are currently no reviews. Click below to add your own!</h2>
+          <button onClick={() => this.setState({ newReviewOpen: true })}>ADD A REVIEW +</button>
+          <NewReview productName={this.props.productName} open={this.state.newReviewOpen}
+            onClose={this.onClose} characteristics={this.props.characteristics} productID={this.props.productID}></NewReview>
+        </div>
+      );
     }
 
     return (<div className="reviewsList">

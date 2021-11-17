@@ -46,7 +46,7 @@ class IndividualReviewTile extends React.Component {
   }
 
   showFullReview(e) {
-    console.log('click');
+    // console.log('click');
     this.setState({
       reviewToShow: this.props.currentReview.body,
       showReviewLink: false
