@@ -223,11 +223,30 @@ progress {
 }
 
 input[type=range] {
-  width: 75%;
+  width: 100%;
+}
+
+#scrollable-reviews {
+  overflow-y: auto;
+  max-height: 800px;
+}
+
+/* .individual-review-tile {
+  max-width: 40%;
+} */
+
+.individual-reviews {
+  width: 50%;
+}
+
+.rating-breakdown {
+ margin-bottom: 25px;
 }
 
 .individual-review-tile {
   border-bottom: 2px solid black;
+  padding-bottom: 10px;
+  margin-bottom: 25px;
 }
 
 .modal {

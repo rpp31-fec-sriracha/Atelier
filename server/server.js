@@ -75,7 +75,7 @@ app.get('/productStyles', (req, res) => {
 app.get('/reviews', (req, res) => {
   let productId = req.query.productId;
   let page = 1;
-  let count = 20;
+  let count = 30;
   let sortType = req.query.sortType;
 
   if (req.query.page) {

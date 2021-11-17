@@ -98,8 +98,8 @@ class Reviews extends React.Component {
       );
     }
 
-    return (<div className="reviewsContainer">
-      <div>'RATINGS & REVIEWS'</div>
+    return (<div className="reviews-container">
+      <div><font size="+2">RATINGS & REVIEWS</font></div>
       <div className="flex-row-reviews">
         <div className="flex-column">
           <div><RatingBreakdown metadata={this.state.meta} setAverageReview={this.props.setAverageReview}
@@ -107,7 +107,7 @@ class Reviews extends React.Component {
             reviews={this.state.reviews} updateFilteredReviews={this.updateFilteredReviews}/></div>
           <div><ProductBreakdown metadata={this.state.meta}/></div>
         </div>
-        <div className="flex-column">
+        <div className="flex-column individual-reviews">
           <div> {this.props.numReviews} reviews, sorted by <SortSelector updateSortType = {this.updateSortType}/></div>
           <div className="flex-column"><ReviewsList reviews={this.state.filteredReviews} productName={this.props.productName}
             characteristics={this.state.meta.characteristics} productID={this.state.currentProduct}/></div>

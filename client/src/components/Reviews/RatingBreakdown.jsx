@@ -162,7 +162,7 @@ class RatingBreakdown extends React.Component {
       return <div/>;
     }
 
-    return (<div className="ratingBreakdown">
+    return (<div className="rating-breakdown">
       <h1>{this.props.averageStars}</h1>
       <div>{this.showStars(this.props.averageStars)}</div>
       <div>Rating Breakdown</div>

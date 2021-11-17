@@ -5,8 +5,12 @@ class IndividualReviewTile extends React.Component {
     super(props);
 
     this.state = {
-      filterSelected: 'relevance'
+      filterSelected: 'relevance',
+      showReviewLink: false,
+      reviewToShow: this.props.currentReview.body
     };
+
+    this.showFullReview = this.showFullReview.bind(this);
   }
 
   showStars(averageStars) {
@@ -27,6 +31,28 @@ class IndividualReviewTile extends React.Component {
     });
   }
 
+  componentDidMount() {
+    if (this.props.currentReview.body.length <= 250) {
+      this.setState({
+        showReviewLink:false,
+        reviewToShow: this.props.currentReview.body
+      });
+    } else {
+      this.setState({
+        showReviewLink: true,
+        reviewToShow: this.props.currentReview.body.slice(0, 251)
+      });
+    }
+  }
+
+  showFullReview(e) {
+    console.log('click');
+    this.setState({
+      reviewToShow: this.props.currentReview.body,
+      showReviewLink: false
+    });
+  }
+
   render() {
     const options = {year: 'numeric', month: 'long', day: 'numeric'};
 
@@ -38,8 +64,9 @@ class IndividualReviewTile extends React.Component {
           <div>{new Intl.DateTimeFormat('en-US', options).format(Date.parse(this.props.currentReview.date))}</div>
         </div>
       </div>
-      <h4>{this.props.currentReview.summary}</h4>
-      <div>{this.props.currentReview.body}</div>
+      <h4>{this.props.currentReview.summary.slice(0, 60)}</h4>
+      <div>{this.state.reviewToShow}</div>
+      {this.state.showReviewLink ? <div onClick={() => this.showFullReview()}><u>Show more</u></div> : null}
       <div>{this.props.currentReview.response}</div>
       <div>Helpful? Yes ({this.props.currentReview.helpfulness}) | Report</div>
       <div>Photos</div>
