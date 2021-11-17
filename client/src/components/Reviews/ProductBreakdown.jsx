@@ -1,8 +1,6 @@
 import React from 'react';
 import Slider from './Slider.jsx';
 
-//use _.map to address all categories
-
 const ProductBreakdown = function(props) {
   if (props.metadata.length === 0) {
     return <div/>;
