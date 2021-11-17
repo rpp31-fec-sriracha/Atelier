@@ -12,6 +12,7 @@ class RatingBreakdown extends React.Component {
       twoStarCount: this.props.metadata.ratings[2],
       oneStarCount: this.props.metadata.ratings[1],
       totalReviews: parseInt(this.props.metadata.recommended.false) + parseInt(this.props.metadata.recommended.true),
+      //future refactor - remove the reviewsFilter object and switch statement below
       reviewsFilter: {
         fiveStar: false,
         fourStar: false,
@@ -102,6 +103,8 @@ class RatingBreakdown extends React.Component {
         filtering: false
       });
     }
+
+    this.props.currentFilters(this.state.currentFilters);
   }
 
   removeFilters() {
