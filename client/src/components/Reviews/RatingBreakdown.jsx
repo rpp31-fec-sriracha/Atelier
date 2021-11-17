@@ -104,7 +104,7 @@ class RatingBreakdown extends React.Component {
       });
     }
 
-    this.props.currentFilters(this.state.currentFilters);
+    this.props.updateFilteredReviews(this.state.currentFilters);
   }
 
   removeFilters() {
@@ -119,6 +119,8 @@ class RatingBreakdown extends React.Component {
       filtering: false,
       currentFilters: [],
     });
+
+    this.props.updateFilteredReviews([]);
   }
 
   render() {

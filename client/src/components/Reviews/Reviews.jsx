@@ -71,6 +71,23 @@ class Reviews extends React.Component {
   }
 
   updateFilteredReviews(currentFilters) {
+    let newFilteredReviews = [];
+
+    if (currentFilters.length > 0) {
+      for (var review of this.state.reviews) {
+        // console.log(review.rating);
+        if (currentFilters.indexOf(review.rating) !== -1) {
+          newFilteredReviews.push(review);
+        }
+      }
+      this.setState({
+        filteredReviews: newFilteredReviews
+      });
+    } else {
+      this.setState({
+        filteredReviews: this.state.reviews
+      });
+    }
 
   }
 
