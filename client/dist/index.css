@@ -231,6 +231,10 @@ input[type=range] {
   max-height: 800px;
 }
 
+.seller-response {
+  background-color: lightgray;
+}
+
 /* .individual-review-tile {
   max-width: 40%;
 } */

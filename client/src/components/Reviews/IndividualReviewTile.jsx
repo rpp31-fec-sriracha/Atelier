@@ -7,10 +7,15 @@ class IndividualReviewTile extends React.Component {
     this.state = {
       filterSelected: 'relevance',
       showReviewLink: false,
-      reviewToShow: this.props.currentReview.body
+      reviewToShow: this.props.currentReview.body,
+      helpfulCount: this.props.currentReview.helpfulness,
+      helpfulClicked: false,
+      report: 'Report',
+      reportClicked: false
     };
 
     this.showFullReview = this.showFullReview.bind(this);
+    // this.sellerResponse = this.sellerResponse.bind(this);
   }
 
   showStars(averageStars) {
@@ -46,12 +51,30 @@ class IndividualReviewTile extends React.Component {
   }
 
   showFullReview(e) {
-    // console.log('click');
     this.setState({
       reviewToShow: this.props.currentReview.body,
       showReviewLink: false
     });
   }
+
+  addHelpful() {
+    if (this.state.helpfulClicked === false) {
+      this.setState({
+        helpfulClicked: true,
+        helpfulCount: this.state.helpfulCount + 1
+      });
+    }
+  }
+
+  addReport() {
+    if (this.state.reportClicked === false) {
+      this.setState({
+        reportClicked: true,
+        report: 'Reported'
+      });
+    }
+  }
+
 
   render() {
     const options = {year: 'numeric', month: 'long', day: 'numeric'};
@@ -68,12 +91,15 @@ class IndividualReviewTile extends React.Component {
       <div>{this.state.reviewToShow}</div>
       {this.state.showReviewLink ? <div onClick={() => this.showFullReview()}><u>Show more</u></div> : null}
       <div>{this.props.currentReview.response}</div>
-      <div>Helpful? Yes ({this.props.currentReview.helpfulness}) | Report</div>
       <div className="photo-list">
         {this.props.currentReview.photos.map((photo, i) => <img className="photos" key={i} src={photo.url}></img>)}
       </div>
-      <div>{console.log(this.props.currentReview)}</div>
       {this.props.currentReview.recommend ? <div>{`${String.fromCharCode(10004)} I recommend this product`}</div> : null}
+      {this.props.currentReview.response ? (<div className={'seller-response'}>
+        <div>Response from seller:</div>
+        {this.props.currentReview.response}
+      </div>) : null}
+      <div>Helpful? <span onClick={() => this.addHelpful()}><u>Yes</u> ({this.state.helpfulCount})</span> | <span onClick={() => this.addReport()}>{this.state.report}</span></div>
     </div>);
   }
 }
