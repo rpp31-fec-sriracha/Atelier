@@ -258,6 +258,7 @@ input[type=range] {
   background-color: #FFF;
   padding: 30px;
   z-index: 1000;
+  flex-direction: column;
 }
 
 .overlay {
@@ -270,6 +271,21 @@ input[type=range] {
   z-index: 1000;
 }
 
+.exit {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.exit button {
+  background: black;
+  color: white;
+  width: 30px;
+  border: none;
+  height: 30px;
+  font-size: 20px;
+  border-radius: 10px;
+  padding-top: 2px;
+}
 
 /* ----------- QA ----------- */
 .questions {
@@ -351,6 +367,8 @@ input[type=range] {
   max-width: 100%;
   height: 60px;
   font-size: 18px;
+  margin-bottom: 17px;
+  margin-top: 17px
 }
 
 .add-answer {
@@ -373,6 +391,7 @@ input[type=range] {
 }
 .buttons {
   display: flex;
+  margin-top: 6px;
 }
 .add-q {
   background-color: white;
@@ -386,11 +405,16 @@ input[type=range] {
 .b-right {
   width: 18%;
 }
+
+
+
+/* Answer Modal */
 .modal-flex-column {
   display: flex;
   flex-direction: column;
   font-family: Helvetica, Arial, sans-serif;
   padding: 50px;
+  width: 600px;
 }
 .modal-header {
   display: flex;
@@ -402,18 +426,59 @@ input[type=range] {
   flex-direction: column;
   margin-bottom: 30px;
 }
-.mandatory-asterisk{
+.mandatory{
   color: red;
 }
-
 .modal-button {
   font-family: Helvetica, Arial, sans-serif;
   background-color: black;
-  height: 30px;
+  height: 40px;
   font-size: 16px;
   color: white;
+  border-radius: 10px;
 }
 
-.input-field {
+.modal-body input:not(.input-file) {
   height: 30px;
+  font-family: Helvetica, Arial, sans-serif;
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
+  color: #4f565c;
+  font-weight: lighter;
+  font-size: 16px;
+  padding-left: 10px;
+}
+
+.modal-body textarea {
+  height: 142px;
+  font-family: Helvetica, Arial, sans-serif;
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
+  color:  #4f565c;
+  font-weight: lighter;
+  font-size: 16px;
+  padding: 10px;
+}
+label {
+  margin-bottom: 5px;
+}
+.thumbnails{
+  width: 100px;
+  height: 65px;
+  margin: 5px;
+  border-radius: 5px;
+}
+.warning {
+ display: flex;
+ font-style: italic;
+ font-weight: lighter;
+ justify-content: center;
+ color: red;
+}
+
+.popup-message {
+  color: #4f565c;
+  padding-left: 5px;
+  padding-top: 5px;
+  font-size: 14px;
 }
