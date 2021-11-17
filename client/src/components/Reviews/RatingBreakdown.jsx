@@ -26,6 +26,7 @@ class RatingBreakdown extends React.Component {
 
     this.calculateAverage();
     this.calculateFilters = this.calculateFilters.bind(this);
+    this.removeFilters = this.removeFilters.bind(this);
   }
 
   calculateAverage() {
@@ -43,10 +44,7 @@ class RatingBreakdown extends React.Component {
   }
 
   calculateFilters(e) {
-    console.log(e);
-
     let newFilterState = this.state.reviewsFilter;
-
     newFilterState[e] = !newFilterState[e];
 
     this.setState({
@@ -104,7 +102,20 @@ class RatingBreakdown extends React.Component {
         filtering: false
       });
     }
+  }
 
+  removeFilters() {
+    this.setState({
+      reviewsFilter: {
+        fiveStar: false,
+        fourStar: false,
+        threeStar: false,
+        twoStar: false,
+        oneStar: false
+      },
+      filtering: false,
+      currentFilters: [],
+    });
   }
 
   render() {
@@ -116,7 +127,7 @@ class RatingBreakdown extends React.Component {
       <div>{this.props.averageStars} Stars</div>
       <div>Rating Breakdown</div>
       {this.state.filtering ? <div>{this.state.filterMessage}</div> : null}
-      {this.state.filtering ? <div>Remove all filters</div> : null}
+      {this.state.filtering ? <div onClick={() => this.removeFilters()}><u>Remove all filters</u></div> : null}
       <div>{Math.round(this.props.metadata.recommended.true / this.state.totalReviews * 1000) / 10}% of reviews recommend this product</div>
       <div onClick={() => this.calculateFilters('fiveStar')}><u>5 stars</u> <progress value={this.state.fiveStarCount / this.state.totalReviews * 100 || 0} max="100"></progress></div>
       <div onClick={() => this.calculateFilters('fourStar')}><u>4 stars</u> <progress value={this.state.fourStarCount / this.state.totalReviews * 100 || 0} max="100"></progress></div>
