@@ -69,9 +69,16 @@ class IndividualReviewTile extends React.Component {
       {this.state.showReviewLink ? <div onClick={() => this.showFullReview()}><u>Show more</u></div> : null}
       <div>{this.props.currentReview.response}</div>
       <div>Helpful? Yes ({this.props.currentReview.helpfulness}) | Report</div>
-      <div>Photos</div>
+      <div>{console.log(this.props.currentReview.photos)}</div>
+      <div className="photo-list">
+        {this.props.currentReview.photos.map((photo, i) => <img className="photos" key={i} src={photo.url}></img>)}
+      </div>
     </div>);
   }
 }
+
+{/* <div className="photo-list">
+{answer.photos.map((photo, i) => <img className="photos" key={i} src={photo}></img>)}
+</div> */}
 
 export default IndividualReviewTile;
