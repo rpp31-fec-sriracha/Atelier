@@ -16,7 +16,7 @@ const AnswerEntry = ({ answer }) => {
 
   const handleMark = (id, subject) => {
     httpRequest.mark(id, subject)
-      .then(() => setMarkCount(markCount + 1))
+      .then(() => setMark(mark + 1))
       .catch((error) => window.alert(error));
   };
 
