@@ -44,9 +44,13 @@ class Reviews extends React.Component {
           meta: response[1].data
         });
       })
+      .then(() => {
+        this.props.setNumReviews(this.state.reviews.length);
+      })
       .catch((err) => {
         console.log(err);
       });
+
   }
 
   updateSortType(event) {
@@ -79,7 +83,7 @@ class Reviews extends React.Component {
           <div><ProductBreakdown metadata={this.state.meta}/></div>
         </div>
         <div className="flex-column">
-          <div> {this.state.reviews.length} reviews, sorted by <SortSelector updateSortType = {this.updateSortType}/></div>
+          <div> {this.props.numReviews} reviews, sorted by <SortSelector updateSortType = {this.updateSortType}/></div>
           <div className="flex-column"><ReviewsList reviews={this.state.reviews} productName={this.props.productName}
             characteristics={this.state.meta.characteristics} productID={this.state.currentProduct}/></div>
         </div>
