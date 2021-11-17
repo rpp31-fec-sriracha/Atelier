@@ -9,12 +9,30 @@ class IndividualReviewTile extends React.Component {
     };
   }
 
+  showStars(averageStars) {
+    let currentStars = averageStars;
+    let starTypes = [];
+
+    for (var i = 0; i < 5; i++) {
+      if (currentStars >= 1) {
+        starTypes[i] = 'fa fa-star';
+      } else {
+        starTypes[i] = 'fa fa-star-o';
+      }
+      currentStars--;
+    }
+
+    return starTypes.map((currentStar, i) => {
+      return <div key={i} className={currentStar}></div>;
+    });
+  }
+
   render() {
     const options = {year: 'numeric', month: 'long', day: 'numeric'};
 
     return (<div className="individual-review-tile">
       <div className="flex-row-reviews">
-        <div>{this.props.currentReview.rating} Stars</div>
+        <div>{this.showStars(this.props.currentReview.rating)}</div>
         <div>
           <div>{this.props.currentReview.reviewer_name}, </div>
           <div>{new Intl.DateTimeFormat('en-US', options).format(Date.parse(this.props.currentReview.date))}</div>

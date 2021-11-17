@@ -123,13 +123,48 @@ class RatingBreakdown extends React.Component {
     this.props.updateFilteredReviews([]);
   }
 
+  showStars(averageStars) {
+    let currentStars = averageStars;
+    let starTypes = [];
+
+    for (var i = 0; i < 5; i++) {
+      if (currentStars >= .875) {
+        starTypes[i] = 'fa fa-star';
+      } else if (currentStars >= .625) {
+        starTypes[i] = 'fa fa-star three-quarters-star';
+      } else if (currentStars >= .375) {
+        starTypes[i] = 'fa fa-star half-star';
+      } else if (currentStars >= .125) {
+        starTypes[i] = 'fa fa-star quarter-star';
+      } else {
+        starTypes[i] = 'fa fa-star-o';
+      }
+      currentStars--;
+    }
+
+    return starTypes.map((currentStar, i) => {
+      return <div key={i} className={currentStar}></div>;
+    });
+
+    // return (
+    //   <div>
+    //     <div className={starTypes[0]}></div>
+    //     <div className={starTypes[1]}></div>
+    //     <div className={starTypes[2]}></div>
+    //     <div className={starTypes[3]}></div>
+    //     <div className={starTypes[4]}></div>
+    //   </div>
+    // );
+  }
+
   render() {
     if (this.props.metadata.length === 0) {
       return <div/>;
     }
 
     return (<div className="ratingBreakdown">
-      <div>{this.props.averageStars} Stars</div>
+      <h1>{this.props.averageStars}</h1>
+      <div>{this.showStars(this.props.averageStars)}</div>
       <div>Rating Breakdown</div>
       {this.state.filtering ? <div>{this.state.filterMessage}</div> : null}
       {this.state.filtering ? <div onClick={() => this.removeFilters()}><u>Remove all filters</u></div> : null}
