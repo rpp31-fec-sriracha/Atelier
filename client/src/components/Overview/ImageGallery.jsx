@@ -30,21 +30,27 @@ const ImageGallery = function (props) {
     }
   });
 
-  return (<div className={extended ? 'extended' : 'flex-row col-2-3'} id="image-gallery"
+  return (<div className={extended ? 'extended' : 'flex-row'} id="image-gallery"
     style={{
       backgroundImage: `url(${props.currentStyle.photos[props.selectedThumb].url})`,
       backgroundRepeat: 'no-repeat'
     }}>
     <div>
       <div className="thumb-arrow">
-        <i className="fas fa-chevron-up"></i>
+        <i className="fas fa-chevron-up" onClick={props.handleArrowUp}></i>
       </div>
       {thumbList}
       <div className="thumb-arrow">
         <i className="fas fa-chevron-down" onClick={props.handleArrowDown}></i>
       </div>
     </div>
-    <i className="fas fa-expand"></i>
+    <div className="photo-nav">
+      <div className="expand-container"><i className="fas fa-expand"></i></div>
+      <div className="arrow-container">
+        <i className="fas fa-chevron-left"></i>
+        <i className="fas fa-chevron-right"></i>
+      </div>
+    </div>
   </div>);
 };
 

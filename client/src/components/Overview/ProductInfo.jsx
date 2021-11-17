@@ -14,6 +14,7 @@ const ProductInfo = function(props) {
           styles={props.styles}
           selectedThumb={props.selectedThumb}
           handleArrowDown={props.handleArrowDown}
+          handleArrowUp={props.handleArrowUp}
           thumbStart={props.thumbStart}
           thumbEnd={props.thumbEnd} /> :
         'Image Gallery'}

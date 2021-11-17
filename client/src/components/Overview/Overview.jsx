@@ -21,6 +21,7 @@ class Overview extends React.Component {
     this.handleThumbClick = this.handleThumbClick.bind(this);
     this.handleAddToCart = this.handleAddToCart.bind(this);
     this.handleArrowDown = this.handleArrowDown.bind(this);
+    this.handleArrowUp = this.handleArrowUp.bind(this);
   }
 
   handleStyleClick(e, styleId) {
@@ -59,6 +60,23 @@ class Overview extends React.Component {
     if (selectedThumb > thumbEnd - 1) {
       thumbStart++;
       thumbEnd++;
+    }
+    this.setState({
+      selectedThumb,
+      thumbStart,
+      thumbEnd
+    });
+  }
+
+  handleArrowUp(e) {
+    console.log('clicking up!!!');
+    let { selectedThumb, thumbStart, thumbEnd, currentStyle } = this.state;
+    if (selectedThumb > 0) {
+      selectedThumb--;
+    }
+    if (selectedThumb < thumbStart) {
+      thumbStart--;
+      thumbEnd--;
     }
     this.setState({
       selectedThumb,
@@ -131,11 +149,12 @@ class Overview extends React.Component {
         styles={this.props.productStyles}
         styleClick={this.handleStyleClick}
         thumbClick={this.handleThumbClick}
-        defaultStyle={this.state.defaultStyle}
         currentStyle={this.state.currentStyle}
-        selectedThumb={this.state.selectedThumb}
         handleAddToCart={this.handleAddToCart}
         handleArrowDown={this.handleArrowDown}
+        handleArrowUp={this.handleArrowUp}
+        defaultStyle={this.state.defaultStyle}
+        selectedThumb={this.state.selectedThumb}
         thumbStart={this.state.thumbStart}
         thumbEnd={this.state.thumbEnd} />
       <ProductInfoBottom

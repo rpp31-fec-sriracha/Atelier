@@ -93,6 +93,8 @@ header {
 #image-gallery {
   background-size: contain;
   background-position: top;
+  width: 100%;
+  min-width: 0;
 }
 
 .fa-expand {
@@ -179,15 +181,20 @@ header {
 
 .thumb-arrow {
   display: flex;
-  width: 100px;
+  width: 75px;
   justify-content: center;
 }
 
-.fa-chevron-up, .fa-chevron-down .fa-expand{
+.fa-chevron-up, .fa-chevron-down, .fa-expand, .fa-chevron-left, .fa-chevron-right {
+  z-index: 3;
   font-size: 1.5em;
   text-shadow: 1px 2px 3px #000;
   color: lightgray;
   background-color: transparent;
+}
+
+.photo-nav {
+  min-width: 100%;
 }
 
 .questions {
