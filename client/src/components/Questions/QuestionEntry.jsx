@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import AnswerEntry from './AnswerEntry.jsx';
 import AnswerModal from './AnswerModal.jsx';
 import httpRequest from './httpRequest.js';
@@ -38,6 +38,7 @@ class QuestionEntry extends React.Component {
   render() {
     const { question, productInfo, handleAddAnswer } = this.props;
     const { isOpen, visibleCount, markCount, mark } = this.state;
+    console.log(handleAddAnswer)
     return (
       <>
         <div className="question">

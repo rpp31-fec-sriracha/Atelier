@@ -17,7 +17,7 @@ const QuestionList = function ({ questions, productInfo, handleAddQuestion, hand
       <div className="list-container">
         {(questions.length > 0) ?
           questions.slice(0, visibleCount).map((question, i) =>
-            <QuestionEntry role="single-question" key={i} question={question} productInfo={productInfo} />)
+            <QuestionEntry role="single-question" key={i} question={question} productInfo={productInfo} handleAddAnswer={handleAddAnswer} />)
           : <div></div>}
         <div className="buttons">
           {(questions.length > 2) ?

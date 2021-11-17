@@ -5,11 +5,11 @@ const httpRequest = {
     return new Promise((resolve, reject) => {
       axios
         .request({
-          url: '/questions',
+          url: '/api/qa/questions',
           method: 'get',
           baseURL: 'http://localhost:3000',
           params: {
-            productId: currentProductId
+            product_id: currentProductId
           }
         })
         .then(q => resolve(q.data.results))
@@ -79,7 +79,7 @@ const httpRequest = {
             product_id: currentProductId
           }
         })
-        .then(() =>resolve('Thank you for submitting your question!'))
+        .then(() => resolve('Thank you for submitting your question!'))
         .catch(error => reject(error));
     });
   },
