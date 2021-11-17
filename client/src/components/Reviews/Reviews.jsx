@@ -10,7 +10,7 @@ class Reviews extends React.Component {
     super(props);
 
     this.state = {
-      currentProduct: 59556,
+      currentProduct: this.props.currentProductId,
       reviews: [],
       meta: {},
       sortType: 'relevant'
@@ -74,12 +74,14 @@ class Reviews extends React.Component {
       <div>'RATINGS & REVIEWS'</div>
       <div className="flex-row-reviews">
         <div className="flex-column">
-          <div><RatingBreakdown metadata={this.state.meta}/></div>
+          <div><RatingBreakdown metadata={this.state.meta} setAverageReview={this.props.setAverageReview}
+            averageStars={this.props.averageStars}/></div>
           <div><ProductBreakdown metadata={this.state.meta}/></div>
         </div>
         <div className="flex-column">
           <div> {this.state.reviews.length} reviews, sorted by <SortSelector updateSortType = {this.updateSortType}/></div>
-          <div className="flex-column"><ReviewsList reviews={this.state.reviews}/></div>
+          <div className="flex-column"><ReviewsList reviews={this.state.reviews} productName={this.props.productName}
+            characteristics={this.state.meta.characteristics} productID={this.state.currentProduct}/></div>
         </div>
       </div>
     </div>);

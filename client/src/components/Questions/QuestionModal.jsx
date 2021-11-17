@@ -3,6 +3,7 @@ import ReactDom from 'react-dom';
 
 const QuestionModal = ({ isOpen, productInfo, handleAddQuestion, closeModal }) => {
 
+<<<<<<< HEAD
   const [values, setValues] = useState({
     question: '',
     nickname: '',
@@ -52,6 +53,9 @@ const QuestionModal = ({ isOpen, productInfo, handleAddQuestion, closeModal }) =
         break;
     }
   }
+=======
+  // invoke handle add question onsubmit
+>>>>>>> main
 
   return ReactDom.createPortal(
     <React.Fragment>
