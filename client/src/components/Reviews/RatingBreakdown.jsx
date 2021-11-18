@@ -21,7 +21,7 @@ class RatingBreakdown extends React.Component {
         oneStar: false
       },
       filtering: false,
-      currentFilters: [],
+      // currentFilters: [],
       filterMessage: ''
     };
 
@@ -130,7 +130,7 @@ class RatingBreakdown extends React.Component {
       break;
     }
 
-    let newFilters = this.state.currentFilters;
+    let newFilters = this.props.currentFilters;
     if (newFilterState[e] === true) {
       this.setState({
         filtering: true
@@ -152,9 +152,11 @@ class RatingBreakdown extends React.Component {
     newMessage = newMessage.slice(0, newMessage.length - 2);
     // console.log(newMessage);
     this.setState({
-      currentFilters: newFilters,
+      // currentFilters: newFilters,
       filterMessage: newMessage
     });
+
+    this.props.setCurrentFilters(newFilters);
 
     if (newFilters.length === 0) {
       this.setState({
@@ -162,7 +164,7 @@ class RatingBreakdown extends React.Component {
       });
     }
 
-    this.props.updateFilteredReviews(this.state.currentFilters);
+    this.props.updateFilteredReviews(this.props.currentFilters);
   }
 
   removeFilters() {
@@ -174,9 +176,11 @@ class RatingBreakdown extends React.Component {
         twoStar: false,
         oneStar: false
       },
-      filtering: false,
-      currentFilters: [],
+      filtering: false
+      // currentFilters: [],
     });
+
+    this.props.setCurrentFilters([]);
 
     this.props.updateFilteredReviews([]);
   }

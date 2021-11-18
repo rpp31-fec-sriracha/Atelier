@@ -14,12 +14,14 @@ class Reviews extends React.Component {
       reviews: [],
       meta: {},
       sortType: 'relevant',
-      filteredReviews: []
+      filteredReviews: [],
+      currentFilters: []
     };
 
     this.updateSortType = this.updateSortType.bind(this);
     this.updateFilteredReviews = this.updateFilteredReviews.bind(this);
     this.setHelpfulness = this.setHelpfulness.bind(this);
+    this.setCurrentFilters = this.setCurrentFilters.bind(this);
   }
 
   getReviews() {
@@ -66,9 +68,17 @@ class Reviews extends React.Component {
           this.setState({
             reviews: response.data.results
           });
-          // console.log(response.data.results[0].date);
+        })
+        .then(() => {
+          this.updateFilteredReviews(this.state.currentFilters);
         })
         .catch((err) => console.log(err));
+    });
+  }
+
+  setCurrentFilters(currentFilters) {
+    this.setState({
+      currentFilters: currentFilters
     });
   }
 
@@ -77,7 +87,6 @@ class Reviews extends React.Component {
 
     if (currentFilters.length > 0) {
       for (var review of this.state.reviews) {
-        // console.log(review.rating);
         if (currentFilters.indexOf(review.rating) !== -1) {
           newFilteredReviews.push(review);
         }
@@ -93,30 +102,7 @@ class Reviews extends React.Component {
   }
 
   setHelpfulness(index) {
-    // console.log('updating');
-
-    // console.log(index);
-    // console.log(this.props.reviews[index]);
-
     this.state.reviews[index].helpfulness = this.state.reviews[index].helpfulness + 1;
-    // let newReviews = this.state.reviews;
-    // // console.log(newReviews[index]);
-    // newReviews[index].helpfulness = newReviews[index].helpfulness + 1;
-    // console.log(newReviews[index].helpfulness);
-    // console.log(this.props);
-    // console.log(this.state.reviews);
-
-    // this.setState({
-    //   reviews[]
-    // });
-
-    // let reviewCopy = review;
-    // reviewCopy.helpfulness = reviewCopy.helpfulness + 1;
-    // console.log(review);
-    // console.log(this.props.key);
-    // review.setState({
-    //   helpfulness: review.helpfulness + 1
-    // });
   }
 
   render() {
@@ -132,7 +118,8 @@ class Reviews extends React.Component {
         <div className="flex-column">
           <div><RatingBreakdown metadata={this.state.meta} setAverageReview={this.props.setAverageReview}
             averageStars={this.props.averageStars} filteredReviews={this.state.filteredReviews}
-            reviews={this.state.reviews} updateFilteredReviews={this.updateFilteredReviews}/></div>
+            reviews={this.state.reviews} updateFilteredReviews={this.updateFilteredReviews}
+            currentFilters={this.state.currentFilters} setCurrentFilters={this.setCurrentFilters}/></div>
           <div><ProductBreakdown metadata={this.state.meta}/></div>
         </div>
         <div className="flex-column individual-reviews">

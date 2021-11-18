@@ -57,8 +57,6 @@ class IndividualReviewTile extends React.Component {
         this.setState({
           showReviewLink: false,
           reviewToShow: this.props.currentReview.body,
-          //maybe adding these here and in else will cause it to update correctly
-          //can we add these to parent so it doesnt get reset?
           helpfulCount: this.props.currentReview.helpfulness,
           helpfulClicked: false,
           report: 'Report',
@@ -85,17 +83,11 @@ class IndividualReviewTile extends React.Component {
   }
 
   addHelpful() {
-
-    // INSTEAD OF TRACKING STATE - USE PROPS AND UPDATE THE VALUE IN THE PARENT COMPONENT
-
-    // console.log(this.props.currentReview.review_id);
     if (this.state.helpfulClicked === false) {
       this.setState({
         helpfulClicked: true,
-        // helpfulCount: this.state.helpfulCount + 1
       });
 
-      // console.log(this.props.currentReview);
       this.props.setHelpfulness(this.props.index);
 
       return new Promise((resolve, reject) => {
