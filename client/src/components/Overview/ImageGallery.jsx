@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 const Thumbnail = function (props) {
   let currentThumbId = parseInt(props.thumbId.replace('thumb', ''), 10);
@@ -15,46 +15,52 @@ const Thumbnail = function (props) {
   );
 };
 
-const ImageGallery = function (props) {
-  const [extended, setExtended] = useState(false);
-  let currentClass;
-  useEffect(() => { currentClass = extended ? 'extended' : 'flex-row'; }, [extended]);
+class ImageGallery extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      extended: false
+    };
+  }
 
-  let thumbs = props.currentStyle.photos.map((photo) => (photo.thumbnail_url));
-  let thumbList = thumbs.map((t, index) => {
-    if (index >= props.thumbStart && index < props.thumbEnd) {
-      return (<Thumbnail
-        thumbClick={props.thumbClick}
-        key={'thumb' + index}
-        thumbId={'thumb' + index}
-        selectedThumb={props.selectedThumb}
-        thumbImg={t} />);
-    }
-  });
+  render() {
 
-  return (<div className={currentClass} id="image-gallery"
-    style={{
-      backgroundImage: `url(${props.currentStyle.photos[props.selectedThumb].url})`,
-      backgroundRepeat: 'no-repeat'
-    }}>
-    <div>
-      <div className="thumb-arrow">
-        <i className="fas fa-chevron-up" onClick={props.handleArrowUp}></i>
+    let thumbs = this.props.currentStyle.photos.map((photo) => (photo.thumbnail_url));
+    let thumbList = thumbs.map((t, index) => {
+      if (index >= this.props.thumbStart && index < this.props.thumbEnd) {
+        return (<Thumbnail
+          thumbClick={this.props.thumbClick}
+          key={'thumb' + index}
+          thumbId={'thumb' + index}
+          selectedThumb={this.props.selectedThumb}
+          thumbImg={t} />);
+      }
+    });
+
+    return (<div className={this.state.extended ? 'extended' : 'flex-row'} id="image-gallery"
+      style={{
+        backgroundImage: `url(${this.props.currentStyle.photos[this.props.selectedThumb].url})`,
+        backgroundRepeat: 'no-repeat'
+      }}>
+      <div>
+        <div className="thumb-arrow">
+          <i className="fas fa-chevron-up" onClick={this.props.handleArrowUp}></i>
+        </div>
+        {thumbList}
+        <div className="thumb-arrow">
+          <i className="fas fa-chevron-down" onClick={this.props.handleArrowDown}></i>
+        </div>
       </div>
-      {thumbList}
-      <div className="thumb-arrow">
-        <i className="fas fa-chevron-down" onClick={props.handleArrowDown}></i>
+      <div className="photo-nav">
+        <div className="expand-container width-100-min-0"><i onClick={() => this.setState({ extended: !this.state.extended })} className="fas fa-expand"></i></div>
+        <div className="arrow-container width-100-min-0">
+          <i onClick={this.props.handleArrowUp} className="fas fa-chevron-left"></i>
+          <i onClick={this.props.handleArrowDown} className="fas fa-chevron-right"></i>
+        </div>
       </div>
-    </div>
-    <div className="photo-nav">
-      <div className="expand-container width-100-min-0"><i onClick={setExtended(!extended)} className="fas fa-expand"></i></div>
-      <div className="arrow-container width-100-min-0">
-        <i onClick={props.handleArrowUp} className="fas fa-chevron-left"></i>
-        <i onClick={props.handleArrowDown} className="fas fa-chevron-right"></i>
-      </div>
-    </div>
-  </div>);
-};
+    </div>);
+  }
+}
 
 
 export default ImageGallery;
