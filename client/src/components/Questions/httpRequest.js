@@ -5,11 +5,11 @@ const httpRequest = {
     return new Promise((resolve, reject) => {
       axios
         .request({
-          url: '/api/qa/questions',
+          url: 'api/qa/questions',
           method: 'get',
-          baseURL: 'http://localhost:3000',
           params: {
-            product_id: currentProductId
+            product_id: currentProductId,
+            count: 20
           }
         })
         .then(q => resolve(q.data.results))
@@ -21,8 +21,7 @@ const httpRequest = {
       axios
         .request({
           url: `/api/qa/questions/${questionId}/answers`,
-          method: 'get',
-          baseURL: 'http://localhost:3000'
+          method: 'get'
         })
         .then(data => resolve(data))
         .catch(error => reject(error));
@@ -34,7 +33,6 @@ const httpRequest = {
         .request({
           url: `/api/qa/questions/${questionId}/answers`,
           method: 'post',
-          baseURL: 'http://localhost:3000',
           data: {
             body: newAnswer.answer,
             name: newAnswer.nickname,
@@ -71,7 +69,6 @@ const httpRequest = {
         .request({
           url: '/api/qa/questions',
           method: 'post',
-          baseURL: 'http://localhost:3000',
           data: {
             body: q.question,
             name: q.nickname,
@@ -97,10 +94,9 @@ const httpRequest = {
     return new Promise((resolve, reject) => {
       axios.request({
         url: `api/qa/${endpoint}/${id}/helpful`,
-        method: 'put',
-        baseURL: 'http://localhost:3000'
+        method: 'put'
       })
-        .then(() => resolve())
+        .then((r) => resolve())
         .catch(error => reject(error));
     });
   },
@@ -118,8 +114,7 @@ const httpRequest = {
     return new Promise((resolve, reject) => {
       axios.request({
         url: `api/qa/${endpoint}/${id}/report`,
-        method: 'put',
-        baseURL: 'http://localhost:3000'
+        method: 'put'
       })
         .then(() => resolve())
         .catch(error => reject(error));

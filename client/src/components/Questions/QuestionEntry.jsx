@@ -38,7 +38,6 @@ class QuestionEntry extends React.Component {
   render() {
     const { question, productInfo, handleAddAnswer } = this.props;
     const { isOpen, visibleCount, markCount, mark } = this.state;
-    console.log(handleAddAnswer)
     return (
       <>
         <div className="question">
