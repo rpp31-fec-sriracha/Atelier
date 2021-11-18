@@ -88,7 +88,6 @@ class Reviews extends React.Component {
         filteredReviews: this.state.reviews
       });
     }
-
   }
 
   render() {
