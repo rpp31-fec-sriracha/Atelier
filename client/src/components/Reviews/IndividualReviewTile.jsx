@@ -15,7 +15,6 @@ class IndividualReviewTile extends React.Component {
     };
 
     this.showFullReview = this.showFullReview.bind(this);
-    // this.sellerResponse = this.sellerResponse.bind(this);
   }
 
   showStars(averageStars) {
@@ -39,7 +38,7 @@ class IndividualReviewTile extends React.Component {
   componentDidMount() {
     if (this.props.currentReview.body.length <= 250) {
       this.setState({
-        showReviewLink:false,
+        showReviewLink: false,
         reviewToShow: this.props.currentReview.body
       });
     } else {
@@ -58,11 +57,23 @@ class IndividualReviewTile extends React.Component {
   }
 
   addHelpful() {
+    // console.log(this.props.currentReview.review_id);
     if (this.state.helpfulClicked === false) {
       this.setState({
         helpfulClicked: true,
         helpfulCount: this.state.helpfulCount + 1
       });
+
+      //address in server/api
+      // return new Promise((resolve, reject) => {
+      //   axios.request({
+      //     url: `api/reviews/${this.props.currentReview.review_id}/helpful`,
+      //     method: 'put',
+      //     baseURL: 'http://localhost:3000'
+      //   })
+      //     .then(() => resolve())
+      //     .catch(error => reject(error));
+      // });
     }
   }
 

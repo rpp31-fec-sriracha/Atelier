@@ -94,7 +94,7 @@ class NewReview extends React.Component {
     // console.log('You have submitted the form');
     let formData = {
       // eslint-disable-next-line camelcase
-      product_id: this.props.productID,
+      product_id: Number(this.props.productID),
       rating: this.state.rating,
       summary: this.state.summary,
       body: this.state.message,

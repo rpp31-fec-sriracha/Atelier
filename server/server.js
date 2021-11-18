@@ -108,11 +108,27 @@ app.get('/reviews/meta', (req, res) => {
 });
 
 app.post('/addReview', (req, res) => {
+  console.log(req.body);
+  // let testObj = {
+  //   product_id: 59557,
+  //   rating: 5,
+  //   summary: 'Best product everrr',
+  //   body: 'I really love how this product makes me feel when I wear it.',
+  //   recommend: true,
+  //   name: 'LeviLive',
+  //   email: 'Levispants@pants.com',
+  //   characteristics: { '199858': 5, '199859': 5, '199860': 4, '199861': 5 }
+  // };
+
+  // api.addReview(testObj, (err, data) => {
   api.addReview(req.body, (err, data) => {
     if (err) {
+      console.log('Error: ', err);
       res.status(500).json(err);
     } else {
-      res.status(200).send(data);
+      // res.status(200).send(data);
+      console.log('success');
+      res.status(200).json(data);
     }
   });
 });
