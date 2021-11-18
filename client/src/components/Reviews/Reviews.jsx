@@ -13,10 +13,12 @@ class Reviews extends React.Component {
       currentProduct: this.props.currentProductId,
       reviews: [],
       meta: {},
-      sortType: 'relevant'
+      sortType: 'relevant',
+      filteredReviews: []
     };
 
     this.updateSortType = this.updateSortType.bind(this);
+    this.updateFilteredReviews = this.updateFilteredReviews.bind(this);
   }
 
   getReviews() {
@@ -41,12 +43,17 @@ class Reviews extends React.Component {
       .then((response) => {
         this.setState({
           reviews: response[0].data.results,
+          filteredReviews: response[0].data.results,
           meta: response[1].data
         });
+      })
+      .then(() => {
+        this.props.setNumReviews(this.state.reviews.length);
       })
       .catch((err) => {
         console.log(err);
       });
+
   }
 
   updateSortType(event) {
@@ -63,6 +70,27 @@ class Reviews extends React.Component {
     });
   }
 
+  updateFilteredReviews(currentFilters) {
+    let newFilteredReviews = [];
+
+    if (currentFilters.length > 0) {
+      for (var review of this.state.reviews) {
+        // console.log(review.rating);
+        if (currentFilters.indexOf(review.rating) !== -1) {
+          newFilteredReviews.push(review);
+        }
+      }
+      this.setState({
+        filteredReviews: newFilteredReviews
+      });
+    } else {
+      this.setState({
+        filteredReviews: this.state.reviews
+      });
+    }
+
+  }
+
   render() {
     if (Object.keys(this.state.meta).length === 0 || Object.keys(this.state.meta.ratings).length === 0) {
       return (
@@ -75,12 +103,13 @@ class Reviews extends React.Component {
       <div className="flex-row-reviews">
         <div className="flex-column">
           <div><RatingBreakdown metadata={this.state.meta} setAverageReview={this.props.setAverageReview}
-            averageStars={this.props.averageStars}/></div>
+            averageStars={this.props.averageStars} filteredReviews={this.state.filteredReviews}
+            reviews={this.state.reviews} updateFilteredReviews={this.updateFilteredReviews}/></div>
           <div><ProductBreakdown metadata={this.state.meta}/></div>
         </div>
         <div className="flex-column">
-          <div> {this.state.reviews.length} reviews, sorted by <SortSelector updateSortType = {this.updateSortType}/></div>
-          <div className="flex-column"><ReviewsList reviews={this.state.reviews} productName={this.props.productName}
+          <div> {this.props.numReviews} reviews, sorted by <SortSelector updateSortType = {this.updateSortType}/></div>
+          <div className="flex-column"><ReviewsList reviews={this.state.filteredReviews} productName={this.props.productName}
             characteristics={this.state.meta.characteristics} productID={this.state.currentProduct}/></div>
         </div>
       </div>

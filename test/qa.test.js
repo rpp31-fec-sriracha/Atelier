@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import '@testing-library/jest-dom';
-import { render, screen, cleanup, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import Questions from '../client/src/components/Questions/Questions.jsx';
@@ -14,11 +14,12 @@ import AnswerModal from '../client/src/components/Questions/AnswerModal.jsx';
 import QuestionModal from '../client/src/components/Questions/QuestionModal.jsx';
 import dummyData from './qaData.js';
 
-afterEach(cleanup);
 
 describe('Individual Question', () => {
   test('should display question body that is fetched data from API', () => {
+    // render a react component to the DOM
     const { container, getByTestId } = render(<QuestionEntry />);
+    // Use DOM APIs (querySelector) to make assertions
     expect(getByTestId('q-body')).toHaveTextContent('What fabric is the bottom made of?');
   });
   // test('a', () => {
@@ -34,7 +35,7 @@ describe('Individual Question', () => {
 
 
 
-describe('Search Question', () => {
+xdescribe('Search Question', () => {
   const placeholderText = 'HAVE A QUESTION? SEARCH FOR ANSWERS...';
 
   test(`should display input field for user to enter & placeholder reading text reading ${placeholderText}`, () => {
@@ -44,7 +45,7 @@ describe('Search Question', () => {
   });
 });
 
-describe.only('Questions', () => {
+xdescribe('Questions', () => {
   test('should display add question button', () => {
     const { getByRole } = render(<Questions />);
     expect(screen.getByRole('add-question')).toBeInTheDocument();
@@ -55,7 +56,7 @@ describe.only('Questions', () => {
   // })
 });
 
-describe('Questions List', () => {
+xdescribe('Questions List', () => {
 
   test('should display the button, if there are more than 2 questions for the given product', () => {
     render(<QuestionList />);
