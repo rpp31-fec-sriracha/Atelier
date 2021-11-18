@@ -19,6 +19,7 @@ class Reviews extends React.Component {
 
     this.updateSortType = this.updateSortType.bind(this);
     this.updateFilteredReviews = this.updateFilteredReviews.bind(this);
+    this.setHelpfulness = this.setHelpfulness.bind(this);
   }
 
   getReviews() {
@@ -65,6 +66,7 @@ class Reviews extends React.Component {
           this.setState({
             reviews: response.data.results
           });
+          // console.log(response.data.results[0].date);
         })
         .catch((err) => console.log(err));
     });
@@ -90,6 +92,33 @@ class Reviews extends React.Component {
     }
   }
 
+  setHelpfulness(index) {
+    // console.log('updating');
+
+    // console.log(index);
+    // console.log(this.props.reviews[index]);
+
+    this.state.reviews[index].helpfulness = this.state.reviews[index].helpfulness + 1;
+    // let newReviews = this.state.reviews;
+    // // console.log(newReviews[index]);
+    // newReviews[index].helpfulness = newReviews[index].helpfulness + 1;
+    // console.log(newReviews[index].helpfulness);
+    // console.log(this.props);
+    // console.log(this.state.reviews);
+
+    // this.setState({
+    //   reviews[]
+    // });
+
+    // let reviewCopy = review;
+    // reviewCopy.helpfulness = reviewCopy.helpfulness + 1;
+    // console.log(review);
+    // console.log(this.props.key);
+    // review.setState({
+    //   helpfulness: review.helpfulness + 1
+    // });
+  }
+
   render() {
     if (Object.keys(this.state.meta).length === 0 || Object.keys(this.state.meta.ratings).length === 0) {
       return (
@@ -109,7 +138,7 @@ class Reviews extends React.Component {
         <div className="flex-column individual-reviews">
           <div> {this.props.numReviews} reviews, sorted by <SortSelector updateSortType = {this.updateSortType}/></div>
           <div className="flex-column"><ReviewsList reviews={this.state.filteredReviews} productName={this.props.productName}
-            characteristics={this.state.meta.characteristics} productID={this.state.currentProduct}/></div>
+            characteristics={this.state.meta.characteristics} productID={this.state.currentProduct} setHelpfulness={this.setHelpfulness}/></div>
         </div>
       </div>
     </div>);

@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 class IndividualReviewTile extends React.Component {
   constructor(props) {
@@ -8,7 +9,7 @@ class IndividualReviewTile extends React.Component {
       filterSelected: 'relevance',
       showReviewLink: false,
       reviewToShow: this.props.currentReview.body,
-      helpfulCount: this.props.currentReview.helpfulness,
+      // helpfulCount: this.props.currentReview.helpfulness,
       helpfulClicked: false,
       report: 'Report',
       reportClicked: false
@@ -36,6 +37,7 @@ class IndividualReviewTile extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.props.index);
     if (this.props.currentReview.body.length <= 250) {
       this.setState({
         showReviewLink: false,
@@ -49,6 +51,32 @@ class IndividualReviewTile extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps !== this.props) {
+      if (this.props.currentReview.body.length <= 250) {
+        this.setState({
+          showReviewLink: false,
+          reviewToShow: this.props.currentReview.body,
+          //maybe adding these here and in else will cause it to update correctly
+          //can we add these to parent so it doesnt get reset?
+          helpfulCount: this.props.currentReview.helpfulness,
+          helpfulClicked: false,
+          report: 'Report',
+          reportClicked: false
+        });
+      } else {
+        this.setState({
+          showReviewLink: true,
+          reviewToShow: this.props.currentReview.body.slice(0, 251),
+          helpfulCount: this.props.currentReview.helpfulness,
+          helpfulClicked: false,
+          report: 'Report',
+          reportClicked: false
+        });
+      }
+    }
+  }
+
   showFullReview(e) {
     this.setState({
       reviewToShow: this.props.currentReview.body,
@@ -57,23 +85,28 @@ class IndividualReviewTile extends React.Component {
   }
 
   addHelpful() {
+
+    // INSTEAD OF TRACKING STATE - USE PROPS AND UPDATE THE VALUE IN THE PARENT COMPONENT
+
     // console.log(this.props.currentReview.review_id);
     if (this.state.helpfulClicked === false) {
       this.setState({
         helpfulClicked: true,
-        helpfulCount: this.state.helpfulCount + 1
+        // helpfulCount: this.state.helpfulCount + 1
       });
 
-      //address in server/api
-      // return new Promise((resolve, reject) => {
-      //   axios.request({
-      //     url: `api/reviews/${this.props.currentReview.review_id}/helpful`,
-      //     method: 'put',
-      //     baseURL: 'http://localhost:3000'
-      //   })
-      //     .then(() => resolve())
-      //     .catch(error => reject(error));
-      // });
+      // console.log(this.props.currentReview);
+      this.props.setHelpfulness(this.props.index);
+
+      return new Promise((resolve, reject) => {
+        axios.request({
+          url: `api/reviews/${this.props.currentReview.review_id}/helpful`,
+          method: 'put',
+          baseURL: 'http://localhost:3000'
+        })
+          .then(() => resolve())
+          .catch(error => reject(error));
+      });
     }
   }
 
@@ -82,6 +115,16 @@ class IndividualReviewTile extends React.Component {
       this.setState({
         reportClicked: true,
         report: 'Reported'
+      });
+
+      return new Promise((resolve, reject) => {
+        axios.request({
+          url: `api/reviews/${this.props.currentReview.review_id}/report`,
+          method: 'put',
+          baseURL: 'http://localhost:3000'
+        })
+          .then(() => resolve())
+          .catch(error => reject(error));
       });
     }
   }
@@ -100,6 +143,7 @@ class IndividualReviewTile extends React.Component {
       </div>
       <h4>{this.props.currentReview.summary.slice(0, 60)}</h4>
       <div>{this.state.reviewToShow}</div>
+      {/* <div>{this.props.currentReview.body}</div> */}
       {this.state.showReviewLink ? <div onClick={() => this.showFullReview()}><u>Show more</u></div> : null}
       <div>{this.props.currentReview.response}</div>
       <div className="photo-list">
@@ -110,7 +154,9 @@ class IndividualReviewTile extends React.Component {
         <div>Response from seller:</div>
         {this.props.currentReview.response}
       </div>) : null}
-      <div>Helpful? <span onClick={() => this.addHelpful()}><u>Yes</u> ({this.state.helpfulCount})</span> | <span onClick={() => this.addReport()}>{this.state.report}</span></div>
+      {/* <div>Helpful? <u>Yes</u> ({this.props.currentReview.helpfulness}) | <span>Report</span></div> */}
+      {/* <div>Helpful? <span onClick={() => this.addHelpful()}><u>Yes</u> ({this.state.helpfulCount})</span> | <span onClick={() => this.addReport()}>{this.state.report}</span></div> */}
+      <div>Helpful? <span onClick={() => this.addHelpful()}><u>Yes</u> ({this.props.currentReview.helpfulness})</span> | <span onClick={() => this.addReport()}>{this.state.report}</span></div>
     </div>);
   }
 }

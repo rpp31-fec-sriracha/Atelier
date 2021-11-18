@@ -14,6 +14,7 @@ class ReviewsList extends React.Component {
     };
 
     this.onClose = this.onClose.bind(this);
+    // this.setHelpfulness = this.setHelpfulness.bind(this);
   }
 
   moreReviews() {
@@ -25,6 +26,24 @@ class ReviewsList extends React.Component {
   onClose() {
     this.setState({newReviewOpen: false});
   }
+
+  // setHelpfulness(index) {
+  //   console.log('updating');
+
+  //   console.log(index);
+  //   console.log(this.props.reviews[index]);
+
+  //   console.log(this.props);
+
+
+  //   // let reviewCopy = review;
+  //   // reviewCopy.helpfulness = reviewCopy.helpfulness + 1;
+  //   // console.log(review);
+  //   // console.log(this.props.key);
+  //   // review.setState({
+  //   //   helpfulness: review.helpfulness + 1
+  //   // });
+  // }
 
   render() {
     if (this.props.reviews.length === 0) {
@@ -41,7 +60,7 @@ class ReviewsList extends React.Component {
     return (<div className="reviewsList">
       <div id={'scrollable-reviews'}>
         {this.props.reviews.slice(0, this.state.numReviewsVisible).map((review, i) => {
-          return <IndividualReviewTile key={i} currentReview={review} />;
+          return <IndividualReviewTile key={i} index={i} currentReview={review} setHelpfulness={this.props.setHelpfulness}/>;
         })}
       </div>
       <div className="flex-row">
