@@ -5,7 +5,7 @@ const httpRequest = {
     return new Promise((resolve, reject) => {
       axios
         .request({
-          url: 'api/qa/questions',
+          url: '/api/qa/questions',
           method: 'get',
           params: {
             product_id: currentProductId,
@@ -93,7 +93,7 @@ const httpRequest = {
     }
     return new Promise((resolve, reject) => {
       axios.request({
-        url: `api/qa/${endpoint}/${id}/helpful`,
+        url: `/api/qa/${endpoint}/${id}/helpful`,
         method: 'put'
       })
         .then((r) => resolve())
@@ -113,7 +113,7 @@ const httpRequest = {
     }
     return new Promise((resolve, reject) => {
       axios.request({
-        url: `api/qa/${endpoint}/${id}/report`,
+        url: `/api/qa/${endpoint}/${id}/report`,
         method: 'put'
       })
         .then(() => resolve())

@@ -322,6 +322,10 @@ input[type=range] {
   padding-left: 15px;
 }
 
+.list-container {
+  max-height: 300px;
+  overflow-y: scroll;
+}
 .add-answer {
   color:black;
 }

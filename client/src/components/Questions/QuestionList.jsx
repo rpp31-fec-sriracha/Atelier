@@ -11,7 +11,7 @@ const QuestionList = function ({ questions, productInfo, handleAddQuestion, hand
 
   const handleSearch = (term) => {
     if (term.length >= 2) {
-      const result = questions.filter(q => q.question_body.includes(term));
+      const result = questions.filter(q => q.question_body.toLowerCase().includes(term));
       setFilter(result);
       setMode(true);
     } else {
@@ -26,33 +26,51 @@ const QuestionList = function ({ questions, productInfo, handleAddQuestion, hand
   const closeModal = () => {
     setModal(false);
   };
+  const handleClick = (e) => {
+    if (visibleCount >= questions.length) {
+      e.preventDefault();
+    } else {
+      setVisibleCount(visibleCount + 2);
+    }
+  };
+  const renderButton = () => {
+    if (visibleCount >= questions.length) {
+      return <div></div>;
+    } else if (questions.length > 2) {
+      return <button className="col-1-3 add-q b-left" onClick={handleClick}>MORE ANSWERED QUESTIONS</button>;
+    } else {
+      return <div></div>;
+    }
+  };
 
   return (
     <React.Fragment>
       <SearchQuestions handleSearch={handleSearch} />
       {(mode) ?
-        <div className="list-container">
-          {(filteredQuestions.length > 0) ?
-            filteredQuestions.slice(0, visibleCount).map((question, i) =>
-              <QuestionEntry role="single-question" key={i} question={question} productInfo={productInfo} handleAddAnswer={handleAddAnswer} />)
-            : <div></div>}
+        <div>
+          <div className="list-container">
+            {(filteredQuestions.length > 0) ?
+              filteredQuestions.slice(0, visibleCount).map((question, i) =>
+                <QuestionEntry role="single-question" key={i} question={question} productInfo={productInfo} handleAddAnswer={handleAddAnswer} />)
+              : <div></div>}
+          </div>
           <div className="buttons">
             {(filteredQuestions.length > 2) ?
-              <button className="col-1-3 add-q b-left" onClick={() => setVisibleCount(visibleCount + 2)}>MORE ANSWERED QUESTIONS</button>
+              <button className="col-1-3 add-q b-left" onClick={handleClick}>MORE ANSWERED QUESTIONS</button>
               : <div></div>}
             <span className="_divider"></span>
             <button className="add-q b-right" onClick={() => openModal()}>ADD A QUESTION +</button>
           </div>
         </div> :
-        <div className="list-container">
-          {(questions.length > 0) ?
-            questions.slice(0, visibleCount).map((question, i) =>
-              <QuestionEntry role="single-question" key={i} question={question} productInfo={productInfo} handleAddAnswer={handleAddAnswer} />)
-            : <div></div>}
-          <div className="buttons">
-            {(questions.length > 2) ?
-              <button className="col-1-3 add-q b-left" onClick={() => setVisibleCount(visibleCount + 2)}>MORE ANSWERED QUESTIONS</button>
+        <div>
+          <div className="list-container">
+            {(questions.length > 0) ?
+              questions.slice(0, visibleCount).map((question, i) =>
+                <QuestionEntry role="single-question" key={i} question={question} productInfo={productInfo} handleAddAnswer={handleAddAnswer} />)
               : <div></div>}
+          </div>
+          <div className="buttons">
+            {renderButton()}
             <span className="_divider"></span>
             <button className="add-q b-right" onClick={() => openModal()}>ADD A QUESTION +</button>
           </div>

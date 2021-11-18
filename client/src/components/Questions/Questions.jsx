@@ -62,7 +62,6 @@ class Questions extends React.Component {
             role="q-list"
             questions={questions}
             productInfo={productInfo}
-            handleSearch={this.handleSearch.bind(this)}
             handleAddQuestion={this.handleAddQuestion.bind(this)}
             handleAddAnswer={this.handleAddAnswer.bind(this)}
           />
