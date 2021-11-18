@@ -30,6 +30,35 @@ class RatingBreakdown extends React.Component {
     this.removeFilters = this.removeFilters.bind(this);
   }
 
+  componentDidMount() {
+    let starCounter = {
+      5: 0,
+      4: 0,
+      3: 0,
+      2: 0,
+      1: 0
+    };
+
+    for (var review of this.props.reviews) {
+      starCounter[review.rating]++;
+    }
+
+    // console.log('countertest', starCounter[3]);
+    this.setState({
+      fiveStarCount: starCounter[5],
+      fourStarCount: starCounter[4],
+      threeStarCount: starCounter[3],
+      twoStarCount: starCounter[2],
+      oneStarCount: starCounter[1],
+    });
+
+
+    // setTimeout(() => {
+    //   console.log('test', this.state);
+    //   console.log(this.state.fourStarCount);
+    // }, 1000);
+  }
+
   calculateAverage() {
 
     console.log(this.props);
@@ -47,9 +76,15 @@ class RatingBreakdown extends React.Component {
       starCounter[review.rating]++;
     }
 
-    this.state({
+    // this.state.fiveStarCount = starCounter[5];
+    // this.setState({
+    //   fiveStarCount: starCounter[5],
+    //   fourStarCount: starCounter[4],
+    //   threeStarCount: starCounter[3],
+    //   twoStarCount: starCounter[2],
+    //   oneStarCount: starCounter[1],
 
-    });
+    // });
 
     console.log('stars', starCounter);
 
