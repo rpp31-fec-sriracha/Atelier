@@ -272,6 +272,7 @@ input[type=range] {
 .answers {
   display: flex;
   flex-direction: column;
+  margin-bottom: 10px;
 }
 .answer-flex-row {
   display: flex;
@@ -322,9 +323,19 @@ input[type=range] {
   padding-left: 15px;
 }
 
-.list-container {
-  max-height: 300px;
+.q-container {
+  max-height: 350px;
   overflow-y: scroll;
+}
+.q-container::-webkit-scrollbar {
+  display: none;
+}
+.a-container {
+  max-height: 150px;
+  overflow-y: scroll;
+}
+.a-container::-webkit-scrollbar {
+  display: none;
 }
 .add-answer {
   color:black;

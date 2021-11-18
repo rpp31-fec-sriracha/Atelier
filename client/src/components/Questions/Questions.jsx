@@ -1,7 +1,5 @@
 import React from 'react';
 import QuestionList from './QuestionList.jsx';
-
-
 import httpRequest from './httpRequest.js';
 
 class Questions extends React.Component {
@@ -18,7 +16,7 @@ class Questions extends React.Component {
     httpRequest.getQuestion(currentProductId)
       .then((data) =>
         this.setState({
-          questions: data
+          questions: data.sort((a, b) => b.question_helpfulness - a.question_helpfulness)
         })
       )
       .catch((error) => console.log(error));

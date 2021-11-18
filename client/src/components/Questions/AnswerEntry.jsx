@@ -10,13 +10,13 @@ const AnswerEntry = ({ answer }) => {
 
   const handleReport = (id, subject) => {
     httpRequest.report(id, subject)
-      .then(() => setReport('Reported'))
+      .then(setReport('Reported'))
       .catch((error) => window.alert(error));
   };
 
   const handleMark = (id, subject) => {
     httpRequest.mark(id, subject)
-      .then(() => setMark(mark + 1))
+      .then(setMark(mark + 1))
       .catch((error) => window.alert(error));
   };
 
@@ -28,7 +28,7 @@ const AnswerEntry = ({ answer }) => {
           {answer.photos.map((photo, i) => <img className="photos" key={i} src={photo}></img>)}
         </div>
         <div className="userInfos">
-          <span data-testid="answerer-name">by {answer.answerer_name}, </span>
+          <span data-testid="answerer-name">by {(answer.answerer_name.toLowerCase() === 'seller') ? <b>{answer.answerer_name}</b> : answer.answerer_name}, </span>
           <span data-testid="date">{new Intl.DateTimeFormat('en-US', options).format(Date.parse(answer.date))}</span>
           <span className="_divider">|</span>
           <span data-testid="answerer_name">Helpful?</span>

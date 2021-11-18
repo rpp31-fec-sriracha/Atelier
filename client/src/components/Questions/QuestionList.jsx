@@ -34,12 +34,14 @@ const QuestionList = function ({ questions, productInfo, handleAddQuestion, hand
     }
   };
   const renderButton = () => {
-    if (visibleCount >= questions.length) {
-      return <div></div>;
-    } else if (questions.length > 2) {
-      return <button className="col-1-3 add-q b-left" onClick={handleClick}>MORE ANSWERED QUESTIONS</button>;
+    if (questions.length > 2) {
+      if (visibleCount >= questions.length) {
+        return null;
+      } else {
+        return <button className="col-1-3 add-q b-left" onClick={handleClick}>MORE ANSWERED QUESTIONS</button>;
+      }
     } else {
-      return <div></div>;
+      return null;
     }
   };
 
@@ -48,7 +50,7 @@ const QuestionList = function ({ questions, productInfo, handleAddQuestion, hand
       <SearchQuestions handleSearch={handleSearch} />
       {(mode) ?
         <div>
-          <div className="list-container">
+          <div className="q-container">
             {(filteredQuestions.length > 0) ?
               filteredQuestions.slice(0, visibleCount).map((question, i) =>
                 <QuestionEntry role="single-question" key={i} question={question} productInfo={productInfo} handleAddAnswer={handleAddAnswer} />)
@@ -63,7 +65,7 @@ const QuestionList = function ({ questions, productInfo, handleAddQuestion, hand
           </div>
         </div> :
         <div>
-          <div className="list-container">
+          <div className="q-container">
             {(questions.length > 0) ?
               questions.slice(0, visibleCount).map((question, i) =>
                 <QuestionEntry role="single-question" key={i} question={question} productInfo={productInfo} handleAddAnswer={handleAddAnswer} />)
