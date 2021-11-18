@@ -60,8 +60,6 @@ class RatingBreakdown extends React.Component {
   }
 
   calculateAverage() {
-
-    console.log(this.props);
     let starCounter = {
       5: 0,
       4: 0,
@@ -83,11 +81,7 @@ class RatingBreakdown extends React.Component {
     //   threeStarCount: starCounter[3],
     //   twoStarCount: starCounter[2],
     //   oneStarCount: starCounter[1],
-
     // });
-
-    console.log('stars', starCounter);
-
 
     let fiveCount = (parseInt(this.state.fiveStarCount) * 5) || 0;
     let fourCount = (parseInt(this.state.fourStarCount) * 4) || 0;

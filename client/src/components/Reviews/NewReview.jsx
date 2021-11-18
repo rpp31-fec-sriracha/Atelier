@@ -14,7 +14,7 @@ class NewReview extends React.Component {
       minReviewLength: false,
       recommend: true,
       currentCharacteristic: 'none selected',
-      characteristics: {},
+      characteristics: {}
     };
 
     // this.handleFormSubmit = this.props.updateSortType.bind(this);
@@ -83,8 +83,93 @@ class NewReview extends React.Component {
     let newCharacteristics = this.state.characteristics;
     newCharacteristics[selectedID] = Number(e.target.value);
 
+    // console.log(e.target.name);
+    // console.log(e.target.value);
+    let description = null;
+
+    switch (e.target.name) {
+    case ('Size'):
+      if (e.target.value === '5') {
+        description = 'A size too wide';
+      } else if (e.target.value === '4') {
+        description = '1/2 a size too big';
+      } else if (e.target.value === '3') {
+        description = 'Perfect';
+      } else if (e.target.value === '2') {
+        description = '1/2 a size too small';
+      } else {
+        description = 'A size too small';
+      }
+      break;
+    case ('Width'):
+      if (e.target.value === '5') {
+        description = 'Too wide';
+      } else if (e.target.value === '4') {
+        description = 'Slightly wide';
+      } else if (e.target.value === '3') {
+        description = 'Perfect';
+      } else if (e.target.value === '2') {
+        description = 'Slightly narrow';
+      } else {
+        description = 'Too narrow';
+      }
+      break;
+    case ('Comfort'):
+      if (e.target.value === '5') {
+        description = 'Perfect';
+      } else if (e.target.value === '4') {
+        description = 'Comfortable';
+      } else if (e.target.value === '3') {
+        description = 'Ok';
+      } else if (e.target.value === '2') {
+        description = 'Slightly uncomfortable';
+      } else {
+        description = 'Uncomfortable';
+      }
+      break;
+    case ('Quality'):
+      if (e.target.value === '5') {
+        description = 'Perfect';
+      } else if (e.target.value === '4') {
+        description = 'Pretty great';
+      } else if (e.target.value === '3') {
+        description = 'What I expected';
+      } else if (e.target.value === '2') {
+        description = 'Below average';
+      } else {
+        description = 'Poor';
+      }
+      break;
+    case ('Length'):
+      if (e.target.value === '5') {
+        description = 'Runs long';
+      } else if (e.target.value === '4') {
+        description = 'Runs slightly long';
+      } else if (e.target.value === '3') {
+        description = 'Perfect';
+      } else if (e.target.value === '2') {
+        description = 'Runs slightly short';
+      } else {
+        description = 'Runs short';
+      }
+      break;
+    case ('Fit'):
+      if (e.target.value === '5') {
+        description = 'Runs long';
+      } else if (e.target.value === '4') {
+        description = 'Runs slightly long';
+      } else if (e.target.value === '3') {
+        description = 'Perfect';
+      } else if (e.target.value === '2') {
+        description = 'Runs slightly tight';
+      } else {
+        description = 'Runs tight';
+      }
+      break;
+    }
+
     this.setState({
-      currentCharacteristic: e.target.value,
+      currentCharacteristic: description,
       characteristics: newCharacteristics
     });
   }

@@ -37,7 +37,6 @@ class IndividualReviewTile extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.index);
     if (this.props.currentReview.body.length <= 250) {
       this.setState({
         showReviewLink: false,
