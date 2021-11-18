@@ -14,7 +14,8 @@ class NewReview extends React.Component {
       minReviewLength: false,
       recommend: true,
       currentCharacteristic: 'none selected',
-      characteristics: {}
+      characteristics: {},
+      starDescription: null
     };
 
     // this.handleFormSubmit = this.props.updateSortType.bind(this);
@@ -52,6 +53,11 @@ class NewReview extends React.Component {
     this.setState({
       rating: Number(e.target.value)
     });
+
+    this.setState({
+      starDescription: e.target.name
+    });
+
   }
 
   setName(e) {
@@ -219,25 +225,26 @@ class NewReview extends React.Component {
               <div onChange={this.setRating}>
                 <label>Overall rating</label><span id="mandatory-asterisk">*</span>
                 <label>
-                  <input type="radio" id="1" name="rating" value="1"></input>
+                  <input type="radio" id="1" name="Poor" value="1"></input>
                   1
                 </label>
                 <label>
-                  <input type="radio" id="2" name="rating" value="2"></input>
+                  <input type="radio" id="2" name="Fair" value="2"></input>
                   2
                 </label>
                 <label>
-                  <input type="radio" id="3" name="rating" value="3"></input>
+                  <input type="radio" id="3" name="Average" value="3"></input>
                   3
                 </label>
                 <label>
-                  <input type="radio" id="4" name="rating" value="4"></input>
+                  <input type="radio" id="4" name="Good" value="4"></input>
                   4
                 </label>
                 <label>
-                  <input type="radio" id="5" name="rating" value="5"></input>
+                  <input type="radio" id="5" name="Great" value="5"></input>
                   5
                 </label>
+                <span>{this.state.starDescription}</span>
               </div>
               <div onChange={this.setRecommend}>
                 <label>Do you recommend this product?</label><span id="mandatory-asterisk">*</span>
