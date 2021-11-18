@@ -26,6 +26,12 @@ html {
 .col-2-3 {
   width: 66%
 }
+
+.width-100-min-0 {
+  width: 100%;
+  min-width: 0;
+}
+
 /* End of styling classes */
 
 body {
@@ -92,15 +98,20 @@ header {
 
 #image-gallery {
   background-size: contain;
-  background-position: top;
+  background-position: center;
   width: 100%;
   min-width: 0;
+  background-color: #f9f9f9;
+}
+.extended {
+  position: absolute;
+  width: 100%;
 }
 
 .fa-expand {
   font-size: 2em;
   margin-left: auto;
-  text-shadow: 1px 2px 3px #000;
+  text-shadow: 2px 3px 5px #000;
   color: lightgray;
 }
 
@@ -125,7 +136,6 @@ header {
 #main-image {
   width: 60%;
   max-height: 100%;
-  min-width: 100%;
   min-width: 100%;
 }
 
@@ -193,8 +203,24 @@ header {
   background-color: transparent;
 }
 
+.fa-chevron-left, .fa-chevron-right {
+  font-size: 2em;
+}
+
 .photo-nav {
-  min-width: 100%;
+  /* min-width: 66%; */
+  width: 100%;
+}
+
+.expand-container {
+  display: flex;
+}
+
+.arrow-container {
+  display: flex;
+  height: 85%;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .questions {

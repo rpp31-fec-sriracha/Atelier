@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Thumbnail = function (props) {
   let currentThumbId = parseInt(props.thumbId.replace('thumb', ''), 10);
@@ -16,7 +16,9 @@ const Thumbnail = function (props) {
 };
 
 const ImageGallery = function (props) {
-  const { extended, setExtended } = useState(false);
+  const [extended, setExtended] = useState(false);
+  let currentClass;
+  useEffect(() => { currentClass = extended ? 'extended' : 'flex-row'; }, [extended]);
 
   let thumbs = props.currentStyle.photos.map((photo) => (photo.thumbnail_url));
   let thumbList = thumbs.map((t, index) => {
@@ -30,7 +32,7 @@ const ImageGallery = function (props) {
     }
   });
 
-  return (<div className={extended ? 'extended' : 'flex-row'} id="image-gallery"
+  return (<div className={currentClass} id="image-gallery"
     style={{
       backgroundImage: `url(${props.currentStyle.photos[props.selectedThumb].url})`,
       backgroundRepeat: 'no-repeat'
@@ -45,10 +47,10 @@ const ImageGallery = function (props) {
       </div>
     </div>
     <div className="photo-nav">
-      <div className="expand-container"><i className="fas fa-expand"></i></div>
-      <div className="arrow-container">
-        <i className="fas fa-chevron-left"></i>
-        <i className="fas fa-chevron-right"></i>
+      <div className="expand-container width-100-min-0"><i onClick={setExtended(!extended)} className="fas fa-expand"></i></div>
+      <div className="arrow-container width-100-min-0">
+        <i onClick={props.handleArrowUp} className="fas fa-chevron-left"></i>
+        <i onClick={props.handleArrowDown} className="fas fa-chevron-right"></i>
       </div>
     </div>
   </div>);
