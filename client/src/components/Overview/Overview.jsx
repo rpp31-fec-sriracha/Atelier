@@ -85,8 +85,8 @@ class Overview extends React.Component {
   }
 
   componentDidMount() {
-    let productIds = products.map((p) => p.id);
-    console.log(productIds);
+    // let productIds = products.map((p) => p.id);
+    // console.log(productIds);
 
     axios.get('/api/cart')
       .then((response) => {
