@@ -1,5 +1,5 @@
 const axios = require('axios');
-const API_KEY = require('./config.js');
+const { API_KEY } = require('./config.js');
 const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
 
 const apiCall = function(endpoint, params, callback) {
@@ -24,7 +24,6 @@ const apiWrap = function(method, endpoint, params, body, callback) {
     })
     .catch((err) => callback(err, null));
 };
-
 
 const defaultParams = { responseType: 'json' };
 
@@ -85,28 +84,76 @@ const addReview = (data, callback) => {
     });
 };
 
-// function for marking review as helpful
-
-const getQuestions = (productId, page, count, callback) => {
-  apiCall('/qa/questions', {
-    // eslint-disable-next-line camelcase
-    product_id: productId,
-    page: page,
-    count: count
-  },
-  callback);
+// POST & REQUEST FOR Q&A
+const report = (endpoint, id) => {
+  return new Promise((resolve, reject) => {
+    axios.request({
+      method: 'put',
+      url: `/qa/${endpoint}/${id}/report`,
+      headers: { 'Authorization': API_KEY },
+      baseURL: url
+    })
+      .then(resolve())
+      .catch((err) => reject(err));
+  });
+};
+const markHelpful = (endpoint, id) => {
+  return new Promise((resolve, reject) => {
+    axios.request({
+      method: 'put',
+      url: `/qa/${endpoint}/${id}/helpful`,
+      headers: { 'Authorization': API_KEY },
+      baseURL: url
+    })
+      .then(resolve())
+      .catch((err)=> reject(err));
+  });
+};
+const addQuestion = (data) => {
+  return new Promise((resolve, reject) => {
+    axios.request({
+      method: 'post',
+      url: '/qa/questions',
+      headers: { 'Authorization': API_KEY },
+      baseURL: url,
+      data: data,
+    })
+      .then(resolve())
+      .catch((err) => reject(err));
+  });
+};
+const addAnswer = (questionId, data) => {
+  return new Promise((resolve, reject) => {
+    axios.request({
+      method: 'post',
+      url: `/qa/questions/${questionId}/answers`,
+      headers: { 'Authorization': API_KEY },
+      baseURL: url,
+      data: data,
+    })
+      .then(resolve())
+      .catch((err) => reject(err));
+  });
 };
 
-const getAnswers = (questionId, page, count, callback) => {
-  apiCall(`/qa/questions/${questionId}/answers`,
-    {
-      page: page,
-      count: count
-    },
-    callback);
-};
+// const getQuestions = (productId, page, count, callback) => {
+//   apiCall('/qa/questions', {
+//     // eslint-disable-next-line camelcase
+//     product_id: productId,
+//     page: page,
+//     count: count
+//   },
+//   callback);
+// };
 
-// need to add POST functions for QA
+// const getAnswers = (questionId, page, count, callback) => {
+//   apiCall(`/qa/questions/${questionId}/answers`,
+//     {
+//       page: page,
+//       count: count
+//     },
+//     callback);
+// };
 
 
 module.exports = {
@@ -118,6 +165,10 @@ module.exports = {
   getReviews,
   getReviewMeta,
   addReview,
-  getQuestions,
-  getAnswers,
+  // getQuestions,
+  // getAnswers,
+  addQuestion,
+  addAnswer,
+  markHelpful,
+  report
 };

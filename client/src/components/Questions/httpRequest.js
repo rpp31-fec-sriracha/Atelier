@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { UPLOADCARE_KEY } from './../../../../server/config.js';
 
 const httpRequest = {
   getQuestion: (currentProductId) => {
@@ -7,9 +8,9 @@ const httpRequest = {
         .request({
           url: '/api/qa/questions',
           method: 'get',
-          baseURL: 'http://localhost:3000',
           params: {
-            product_id: currentProductId
+            product_id: currentProductId,
+            count: 20
           }
         })
         .then(q => resolve(q.data.results))
@@ -21,8 +22,7 @@ const httpRequest = {
       axios
         .request({
           url: `/api/qa/questions/${questionId}/answers`,
-          method: 'get',
-          baseURL: 'http://localhost:3000'
+          method: 'get'
         })
         .then(data => resolve(data))
         .catch(error => reject(error));
@@ -32,23 +32,24 @@ const httpRequest = {
     return new Promise((resolve, reject) => {
       axios
         .request({
-          url: `/api/qa/questions/${questionId}/answers`,
+          url: '/addAnswer',
           method: 'post',
-          baseURL: 'http://localhost:3000',
           data: {
+            id: questionId,
             body: newAnswer.answer,
             name: newAnswer.nickname,
             email: newAnswer.email,
             photos: newAnswer.urls
-          }
+          },
         })
-        .then(() => resolve('Thank you for submitting your answer!'))
-        .catch(error => reject(error));
+        .then(resolve('Thank you for submitting your answer!'))
+        .catch(error =>reject(error)
+        );
     });
   },
   uploadFile: (file) => {
     const form = new FormData();
-    form.append('UPLOADCARE_PUB_KEY', 'ecfa3a2606581daba823');
+    form.append('UPLOADCARE_PUB_KEY', UPLOADCARE_KEY);
     form.append('UPLOADCARE_STORE', 'auto');
     form.append('file', file);
 
@@ -69,17 +70,16 @@ const httpRequest = {
     return new Promise((resolve, reject) => {
       axios
         .request({
-          url: '/api/qa/questions',
+          url: '/addQuestion',
           method: 'post',
-          baseURL: 'http://localhost:3000',
           data: {
             body: q.question,
             name: q.nickname,
             email: q.email,
-            product_id: currentProductId
+            product_id: Number(currentProductId)
           }
         })
-        .then(() => resolve('Thank you for submitting your question!'))
+        .then(resolve('Thank you for submitting your question!'))
         .catch(error => reject(error));
     });
   },
@@ -96,11 +96,14 @@ const httpRequest = {
     }
     return new Promise((resolve, reject) => {
       axios.request({
-        url: `api/qa/${endpoint}/${id}/helpful`,
+        url: '/helpful',
         method: 'put',
-        baseURL: 'http://localhost:3000'
+        params: {
+          endpoint: endpoint,
+          id: id
+        }
       })
-        .then(() => resolve())
+        .then(resolve())
         .catch(error => reject(error));
     });
   },
@@ -117,18 +120,17 @@ const httpRequest = {
     }
     return new Promise((resolve, reject) => {
       axios.request({
-        url: `api/qa/${endpoint}/${id}/report`,
+        url: '/report',
         method: 'put',
-        baseURL: 'http://localhost:3000'
+        params: {
+          endpoint: endpoint,
+          id: id
+        }
       })
-        .then(() => resolve())
+        .then(resolve())
         .catch(error => reject(error));
     });
-  },
-  searchQuestion: () => {
-
   }
 };
-
 
 export default httpRequest;

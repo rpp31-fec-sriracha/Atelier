@@ -1,7 +1,6 @@
 import React from 'react';
 import Overview from './components/Overview/Overview.jsx';
 import Questions from './components/Questions/Questions.jsx';
-// import productInfo from './components/Questions/dummyData.js';
 import Reviews from './components/Reviews/Reviews.jsx';
 import axios from 'axios';
 

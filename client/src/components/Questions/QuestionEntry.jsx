@@ -20,25 +20,58 @@ class QuestionEntry extends React.Component {
   closeModal() {
     this.setState({ isOpen: false });
   }
-
   handleMark(id, subject) {
     httpRequest.mark(id, subject)
-      .then(() => this.setState({
-        mark: this.props.question.question_helpfulness + 1
-      }))
+      .then(this.setState({ mark: this.props.question.question_helpfulness + 1 }))
       .catch((error) => window.alert(error));
   }
-
   handleCount() {
     this.setState({
       markCount: this.state.markCount + 1,
     });
   }
+  handleClick(e) {
+    const { visibleCount } = this.state;
+
+    if (visibleCount >= Object.values(this.props.question.answers).length) {
+      e.preventDefault();
+      this.setState({ visibleCount: 2 });
+    } else {
+      this.setState({ visibleCount: this.state.visibleCount + 2 });
+    }
+  }
+  renderButton() {
+    const { visibleCount } = this.state;
+
+    if ([0, 1, 2].includes(Object.values(this.props.question.answers).length)) {
+      return null;
+    } else if (Object.values(this.props.question.answers).length > 2) {
+      if (visibleCount >= Object.values(this.props.question.answers).length) {
+        return <button className="load-more-a" onClick={this.handleClick.bind(this)}>COLLAPSE ANSWERS</button>;
+      } else {
+        return <button className="load-more-a" onClick={this.handleClick.bind(this)}>LOAD MORE ANSWERS</button>;
+      }
+    }
+  }
+  handleSort(answers) {
+    var result = [];
+    if (answers.length === 1) {
+      result.concat(answers);
+    } else {
+      answers.forEach((a, i) => {
+        if (a.answerer_name === 'Seller') {
+          result.push(a);
+          answers.splice(i, 1);
+        }
+      });
+    }
+    return result.concat(answers.sort((a, b) => b.helpfulness - a.helpfulness));
+  }
 
   render() {
     const { question, productInfo, handleAddAnswer } = this.props;
     const { isOpen, visibleCount, markCount, mark } = this.state;
-    // console.log(handleAddAnswer);
+
     return (
       <>
         <div className="question">
@@ -68,16 +101,12 @@ class QuestionEntry extends React.Component {
         <div className="answers">
           <div className="answer-flex-row">
             <div className="left">A:  </div>
-            <div>
-              {Object.values(question.answers).slice(0, visibleCount).map((answer, i) => {
+            <div className="a-container">
+              {this.handleSort(Object.values(question.answers)).slice(0, visibleCount).map((answer, i) => {
                 return <AnswerEntry key={i} answer={answer} />;
               })}
-              {(Object.values(question.answers).length > 2) ?
-                <button className="load-more-a" onClick={() => this.setState({ visibleCount: this.state.visibleCount + 2 })}>LOAD MORE ANSWERS</button>
-                : <div></div>
-              }
+              {this.renderButton()}
             </div>
-
           </div>
         </div>
       </>

@@ -1,7 +1,5 @@
 import React from 'react';
 import QuestionList from './QuestionList.jsx';
-import SearchQuestions from './SearchQuestions.jsx';
-
 import httpRequest from './httpRequest.js';
 
 class Questions extends React.Component {
@@ -18,15 +16,12 @@ class Questions extends React.Component {
     httpRequest.getQuestion(currentProductId)
       .then((data) =>
         this.setState({
-          questions: data
+          questions: data.sort((a, b) => b.question_helpfulness - a.question_helpfulness)
         })
       )
       .catch((error) => console.log(error));
   }
 
-  handleSearch(term) {
-    console.log(term);
-  }
   handleAddQuestion(question) {
     httpRequest
       .addQuestion(this.props.currentProductId, question)
@@ -49,7 +44,7 @@ class Questions extends React.Component {
         return result;
       })
       .then((result) => window.alert(result))
-      .catch((error) => conosle.log(error));
+      .catch((error) => console.log(error));
   }
 
   render() {
@@ -60,7 +55,7 @@ class Questions extends React.Component {
       <React.Fragment>
         <div className="questions flex-column">
           <p>QUESTIONS & ANSWERS</p>
-          <SearchQuestions handleSearch={this.handleSearch.bind(this)} />
+
           <QuestionList
             role="q-list"
             questions={questions}
