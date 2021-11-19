@@ -52,7 +52,7 @@ const AddToCart = function(props) {
 
       <div className="flex-row">
         <button>Add to Bag</button>
-        <button>STAR</button>
+        <button><i class="far fa-star"></i></button>
       </div>
     </form>
   );
