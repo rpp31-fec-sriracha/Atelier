@@ -87,49 +87,44 @@ class Overview extends React.Component {
   }
 
   componentDidMount() {
+    let cart;
+    let newState;
     axios.get('/api/cart')
-      .then((response) => {
-        this.setState({ cart: response.data });
-      })
-      .catch((e) => console.log(e));
-
-    this.setState((state, props) => {
-      let cart;
-      if (props.productStyles) {
-        for (let style of props.productStyles) {
+      .then((response) => { cart = response.data; })
+      .then(() => {
+        for (let style of this.props.productStyles) {
           if (style['default?']) {
-            let newStyle = !state.currentStyle ? style : state.currentStyle;
+            let newStyle = !this.state.currentStyle ? style : this.state.currentStyle;
 
-            return ({
+            newState = {
               defaultStyle: style,
               currentStyle: newStyle,
               cart: cart,
               loaded: true,
-            });
+            };
           }
         }
-      } else {
-        return state;
-      }
-    });
+        if (!newState) {
+          newState = {
+            defaultStyle: this.props.productStyles[0],
+            currentStyle: !this.state.currentStyle ? this.props.productStyles[0] : this.state.currentStyle,
+            cart: cart,
+            loaded: true,
+          };
+        }
+      })
+      .then(() => this.setState(newState))
+      .catch((e) => console.log(e));
   }
 
   componentDidUpdate() {
-    let { thumbStart, thumbEnd } = this.state;
-    let thumbs = this.state.currentStyle.photos.map((photo, index) => {
-      if (index >= thumbStart && index < thumbEnd) {
-        return photo.thumbnail_url;
-      }
-    });
-
     if (this.props.productStyles) {
       this.props.productStyles.map((style, index) => {
         if (this.state.selectedStyleId &&
           this.state.selectedStyleId === style.style_id &&
           this.state.currentStyle.style_id !== style.style_id) {
           this.setState({
-            currentStyle: style,
-            // currentThumbs: thumbs
+            currentStyle: style
           });
         }
       });
@@ -142,17 +137,20 @@ class Overview extends React.Component {
       return null;
     }
 
-    return (<Interactions displayName="Container" widget="Overview" children={
+    return (<Interactions widget="Overview" children={
       <div className="overview flex-column">
         <ProductInfo product={this.props.productInfo}
           averageReview={this.props.averageReview}
           styles={this.props.productStyles}
+          numReviews={this.props.numReviews}
+
           styleClick={this.handleStyleClick}
           thumbClick={this.handleThumbClick}
-          currentStyle={this.state.currentStyle}
           handleAddToCart={this.handleAddToCart}
           handleArrowDown={this.handleArrowDown}
           handleArrowUp={this.handleArrowUp}
+
+          currentStyle={this.state.currentStyle}
           defaultStyle={this.state.defaultStyle}
           selectedThumb={this.state.selectedThumb}
           thumbStart={this.state.thumbStart}

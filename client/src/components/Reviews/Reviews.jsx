@@ -113,7 +113,7 @@ class Reviews extends React.Component {
     }
 
     return (<div className="reviews-container">
-      <div><font size="+2">RATINGS & REVIEWS</font></div>
+      <div id="ratings-reviews"><font size="+2">RATINGS & REVIEWS</font></div>
       <div className="flex-row-reviews">
         <div className="flex-column">
           <div><RatingBreakdown metadata={this.state.meta} setAverageReview={this.props.setAverageReview}

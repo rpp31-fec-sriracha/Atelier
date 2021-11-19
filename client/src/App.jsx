@@ -22,22 +22,25 @@ class App extends React.Component {
 
   getProductInfo() {
     let { currentProductId } = this.state;
-    let product;
-    axios({
-      url: `/api/products/${currentProductId}`,
-      method: 'get',
-    })
-      .then((response) => product = response.data)
-      .then(() => {
-        return axios({
-          url: `/api/products/${currentProductId}/styles`,
-          method: 'get',
-        });
+
+    let productRequests = [
+      axios({
+        url: `/api/products/${currentProductId}`,
+        method: 'get',
+      }),
+      axios({
+        url: `/api/products/${currentProductId}/styles`,
+        method: 'get',
       })
-      .then((response) => this.setState( {
-        productInfo: product,
-        productStyles: response.data.results,
-        productLoaded: true
+    ];
+
+    axios.all(productRequests)
+      .then(axios.spread((product, styles) => {
+        this.setState({
+          productInfo: product.data,
+          productStyles: styles.data.results,
+          productLoaded: true
+        });
       }))
       .catch((err) => console.log(err));
   }
@@ -59,11 +62,11 @@ class App extends React.Component {
   }
 
   render() {
-    const { averageReview, currentProductId, productInfo, productStyles} = this.state;
+    const { averageReview, currentProductId, productInfo, productStyles, numReviews} = this.state;
     return (<div className="appContainer">
       {(this.state.productLoaded) ?
         <>
-          <Overview productInfo={productInfo} productStyles={productStyles} averageReview={averageReview} currentProductId={currentProductId} />
+          <Overview productInfo={productInfo} productStyles={productStyles} averageReview={averageReview} currentProductId={currentProductId} numReviews={numReviews} />
           <Questions currentProductId={currentProductId} productInfo={productInfo.name} />
           <Reviews currentProductId={currentProductId} productName={productInfo.name}
             setAverageReview={this.setAverageReview} averageStars={this.state.averageReview}
