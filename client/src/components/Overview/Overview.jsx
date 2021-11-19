@@ -69,7 +69,6 @@ class Overview extends React.Component {
   }
 
   handleArrowUp(e) {
-    console.log('clicking up!!!');
     let { selectedThumb, thumbStart, thumbEnd, currentStyle } = this.state;
     if (selectedThumb > 0) {
       selectedThumb--;
