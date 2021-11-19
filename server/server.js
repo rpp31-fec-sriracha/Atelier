@@ -6,7 +6,7 @@ const api = require('./api.js');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.resolve(__dirname, '../client/dist')));
-app.use(/\/\d+/, express.static(path.resolve(__dirname, '../client/dist')));
+app.use(/^\/\d+/, express.static(path.resolve(__dirname, '../client/dist')));
 
 app.use((req, res, next) => {
   console.log(req.method, req.url);
