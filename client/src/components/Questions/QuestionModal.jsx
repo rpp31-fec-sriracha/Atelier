@@ -85,7 +85,7 @@ const QuestionModal = ({ isOpen, productInfo, handleAddQuestion, closeModal }) =
                 <br/>
                 <label style={{ marginBottom: '5px'}}>Your email<span className="mandatory">*</span></label>
                 <input style={(invalid && !values['email']) ? { border: 'red solid 1px' } : { border: '#e6e6e6 solid 1px' }}
-                  name="email" required maxLength="60" onFocus={handleFocus} onBlur={handleBlur} placeholder="Why did you like the product or not?"
+                  name="email" required maxLength="60" onFocus={handleFocus} onBlur={handleBlur} placeholder="Example: jack@email.com"
                   className="input-field" type="email" onChange={handleChange}></input>
                 <div className="popup-message">{messages['notification2']}</div>
               </div>
