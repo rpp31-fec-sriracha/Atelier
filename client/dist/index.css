@@ -258,12 +258,71 @@ progress {
     background: green;
 }
 
+.three-quarters-star {
+  background: linear-gradient(
+    to right,
+    black 0%,
+    black 75%,
+    white 75%,
+    white  100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.half-star {
+  background: linear-gradient(
+    to right,
+    black 0%,
+    black 50%,
+    white 50%,
+    white  100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  }
+
+.quarter-star {
+  background: linear-gradient(
+    to right,
+    black 0%,
+    black 25%,
+    white 25%,
+    white  100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 input[type=range] {
-  width: 75%;
+  width: 100%;
+}
+
+#scrollable-reviews {
+  overflow-y: auto;
+  max-height: 800px;
+}
+
+.seller-response {
+  background-color: lightgray;
+}
+
+/* .individual-review-tile {
+  max-width: 40%;
+} */
+
+.individual-reviews {
+  width: 40%;
+}
+
+.rating-breakdown {
+ margin-bottom: 25px;
 }
 
 .individual-review-tile {
   border-bottom: 2px solid black;
+  padding-bottom: 10px;
+  margin-bottom: 25px;
 }
 
 .modal {

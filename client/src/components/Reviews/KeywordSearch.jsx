@@ -1,5 +1,5 @@
 import React from 'react';
-
+//Future implementation
 class KeywordSearch extends React.Component {
   constructor(props) {
     super(props);
@@ -11,7 +11,8 @@ class KeywordSearch extends React.Component {
 
   render() {
     return (<div className="keywordSearch">
-      <div>'Keyword Search Bar'</div>
+      {/* <div>'Keyword Search Bar'</div> */}
+      <div></div>
     </div>);
   }
 }
