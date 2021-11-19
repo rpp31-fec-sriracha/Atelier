@@ -8,11 +8,15 @@ class Interactions extends React.Component {
 
   render() {
     return (<div onClick={(e) => {
-      let element = e.target;
+      let element = e.target.outerHTML;
       let widget = this.props.widget;
-      let time = e.timeStamp;
+      let time = new Date(e.timeStamp).toISOString();
 
-      console.log('element', element, 'widget', widget, 'time', time);
+      axios.post('/api/interactions', { element, widget, time })
+        .then((response) => console.log(response))
+        .catch((error) => console.log(error));
+
+      // console.log({ element, widget, time });
     }}>{this.props.children}</div>);
   }
 }
