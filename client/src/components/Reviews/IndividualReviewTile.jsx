@@ -122,7 +122,7 @@ class IndividualReviewTile extends React.Component {
 
 
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     const options = {year: 'numeric', month: 'long', day: 'numeric'};
 
     return (<div className="individual-review-tile">
