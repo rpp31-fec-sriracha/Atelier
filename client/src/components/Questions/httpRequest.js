@@ -102,7 +102,7 @@ const httpRequest = {
           id: id
         }
       })
-        .then(() => resolve())
+        .then(resolve())
         .catch(error => reject(error));
     });
   },
@@ -126,7 +126,7 @@ const httpRequest = {
           id: id
         }
       })
-        .then(() => resolve())
+        .then(resolve())
         .catch(error => reject(error));
     });
   }
