@@ -1,4 +1,5 @@
 import axios from 'axios';
+import UPLOADCARE_KEY from './../../../../server/config.js';
 
 const httpRequest = {
   getQuestion: (currentProductId) => {
@@ -48,7 +49,7 @@ const httpRequest = {
   },
   uploadFile: (file) => {
     const form = new FormData();
-    form.append('UPLOADCARE_PUB_KEY', 'ecfa3a2606581daba823');
+    form.append('UPLOADCARE_PUB_KEY', UPLOADCARE_KEY);
     form.append('UPLOADCARE_STORE', 'auto');
     form.append('file', file);
 
