@@ -1,6 +1,8 @@
 import React from 'react';
+
 import ProductInfo from './ProductInfo.jsx';
 import ProductInfoBottom from './ProductInfoBottom.jsx';
+import Interactions from '../Interactions.jsx';
 import axios from 'axios';
 import products from './products.js';
 
@@ -87,7 +89,7 @@ class Overview extends React.Component {
   componentDidMount() {
     // let productIds = products.map((p) => p.id);
     // console.log(productIds);
-
+    console.log(typeof ProductInfo);
     axios.get('/api/cart')
       .then((response) => {
         this.setState({ cart: response.data });
@@ -138,30 +140,34 @@ class Overview extends React.Component {
   }
 
   render() {
+
     if (!this.state.loaded) {
       return null;
     }
 
-    return (<div className="overview flex-column">
-      <ProductInfo product={this.props.productInfo}
-        averageReview={this.props.averageReview}
-        styles={this.props.productStyles}
-        styleClick={this.handleStyleClick}
-        thumbClick={this.handleThumbClick}
-        currentStyle={this.state.currentStyle}
-        handleAddToCart={this.handleAddToCart}
-        handleArrowDown={this.handleArrowDown}
-        handleArrowUp={this.handleArrowUp}
-        defaultStyle={this.state.defaultStyle}
-        selectedThumb={this.state.selectedThumb}
-        thumbStart={this.state.thumbStart}
-        thumbEnd={this.state.thumbEnd} />
-      <ProductInfoBottom
-        slogan={this.props.productInfo.slogan}
-        description={this.props.productInfo.description}
-        features={this.props.productInfo.features} />
+    return (<Interactions children={
+      <div className="overview flex-column">
+        <ProductInfo product={this.props.productInfo}
+          averageReview={this.props.averageReview}
+          styles={this.props.productStyles}
+          styleClick={this.handleStyleClick}
+          thumbClick={this.handleThumbClick}
+          currentStyle={this.state.currentStyle}
+          handleAddToCart={this.handleAddToCart}
+          handleArrowDown={this.handleArrowDown}
+          handleArrowUp={this.handleArrowUp}
+          defaultStyle={this.state.defaultStyle}
+          selectedThumb={this.state.selectedThumb}
+          thumbStart={this.state.thumbStart}
+          thumbEnd={this.state.thumbEnd} />
+        <ProductInfoBottom
+          slogan={this.props.productInfo.slogan}
+          description={this.props.productInfo.description}
+          features={this.props.productInfo.features} />
 
-    </div>);
+      </div>
+    } />);
+
   }
 }
 
