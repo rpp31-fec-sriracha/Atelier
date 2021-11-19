@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.resolve(__dirname, '../client/dist')));
-app.use(/\/\d+/, express.static(path.resolve(__dirname, '../client/dist')));
+app.use(/^\/\d+/, express.static(path.resolve(__dirname, '../client/dist')));
 
 app.all('/api/*', (req, res, next) => {
   // console.log('ALL --->', req.method, req.url);
