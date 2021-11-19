@@ -9,7 +9,7 @@ class Slider extends React.Component {
   }
 
   renderSwitch(characteristic) {
-    // console.log(characteristic); - why is this rendering w
+    // console.log(characteristic); - why is this logging twice?
     switch (characteristic) {
     case ('Size'):
       return (

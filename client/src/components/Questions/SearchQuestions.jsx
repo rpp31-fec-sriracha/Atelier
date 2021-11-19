@@ -12,10 +12,7 @@ const SearchQuestions = ({ searchTerm, handleSearch }) => {
         value={search}
         onChange={(e) => {
           setSearch(e.target.value);
-          // only start filter when search.length >= 3
-          if (search.length >= 3) {
-            handleSearch(search);
-          }
+          handleSearch(search);
         }}></input>
     </>
   );

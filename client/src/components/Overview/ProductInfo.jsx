@@ -12,7 +12,11 @@ const ProductInfo = function(props) {
         <ImageGallery thumbClick={props.thumbClick}
           currentStyle={props.currentStyle}
           styles={props.styles}
-          selectedThumb={props.selectedThumb} /> :
+          selectedThumb={props.selectedThumb}
+          handleArrowDown={props.handleArrowDown}
+          handleArrowUp={props.handleArrowUp}
+          thumbStart={props.thumbStart}
+          thumbEnd={props.thumbEnd} /> :
         'Image Gallery'}
 
       <div className="flex-column" id="productInfoTop">

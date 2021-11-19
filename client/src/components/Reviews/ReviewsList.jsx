@@ -14,6 +14,7 @@ class ReviewsList extends React.Component {
     };
 
     this.onClose = this.onClose.bind(this);
+    // this.setHelpfulness = this.setHelpfulness.bind(this);
   }
 
   moreReviews() {
@@ -28,22 +29,31 @@ class ReviewsList extends React.Component {
 
   render() {
     if (this.props.reviews.length === 0) {
-      return <div></div>;
+      return (
+        <div>
+          {/* <h2>There are currently no reviews. Click below to add your own!</h2> */}
+          <button onClick={() => this.setState({ newReviewOpen: true })}>ADD A REVIEW +</button>
+          <NewReview productName={this.props.productName} open={this.state.newReviewOpen}
+            onClose={this.onClose} characteristics={this.props.characteristics} productID={this.props.productID}></NewReview>
+        </div>
+      );
     }
 
     return (<div className="reviewsList">
-      {this.props.reviews.slice(0, this.state.numReviewsVisible).map((review, i) => {
-        return <IndividualReviewTile key={i} currentReview={review} />;
-      })}
+      <div id={'scrollable-reviews'}>
+        {this.props.reviews.slice(0, this.state.numReviewsVisible).map((review, i) => {
+          return <IndividualReviewTile key={i} index={i} currentReview={review} setHelpfulness={this.props.setHelpfulness}/>;
+        })}
+      </div>
       <div className="flex-row">
-        <button onClick={() => this.moreReviews()}>MORE REVIEWS</button>
+        {(this.props.reviews.length > 2 && this.state.numReviewsVisible < this.props.reviews.length) ? <button onClick={() => this.moreReviews()}>MORE REVIEWS</button> : null}
         <div>
           <button onClick={() => this.setState({newReviewOpen: true})}>ADD A REVIEW +</button>
           <NewReview productName={this.props.productName} open={this.state.newReviewOpen}
             onClose={this.onClose} characteristics={this.props.characteristics} productID={this.props.productID}></NewReview>
         </div>
       </div>
-      <div><KeywordSearch/></div>
+      {/* <div><KeywordSearch/></div> */}
     </div>);
   }
 }

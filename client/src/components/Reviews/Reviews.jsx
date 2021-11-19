@@ -13,10 +13,15 @@ class Reviews extends React.Component {
       currentProduct: this.props.currentProductId,
       reviews: [],
       meta: {},
-      sortType: 'relevant'
+      sortType: 'relevant',
+      filteredReviews: [],
+      currentFilters: []
     };
 
     this.updateSortType = this.updateSortType.bind(this);
+    this.updateFilteredReviews = this.updateFilteredReviews.bind(this);
+    this.setHelpfulness = this.setHelpfulness.bind(this);
+    this.setCurrentFilters = this.setCurrentFilters.bind(this);
   }
 
   getReviews() {
@@ -41,12 +46,17 @@ class Reviews extends React.Component {
       .then((response) => {
         this.setState({
           reviews: response[0].data.results,
+          filteredReviews: response[0].data.results,
           meta: response[1].data
         });
+      })
+      .then(() => {
+        this.props.setNumReviews(this.state.reviews.length);
       })
       .catch((err) => {
         console.log(err);
       });
+
   }
 
   updateSortType(event) {
@@ -59,8 +69,40 @@ class Reviews extends React.Component {
             reviews: response.data.results
           });
         })
+        .then(() => {
+          this.updateFilteredReviews(this.state.currentFilters);
+        })
         .catch((err) => console.log(err));
     });
+  }
+
+  setCurrentFilters(currentFilters) {
+    this.setState({
+      currentFilters: currentFilters
+    });
+  }
+
+  updateFilteredReviews(currentFilters) {
+    let newFilteredReviews = [];
+
+    if (currentFilters.length > 0) {
+      for (var review of this.state.reviews) {
+        if (currentFilters.indexOf(review.rating) !== -1) {
+          newFilteredReviews.push(review);
+        }
+      }
+      this.setState({
+        filteredReviews: newFilteredReviews
+      });
+    } else {
+      this.setState({
+        filteredReviews: this.state.reviews
+      });
+    }
+  }
+
+  setHelpfulness(index) {
+    this.state.reviews[index].helpfulness = this.state.reviews[index].helpfulness + 1;
   }
 
   render() {
@@ -70,18 +112,20 @@ class Reviews extends React.Component {
       );
     }
 
-    return (<div className="reviewsContainer">
-      <div>'RATINGS & REVIEWS'</div>
+    return (<div className="reviews-container">
+      <div><font size="+2">RATINGS & REVIEWS</font></div>
       <div className="flex-row-reviews">
         <div className="flex-column">
           <div><RatingBreakdown metadata={this.state.meta} setAverageReview={this.props.setAverageReview}
-            averageStars={this.props.averageStars}/></div>
+            averageStars={this.props.averageStars} filteredReviews={this.state.filteredReviews}
+            reviews={this.state.reviews} updateFilteredReviews={this.updateFilteredReviews}
+            currentFilters={this.state.currentFilters} setCurrentFilters={this.setCurrentFilters}/></div>
           <div><ProductBreakdown metadata={this.state.meta}/></div>
         </div>
-        <div className="flex-column">
-          <div> {this.state.reviews.length} reviews, sorted by <SortSelector updateSortType = {this.updateSortType}/></div>
-          <div className="flex-column"><ReviewsList reviews={this.state.reviews} productName={this.props.productName}
-            characteristics={this.state.meta.characteristics} productID={this.state.currentProduct}/></div>
+        <div className="flex-column individual-reviews">
+          <div> {this.props.numReviews} reviews, sorted by <SortSelector updateSortType = {this.updateSortType}/></div>
+          <div className="flex-column"><ReviewsList reviews={this.state.filteredReviews} productName={this.props.productName}
+            characteristics={this.state.meta.characteristics} productID={this.state.currentProduct} setHelpfulness={this.setHelpfulness}/></div>
         </div>
       </div>
     </div>);

@@ -15,6 +15,8 @@ class NewReview extends React.Component {
       recommend: true,
       currentCharacteristic: 'none selected',
       characteristics: {},
+      starDescription: null,
+      starRating: []
     };
 
     // this.handleFormSubmit = this.props.updateSortType.bind(this);
@@ -48,10 +50,82 @@ class NewReview extends React.Component {
     });
   }
 
-  setRating(e) {
-    this.setState({
-      rating: Number(e.target.value)
+  setStarRating(value) {
+    let currentStars = value || 0;
+    let starTypes = [];
+
+    for (var i = 0; i < 5; i++) {
+      if (currentStars >= 1) {
+        starTypes[i] = 'fa fa-star';
+      } else {
+        starTypes[i] = 'fa fa-star-o';
+      }
+      currentStars--;
+    }
+
+    let newRating = starTypes.map((currentStar, i) => {
+      return <div key={i} onClick={() => this.setStarAndRating(i)} className={currentStar}></div>;
     });
+
+    this.setState({
+      starRating: newRating
+    });
+
+    // this.setRating(value + 1);
+  }
+
+  setStarAndRating(value) {
+    // console.log(value);
+    this.setStarRating(value + 1);
+    this.setRating(value + 1);
+  }
+
+
+  componentDidMount() {
+    this.setStarRating();
+  }
+
+
+  setRating(value) {
+    let description = '';
+
+    if (value === 5) {
+      description = 'Great';
+    } else if (value === 4) {
+      description = 'Good';
+    } else if (value === 3) {
+      description = 'Average';
+    } else if (value === 2) {
+      description = 'Fair';
+    } else if (value === 1) {
+      description = 'Poor';
+    }
+    // switch (value) {
+    // case ('1'):
+    //   description = 'Poor';
+    //   break;
+    // case ('2'):
+    //   description = 'Fair';
+    //   break;
+    // case ('3'):
+    //   description = 'Average';
+    //   break;
+    // case ('4'):
+    //   description = 'Good';
+    //   break;
+    // case ('5'):
+    //   description = 'Great';
+    //   break;
+    // }
+
+    this.setState({
+      rating: Number(value)
+    });
+
+    this.setState({
+      starDescription: description
+    });
+
   }
 
   setName(e) {
@@ -83,8 +157,91 @@ class NewReview extends React.Component {
     let newCharacteristics = this.state.characteristics;
     newCharacteristics[selectedID] = Number(e.target.value);
 
+    let description = null;
+
+    switch (e.target.name) {
+    case ('Size'):
+      if (e.target.value === '5') {
+        description = 'A size too wide';
+      } else if (e.target.value === '4') {
+        description = '1/2 a size too big';
+      } else if (e.target.value === '3') {
+        description = 'Perfect';
+      } else if (e.target.value === '2') {
+        description = '1/2 a size too small';
+      } else {
+        description = 'A size too small';
+      }
+      break;
+    case ('Width'):
+      if (e.target.value === '5') {
+        description = 'Too wide';
+      } else if (e.target.value === '4') {
+        description = 'Slightly wide';
+      } else if (e.target.value === '3') {
+        description = 'Perfect';
+      } else if (e.target.value === '2') {
+        description = 'Slightly narrow';
+      } else {
+        description = 'Too narrow';
+      }
+      break;
+    case ('Comfort'):
+      if (e.target.value === '5') {
+        description = 'Perfect';
+      } else if (e.target.value === '4') {
+        description = 'Comfortable';
+      } else if (e.target.value === '3') {
+        description = 'Ok';
+      } else if (e.target.value === '2') {
+        description = 'Slightly uncomfortable';
+      } else {
+        description = 'Uncomfortable';
+      }
+      break;
+    case ('Quality'):
+      if (e.target.value === '5') {
+        description = 'Perfect';
+      } else if (e.target.value === '4') {
+        description = 'Pretty great';
+      } else if (e.target.value === '3') {
+        description = 'What I expected';
+      } else if (e.target.value === '2') {
+        description = 'Below average';
+      } else {
+        description = 'Poor';
+      }
+      break;
+    case ('Length'):
+      if (e.target.value === '5') {
+        description = 'Runs long';
+      } else if (e.target.value === '4') {
+        description = 'Runs slightly long';
+      } else if (e.target.value === '3') {
+        description = 'Perfect';
+      } else if (e.target.value === '2') {
+        description = 'Runs slightly short';
+      } else {
+        description = 'Runs short';
+      }
+      break;
+    case ('Fit'):
+      if (e.target.value === '5') {
+        description = 'Runs long';
+      } else if (e.target.value === '4') {
+        description = 'Runs slightly long';
+      } else if (e.target.value === '3') {
+        description = 'Perfect';
+      } else if (e.target.value === '2') {
+        description = 'Runs slightly tight';
+      } else {
+        description = 'Runs tight';
+      }
+      break;
+    }
+
     this.setState({
-      currentCharacteristic: e.target.value,
+      currentCharacteristic: description,
       characteristics: newCharacteristics
     });
   }
@@ -94,7 +251,7 @@ class NewReview extends React.Component {
     // console.log('You have submitted the form');
     let formData = {
       // eslint-disable-next-line camelcase
-      product_id: this.props.productID,
+      product_id: Number(this.props.productID),
       rating: this.state.rating,
       summary: this.state.summary,
       body: this.state.message,
@@ -131,7 +288,10 @@ class NewReview extends React.Component {
             <form>
               <h3 className="modal-title">Write Your Review</h3>
               <h4 className="modal-subtitle">About the {this.props.productName}.</h4>
-              <div onChange={this.setRating}>
+              <div>Overall Rating*   <span>{this.state.starDescription}</span></div>
+              <div>{this.state.starRating}</div>
+
+              {/* <div onChange={this.setRating}>
                 <label>Overall rating</label><span id="mandatory-asterisk">*</span>
                 <label>
                   <input type="radio" id="1" name="rating" value="1"></input>
@@ -153,7 +313,8 @@ class NewReview extends React.Component {
                   <input type="radio" id="5" name="rating" value="5"></input>
                   5
                 </label>
-              </div>
+                <span>{this.state.starDescription}</span>
+              </div> */}
               <div onChange={this.setRecommend}>
                 <label>Do you recommend this product?</label><span id="mandatory-asterisk">*</span>
                 <label>
@@ -197,12 +358,12 @@ class NewReview extends React.Component {
                 })}
               </div>
               <div onChange={this.setSummary}>
-                <label>Review Summary</label>
+                <label>Review Summary*</label>
                 <input type="text" name="summary" placeholder="Example: Best purchase ever!" maxLength="60"></input>
               </div>
               <div>
-                <span id="mandatory-asterisk">*</span>
                 <div>{this.state.reviewLengthMessage}</div>
+                <label>Review Body*</label>
                 <input type="text" name="summary" placeholder="Why did you like the product or not?" onChange={this.checkReviewLength}></input>
               </div>
               <div>

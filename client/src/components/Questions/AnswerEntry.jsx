@@ -1,30 +1,71 @@
-import React from 'react';
+import React, { useState } from 'react';
+import httpRequest from './httpRequest.js';
+import ImageModal from './ImageModal.jsx';
 
 const AnswerEntry = ({ answer }) => {
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
-  // handle mark helpful
-  // handle report answer
+  const [isOpen, setModal] = useState(false);
+  const [markCount, setMarkCount] = useState(0);
+  const [reportCount, setReportCount] = useState(0);
+  const [report, setReport] = useState('Report');
+  const [mark, setMark] = useState(answer.helpfulness);
+  const [src, setSrc] = useState('');
+
+  const handleReport = (id, subject) => {
+    httpRequest.report(id, subject)
+      .then(setReport('Reported'))
+      .catch((error) => window.alert(error));
+  };
+
+  const handleMark = (id, subject) => {
+    httpRequest.mark(id, subject)
+      .then(setMark(mark + 1))
+      .catch((error) => window.alert(error));
+  };
+  const openModal = () => {
+    setModal(true);
+  };
+  const closeModal = () => {
+    setModal(false);
+  };
+  const handleimageclick = (e) => {
+    setSrc(e.target.src);
+    openModal();
+  };
+
   return (
     <>
       <div className="answer">
         <div className="A-body">{answer.body}</div>
-        <div className="photo-list">
-          {/* {answer.photos.map((photo, i) => <img key={i} src={photo.url}></img>)} */}
-          <img className="photos" src=''></img>
-          <img className="photos" src=''></img>
-          <img className="photos" src=''></img>
-          {/* <img className="photos" src=''></img>
-          <img className="photos" src=''></img> */}
+        <div className="photo-list" >
+          {answer.photos.map((photo, i) =>
+            <img className="photos" key={i} src={photo} onClick={handleimageclick}></img>
+          )}
+          <ImageModal isOpen={isOpen} closeModal={closeModal} src={src}></ImageModal>
         </div>
         <div className="userInfos">
-          <span data-testid="answerer-name">by {answer.answerer_name}, </span>
+          <span data-testid="answerer-name">by {(answer.answerer_name.toLowerCase() === 'seller') ? <b>{answer.answerer_name}</b> : answer.answerer_name}, </span>
           <span data-testid="date">{new Intl.DateTimeFormat('en-US', options).format(Date.parse(answer.date))}</span>
           <span className="_divider">|</span>
           <span data-testid="answerer_name">Helpful?</span>
           <span className="_divider">|</span>
-          <button data-testid="helpfulness" className="helpful-and-report">Yes({answer.helpfulness})</button>
+          <button data-testid="helpfulness" onClick={(e) => {
+            if (markCount === 1) {
+              e.preventDefault();
+            } else {
+              handleMark(answer.id, 'a');
+              setMarkCount(markCount + 1);
+            }
+          }} className="helpful-and-report">Yes({mark})</button>
           <span className="_divider">|</span>
-          <button className="helpful-and-report">Report</button>
+          <button className="helpful-and-report" onClick={(e) => {
+            if (reportCount === 1) {
+              e.preventDefault();
+            } else {
+              handleReport(answer.id, 'a');
+              setReportCount(reportCount + 1);
+            }
+          }}>{report}</button>
         </div>
       </div>
     </>
