@@ -142,7 +142,7 @@ class Overview extends React.Component {
       return null;
     }
 
-    return (<Interactions widget="Overview" children={
+    return (<Interactions displayName="Container" widget="Overview" children={
       <div className="overview flex-column">
         <ProductInfo product={this.props.productInfo}
           averageReview={this.props.averageReview}
