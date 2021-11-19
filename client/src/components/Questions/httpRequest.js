@@ -1,5 +1,5 @@
 import axios from 'axios';
-import UPLOADCARE_KEY from './../../../../server/config.js';
+import { UPLOADCARE_KEY } from './../../../../server/config.js';
 
 const httpRequest = {
   getQuestion: (currentProductId) => {
@@ -70,7 +70,7 @@ const httpRequest = {
     return new Promise((resolve, reject) => {
       axios
         .request({
-          url: '/addQueston',
+          url: '/addQuestion',
           method: 'post',
           data: {
             body: q.question,
