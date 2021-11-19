@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 class Interactions extends React.Component {
   constructor(props) {
@@ -6,7 +7,13 @@ class Interactions extends React.Component {
   }
 
   render() {
-    return (<div onClick={(e) => console.log(e.target)}>{this.props.children}</div>);
+    return (<div onClick={(e) => {
+      let element = e.target;
+      let widget = this.props.widget;
+      let time = e.timeStamp;
+
+      console.log('element', element, 'widget', widget, 'time', time);
+    }}>{this.props.children}</div>);
   }
 }
 
