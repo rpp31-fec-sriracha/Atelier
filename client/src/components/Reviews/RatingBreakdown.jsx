@@ -21,7 +21,7 @@ class RatingBreakdown extends React.Component {
         oneStar: false
       },
       filtering: false,
-      currentFilters: [],
+      // currentFilters: [],
       filterMessage: ''
     };
 
@@ -30,7 +30,59 @@ class RatingBreakdown extends React.Component {
     this.removeFilters = this.removeFilters.bind(this);
   }
 
+  componentDidMount() {
+    let starCounter = {
+      5: 0,
+      4: 0,
+      3: 0,
+      2: 0,
+      1: 0
+    };
+
+    for (var review of this.props.reviews) {
+      starCounter[review.rating]++;
+    }
+
+    // console.log('countertest', starCounter[3]);
+    this.setState({
+      fiveStarCount: starCounter[5],
+      fourStarCount: starCounter[4],
+      threeStarCount: starCounter[3],
+      twoStarCount: starCounter[2],
+      oneStarCount: starCounter[1],
+    });
+
+
+    // setTimeout(() => {
+    //   console.log('test', this.state);
+    //   console.log(this.state.fourStarCount);
+    // }, 1000);
+  }
+
   calculateAverage() {
+    let starCounter = {
+      5: 0,
+      4: 0,
+      3: 0,
+      2: 0,
+      1: 0
+    };
+
+    // starCounter[5] = 1;
+
+    for (var review of this.props.reviews) {
+      starCounter[review.rating]++;
+    }
+
+    // this.state.fiveStarCount = starCounter[5];
+    // this.setState({
+    //   fiveStarCount: starCounter[5],
+    //   fourStarCount: starCounter[4],
+    //   threeStarCount: starCounter[3],
+    //   twoStarCount: starCounter[2],
+    //   oneStarCount: starCounter[1],
+    // });
+
     let fiveCount = (parseInt(this.state.fiveStarCount) * 5) || 0;
     let fourCount = (parseInt(this.state.fourStarCount) * 4) || 0;
     let threeCount = (parseInt(this.state.threeStarCount) * 3) || 0;
@@ -72,7 +124,7 @@ class RatingBreakdown extends React.Component {
       break;
     }
 
-    let newFilters = this.state.currentFilters;
+    let newFilters = this.props.currentFilters;
     if (newFilterState[e] === true) {
       this.setState({
         filtering: true
@@ -94,9 +146,11 @@ class RatingBreakdown extends React.Component {
     newMessage = newMessage.slice(0, newMessage.length - 2);
     // console.log(newMessage);
     this.setState({
-      currentFilters: newFilters,
+      // currentFilters: newFilters,
       filterMessage: newMessage
     });
+
+    this.props.setCurrentFilters(newFilters);
 
     if (newFilters.length === 0) {
       this.setState({
@@ -104,7 +158,7 @@ class RatingBreakdown extends React.Component {
       });
     }
 
-    this.props.updateFilteredReviews(this.state.currentFilters);
+    this.props.updateFilteredReviews(this.props.currentFilters);
   }
 
   removeFilters() {
@@ -116,20 +170,59 @@ class RatingBreakdown extends React.Component {
         twoStar: false,
         oneStar: false
       },
-      filtering: false,
-      currentFilters: [],
+      filtering: false
+      // currentFilters: [],
     });
+
+    this.props.setCurrentFilters([]);
 
     this.props.updateFilteredReviews([]);
   }
 
+  showStars(averageStars) {
+    let currentStars = averageStars;
+    let starTypes = [];
+
+    for (var i = 0; i < 5; i++) {
+      if (currentStars >= .875) {
+        starTypes[i] = 'fa fa-star';
+      } else if (currentStars >= .625) {
+        starTypes[i] = 'fa fa-star three-quarters-star';
+      } else if (currentStars >= .375) {
+        starTypes[i] = 'fa fa-star half-star';
+      } else if (currentStars >= .125) {
+        starTypes[i] = 'fa fa-star quarter-star';
+      } else {
+        starTypes[i] = 'fa fa-star-o';
+      }
+      currentStars--;
+    }
+
+    return starTypes.map((currentStar, i) => {
+      return <div key={i} className={currentStar}></div>;
+    });
+
+    // return (
+    //   <div>
+    //     <div className={starTypes[0]}></div>
+    //     <div className={starTypes[1]}></div>
+    //     <div className={starTypes[2]}></div>
+    //     <div className={starTypes[3]}></div>
+    //     <div className={starTypes[4]}></div>
+    //   </div>
+    // );
+  }
+
   render() {
+    // console.log('one star reviews:', this.state.oneStarCount);
+    // console.log('total: ', this.state.totalReviews);
     if (this.props.metadata.length === 0) {
       return <div/>;
     }
 
-    return (<div className="ratingBreakdown">
-      <div>{this.props.averageStars} Stars</div>
+    return (<div className="rating-breakdown">
+      <h1>{this.props.averageStars}</h1>
+      <div>{this.showStars(this.props.averageStars)}</div>
       <div>Rating Breakdown</div>
       {this.state.filtering ? <div>{this.state.filterMessage}</div> : null}
       {this.state.filtering ? <div onClick={() => this.removeFilters()}><u>Remove all filters</u></div> : null}
