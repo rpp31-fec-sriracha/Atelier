@@ -31,17 +31,19 @@ const httpRequest = {
     return new Promise((resolve, reject) => {
       axios
         .request({
-          url: `/api/qa/questions/${questionId}/answers`,
+          url: '/addAnswer',
           method: 'post',
           data: {
+            id: questionId,
             body: newAnswer.answer,
             name: newAnswer.nickname,
             email: newAnswer.email,
             photos: newAnswer.urls
-          }
+          },
         })
-        .then(() => resolve('Thank you for submitting your answer!'))
-        .catch(error => reject(error));
+        .then(resolve('Thank you for submitting your answer!'))
+        .catch(error =>reject(error)
+        );
     });
   },
   uploadFile: (file) => {
@@ -67,16 +69,16 @@ const httpRequest = {
     return new Promise((resolve, reject) => {
       axios
         .request({
-          url: '/api/qa/questions',
+          url: '/addQueston',
           method: 'post',
           data: {
             body: q.question,
             name: q.nickname,
             email: q.email,
-            product_id: currentProductId
+            product_id: Number(currentProductId)
           }
         })
-        .then(() => resolve('Thank you for submitting your question!'))
+        .then(resolve('Thank you for submitting your question!'))
         .catch(error => reject(error));
     });
   },
@@ -93,10 +95,14 @@ const httpRequest = {
     }
     return new Promise((resolve, reject) => {
       axios.request({
-        url: `/api/qa/${endpoint}/${id}/helpful`,
-        method: 'put'
+        url: '/helpful',
+        method: 'put',
+        params: {
+          endpoint: endpoint,
+          id: id
+        }
       })
-        .then((r) => resolve())
+        .then(() => resolve())
         .catch(error => reject(error));
     });
   },
@@ -113,17 +119,17 @@ const httpRequest = {
     }
     return new Promise((resolve, reject) => {
       axios.request({
-        url: `/api/qa/${endpoint}/${id}/report`,
-        method: 'put'
+        url: '/report',
+        method: 'put',
+        params: {
+          endpoint: endpoint,
+          id: id
+        }
       })
         .then(() => resolve())
         .catch(error => reject(error));
     });
-  },
-  searchQuestion: () => {
-
   }
 };
-
 
 export default httpRequest;
