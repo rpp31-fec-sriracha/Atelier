@@ -1,6 +1,7 @@
 import React from 'react';
 import QuestionList from './QuestionList.jsx';
 import httpRequest from './httpRequest.js';
+import Interactions from '../Interactions.jsx';
 
 class Questions extends React.Component {
   constructor() {
@@ -52,7 +53,7 @@ class Questions extends React.Component {
     const { productInfo } = this.props;
 
     return (
-      <React.Fragment>
+      <Interactions displayName="Container" widget="Reviews" children={
         <div className="questions flex-column">
           <p>QUESTIONS & ANSWERS</p>
 
@@ -63,9 +64,8 @@ class Questions extends React.Component {
             handleAddQuestion={this.handleAddQuestion.bind(this)}
             handleAddAnswer={this.handleAddAnswer.bind(this)}
           />
-        </div>
-      </React.Fragment>
-    );
+        </div>}>
+      </Interactions>);
   }
 }
 
