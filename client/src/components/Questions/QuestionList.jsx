@@ -77,7 +77,6 @@ const QuestionList = function ({ questions, productInfo, handleAddQuestion, hand
             <button className="add-q b-right" onClick={() => openModal()}>ADD A QUESTION +</button>
           </div>
         </div>}
-
       <QuestionModal
         role="q-modal"
         isOpen={isOpen}

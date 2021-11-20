@@ -1,4 +1,10 @@
 const axios = require('axios');
+const FormData = require('form-data');
+require('dotenv').config();
+
+const API_KEY = process.env.API_KEY;
+const UPLOADCARE_KEY = process.env.UPLOADCARE_KEY;
+
 const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
 const dotenv = require('dotenv');
 const result = dotenv.config();
@@ -138,7 +144,25 @@ const addAnswer = (questionId, data) => {
       .catch((err) => reject(err));
   });
 };
+const uploadImage = (file) => {
+  const form = new FormData();
+  form.append('UPLOADCARE_PUB_KEY', UPLOADCARE_KEY);
+  form.append('UPLOADCARE_STORE', 'auto');
+  form.append('file', file.buffer, file.originalname);
 
+  return new Promise((resolve, reject) => {
+    axios.request({
+      url: 'https://upload.uploadcare.com/base/',
+      method: 'post',
+      headers: {
+        'Content-Type': `multipart/form-data; boundary=${form._boundary}`
+      },
+      data: form
+    })
+      .then(result => resolve(result))
+      .catch(error => reject(error));
+  });
+};
 // const getQuestions = (productId, page, count, callback) => {
 //   apiCall('/qa/questions', {
 //     // eslint-disable-next-line camelcase
@@ -173,5 +197,6 @@ module.exports = {
   addQuestion,
   addAnswer,
   markHelpful,
-  report
+  report,
+  uploadImage
 };
