@@ -2,16 +2,18 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const api = require('./api.js');
+const multer = require('multer');
+const upload = multer();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.resolve(__dirname, '../client/dist')));
 app.use(/^\/\d+/, express.static(path.resolve(__dirname, '../client/dist')));
 
-app.use((req, res, next) => {
-  console.log(req.method, req.url);
-  next();
-});
+// app.use((req, res, next) => {
+//   console.log(req.method, req.url);
+//   next();
+// });
 
 app.all('/api/*', (req, res, next) => {
   // console.log('hitting local server', req);
@@ -20,6 +22,7 @@ app.all('/api/*', (req, res, next) => {
   reqUrl = reqUrl.replace(/\?.*$/, '');
   let params = req.query;
   let data = req.body;
+
   // method, endpoint, params, body, callback
   api.apiWrap(method, reqUrl, params, data, (err, data) => {
     if (err) {
@@ -166,6 +169,15 @@ app.post('/addAnswer', (req, res) => {
   api.addAnswer(id, { body, name, email, photos })
     .then(res.status(201).json())
     .catch(err => res.status(500).json(err));
+});
+
+app.post('/upload', upload.single('photos'), (req, res, next) => {
+  console.log(req.file);
+  console.log(req.body);
+  // console.log(req.body);
+  // api.uploadImage(req.file)
+  //   .then(res.status(200).json())
+  //   .catch(err => res.status(500).json(err));
 });
 
 // app.get('/questions', (req, res) => {

@@ -26,15 +26,20 @@ const AnswerModal = ({ question, productInfo, isOpen, closeModal, handleAddAnswe
     const file = e.target.files[0];
 
     if (file) {
-      httpRequest.uploadFile(file)
+      const reader = new FileReader();
+      reader.onload = function() {
+        httpRequest.uploadFile(reader.result)
         .then(result => {
           const { file } = result.data;
           const delivery = `https://ucarecdn.com/${file}/`;
           setUrls([delivery, ...urls]);
         })
         .catch(error => console.log(error))
-      setPhotos([URL.createObjectURL(file), ...photos]);
+
+      };
+      reader.readAsArrayBuffer(file);
     }
+      setPhotos([URL.createObjectURL(file), ...photos]);
   };
 
   const handleValidate = (e) => {
