@@ -1,7 +1,6 @@
 import React from 'react';
 import IndividualReviewTile from './IndividualReviewTile.jsx';
 import NewReview from './NewReview.jsx';
-import KeywordSearch from './keywordSearch.jsx';
 
 class ReviewsList extends React.Component {
   constructor(props) {
@@ -53,7 +52,6 @@ class ReviewsList extends React.Component {
             onClose={this.onClose} characteristics={this.props.characteristics} productID={this.props.productID}></NewReview>
         </div>
       </div>
-      {/* <div><KeywordSearch/></div> */}
     </div>);
   }
 }

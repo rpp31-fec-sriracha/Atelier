@@ -4,7 +4,12 @@ require('dotenv').config();
 
 const API_KEY = process.env.API_KEY;
 const UPLOADCARE_KEY = process.env.UPLOADCARE_KEY;
+
 const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
+const dotenv = require('dotenv');
+const result = dotenv.config();
+const API_KEY = process.env.API_KEY;
+
 
 const apiCall = function(endpoint, params, callback) {
   axios.get(`${url}${endpoint}`, {
