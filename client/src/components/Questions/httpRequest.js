@@ -48,16 +48,16 @@ const httpRequest = {
     });
   },
   uploadFile: (file) => {
+    const form = new FormData();
+    form.append('photos', file, file.name);
+
     return new Promise((resolve, reject) => {
       axios.request({
         url: '/upload',
         method: 'post',
-        headers: {
-          'Content-Type': 'multipart/form-data; boundary'
-        },
-        data: file
+        data: form
       })
-        .then(result => resolve(result))
+        .then((result) => resolve(result))
         .catch(error => reject(error));
     });
   },
