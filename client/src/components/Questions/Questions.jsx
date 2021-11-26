@@ -35,6 +35,7 @@ class Questions extends React.Component {
       .then((result) => window.alert(result))
       .catch((error) => console.log(error));
   }
+
   handleAddAnswer(questionId, answer) {
     httpRequest
       .addAnswer(questionId, answer)
