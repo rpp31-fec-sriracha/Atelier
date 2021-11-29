@@ -3,8 +3,6 @@ import ReactDom from 'react-dom';
 import _ from 'underscore';
 const axios = require('axios');
 
-//NEED TO ADD VALIDATION
-
 class NewReview extends React.Component {
   constructor(props) {
     super(props);
@@ -12,7 +10,7 @@ class NewReview extends React.Component {
     this.state = {
       reviewLengthMessage: 'Minimum required characters left: 50',
       minReviewLength: false,
-      recommend: true,
+      recommend: null,
       currentCharacteristic: 'none selected',
       characteristics: {},
       starDescription: null,
@@ -261,18 +259,72 @@ class NewReview extends React.Component {
       characteristics: this.state.characteristics
     };
 
-    axios.post('/addReview', formData)
-      .then(function (response) {
-        console.log(response);
-        //get reviews and metadata again?
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    let validated = this.validate(formData);
 
-    this.props.onClose();
+    if (validated) {
+      axios.post('/addReview', formData)
+        .then(function (response) {
+          console.log(response);
+          //get reviews and metadata again?
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
+      this.props.onClose();
+    }
   }
 
+  validate(formData) {
+    let validated = true;
+    let alertMessage = 'Please ensure that the following fields are completed correctly: ';
+
+    console.log(formData);
+    if (formData.rating === undefined) {
+      alertMessage += 'Rating, ';
+      validated = false;
+    }
+
+    if (formData.recommend === null) {
+      alertMessage += 'Recommendation, ';
+      validated = false;
+    }
+
+    if (formData.summary === undefined) {
+      alertMessage += 'Summary, ';
+      validated = false;
+    }
+
+    if (formData.body === undefined || formData.body.length < 50) {
+      alertMessage += 'Review body, ';
+      validated = false;
+    }
+
+    if (formData.name === undefined) {
+      alertMessage += 'Nickname, ';
+      validated = false;
+    }
+
+    if (formData.email === undefined) {
+      alertMessage += 'Email, ';
+      validated = false;
+    } else {
+      if ((/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(formData.email)) === false) {
+        alertMessage += 'Email, ';
+        validated = false;
+      }
+    }
+
+
+    alertMessage = alertMessage.slice(0, alertMessage.length - 2);
+
+    if (validated) {
+      return true;
+    } else {
+      window.alert(alertMessage);
+      return false;
+    }
+  }
 
 
   render () {
@@ -286,6 +338,9 @@ class NewReview extends React.Component {
         <div className="modal">
           <div className="new-review">
             <form>
+              <div className="exit">
+                <button onClick={() => this.props.onClose()}>X</button>
+              </div>
               <h3 className="modal-title">Write Your Review</h3>
               <h4 className="modal-subtitle">About the {this.props.productName}.</h4>
               <div>Overall Rating*   <span>{this.state.starDescription}</span></div>
