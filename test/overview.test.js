@@ -17,6 +17,18 @@ jest.mock('../client/src/components/Overview/ImageGallery.jsx', () => {
   };
 });
 
+jest.mock('../client/src/components/Overview/AddToCart.jsx', () => {
+  return function DummyGallery(props) {
+    return (<div><p>Add To Cart</p></div>);
+  };
+});
+
+jest.mock('../client/src/components/Overview/ProductInfo.jsx', () => {
+  return function DummyGallery(props) {
+    return (<div><p>Add To Cart</p></div>);
+  };
+});
+
 const server = setupServer(
   rest.get('/api/products', (req, res, ctx) => {
     return res(ctx.json(dummyData[0]));
