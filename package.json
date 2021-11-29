@@ -33,11 +33,13 @@
   "dependencies": {
     "@testing-library/jest-dom": "^5.15.0",
     "axios": "^0.23.0",
-    "body-parser": "^1.19.0",
+    "dotenv": "^10.0.0",
     "eslint": "^8.0.1",
     "express": "^4.17.1",
+    "form-data": "^4.0.0",
     "jest": "^27.3.1",
     "jquery": "^3.6.0",
+    "multer": "^1.4.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "underscore": "^1.13.1"

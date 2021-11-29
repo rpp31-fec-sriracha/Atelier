@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { UPLOADCARE_KEY } from './../../../../server/config.js';
+// import { UPLOADCARE_KEY } from './../../../../server/config.js';
 
 const httpRequest = {
   getQuestion: (currentProductId) => {
@@ -49,20 +49,15 @@ const httpRequest = {
   },
   uploadFile: (file) => {
     const form = new FormData();
-    form.append('UPLOADCARE_PUB_KEY', UPLOADCARE_KEY);
-    form.append('UPLOADCARE_STORE', 'auto');
-    form.append('file', file);
+    form.append('photos', file, file.name);
 
     return new Promise((resolve, reject) => {
       axios.request({
-        url: 'https://upload.uploadcare.com/base/',
+        url: '/upload',
         method: 'post',
-        headers: {
-          'Content-Type': `multipart/form-data; boundary=${form._boundary}`
-        },
         data: form
       })
-        .then(result => resolve(result))
+        .then((result) => resolve(result))
         .catch(error => reject(error));
     });
   },

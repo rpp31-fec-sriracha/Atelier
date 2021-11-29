@@ -24,18 +24,18 @@ const AnswerModal = ({ question, productInfo, isOpen, closeModal, handleAddAnswe
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
-
     if (file) {
-      httpRequest.uploadFile(file)
-        .then(result => {
-          const { file } = result.data;
-          const delivery = `https://ucarecdn.com/${file}/`;
-          setUrls([delivery, ...urls]);
-        })
-        .catch(error => console.log(error))
-      setPhotos([URL.createObjectURL(file), ...photos]);
+        httpRequest.uploadFile(file)
+          .then(result => {
+            const { file } = result.data;
+            const delivery = `https://ucarecdn.com/${file}/`;
+            setUrls([delivery, ...urls]);
+          })
+          .catch(error => console.log(error))
     }
+    setPhotos([URL.createObjectURL(file), ...photos]);
   };
+
 
   const handleValidate = (e) => {
     if (Object.values(values).every((v) => v !== '')) {
@@ -48,7 +48,6 @@ const AnswerModal = ({ question, productInfo, isOpen, closeModal, handleAddAnswe
       setValidation(true);
     }
   };
-
   const handleBlur = (e) => {
     switch (e.target.name) {
       case 'email':
@@ -72,7 +71,6 @@ const AnswerModal = ({ question, productInfo, isOpen, closeModal, handleAddAnswe
         break;
     }
   }
-
   return ReactDom.createPortal(
     <>
       {isOpen ?

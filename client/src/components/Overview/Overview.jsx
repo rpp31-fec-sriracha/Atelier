@@ -1,8 +1,10 @@
 import React from 'react';
+
 import ProductInfo from './ProductInfo.jsx';
 import ProductInfoBottom from './ProductInfoBottom.jsx';
+import Interactions from '../Interactions.jsx';
 import axios from 'axios';
-import products from './products.js';
+// import products from './products.js';
 
 class Overview extends React.Component {
   constructor(props) {
@@ -85,34 +87,34 @@ class Overview extends React.Component {
   }
 
   componentDidMount() {
-    // let productIds = products.map((p) => p.id);
-    // console.log(productIds);
-
+    let cart;
+    let newState;
     axios.get('/api/cart')
-      .then((response) => {
-        this.setState({ cart: response.data });
-      })
-      .catch((e) => console.log(e));
-
-    this.setState((state, props) => {
-      let cart;
-      if (props.productStyles) {
-        for (let style of props.productStyles) {
+      .then((response) => { cart = response.data; })
+      .then(() => {
+        for (let style of this.props.productStyles) {
           if (style['default?']) {
-            let newStyle = !state.currentStyle ? style : state.currentStyle;
+            let newStyle = !this.state.currentStyle ? style : this.state.currentStyle;
 
-            return ({
+            newState = {
               defaultStyle: style,
               currentStyle: newStyle,
               cart: cart,
               loaded: true,
-            });
+            };
           }
         }
-      } else {
-        return state;
-      }
-    });
+        if (!newState) {
+          newState = {
+            defaultStyle: this.props.productStyles[0],
+            currentStyle: !this.state.currentStyle ? this.props.productStyles[0] : this.state.currentStyle,
+            cart: cart,
+            loaded: true,
+          };
+        }
+      })
+      .then(() => this.setState(newState))
+      .catch((e) => console.log(e));
   }
 
   componentDidUpdate() {
@@ -138,30 +140,34 @@ class Overview extends React.Component {
   }
 
   render() {
+
     if (!this.state.loaded) {
       return null;
     }
 
-    return (<div className="overview flex-column">
-      <ProductInfo product={this.props.productInfo}
-        averageReview={this.props.averageReview}
-        styles={this.props.productStyles}
-        styleClick={this.handleStyleClick}
-        thumbClick={this.handleThumbClick}
-        currentStyle={this.state.currentStyle}
-        handleAddToCart={this.handleAddToCart}
-        handleArrowDown={this.handleArrowDown}
-        handleArrowUp={this.handleArrowUp}
-        defaultStyle={this.state.defaultStyle}
-        selectedThumb={this.state.selectedThumb}
-        thumbStart={this.state.thumbStart}
-        thumbEnd={this.state.thumbEnd} />
-      <ProductInfoBottom
-        slogan={this.props.productInfo.slogan}
-        description={this.props.productInfo.description}
-        features={this.props.productInfo.features} />
+    return (<Interactions displayName="Container" widget="Overview" children={
+      <div className="overview flex-column">
+        <ProductInfo product={this.props.productInfo}
+          averageReview={this.props.averageReview}
+          styles={this.props.productStyles}
+          styleClick={this.handleStyleClick}
+          thumbClick={this.handleThumbClick}
+          currentStyle={this.state.currentStyle}
+          handleAddToCart={this.handleAddToCart}
+          handleArrowDown={this.handleArrowDown}
+          handleArrowUp={this.handleArrowUp}
+          defaultStyle={this.state.defaultStyle}
+          selectedThumb={this.state.selectedThumb}
+          thumbStart={this.state.thumbStart}
+          thumbEnd={this.state.thumbEnd} />
+        <ProductInfoBottom
+          slogan={this.props.productInfo.slogan}
+          description={this.props.productInfo.description}
+          features={this.props.productInfo.features} />
 
-    </div>);
+      </div>
+    } />);
+
   }
 }
 

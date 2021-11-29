@@ -3,6 +3,7 @@ import RatingBreakdown from './RatingBreakdown.jsx';
 import ProductBreakdown from './ProductBreakdown.jsx';
 import ReviewsList from './ReviewsList.jsx';
 import SortSelector from './SortSelector.jsx';
+import Interactions from '../Interactions.jsx';
 const axios = require('axios');
 
 class Reviews extends React.Component {
@@ -112,23 +113,25 @@ class Reviews extends React.Component {
       );
     }
 
-    return (<div className="reviews-container">
-      <div><font size="+2">RATINGS & REVIEWS</font></div>
-      <div className="flex-row-reviews">
-        <div className="flex-column">
-          <div><RatingBreakdown metadata={this.state.meta} setAverageReview={this.props.setAverageReview}
-            averageStars={this.props.averageStars} filteredReviews={this.state.filteredReviews}
-            reviews={this.state.reviews} updateFilteredReviews={this.updateFilteredReviews}
-            currentFilters={this.state.currentFilters} setCurrentFilters={this.setCurrentFilters}/></div>
-          <div><ProductBreakdown metadata={this.state.meta}/></div>
-        </div>
-        <div className="flex-column individual-reviews">
-          <div> {this.props.numReviews} reviews, sorted by <SortSelector updateSortType = {this.updateSortType}/></div>
-          <div className="flex-column"><ReviewsList reviews={this.state.filteredReviews} productName={this.props.productName}
-            characteristics={this.state.meta.characteristics} productID={this.state.currentProduct} setHelpfulness={this.setHelpfulness}/></div>
+    return (<Interactions displayName="Container" widget="Reviews" children={
+      <div className="reviews-container">
+        <div><font size="+2">RATINGS & REVIEWS</font></div>
+        <div className="flex-row-reviews">
+          <div className="flex-column">
+            <div><RatingBreakdown metadata={this.state.meta} setAverageReview={this.props.setAverageReview}
+              averageStars={this.props.averageStars} filteredReviews={this.state.filteredReviews}
+              reviews={this.state.reviews} updateFilteredReviews={this.updateFilteredReviews}
+              currentFilters={this.state.currentFilters} setCurrentFilters={this.setCurrentFilters}/></div>
+            <div><ProductBreakdown metadata={this.state.meta}/></div>
+          </div>
+          <div className="flex-column individual-reviews">
+            <div> {this.props.numReviews} reviews, sorted by <SortSelector updateSortType = {this.updateSortType}/></div>
+            <div className="flex-column"><ReviewsList reviews={this.state.filteredReviews} productName={this.props.productName}
+              characteristics={this.state.meta.characteristics} productID={this.state.currentProduct} setHelpfulness={this.setHelpfulness}/></div>
+          </div>
         </div>
       </div>
-    </div>);
+    } />);
   }
 }
 

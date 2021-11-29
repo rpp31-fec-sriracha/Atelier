@@ -223,15 +223,15 @@ class RatingBreakdown extends React.Component {
     return (<div className="rating-breakdown">
       <h1>{this.props.averageStars}</h1>
       <div>{this.showStars(this.props.averageStars)}</div>
-      <div>Rating Breakdown</div>
+      {/* <div>Rating Breakdown</div> */}
       {this.state.filtering ? <div>{this.state.filterMessage}</div> : null}
       {this.state.filtering ? <div onClick={() => this.removeFilters()}><u>Remove all filters</u></div> : null}
       <div>{Math.round(this.props.metadata.recommended.true / this.state.totalReviews * 1000) / 10}% of reviews recommend this product</div>
-      <div onClick={() => this.calculateFilters('fiveStar')}><u>5 stars</u> <progress value={this.state.fiveStarCount / this.state.totalReviews * 100 || 0} max="100"></progress></div>
-      <div onClick={() => this.calculateFilters('fourStar')}><u>4 stars</u> <progress value={this.state.fourStarCount / this.state.totalReviews * 100 || 0} max="100"></progress></div>
-      <div onClick={() => this.calculateFilters('threeStar')}><u>3 stars</u> <progress value={this.state.threeStarCount / this.state.totalReviews * 100 || 0} max="100"></progress></div>
-      <div onClick={() => this.calculateFilters('twoStar')}><u>2 stars</u> <progress value={this.state.twoStarCount / this.state.totalReviews * 100 || 0} max="100"></progress></div>
-      <div onClick={() => this.calculateFilters('oneStar')}><u>1 stars</u> <progress value={this.state.oneStarCount / this.state.totalReviews * 100 || 0} max="100"></progress></div>
+      <div onClick={() => this.calculateFilters('fiveStar')}><u>5 stars</u> <progress value={this.state.fiveStarCount / this.state.totalReviews * 100 || 0} max="100"></progress><span>({this.state.fiveStarCount})</span></div>
+      <div onClick={() => this.calculateFilters('fourStar')}><u>4 stars</u> <progress value={this.state.fourStarCount / this.state.totalReviews * 100 || 0} max="100"></progress><span>({this.state.fourStarCount})</span></div>
+      <div onClick={() => this.calculateFilters('threeStar')}><u>3 stars</u> <progress value={this.state.threeStarCount / this.state.totalReviews * 100 || 0} max="100"></progress><span>({this.state.threeStarCount})</span></div>
+      <div onClick={() => this.calculateFilters('twoStar')}><u>2 stars</u> <progress value={this.state.twoStarCount / this.state.totalReviews * 100 || 0} max="100"></progress><span>({this.state.twoStarCount})</span></div>
+      <div onClick={() => this.calculateFilters('oneStar')}><u>1 stars</u> <progress value={this.state.oneStarCount / this.state.totalReviews * 100 || 0} max="100"></progress><span>({this.state.oneStarCount})</span></div>
     </div>);
   }
 }
