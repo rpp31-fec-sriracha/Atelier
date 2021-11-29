@@ -4,9 +4,9 @@ const FormData = require('form-data');
 const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
 const dotenv = require('dotenv');
 const result = dotenv.config();
-
 const API_KEY = process.env.API_KEY;
 const UPLOADCARE_KEY = process.env.UPLOADCARE_KEY;
+
 
 
 const apiCall = function(endpoint, params, callback) {
@@ -143,6 +143,7 @@ const addAnswer = (questionId, data) => {
   });
 };
 const uploadImage = (file) => {
+
   const form = new FormData();
   form.append('UPLOADCARE_PUB_KEY', UPLOADCARE_KEY);
   form.append('UPLOADCARE_STORE', 'auto');
@@ -157,7 +158,7 @@ const uploadImage = (file) => {
       },
       data: form
     })
-      .then(result => resolve(result))
+      .then(result => resolve(result.data))
       .catch(error => reject(error));
   });
 };
