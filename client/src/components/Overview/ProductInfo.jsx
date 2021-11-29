@@ -4,12 +4,6 @@ import StyleSelector from './StyleSelector.jsx';
 import AddToCart from './AddToCart.jsx';
 
 const ProductInfo = function(props) {
-  // const starIcons = (averageReview) => {
-  //   let fullStars = Math.floor(averageReview);
-  //   let emptyStars = 5 - Math.ceiling(averageReview);
-  //   let partialStar = averageReview - fullStars - emptyStars;
-  //   let nearestQuarter = (Math.round(partialStar * 4) / 4).toFixed(2);
-  // };
   const showStars = (averageStars) => {
     let currentStars = averageStars;
     let starTypes = [];

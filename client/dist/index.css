@@ -97,19 +97,31 @@ header {
 }
 
 #image-gallery {
-  background-size: contain;
-  background-position: center;
+  background-size: 100%;
   width: 100%;
   min-width: 0;
   background-color: #f9f9f9;
+  transition: all 0.5s ease;
 }
-.extended {
+
+#image-gallery.zoomed {
+  background-size: 250%
+}
+
+#image-gallery:hover {
+  cursor: -moz-zoom-in;
+  cursor: -webkit-zoom-in;
+  cursor: zoom-in;
+}
+
+#image-gallery.extended {
   display: flex;
   position: absolute;
   max-width: 75%;
   height: 100%;
   z-index: 10;
   margin: auto;
+  transition: all 1s ease;
 }
 
 .extended:after {
@@ -143,12 +155,6 @@ header {
   width: 33%;
 }
 
-#main-image {
-  width: 60%;
-  max-height: 100%;
-  min-width: 100%;
-}
-
 .thumb {
   display: flex;
   flex-direction: column;
@@ -160,6 +166,10 @@ header {
   margin: 0.25em 0;
   background-color: rgba(50, 50, 50, 0.6);
   filter: drop-shadow(5px 5px 8px black)
+}
+
+.thumb:hover {
+  cursor: auto;
 }
 
 .thumb img {
@@ -231,6 +241,14 @@ header {
   height: 85%;
   justify-content: space-between;
   align-items: center;
+}
+
+.photo-nav i:hover {
+  cursor: auto;
+}
+
+.thumb-arrow i:hover {
+  cursor: auto;
 }
 
 .questions {
