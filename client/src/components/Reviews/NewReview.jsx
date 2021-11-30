@@ -279,7 +279,6 @@ class NewReview extends React.Component {
     let validated = true;
     let alertMessage = 'Please ensure that the following fields are completed correctly: ';
 
-    console.log(formData);
     if (formData.rating === undefined) {
       alertMessage += 'Rating, ';
       validated = false;
@@ -289,6 +288,12 @@ class NewReview extends React.Component {
       alertMessage += 'Recommendation, ';
       validated = false;
     }
+
+    if (Object.keys(this.props.characteristics).length !== Object.keys(formData.characteristics).length) {
+      alertMessage += 'Characteristics, ';
+      validated = false;
+    }
+
 
     if (formData.summary === undefined) {
       alertMessage += 'Summary, ';
