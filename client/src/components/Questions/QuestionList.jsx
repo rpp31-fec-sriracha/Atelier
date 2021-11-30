@@ -53,7 +53,7 @@ const QuestionList = function ({ questions, productInfo, handleAddQuestion, hand
           <div className="q-container">
             {(filteredQuestions.length > 0) ?
               filteredQuestions.slice(0, visibleCount).map((question, i) =>
-                <QuestionEntry key={i} question={question} productInfo={productInfo} handleAddAnswer={handleAddAnswer} />)
+                <QuestionEntry data-testid="found" key={i} question={question} productInfo={productInfo} handleAddAnswer={handleAddAnswer} />)
               : <div></div>}
           </div>
           <div className="buttons">
@@ -79,7 +79,6 @@ const QuestionList = function ({ questions, productInfo, handleAddQuestion, hand
         </div>}
       {isOpen ?
         <QuestionModal
-          role="dialog"
           isOpen={isOpen}
           productInfo={productInfo}
           closeModal={closeModal.bind(this)}

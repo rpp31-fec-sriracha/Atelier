@@ -79,6 +79,16 @@ const dummyData = {
           'photos': []
         }
       }
+    },
+    {
+      'question_id': 513739,
+      'question_body': 'What is the color?',
+      'question_date': '2017-08-12T00:00:00.000Z',
+      'asker_name': 'toofast',
+      'question_helpfulness': 18,
+      'reported': false,
+      'answers': {
+      }
     }
   ],
   'resultsB': [
@@ -122,6 +132,26 @@ const dummyData = {
       }
     },
   ],
+  'resultsD': [
+    {
+      'question_id': 513737,
+      'question_body': 'Where is this product made?',
+      'question_date': '2017-02-06T00:00:00.000Z',
+      'asker_name': 'cleopatra',
+      'question_helpfulness': 19,
+      'reported': false,
+      'answers': {
+        '4812011': {
+          'id': 4812011,
+          'body': 'China',
+          'date': '2017-03-06T00:00:00.000Z',
+          'answerer_name': 'ceasar',
+          'helpfulness': 0,
+          'photos': []
+        }
+      }
+    },
+  ]
 };
 
 module.exports = dummyData;

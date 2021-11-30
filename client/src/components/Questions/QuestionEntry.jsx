@@ -79,7 +79,7 @@ class QuestionEntry extends React.Component {
           <div className="question-flex-row">
             <div className="left">
               <div className="title">Q:  </div>
-              <div data-testid="q-body" className="Q-body">{question.question_body}</div>
+              <div data-testid="Q-body" className="Q-body">{question.question_body}</div>
             </div>
             <div className="right userInfos">
               <span>Helpful?</span>
@@ -96,7 +96,7 @@ class QuestionEntry extends React.Component {
               <span className="_divider">|</span>
               <button className="helpful-and-report" onClick={() => this.openModal()}>Add Answer</button>
               {isOpen ?
-                <AnswerModal role="dialog" isOpen={isOpen} closeModal={this.closeModal.bind(this)} question={question} productInfo={productInfo} handleAddAnswer={handleAddAnswer} /> : null}
+                <AnswerModal isOpen={isOpen} closeModal={this.closeModal.bind(this)} question={question} productInfo={productInfo} handleAddAnswer={handleAddAnswer} /> : null}
             </div>
           </div>
         </div>

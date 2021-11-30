@@ -17,9 +17,7 @@ const ImageModal = ({ src, isOpen, closeModal}) => {
             </div>
           </div>
         </> : null}
-
-    </>,
-    document.getElementById('image-portal')
+    </>
   );
 };
 

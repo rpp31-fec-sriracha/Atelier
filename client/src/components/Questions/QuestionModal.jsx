@@ -68,27 +68,27 @@ const QuestionModal = ({ isOpen, productInfo, handleAddQuestion, closeModal }) =
                 <h3 style={{textDecoration: 'underline'}} data-testid="product-name">About the {productInfo}</h3>
               </div>
               <div className="warning">
-                <p id="err">{messages['warning']}</p>
+                <p>{messages['warning']}</p>
               </div>
               <br/>
               <div className="modal-body userInfos">
-                <label htmlFor="question" style={{ marginBottom: '5px'}}>Your Question<span className="mandatory">*</span></label>
+                <label htmlFor="new-q" style={{ marginBottom: '5px'}}>Your Question<span className="mandatory">*</span></label>
                 <textarea style={(invalid && !values['question']) ? { border: 'red solid 1px' } : { border: '#e6e6e6 solid 1px' }}
-                  aria-errormessage="err"
-                  id="question" name="question" required maxLength="1000"
+                  name="question" required maxLength="1000"
+                  value={values['question']} id="new-q"
                   className="input-field" type="text" onChange={handleChange}></textarea>
                 <br/>
-                <label htmlFor="nickname" style={{ marginBottom: '5px'}}>What is your nickname<span className="mandatory">*</span></label>
+                <label htmlFor="new-nick" style={{ marginBottom: '5px'}}>What is your nickname<span className="mandatory">*</span></label>
                 <input style={(invalid && !values['nickname']) ? { border: 'red solid 1px' } : { border: '#e6e6e6 solid 1px' }}
-                  aria-errormessage="err"
-                  id="nickname" name="nickname" required maxLength="60" onFocus={handleFocus} onBlur={handleBlur} placeholder="Example: jackson11!"
+                  name="nickname" required maxLength="60" onFocus={handleFocus} onBlur={handleBlur} placeholder="Example: jackson11!"
+                  value={values['nickname']} id="new-nick"
                   className="input-field" type="text" onChange={handleChange}></input>
                   <div className="popup-message">{messages['notification1']}</div>
                 <br/>
-                <label htmlFor="email" style={{ marginBottom: '5px'}}>Your email<span className="mandatory">*</span></label>
+                <label htmlFor="new-e" style={{ marginBottom: '5px'}}>Your email<span className="mandatory">*</span></label>
                 <input style={(invalid && !values['email']) ? { border: 'red solid 1px' } : { border: '#e6e6e6 solid 1px' }}
-                  aria-errormessage="err"
-                  id="email" name="email" required maxLength="60" onFocus={handleFocus} onBlur={handleBlur} placeholder="Example: jack@email.com"
+                  name="email" required maxLength="60" onFocus={handleFocus} onBlur={handleBlur} placeholder="Example: jack@email.com"
+                  value={values['email']} id="new-e"
                   className="input-field" type="email" onChange={handleChange}></input>
                 <div className="popup-message">{messages['notification2']}</div>
               </div>

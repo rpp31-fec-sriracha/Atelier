@@ -73,7 +73,7 @@ const httpRequest = {
             product_id: Number(currentProductId)
           }
         })
-        .then(resolve('Thank you for submitting your question!'))
+        .then(() => resolve('Thank you for submitting your question!'))
         .catch(error => reject(error));
     });
   },

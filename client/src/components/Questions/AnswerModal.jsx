@@ -71,7 +71,7 @@ const AnswerModal = ({ question, productInfo, isOpen, closeModal, handleAddAnswe
         break;
     }
   }
-  return ReactDom.createPortal(
+  return (
     <>
       {isOpen ?
         <>
@@ -117,9 +117,8 @@ const AnswerModal = ({ question, productInfo, isOpen, closeModal, handleAddAnswe
             </div>
           </div>
         </> : null}
+    </>
 
-    </>,
-    document.getElementById('answer-portal')
   );
 };
 
