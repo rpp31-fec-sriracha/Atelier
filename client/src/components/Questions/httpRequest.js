@@ -1,5 +1,4 @@
 import axios from 'axios';
-// import { UPLOADCARE_KEY } from './../../../../server/config.js';
 
 const httpRequest = {
   getQuestion: (currentProductId) => {

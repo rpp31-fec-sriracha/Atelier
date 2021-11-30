@@ -3,6 +3,7 @@ import AnswerEntry from './AnswerEntry.jsx';
 import AnswerModal from './AnswerModal.jsx';
 import httpRequest from './httpRequest.js';
 
+
 class QuestionEntry extends React.Component {
   constructor(props) {
     super(props);
@@ -94,7 +95,8 @@ class QuestionEntry extends React.Component {
                 Yes({mark})</button>
               <span className="_divider">|</span>
               <button className="helpful-and-report" onClick={() => this.openModal()}>Add Answer</button>
-              <AnswerModal isOpen={isOpen} closeModal={this.closeModal.bind(this)} question={question} productInfo={productInfo} handleAddAnswer={handleAddAnswer} />
+              {isOpen ?
+                <AnswerModal role="dialog" isOpen={isOpen} closeModal={this.closeModal.bind(this)} question={question} productInfo={productInfo} handleAddAnswer={handleAddAnswer} /> : null}
             </div>
           </div>
         </div>

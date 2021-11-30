@@ -90,28 +90,28 @@ const AnswerModal = ({ question, productInfo, isOpen, closeModal, handleAddAnswe
               </div>
               <br/>
               <div className="modal-body userInfos">
-                <label htmlFor="answer-text">Your Answer<span className="mandatory">*</span></label>
+                <label htmlFor="answer">Your Answer<span className="mandatory">*</span></label>
                 <textarea style={(invalid && !values['answer']) ? { border: 'red solid 1px' } : { border: '#e6e6e6 solid 1px' }}
-                  name="answer" id="answer-text" className="text-field" onChange={handleChange}
+                  name="answer" id="answer" className="text-field" onChange={handleChange}
                   required maxLength="1000"></textarea>
                 <br/>
-                <label>What is your nickname<span className="mandatory">*</span></label>
+                <label htmlFor="nickname">What is your nickname<span className="mandatory">*</span></label>
                 <input style={(invalid && !values['nickname']) ? { border: 'red solid 1px' } : { border: '#e6e6e6 solid 1px' }}
-                  name="nickname" onChange={handleChange} placeholder="Example: jack543!" type="text"
+                  id="nickname" name="nickname" onChange={handleChange} placeholder="Example: jack543!" type="text"
                   required maxLength="60" onFocus={handleFocus} onBlur={handleBlur}></input>
                 <div className="popup-message">{messages['notification1']}</div>
                 <br/>
-                <label>Your email<span className="mandatory">*</span></label>
+                <label htmlFor="email">Your email<span className="mandatory">*</span></label>
                 <input style={(invalid && !values['email']) ? { border: 'red solid 1px' } : { border: '#e6e6e6 solid 1px' }}
-                  name="email" type="email" onChange={handleChange} placeholder="Example: jack@email.com"
+                  id="email" name="email" type="email" onChange={handleChange} placeholder="Example: jack@email.com"
                   required maxLength="60" onBlur={handleBlur} onFocus={handleFocus}></input>
                 <div className="popup-message">{messages['notification2']}</div>
                 <br/>
-                <label>Upload your photos</label>
+                <label htmlFor="photo">Upload your photos</label>
                 <div className="preview">
                   {photos.map((photo, i) => <img src={photo} className="thumbnails" key={i} ></img>)}
                 </div>
-                {(photos.length >= 5) ? <div></div> : <input className="input-file" type="file" name="photos" accept="image/*" multiple onChange={handleFileUpload}></input>}
+                {(photos.length >= 5) ? <div></div> : <input id="photo" className="input-file" type="file" name="photos" accept="image/*" multiple onChange={handleFileUpload}></input>}
               </div>
               <button className="modal-button" onClick={handleValidate}>Submit answer</button>
             </div>

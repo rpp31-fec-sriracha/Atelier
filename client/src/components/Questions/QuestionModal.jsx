@@ -53,8 +53,8 @@ const QuestionModal = ({ isOpen, productInfo, handleAddQuestion, closeModal }) =
     }
   }
 
-  return ReactDom.createPortal(
-    <React.Fragment>
+  return (
+    <>
       {isOpen ?
         <React.Fragment>
           <div className="overlay"></div>
@@ -68,24 +68,27 @@ const QuestionModal = ({ isOpen, productInfo, handleAddQuestion, closeModal }) =
                 <h3 style={{textDecoration: 'underline'}} data-testid="product-name">About the {productInfo}</h3>
               </div>
               <div className="warning">
-                <p>{messages['warning']}</p>
+                <p id="err">{messages['warning']}</p>
               </div>
               <br/>
               <div className="modal-body userInfos">
-                <label style={{ marginBottom: '5px'}}>Your Question<span className="mandatory">*</span></label>
+                <label htmlFor="question" style={{ marginBottom: '5px'}}>Your Question<span className="mandatory">*</span></label>
                 <textarea style={(invalid && !values['question']) ? { border: 'red solid 1px' } : { border: '#e6e6e6 solid 1px' }}
-                  name="question" required maxLength="1000"
+                  aria-errormessage="err"
+                  id="question" name="question" required maxLength="1000"
                   className="input-field" type="text" onChange={handleChange}></textarea>
                 <br/>
-                <label style={{ marginBottom: '5px'}}>What is your nickname<span className="mandatory">*</span></label>
+                <label htmlFor="nickname" style={{ marginBottom: '5px'}}>What is your nickname<span className="mandatory">*</span></label>
                 <input style={(invalid && !values['nickname']) ? { border: 'red solid 1px' } : { border: '#e6e6e6 solid 1px' }}
-                  name="nickname" required maxLength="60" onFocus={handleFocus} onBlur={handleBlur} placeholder="Example: jackson11!"
+                  aria-errormessage="err"
+                  id="nickname" name="nickname" required maxLength="60" onFocus={handleFocus} onBlur={handleBlur} placeholder="Example: jackson11!"
                   className="input-field" type="text" onChange={handleChange}></input>
                   <div className="popup-message">{messages['notification1']}</div>
                 <br/>
-                <label style={{ marginBottom: '5px'}}>Your email<span className="mandatory">*</span></label>
+                <label htmlFor="email" style={{ marginBottom: '5px'}}>Your email<span className="mandatory">*</span></label>
                 <input style={(invalid && !values['email']) ? { border: 'red solid 1px' } : { border: '#e6e6e6 solid 1px' }}
-                  name="email" required maxLength="60" onFocus={handleFocus} onBlur={handleBlur} placeholder="Example: jack@email.com"
+                  aria-errormessage="err"
+                  id="email" name="email" required maxLength="60" onFocus={handleFocus} onBlur={handleBlur} placeholder="Example: jack@email.com"
                   className="input-field" type="email" onChange={handleChange}></input>
                 <div className="popup-message">{messages['notification2']}</div>
               </div>
@@ -95,8 +98,7 @@ const QuestionModal = ({ isOpen, productInfo, handleAddQuestion, closeModal }) =
         </React.Fragment>
         : null
       }
-    </React.Fragment>,
-    document.getElementById('question-modal')
+    </>
   );
 };
 
