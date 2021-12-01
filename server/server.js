@@ -4,8 +4,10 @@ const app = express();
 const path = require('path');
 const api = require('./api.js');
 const multer = require('multer');
+const compression = require('compression');
 const upload = multer();
 
+app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.resolve(__dirname, '../client/dist')));
