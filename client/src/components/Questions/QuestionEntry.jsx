@@ -3,6 +3,7 @@ import AnswerEntry from './AnswerEntry.jsx';
 import AnswerModal from './AnswerModal.jsx';
 import httpRequest from './httpRequest.js';
 
+
 class QuestionEntry extends React.Component {
   constructor(props) {
     super(props);
@@ -78,7 +79,7 @@ class QuestionEntry extends React.Component {
           <div className="question-flex-row">
             <div className="left">
               <div className="title">Q:  </div>
-              <div data-testid="q-body" className="Q-body">{question.question_body}</div>
+              <div data-testid="Q-body" className="Q-body">{question.question_body}</div>
             </div>
             <div className="right userInfos">
               <span>Helpful?</span>
@@ -94,7 +95,8 @@ class QuestionEntry extends React.Component {
                 Yes({mark})</button>
               <span className="_divider">|</span>
               <button className="helpful-and-report" onClick={() => this.openModal()}>Add Answer</button>
-              <AnswerModal isOpen={isOpen} closeModal={this.closeModal.bind(this)} question={question} productInfo={productInfo} handleAddAnswer={handleAddAnswer} />
+              {isOpen ?
+                <AnswerModal isOpen={isOpen} closeModal={this.closeModal.bind(this)} question={question} productInfo={productInfo} handleAddAnswer={handleAddAnswer} /> : null}
             </div>
           </div>
         </div>

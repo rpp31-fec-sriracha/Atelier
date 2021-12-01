@@ -46,14 +46,14 @@ const QuestionList = function ({ questions, productInfo, handleAddQuestion, hand
   };
 
   return (
-    <React.Fragment>
+    <>
       <SearchQuestions handleSearch={handleSearch} />
       {(mode) ?
         <div>
           <div className="q-container">
             {(filteredQuestions.length > 0) ?
               filteredQuestions.slice(0, visibleCount).map((question, i) =>
-                <QuestionEntry role="single-question" key={i} question={question} productInfo={productInfo} handleAddAnswer={handleAddAnswer} />)
+                <QuestionEntry data-testid="found" key={i} question={question} productInfo={productInfo} handleAddAnswer={handleAddAnswer} />)
               : <div></div>}
           </div>
           <div className="buttons">
@@ -68,7 +68,7 @@ const QuestionList = function ({ questions, productInfo, handleAddQuestion, hand
           <div className="q-container">
             {(questions.length > 0) ?
               questions.slice(0, visibleCount).map((question, i) =>
-                <QuestionEntry role="single-question" key={i} question={question} productInfo={productInfo} handleAddAnswer={handleAddAnswer} />)
+                <QuestionEntry key={i} question={question} productInfo={productInfo} handleAddAnswer={handleAddAnswer} />)
               : <div></div>}
           </div>
           <div className="buttons">
@@ -77,14 +77,14 @@ const QuestionList = function ({ questions, productInfo, handleAddQuestion, hand
             <button className="add-q b-right" onClick={() => openModal()}>ADD A QUESTION +</button>
           </div>
         </div>}
-      <QuestionModal
-        role="q-modal"
-        isOpen={isOpen}
-        productInfo={productInfo}
-        closeModal={closeModal.bind(this)}
-        handleAddQuestion={handleAddQuestion}>
-      </QuestionModal>
-    </React.Fragment>
+      {isOpen ?
+        <QuestionModal
+          isOpen={isOpen}
+          productInfo={productInfo}
+          closeModal={closeModal.bind(this)}
+          handleAddQuestion={handleAddQuestion}>
+        </QuestionModal> : null}
+    </>
   );
 };
 
