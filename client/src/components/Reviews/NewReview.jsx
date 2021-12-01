@@ -14,7 +14,9 @@ class NewReview extends React.Component {
       currentCharacteristic: 'none selected',
       characteristics: {},
       starDescription: null,
-      starRating: []
+      starRating: [],
+      photos: [],
+      URLs: []
     };
 
     // this.handleFormSubmit = this.props.updateSortType.bind(this);
@@ -25,6 +27,10 @@ class NewReview extends React.Component {
     this.setSummary = this.setSummary.bind(this);
     this.setName = this.setName.bind(this);
     this.setEmail = this.setEmail.bind(this);
+    this.handleFileUpload = this.handleFileUpload.bind(this);
+    this.uploadFile = this.uploadFile.bind(this);
+    this.setPhotos = this.setPhotos.bind(this);
+    this.setURLs = this.setURLs.bind(this);
   }
 
   checkReviewLength(e) {
@@ -123,7 +129,6 @@ class NewReview extends React.Component {
     this.setState({
       starDescription: description
     });
-
   }
 
   setName(e) {
@@ -256,11 +261,12 @@ class NewReview extends React.Component {
       recommend: this.state.recommend,
       name: this.state.name,
       email: this.state.email,
-      characteristics: this.state.characteristics
+      characteristics: this.state.characteristics,
+      photos: this.state.URLs
     };
 
     let validated = this.validate(formData);
-
+    // console.log(formData.photos);
     if (validated) {
       axios.post('/addReview', formData)
         .then(function (response) {
@@ -294,7 +300,6 @@ class NewReview extends React.Component {
       validated = false;
     }
 
-
     if (formData.summary === undefined) {
       alertMessage += 'Summary, ';
       validated = false;
@@ -320,7 +325,6 @@ class NewReview extends React.Component {
       }
     }
 
-
     alertMessage = alertMessage.slice(0, alertMessage.length - 2);
 
     if (validated) {
@@ -331,6 +335,48 @@ class NewReview extends React.Component {
     }
   }
 
+  handleFileUpload(e) {
+    const file = e.target.files[0];
+    if (file) {
+      this.uploadFile(file)
+        .then(result => {
+          const { file } = result.data;
+          const delivery = `https://ucarecdn.com/${file}/`;
+          this.setURLs([delivery, ...this.state.URLs]);
+        })
+        .catch(error => console.log(error));
+    }
+    this.setPhotos([URL.createObjectURL(file), ...this.state.photos]);
+  }
+
+  setPhotos(photos) {
+    this.setState({
+      photos: photos
+    });
+  }
+
+  setURLs(URLs) {
+
+    console.log('set urls: ', URLs);
+    this.setState({
+      URLs: URLs
+    });
+  }
+
+  uploadFile(file) {
+    const form = new FormData();
+    form.append('photos', file, file.name);
+
+    return new Promise((resolve, reject) => {
+      axios.request({
+        url: '/upload',
+        method: 'post',
+        data: form
+      })
+        .then((result) => resolve(result))
+        .catch(error => reject(error));
+    });
+  }
 
   render () {
     if (this.props.open !== true) {
@@ -428,7 +474,11 @@ class NewReview extends React.Component {
               </div>
               <div>
                 <label>Upload photos</label>
-                <input type="file" name="photos"></input>
+                <div className="preview">
+                  {this.state.photos.map((photo, i) => <img src={photo} className="thumbnails" key={i} ></img>)}
+                </div>
+                {(this.state.photos.length >= 5) ? <div></div> : <input className="input-file" type="file" name="photos" accept="image/*" multiple onChange={this.handleFileUpload}></input>}
+                {/* <input type="file" name="photos"></input> */}
               </div>
               <div onChange={this.setName}>
                 <label>What is your nickname?</label><span id="mandatory-asterisk">*</span>
