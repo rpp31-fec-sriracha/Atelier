@@ -1,4 +1,6 @@
 import React from 'react';
+import './index.css';
+import '../../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
 import Overview from './components/Overview/Overview.jsx';
 import Questions from './components/Questions/Questions.jsx';
 import Reviews from './components/Reviews/Reviews.jsx';
