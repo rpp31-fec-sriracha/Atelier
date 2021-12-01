@@ -8,10 +8,19 @@ const Thumbnail = function (props) {
   } else {
     thumbImg = props.thumbImg;
   }
+
+  let className = props.selectedThumb === currentThumbId ?
+    'thumb current-thumb' :
+    'thumb';
+
+  if (props.extended) {
+    className += ' extended-thumb';
+  }
+
   return (
-    <div className={props.selectedThumb === currentThumbId ?
-      'thumb current-thumb' :
-      'thumb'}><img onMouseEnter={props.thumbEnter} onMouseLeave={props.thumbLeave} onClick={(e) => props.thumbClick(e, props.thumbId)} src={thumbImg}></img></div>
+    <div className={className} onMouseEnter={props.thumbEnter} onMouseLeave={props.thumbLeave} onClick={(e) => props.thumbClick(e, props.thumbId)} >
+      {!props.extended ? <img src={thumbImg}></img> : null}
+    </div>
   );
 };
 
@@ -22,8 +31,6 @@ class ImageGallery extends React.Component {
       extended: false,
       zoomed: false,
       imageHover: false,
-      mouseX: 0,
-      mouseY: 0,
       width: null,
       height: null,
     };
@@ -36,10 +43,8 @@ class ImageGallery extends React.Component {
 
   handleMouseMove(e) {
     this.setState({
-      mouseX: e.clientX,
-      mouseY: e.clientY,
-      offsetX: this.state.zoomed ? (e.nativeEvent.offsetX - this.state.height / 2) + 'px' : 'center',
-      offsetY: this.state.zoomed ? (e.nativeEvent.offsetY - this.state.width / 2) + 'px' : 'center',
+      offsetX: Math.floor((e.nativeEvent.offsetX / this.state.width) * 100) + '%',
+      offsetY: Math.floor((e.nativeEvent.offsetY / this.state.height) * 100) + '%',
     });
   }
 
@@ -52,18 +57,24 @@ class ImageGallery extends React.Component {
   }
 
   setExpanded(e) {
-    if (this.state.imageHover === true && !this.state.extended) {
+    if (this.state.imageHover === true && !this.state.extended && e.target.nodeName !== 'IMG') {
       this.setState({
         extended: true
       });
     } else {
-      this.setState({zoomed: !this.state.zoomed});
+      if (!e.target.classList.contains('thumb') && e.target.nodeName !== 'IMG' && e.target.nodeName !== 'I') {
+        this.setState({
+          zoomed: !this.state.zoomed
+        });
+      }
     }
     const { width, height } = document.getElementById('image-gallery').getBoundingClientRect();
     this.setState({ width, height });
   }
 
   componentDidMount() {
+    const { width, height } = document.getElementById('image-gallery').getBoundingClientRect();
+    this.setState({ width, height });
   }
 
   render() {
@@ -76,6 +87,7 @@ class ImageGallery extends React.Component {
           thumbClick={this.props.thumbClick}
           key={'thumb' + index}
           thumbId={'thumb' + index}
+          extended={this.state.extended}
           selectedThumb={this.props.selectedThumb}
           thumbImg={t} />);
       }
@@ -90,11 +102,11 @@ class ImageGallery extends React.Component {
       style={{
         backgroundImage: `url(${this.props.currentStyle.photos[this.props.selectedThumb].url})`,
         backgroundRepeat: 'no-repeat',
-        backgroundSize: `${this.state.zoomed ? '250%' : '100%'}`,
-        backgroundPosition: (this.state.zoomed ? `bottom ${this.state.offsetY} right ${this.state.offsetX}` : 'center'),
-        transition: false,
+        backgroundSize: `${this.state.zoomed ? '250%' : 'contain'}`,
+        backgroundPosition: (this.state.zoomed ? `${this.state.offsetX} ${this.state.offsetY}` : 'center'),
+        // transition: 0,
       }}>
-      <div>
+      <div className="thumb-container">
         <div className="thumb-arrow">
           <i className="fas fa-chevron-up" onMouseEnter={this.mouseOut} onMouseLeave={this.mouseOver} onClick={this.props.handleArrowUp}></i>
         </div>
@@ -104,7 +116,7 @@ class ImageGallery extends React.Component {
         </div>
       </div>
       <div className="photo-nav">
-        <div className="expand-container width-100-min-0"><i onMouseEnter={this.mouseOut} onMouseLeave={this.mouseOver} onClick={() => this.setState({ extended: !this.state.extended })} className="fas fa-expand"></i></div>
+        <div className="expand-container width-100-min-0"><i onMouseEnter={this.mouseOut} onMouseLeave={this.mouseOver} onClick={() => this.setState({ extended: !this.state.extended, zoomed: false })} className="fas fa-expand"></i></div>
         <div className="arrow-container width-100-min-0">
           <i onMouseEnter={this.mouseOut} onMouseLeave={this.mouseOver} onClick={this.props.handleArrowUp} className="fas fa-chevron-left"></i>
           <i onMouseEnter={this.mouseOut} onMouseLeave={this.mouseOver} onClick={this.props.handleArrowDown} className="fas fa-chevron-right"></i>

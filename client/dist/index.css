@@ -9,6 +9,10 @@ html {
   box-sizing: inherit;
 }
 
+ul {
+  list-style-position: inside;
+}
+
 /* Styling classes - add a class to apply that style to your element */
 .flex-row {
   display: flex;
@@ -101,7 +105,7 @@ header {
   width: 100%;
   min-width: 0;
   background-color: #f9f9f9;
-  transition: all 0.5s ease;
+  transition: all 0.2s ease-out;
 }
 
 #image-gallery.zoomed {
@@ -118,10 +122,14 @@ header {
   display: flex;
   position: absolute;
   max-width: 75%;
-  height: 100%;
+  /* height: 100%; */
   z-index: 10;
   margin: auto;
-  transition: all 1s ease;
+}
+
+#style-name {
+  display: flex;
+  align-items: center;
 }
 
 .extended:after {
@@ -145,14 +153,16 @@ header {
 #productInfoBottom {
   justify-content: center;
   display: flex;
-}
-
-#productInfoBottom div {
-  margin: 1.5em;
+  margin-top: 1.5em;
 }
 
 #productInfoBottom ul {
+  margin: auto 0 auto 1em;
   width: 33%;
+}
+
+.bottom-text {
+  border-right: 1px solid darkgray;
 }
 
 .thumb {
@@ -177,6 +187,14 @@ header {
   min-width: 100%;
   padding: 0;
   object-fit: cover;
+}
+
+.extended-thumb {
+  width: 50px;
+  height: 50px;
+  margin: 25px;
+  background-color: black;
+
 }
 
 .current-thumb {
@@ -209,6 +227,12 @@ header {
   object-fit: cover;
 }
 
+.thumb-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .thumb-arrow {
   display: flex;
   width: 75px;
@@ -225,6 +249,17 @@ header {
 
 .fa-chevron-left, .fa-chevron-right {
   font-size: 2em;
+}
+
+.fa-check {
+  color: transparent;
+}
+
+.current-style .fa-check {
+  font-size: 1.5em;
+  margin: -5px -10px 0 auto;
+  text-shadow: 1px 2px 3px #fff;
+  color: #332E30;
 }
 
 .photo-nav {

@@ -18,6 +18,7 @@ class Overview extends React.Component {
       thumbEnd: 7,
       cart: [],
       loaded: false,
+      done: false
     };
     this.handleStyleClick = this.handleStyleClick.bind(this);
     this.handleThumbClick = this.handleThumbClick.bind(this);
@@ -132,7 +133,6 @@ class Overview extends React.Component {
   }
 
   render() {
-
     if (!this.state.loaded) {
       return null;
     }

@@ -28,6 +28,14 @@ const ProductInfo = function(props) {
     });
   };
 
+  let prices;
+
+  if (props.currentStyle.sale_price) {
+    prices = (<><s style={{color: 'red'}}>${props.currentStyle.original_price}</s>${props.currentStyle.sale_price}</>);
+  } else {
+    prices = '$' + props.currentStyle.original_price;
+  }
+
   return (
     <div className="flex-row" id="productInfo">
 
@@ -47,12 +55,11 @@ const ProductInfo = function(props) {
         <h4 data-testid="productCategory">{props.product.category}</h4>
         <h3 data-testid="productName">{props.product.name}</h3>
 
-        <p>{props.product.default_price}</p>
+        <p>{prices}</p>
 
         {props.styles !== undefined ? <StyleSelector styleClick={props.styleClick} styles={props.styles} currentStyle={props.currentStyle} /> :
           <div></div>}
         <AddToCart handleAddToCart={props.handleAddToCart} currentStyle={props.currentStyle} />
-        <p>{props.product.description}</p>
       </div>
 
     </div>

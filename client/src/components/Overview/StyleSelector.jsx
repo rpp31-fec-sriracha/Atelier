@@ -4,7 +4,9 @@ const StyleThumb = function(props) {
   return (<div>
     <span role="img" aria-label={props.styleName} onClick={(e) => props.onClick(e, props.styleId)} className={props.currentStyleId === props.styleId ?
       'styleThumb current-style' :
-      'styleThumb'} style={{backgroundImage: `url(${props.thumbnailUrl})`}}></span>
+      'styleThumb'} style={{backgroundImage: `url(${props.thumbnailUrl})`}}>
+      <i className="fas fa-check"></i>
+    </span>
   </div>);
 };
 
@@ -18,7 +20,7 @@ const StyleSelector = function(props) {
 
     return (
       <React.Fragment>
-        <div className="flex-row">
+        <div id="style-name" className="flex-row">
           <h3>{'Style >'} </h3><h4>{styleName}</h4>
         </div>
         <div className="flex-row styleThumbs">
