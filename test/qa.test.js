@@ -21,8 +21,9 @@ import AnswerModal from '../client/src/components/Questions/AnswerModal.jsx';
 import ImageModal from '../client/src/components/Questions/ImageModal.jsx';
 import QuestionModal from '../client/src/components/Questions/QuestionModal.jsx';
 
+jest.mock('axios');
 
-xdescribe('Unit Tests', () => {
+describe('Unit Tests', () => {
 
   test('renders Search Component', () => {
     const placeholderText = 'HAVE A QUESTION? SEARCH FOR ANSWERS...';
@@ -54,37 +55,37 @@ xdescribe('Unit Tests', () => {
 });
 
 
-
-jest.mock('axios');
 describe('Integration Tests', () => {
 
-  xtest('should open a modal when user clicks add answer button', async () => {
+  test('should open a modal when user clicks add answer button', async () => {
     render(<QuestionList questions={dummyData.resultsC} />)
+
     const addA = screen.getAllByRole('button', { name: /Add Answer/i });
     userEvent.click(addA[0])
 
     expect(await screen.findByText('Submit your Answer')).toBeInTheDocument();
   });
 
-  xtest('should open a modal when user clicks add question button', async () => {
+  test('should open a modal when user clicks add question button', async () => {
     render(<QuestionList questions={dummyData.resultsA} productInfo={dummyData.product_id} />)
+
     const addQ = screen.getByRole('button', { name: /ADD A QUESTION +/i });
     userEvent.click(addQ)
 
     expect(await screen.findByText('Ask Your Question')).toBeInTheDocument();
   });
 
-  xtest('should hide a button when user loads up all the questions', async () => {
+  test('should hide a button when user loads up all the questions', async () => {
     render(<QuestionList questions={dummyData.resultsA} productInfo={dummyData.product_id} />)
 
     const moreQ = screen.getByRole('button', { name: /MORE ANSWERED QUESTIONS/i });
-    for (let i = 0; i < dummyData.resultsA.length; i++) {ß
+    for (let i = 0; i < dummyData.resultsA.length; i++) {
       userEvent.click(moreQ)
     }
     expect(await moreQ).not.toBeInTheDocument();
   });
 
-  xtest('should display a warning message when requirements have not been met in Question Modal', async () => {
+  test('should display a warning message when requirements have not been met in Question Modal', async () => {
     render(<QuestionModal isOpen={true} productInfo={dummyData.product_name} />)
 
     const submit = screen.getByRole('button', { name: /Submit question/i });
@@ -93,7 +94,7 @@ describe('Integration Tests', () => {
     expect(await screen.findByText(/You must enter the following/i)).toBeVisible();
   });
 
-  xtest('should display a warning message when requirements have not been met in Answer Modal', async () => {
+  test('should display a warning message when requirements have not been met in Answer Modal', async () => {
     render(<AnswerModal question={dummyData.resultsD} isOpen={true} productInfo={dummyData.product_name} />)
 
     const submit = screen.getByRole('button', { name: /Submit answer/i });
@@ -112,11 +113,6 @@ describe('Integration Tests', () => {
     const email = screen.getByLabelText(/Your email/);
     const submit = screen.getByRole('button', { name: /Submit question/i });
 
-    userEvent.type(question, 'Is this durable?');
-    userEvent.type(nickname, 'BunnyBurn');
-    userEvent.type(email, 'bunny@aol.com');
-
-
     const q = {
       question: question.value,
       nickname: nickname.value,
@@ -124,7 +120,11 @@ describe('Integration Tests', () => {
     }
     const onSuccess = 'Thank you for submitting your question!';
 
+    userEvent.type(question, 'Is this durable?');
+    userEvent.type(nickname, 'BunnyBurn');
+    userEvent.type(email, 'bunny@aol.com');
     userEvent.click(submit);
+
     axios.request.mockResolvedValueOnce(onSuccess)
 
     httpRequest.addQuestion(dummyData.product_id, q)
@@ -147,46 +147,54 @@ describe('Integration Tests', () => {
     expect(await question).toHaveDisplayValue('Is this durable?')
     expect(await nickname).toHaveDisplayValue('BunnyBurn')
     expect(await email).toHaveDisplayValue('bunny@aol.com')
+
   });
 
-  xtest('should allow users to add a new answer to given question', () => {
-    render(<AnswerModal question={dummyData.resultsA[1]} isOpen={true} productInfo={dummyData.product_id} />);
+  test('should allow users to add a new answer to given question', () => {
+    const handleAdd = jest.fn();
+    const close = jest.fn();
+    render(<AnswerModal question={dummyData.resultsA[1]} isOpen={true} productInfo={dummyData.product_name} handleAddAnswer={handleAdd} closeModal={close} />);
 
-    const questionId = 513739;
     const newAnswer = {
-      id: questionId,
+      id: dummyData.resultsA[1].question_id,
       body: 'Overstock',
       name: 'Seller',
-      email: 'nushoes@shop.com',
-      photos: [
-        'https://ucarecdn.com/00977bf8-9eb4-4897-996c-063900c1b19b/',
-        'https://ucarecdn.com/081cec79-a762-417b-afd8-a2c8fe30d15e/'
-      ]
+      email: 'nushoes@shop.com'
     };
-    const onSuccess = 'Thank you for submitting your answer!';
 
-    axios.post(questionId, newAnswer).mockResolvedValue(onSuccess);
-
-    const answer = screen.getByLabelText('Your Answer');
-    const nickname = screen.getByLabelText('What is your nickname');
-    const email = screen.getByLabelText('Your email');
-    const photo = screen.getByLabelText('Upload your photos');
+    const answer = screen.getByLabelText(/Your Answer/);
+    const nickname = screen.getByLabelText(/What is your nickname/);
+    const email = screen.getByLabelText(/Your email/);
     const submit = screen.getByRole('button', { name: /Submit answer/i });
 
     userEvent.type(answer, 'We have overstock');
     userEvent.type(nickname, 'Seller');
     userEvent.type(email, 'nushoes@shop.com');
-    userEvent.click(photo);
     userEvent.click(submit);
 
-    waitFor(() => {
-      expect(screen.getByText('We have overstock')).toBeInTheDocument();
-    });
-    expect(httpRequest.addAnswer).toBeCalledTimes(1);
-    expect(httpRequest.addAnswer).toBeCalledWith('/addAnswer', newAnswer, expect.stringContaining(onSuccess));
+    const onSuccess = 'Thank you for submitting your answer!';
+    axios.request.mockResolvedValueOnce(onSuccess);
+
+    httpRequest.addAnswer(dummyData.resultsD[0].question_id, newAnswer)
+      .then((result) => {
+      expect(result).toEqual(onSuccess);
+      expect(axios.request).toBeCalledTimes(1);
+      expect(axios.request).toBeCalledWith({
+        url: '/addAnswer',
+        method: 'post',
+        data: {
+          id: dummyData.resultsD[0].question_id,
+          body: newAnswer.answer,
+          name: newAnswer.nickname,
+          email: newAnswer.email
+        },
+      })
+    })
+    .catch(err => console.log(err))
+
   });
 
-  xtest('should display filtered questions when user types', () => {
+  test('should display filtered questions when user types', () => {
     render(<QuestionList questions={dummyData.resultsA} productInfo={dummyData.product_id} />);
 
     const search = screen.getByPlaceholderText('HAVE A QUESTION? SEARCH FOR ANSWERS...')
@@ -195,7 +203,7 @@ describe('Integration Tests', () => {
     expect(screen.getAllByTestId('Q-body')).toHaveLength(1);
   });
 
-  xtest('should not display non-existing filtered questions when user types', () => {
+  test('should not display non-existing filtered questions when user types', () => {
     render(<QuestionList questions={dummyData.resultsA} productInfo={dummyData.product_id} />);
 
     const search = screen.getByPlaceholderText('HAVE A QUESTION? SEARCH FOR ANSWERS...')
@@ -204,7 +212,7 @@ describe('Integration Tests', () => {
     expect(screen.queryAllByTestId('found')).toHaveLength(0);
   });
 
-  xtest('should fetched data from Q&A API', async () => {
+  test('should fetched data from Q&A API', async () => {
     // setup
     axios.get.mockResolvedValue(dummyData.resultsA);
     // work
@@ -216,8 +224,7 @@ describe('Integration Tests', () => {
       })
   });
 
-
-  xtest('should display 2 more questions upon clicking the button', () => {
+  test('should display 2 more questions upon clicking the button', () => {
 
     render(<QuestionList questions={dummyData.resultsA} productInfo={dummyData.product_id} />);
 

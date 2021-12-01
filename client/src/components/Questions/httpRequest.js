@@ -42,8 +42,7 @@ const httpRequest = {
           },
         })
         .then(resolve('Thank you for submitting your answer!'))
-        .catch(error =>reject(error)
-        );
+        .catch(error =>reject(error));
     });
   },
   uploadFile: (file) => {
