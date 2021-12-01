@@ -3,7 +3,7 @@ import ReactDom from 'react-dom';
 
 const ImageModal = ({ src, isOpen, closeModal}) => {
 
-  return ReactDom.createPortal(
+  return (
     <>
       {isOpen ?
         <>
@@ -17,9 +17,7 @@ const ImageModal = ({ src, isOpen, closeModal}) => {
             </div>
           </div>
         </> : null}
-
-    </>,
-    document.getElementById('image-portal')
+    </>
   );
 };
 
