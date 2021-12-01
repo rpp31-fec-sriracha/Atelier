@@ -37,8 +37,9 @@ const AddToCart = function(props) {
 
         <select value={value}
           onChange={(e) => {
+            console.log(e.target.value);
             setValue(e.target.value);
-            setQty(e.hasOwnProperty('value') ? sizes[e.target.value][0] : '');
+            setQty(sizes[e.target.value][0]);
             setDisabled(!Boolean(e.target.value));
           }} name="size" id="size-select" required>
           <option value="">Select Size</option>
