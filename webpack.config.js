@@ -4,7 +4,7 @@ var DIST = path.join(__dirname, '/client/dist');
 
 module.exports = (env) => {
   return {
-    mode: env.PRODUCTION ? 'production' : 'development',
+    mode: env.production ? 'production' : 'development',
     entry: SRC,
     output: {
       filename: 'main.js',
