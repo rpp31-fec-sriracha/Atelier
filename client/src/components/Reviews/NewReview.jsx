@@ -3,8 +3,6 @@ import ReactDom from 'react-dom';
 import _ from 'underscore';
 const axios = require('axios');
 
-//NEED TO ADD VALIDATION
-
 class NewReview extends React.Component {
   constructor(props) {
     super(props);
@@ -12,11 +10,13 @@ class NewReview extends React.Component {
     this.state = {
       reviewLengthMessage: 'Minimum required characters left: 50',
       minReviewLength: false,
-      recommend: true,
+      recommend: null,
       currentCharacteristic: 'none selected',
       characteristics: {},
       starDescription: null,
-      starRating: []
+      starRating: [],
+      photos: [],
+      URLs: []
     };
 
     // this.handleFormSubmit = this.props.updateSortType.bind(this);
@@ -27,6 +27,10 @@ class NewReview extends React.Component {
     this.setSummary = this.setSummary.bind(this);
     this.setName = this.setName.bind(this);
     this.setEmail = this.setEmail.bind(this);
+    this.handleFileUpload = this.handleFileUpload.bind(this);
+    this.uploadFile = this.uploadFile.bind(this);
+    this.setPhotos = this.setPhotos.bind(this);
+    this.setURLs = this.setURLs.bind(this);
   }
 
   checkReviewLength(e) {
@@ -125,7 +129,6 @@ class NewReview extends React.Component {
     this.setState({
       starDescription: description
     });
-
   }
 
   setName(e) {
@@ -258,22 +261,122 @@ class NewReview extends React.Component {
       recommend: this.state.recommend,
       name: this.state.name,
       email: this.state.email,
-      characteristics: this.state.characteristics
+      characteristics: this.state.characteristics,
+      photos: this.state.URLs
     };
 
-    axios.post('/addReview', formData)
-      .then(function (response) {
-        console.log(response);
-        //get reviews and metadata again?
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    let validated = this.validate(formData);
+    // console.log(formData.photos);
+    if (validated) {
+      axios.post('/addReview', formData)
+        .then(function (response) {
+          console.log(response);
+          //get reviews and metadata again?
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
 
-    this.props.onClose();
+      this.props.onClose();
+    }
   }
 
+  validate(formData) {
+    let validated = true;
+    let alertMessage = 'Please ensure that the following fields are completed correctly: ';
 
+    if (formData.rating === undefined) {
+      alertMessage += 'Rating, ';
+      validated = false;
+    }
+
+    if (formData.recommend === null) {
+      alertMessage += 'Recommendation, ';
+      validated = false;
+    }
+
+    if (Object.keys(this.props.characteristics).length !== Object.keys(formData.characteristics).length) {
+      alertMessage += 'Characteristics, ';
+      validated = false;
+    }
+
+    if (formData.summary === undefined) {
+      alertMessage += 'Summary, ';
+      validated = false;
+    }
+
+    if (formData.body === undefined || formData.body.length < 50) {
+      alertMessage += 'Review body, ';
+      validated = false;
+    }
+
+    if (formData.name === undefined) {
+      alertMessage += 'Nickname, ';
+      validated = false;
+    }
+
+    if (formData.email === undefined) {
+      alertMessage += 'Email, ';
+      validated = false;
+    } else {
+      if ((/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(formData.email)) === false) {
+        alertMessage += 'Email, ';
+        validated = false;
+      }
+    }
+
+    alertMessage = alertMessage.slice(0, alertMessage.length - 2);
+
+    if (validated) {
+      return true;
+    } else {
+      window.alert(alertMessage);
+      return false;
+    }
+  }
+
+  handleFileUpload(e) {
+    const file = e.target.files[0];
+    if (file) {
+      this.uploadFile(file)
+        .then(result => {
+          const { file } = result.data;
+          const delivery = `https://ucarecdn.com/${file}/`;
+          this.setURLs([delivery, ...this.state.URLs]);
+        })
+        .catch(error => console.log(error));
+    }
+    this.setPhotos([URL.createObjectURL(file), ...this.state.photos]);
+  }
+
+  setPhotos(photos) {
+    this.setState({
+      photos: photos
+    });
+  }
+
+  setURLs(URLs) {
+
+    console.log('set urls: ', URLs);
+    this.setState({
+      URLs: URLs
+    });
+  }
+
+  uploadFile(file) {
+    const form = new FormData();
+    form.append('photos', file, file.name);
+
+    return new Promise((resolve, reject) => {
+      axios.request({
+        url: '/upload',
+        method: 'post',
+        data: form
+      })
+        .then((result) => resolve(result))
+        .catch(error => reject(error));
+    });
+  }
 
   render () {
     if (this.props.open !== true) {
@@ -286,6 +389,9 @@ class NewReview extends React.Component {
         <div className="modal">
           <div className="new-review">
             <form>
+              <div className="exit">
+                <button onClick={() => this.props.onClose()}>X</button>
+              </div>
               <h3 className="modal-title">Write Your Review</h3>
               <h4 className="modal-subtitle">About the {this.props.productName}.</h4>
               <div>Overall Rating*   <span>{this.state.starDescription}</span></div>
@@ -368,7 +474,11 @@ class NewReview extends React.Component {
               </div>
               <div>
                 <label>Upload photos</label>
-                <input type="file" name="photos"></input>
+                <div className="preview">
+                  {this.state.photos.map((photo, i) => <img src={photo} className="thumbnails" key={i} ></img>)}
+                </div>
+                {(this.state.photos.length >= 5) ? <div></div> : <input className="input-file" type="file" name="photos" accept="image/*" multiple onChange={this.handleFileUpload}></input>}
+                {/* <input type="file" name="photos"></input> */}
               </div>
               <div onChange={this.setName}>
                 <label>What is your nickname?</label><span id="mandatory-asterisk">*</span>

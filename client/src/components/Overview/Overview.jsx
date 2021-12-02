@@ -18,6 +18,7 @@ class Overview extends React.Component {
       thumbEnd: 7,
       cart: [],
       loaded: false,
+      done: false
     };
     this.handleStyleClick = this.handleStyleClick.bind(this);
     this.handleThumbClick = this.handleThumbClick.bind(this);
@@ -118,21 +119,13 @@ class Overview extends React.Component {
   }
 
   componentDidUpdate() {
-    let { thumbStart, thumbEnd } = this.state;
-    let thumbs = this.state.currentStyle.photos.map((photo, index) => {
-      if (index >= thumbStart && index < thumbEnd) {
-        return photo.thumbnail_url;
-      }
-    });
-
     if (this.props.productStyles) {
       this.props.productStyles.map((style, index) => {
         if (this.state.selectedStyleId &&
           this.state.selectedStyleId === style.style_id &&
           this.state.currentStyle.style_id !== style.style_id) {
           this.setState({
-            currentStyle: style,
-            // currentThumbs: thumbs
+            currentStyle: style
           });
         }
       });
@@ -140,22 +133,24 @@ class Overview extends React.Component {
   }
 
   render() {
-
     if (!this.state.loaded) {
       return null;
     }
 
-    return (<Interactions displayName="Container" widget="Overview" children={
+    return (<Interactions widget="Overview" children={
       <div className="overview flex-column">
         <ProductInfo product={this.props.productInfo}
           averageReview={this.props.averageReview}
           styles={this.props.productStyles}
+          numReviews={this.props.numReviews}
+
           styleClick={this.handleStyleClick}
           thumbClick={this.handleThumbClick}
-          currentStyle={this.state.currentStyle}
           handleAddToCart={this.handleAddToCart}
           handleArrowDown={this.handleArrowDown}
           handleArrowUp={this.handleArrowUp}
+
+          currentStyle={this.state.currentStyle}
           defaultStyle={this.state.defaultStyle}
           selectedThumb={this.state.selectedThumb}
           thumbStart={this.state.thumbStart}

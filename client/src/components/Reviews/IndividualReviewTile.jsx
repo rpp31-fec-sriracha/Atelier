@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import EnlargePhoto from './EnlargePhoto.jsx';
 
 class IndividualReviewTile extends React.Component {
   constructor(props) {
@@ -12,10 +13,14 @@ class IndividualReviewTile extends React.Component {
       // helpfulCount: this.props.currentReview.helpfulness,
       helpfulClicked: false,
       report: 'Report',
-      reportClicked: false
+      reportClicked: false,
+      isOpen: false,
+      currentURL: null
     };
 
     this.showFullReview = this.showFullReview.bind(this);
+    this.setIsOpen = this.setIsOpen.bind(this);
+    this.onClose = this.onClose.bind(this);
   }
 
   showStars(averageStars) {
@@ -120,6 +125,16 @@ class IndividualReviewTile extends React.Component {
     }
   }
 
+  setIsOpen(e) {
+    this.setState({
+      isOpen: true,
+      currentURL: e.target.src
+    });
+  }
+
+  onClose() {
+    this.setState({isOpen: false});
+  }
 
   render() {
     // console.log(this.props);
@@ -139,7 +154,8 @@ class IndividualReviewTile extends React.Component {
       {this.state.showReviewLink ? <div onClick={() => this.showFullReview()}><u>Show more</u></div> : null}
       <div>{this.props.currentReview.response}</div>
       <div className="photo-list">
-        {this.props.currentReview.photos.map((photo, i) => <img className="photos" key={i} src={photo.url}></img>)}
+        {this.props.currentReview.photos.map((photo, i) => <img className="photos" key={i} onClick= {(e) => this.setIsOpen(e)} src={photo.url}></img>)}
+        <EnlargePhoto isOpen={this.state.isOpen} currentURL={this.state.currentURL} onClose={this.onClose}></EnlargePhoto>
       </div>
       {this.props.currentReview.recommend ? <div>{`${String.fromCharCode(10004)} I recommend this product`}</div> : null}
       {this.props.currentReview.response ? (<div className={'seller-response'}>

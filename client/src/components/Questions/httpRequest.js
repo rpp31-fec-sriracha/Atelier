@@ -1,5 +1,4 @@
 import axios from 'axios';
-// import { UPLOADCARE_KEY } from './../../../../server/config.js';
 
 const httpRequest = {
   getQuestion: (currentProductId) => {
@@ -43,8 +42,7 @@ const httpRequest = {
           },
         })
         .then(resolve('Thank you for submitting your answer!'))
-        .catch(error =>reject(error)
-        );
+        .catch(error =>reject(error));
     });
   },
   uploadFile: (file) => {
@@ -74,7 +72,7 @@ const httpRequest = {
             product_id: Number(currentProductId)
           }
         })
-        .then(resolve('Thank you for submitting your question!'))
+        .then(() => resolve('Thank you for submitting your question!'))
         .catch(error => reject(error));
     });
   },

@@ -41,7 +41,7 @@ const AnswerEntry = ({ answer }) => {
           {answer.photos.map((photo, i) =>
             <img className="photos" key={i} src={photo} onClick={handleimageclick}></img>
           )}
-          <ImageModal isOpen={isOpen} closeModal={closeModal} src={src}></ImageModal>
+          {isOpen ? <ImageModal isOpen={isOpen} closeModal={closeModal} src={src}></ImageModal> : null}
         </div>
         <div className="userInfos">
           <span data-testid="answerer-name">by {(answer.answerer_name.toLowerCase() === 'seller') ? <b>{answer.answerer_name}</b> : answer.answerer_name}, </span>

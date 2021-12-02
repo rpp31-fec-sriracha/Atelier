@@ -59,14 +59,15 @@ class Questions extends React.Component {
           <p>QUESTIONS & ANSWERS</p>
 
           <QuestionList
-            role="q-list"
             questions={questions}
             productInfo={productInfo}
             handleAddQuestion={this.handleAddQuestion.bind(this)}
             handleAddAnswer={this.handleAddAnswer.bind(this)}
           />
-        </div>}>
-      </Interactions>);
+        </div>
+      }>
+      </Interactions>
+    );
   }
 }
 

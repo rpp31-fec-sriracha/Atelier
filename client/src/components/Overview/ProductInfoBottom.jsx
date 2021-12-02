@@ -12,7 +12,7 @@ const ProductInfoBottom = function(props) {
   }
   return (
     <div id="productInfoBottom">
-      <div>
+      <div className="bottom-text">
         <h3 data-testid="slogan">{props.slogan}</h3>
         <h4>{props.description}</h4>
       </div>

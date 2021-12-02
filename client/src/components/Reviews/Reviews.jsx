@@ -114,7 +114,7 @@ class Reviews extends React.Component {
     }
 
     return (<Interactions displayName="Container" widget="Reviews" children={
-      <div className="reviews-container">
+      <div id="ratings-reviews" className="reviews-container">
         <div><font size="+2">RATINGS & REVIEWS</font></div>
         <div className="flex-row-reviews">
           <div className="flex-column">
