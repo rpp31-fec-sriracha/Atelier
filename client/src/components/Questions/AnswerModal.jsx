@@ -28,7 +28,7 @@ const AnswerModal = ({ question, productInfo, isOpen, closeModal, handleAddAnswe
         httpRequest.uploadFile(file)
           .then(result => {
             const { file } = result.data;
-            const delivery = `https://ucarecdn.com/${file}/`;
+            const delivery = `https://ucarecdn.com/${file}/-/preview/720x720/-/format/webp/`;
             setUrls([delivery, ...urls]);
           })
           .catch(error => console.log(error))

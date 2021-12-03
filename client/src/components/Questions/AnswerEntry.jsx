@@ -38,12 +38,7 @@ const AnswerEntry = ({ answer }) => {
       <div className="answer">
         <div className="A-body">{answer.body}</div>
         <div className="photo-list" >
-          {answer.photos.map((photo, i) =>
-            <picture>
-              <source srcSet={photo} type="image/webp" />
-              <img className="photos" key={i} src={photo} onClick={handleimageclick}></img>
-            </picture>
-          )}
+          {answer.photos.map((photo, i) => (photo.includes('ucare')) ? <img className="photos" key={i} src={`${photo}-/preview/720x720/-/format/webp/`} onClick={handleimageclick}></img> : <img className="photos" key={i} src={photo} onClick={handleimageclick}></img>)}
           {isOpen ? <ImageModal isOpen={isOpen} closeModal={closeModal} src={src}></ImageModal> : null}
         </div>
         <div className="userInfos">
