@@ -1,5 +1,6 @@
 html {
   box-sizing: border-box;
+  font-family: Helvetica, Arial, sans-serif;
 }
 * {
   margin: 0;
@@ -43,18 +44,53 @@ body {
   width: 100%;
 }
 
-header {
+header .top {
   display: flex;
   align-items: center;
-  height: 20%;
-  background-color: gray;
+  height: 40%;
+  background-color: black;
   color: white;
-  font-family: sans-serif
+  font-family: sans-serif;
+  justify-content: space-evenly;
+  font-size: 7rem;
 }
 
-.logo {
-  height: 100px;
-  padding: 4px;
+header .top span:first-child{
+  color: rgb(220, 50, 4);
+}
+header .bottom {
+  display: flex;
+  justify-content: center;
+  color: rgb(80, 78, 78);
+  font-size: 1.2rem;
+  font-style: italic;
+  margin-top: 20px;
+}
+header .bottom span {
+  text-decoration: underline;
+}
+header input {
+  width: 300px;
+  height: 50px;
+  color: white;
+  font-size: 1.1rem;
+  border-bottom: solid 3px white;
+  border-left-style: none;
+  border-right-style: none;
+  border-top-style: none;
+  background: none;
+  outline: none;
+  margin-top: 30px;
+}
+.product-search {
+  display: flex;
+  align-items: center;
+}
+.product-search img {
+  width: 40px;
+  height: 40px;
+  padding-left: 10px;
+  margin-top: 30px;
 }
 
 #app {
@@ -287,7 +323,6 @@ header {
 }
 
 .questions {
-  font-family: Helvetica, Arial, sans-serif;
   margin: 100px;
 }
 
@@ -508,7 +543,7 @@ input[type=range] {
 }
 
 .q-container {
-  max-height: 350px;
+  max-height: 400px;
   overflow-y: scroll;
 }
 .q-container::-webkit-scrollbar {
