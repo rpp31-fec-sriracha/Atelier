@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "start": "nodemon server/server.js",
-    "build": "webpack --watch --config webpack.config.js"
+    "build": "webpack --watch --config webpack.config.js",
+    "build-prod": "webpack --env production"
   },
   "repository": {
     "type": "git",
@@ -32,9 +33,11 @@
     "webpack-cli": "^4.9.1"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4",
     "@testing-library/jest-dom": "^5.15.0",
     "axios": "^0.23.0",
     "compression": "^1.7.4",
+    "css-loader": "^6.5.1",
     "dotenv": "^10.0.0",
     "eslint": "^8.0.1",
     "express": "^4.17.1",
@@ -45,6 +48,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "regenerator-runtime": "^0.13.9",
+    "style-loader": "^3.3.1",
     "underscore": "^1.13.1"
   }
 }
