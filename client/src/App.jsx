@@ -1,4 +1,4 @@
-import React, { lazy } from 'react';
+import React, { lazy, Suspense } from 'react';
 import './index.css';
 import '../../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
 const Overview = lazy(() => import('./components/Overview/Overview.jsx'));
@@ -62,18 +62,20 @@ class App extends React.Component {
   componentDidMount() {
     this.getProductInfo();
   }
-
+  renderLoader() {
+    return <p>Loading product info...</p>;
+  }
   render() {
     const { averageReview, currentProductId, productInfo, productStyles, numReviews} = this.state;
     return (<div className="appContainer">
       {(this.state.productLoaded) ?
-        <>
+        <Suspense fallback={this.renderLoader()}>
           <Overview productInfo={productInfo} productStyles={productStyles} averageReview={averageReview} currentProductId={currentProductId} numReviews={numReviews} />
           <Questions currentProductId={currentProductId} productInfo={productInfo.name} />
           <Reviews currentProductId={currentProductId} productName={productInfo.name}
             setAverageReview={this.setAverageReview} averageStars={this.state.averageReview}
-            setNumReviews={this.setNumReviews} numReviews={this.state.numReviews}/>
-        </>
+            setNumReviews={this.setNumReviews} numReviews={this.state.numReviews} />
+        </Suspense>
         : <p>Loading product info...</p>
       }
     </div>);
