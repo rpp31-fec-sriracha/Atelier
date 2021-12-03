@@ -21,7 +21,6 @@ class RatingBreakdown extends React.Component {
         oneStar: false
       },
       filtering: false,
-      // currentFilters: [],
       filterMessage: ''
     };
 
@@ -43,7 +42,6 @@ class RatingBreakdown extends React.Component {
       starCounter[review.rating]++;
     }
 
-    // console.log('countertest', starCounter[3]);
     this.setState({
       fiveStarCount: starCounter[5],
       fourStarCount: starCounter[4],
@@ -51,12 +49,6 @@ class RatingBreakdown extends React.Component {
       twoStarCount: starCounter[2],
       oneStarCount: starCounter[1],
     });
-
-
-    // setTimeout(() => {
-    //   console.log('test', this.state);
-    //   console.log(this.state.fourStarCount);
-    // }, 1000);
   }
 
   calculateAverage() {
@@ -68,20 +60,9 @@ class RatingBreakdown extends React.Component {
       1: 0
     };
 
-    // starCounter[5] = 1;
-
     for (var review of this.props.reviews) {
       starCounter[review.rating]++;
     }
-
-    // this.state.fiveStarCount = starCounter[5];
-    // this.setState({
-    //   fiveStarCount: starCounter[5],
-    //   fourStarCount: starCounter[4],
-    //   threeStarCount: starCounter[3],
-    //   twoStarCount: starCounter[2],
-    //   oneStarCount: starCounter[1],
-    // });
 
     let fiveCount = (parseInt(this.state.fiveStarCount) * 5) || 0;
     let fourCount = (parseInt(this.state.fourStarCount) * 4) || 0;
@@ -131,7 +112,6 @@ class RatingBreakdown extends React.Component {
       });
       newFilters.push(currentSelection);
       newFilters.sort();
-      // console.log(newFilters);
     }
 
     if (newFilterState[e] === false) {
@@ -144,9 +124,8 @@ class RatingBreakdown extends React.Component {
       newMessage = newMessage + i + ', ';
     }
     newMessage = newMessage.slice(0, newMessage.length - 2);
-    // console.log(newMessage);
+
     this.setState({
-      // currentFilters: newFilters,
       filterMessage: newMessage
     });
 
@@ -171,7 +150,6 @@ class RatingBreakdown extends React.Component {
         oneStar: false
       },
       filtering: false
-      // currentFilters: [],
     });
 
     this.props.setCurrentFilters([]);
@@ -201,21 +179,10 @@ class RatingBreakdown extends React.Component {
     return starTypes.map((currentStar, i) => {
       return <div key={i} className={currentStar}></div>;
     });
-
-    // return (
-    //   <div>
-    //     <div className={starTypes[0]}></div>
-    //     <div className={starTypes[1]}></div>
-    //     <div className={starTypes[2]}></div>
-    //     <div className={starTypes[3]}></div>
-    //     <div className={starTypes[4]}></div>
-    //   </div>
-    // );
   }
 
   render() {
-    // console.log('one star reviews:', this.state.oneStarCount);
-    // console.log('total: ', this.state.totalReviews);
+    // console.log(JSON.stringify(this.props.metadata));
     if (this.props.metadata.length === 0) {
       return <div/>;
     }
@@ -223,7 +190,6 @@ class RatingBreakdown extends React.Component {
     return (<div className="rating-breakdown">
       <h1>{this.props.averageStars}</h1>
       <div>{this.showStars(this.props.averageStars)}</div>
-      {/* <div>Rating Breakdown</div> */}
       {this.state.filtering ? <div>{this.state.filterMessage}</div> : null}
       {this.state.filtering ? <div onClick={() => this.removeFilters()}><u>Remove all filters</u></div> : null}
       <div>{Math.round(this.props.metadata.recommended.true / this.state.totalReviews * 1000) / 10}% of reviews recommend this product</div>

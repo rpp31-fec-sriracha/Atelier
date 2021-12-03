@@ -15,7 +15,6 @@ class SortSelector extends React.Component {
     this.updateSortType(event.target.value);
   }
 
-
   render() {
     return (
       <select id="select" onChange={this.handleChange.bind(this)}>
@@ -25,7 +24,6 @@ class SortSelector extends React.Component {
       </select>
     );
   }
-
 }
 
 export default SortSelector;

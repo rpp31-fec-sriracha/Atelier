@@ -15,8 +15,6 @@ class Interactions extends React.Component {
       axios.post('/api/interactions', { element, widget, time })
         .then((response) => console.log(response))
         .catch((error) => console.log(error));
-
-      // console.log({ element, widget, time });
     }}>{this.props.children}</div>);
   }
 }

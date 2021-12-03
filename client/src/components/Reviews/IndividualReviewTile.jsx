@@ -10,7 +10,6 @@ class IndividualReviewTile extends React.Component {
       filterSelected: 'relevance',
       showReviewLink: false,
       reviewToShow: this.props.currentReview.body,
-      // helpfulCount: this.props.currentReview.helpfulness,
       helpfulClicked: false,
       report: 'Report',
       reportClicked: false,
@@ -137,7 +136,6 @@ class IndividualReviewTile extends React.Component {
   }
 
   render() {
-    // console.log(this.props);
     const options = {year: 'numeric', month: 'long', day: 'numeric'};
 
     return (<div className="individual-review-tile">
@@ -150,7 +148,6 @@ class IndividualReviewTile extends React.Component {
       </div>
       <h4>{this.props.currentReview.summary.slice(0, 60)}</h4>
       <div>{this.state.reviewToShow}</div>
-      {/* <div>{this.props.currentReview.body}</div> */}
       {this.state.showReviewLink ? <div onClick={() => this.showFullReview()}><u>Show more</u></div> : null}
       <div>{this.props.currentReview.response}</div>
       <div className="photo-list">
@@ -162,8 +159,6 @@ class IndividualReviewTile extends React.Component {
         <div>Response from seller:</div>
         {this.props.currentReview.response}
       </div>) : null}
-      {/* <div>Helpful? <u>Yes</u> ({this.props.currentReview.helpfulness}) | <span>Report</span></div> */}
-      {/* <div>Helpful? <span onClick={() => this.addHelpful()}><u>Yes</u> ({this.state.helpfulCount})</span> | <span onClick={() => this.addReport()}>{this.state.report}</span></div> */}
       <div>Helpful? <span onClick={() => this.addHelpful()}><u>Yes</u> ({this.props.currentReview.helpfulness})</span> | <span onClick={() => this.addReport()}>{this.state.report}</span></div>
     </div>);
   }
