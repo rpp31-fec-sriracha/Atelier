@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import './index.css';
 import '../../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
-import Overview from './components/Overview/Overview.jsx';
-import Questions from './components/Questions/Questions.jsx';
-import Reviews from './components/Reviews/Reviews.jsx';
+const Overview = lazy(() => import('./components/Overview/Overview.jsx'));
+const Questions = lazy(() => import('./components/Questions/Questions.jsx'));
+const Reviews = lazy(() => import('./components/Reviews/Reviews.jsx'));
 import axios from 'axios';
 
 class App extends React.Component {
@@ -62,18 +62,20 @@ class App extends React.Component {
   componentDidMount() {
     this.getProductInfo();
   }
-
+  renderLoader() {
+    return <p>Loading product info...</p>;
+  }
   render() {
     const { averageReview, currentProductId, productInfo, productStyles, numReviews} = this.state;
     return (<div className="appContainer">
       {(this.state.productLoaded) ?
-        <>
+        <Suspense fallback={this.renderLoader()}>
           <Overview productInfo={productInfo} productStyles={productStyles} averageReview={averageReview} currentProductId={currentProductId} numReviews={numReviews} />
           <Questions currentProductId={currentProductId} productInfo={productInfo.name} />
           <Reviews currentProductId={currentProductId} productName={productInfo.name}
             setAverageReview={this.setAverageReview} averageStars={this.state.averageReview}
-            setNumReviews={this.setNumReviews} numReviews={this.state.numReviews}/>
-        </>
+            setNumReviews={this.setNumReviews} numReviews={this.state.numReviews} />
+        </Suspense>
         : <p>Loading product info...</p>
       }
     </div>);
