@@ -39,8 +39,8 @@ const AnswerEntry = ({ answer }) => {
         <div className="A-body">{answer.body}</div>
         <div className="photo-list" >
           {answer.photos.map((photo, i) => (photo.includes('ucare')) ?
-            <img className="photos" key={i} src={`${photo}-/preview/300x300/-/quality/lighter/-/format/webp/`} onClick={handleimageclick}></img>
-            : <img className="photos" key={i} src={photo} onClick={handleimageclick}></img>
+            <img alt="answer" className="photos" key={i} src={`${photo}-/preview/300x300/-/quality/lighter/-/format/webp/`} onClick={handleimageclick}></img>
+            : <img alt="answer" className="photos" key={i} src={photo} onClick={handleimageclick}></img>
           )}
           {isOpen ? <ImageModal isOpen={isOpen} closeModal={closeModal} src={src}></ImageModal> : null}
         </div>
