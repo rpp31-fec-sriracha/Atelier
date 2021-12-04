@@ -40,9 +40,10 @@ class Questions extends React.Component {
     httpRequest
       .addAnswer(questionId, answer)
       .then((result) => {
-        httpRequest
+        setTimeout(() => httpRequest
           .getQuestion(this.props.currentProductId)
-          .then((a) => this.setState({ questions: a }));
+          .then((a) => this.setState({ questions: a }))
+        , 2000);
         return result;
       })
       .then((result) => window.alert(result))

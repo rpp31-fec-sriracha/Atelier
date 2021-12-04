@@ -11,7 +11,7 @@ const QuestionList = function ({ questions, productInfo, handleAddQuestion, hand
 
   const handleSearch = (term) => {
     if (term.length >= 2) {
-      const result = questions.filter(q => q.question_body.toLowerCase().includes(term));
+      const result = questions.filter((q, i) => q.question_body.toLowerCase().includes(term));
       setFilter(result);
       setMode(true);
     } else {
@@ -26,19 +26,19 @@ const QuestionList = function ({ questions, productInfo, handleAddQuestion, hand
   const closeModal = () => {
     setModal(false);
   };
-  const handleClick = (e) => {
-    if (visibleCount >= questions.length) {
+  const handleClick = (e, body) => {
+    if (visibleCount >= body.length) {
       e.preventDefault();
     } else {
       setVisibleCount(visibleCount + 2);
     }
   };
-  const renderButton = () => {
-    if (questions.length > 2) {
-      if (visibleCount >= questions.length) {
+  const renderButton = (body) => {
+    if (body.length > 2) {
+      if (visibleCount >= body.length) {
         return null;
       } else {
-        return <button className="col-1-3 add-q b-left" onClick={handleClick}>MORE ANSWERED QUESTIONS</button>;
+        return <button className="col-1-3 add-q b-left" onClick={(e) => handleClick(e, body)}>MORE ANSWERED QUESTIONS</button>;
       }
     } else {
       return null;
@@ -57,9 +57,7 @@ const QuestionList = function ({ questions, productInfo, handleAddQuestion, hand
               : <div></div>}
           </div>
           <div className="buttons">
-            {(filteredQuestions.length > 2) ?
-              <button className="col-1-3 add-q b-left" onClick={handleClick}>MORE ANSWERED QUESTIONS</button>
-              : <div></div>}
+            {renderButton(filteredQuestions)}
             <span className="_divider"></span>
             <button className="add-q b-right" onClick={() => openModal()}>ADD A QUESTION +</button>
           </div>
@@ -72,7 +70,7 @@ const QuestionList = function ({ questions, productInfo, handleAddQuestion, hand
               : <div></div>}
           </div>
           <div className="buttons">
-            {renderButton()}
+            {renderButton(questions)}
             <span className="_divider"></span>
             <button className="add-q b-right" onClick={() => openModal()}>ADD A QUESTION +</button>
           </div>
