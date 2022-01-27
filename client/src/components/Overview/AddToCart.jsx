@@ -37,7 +37,6 @@ const AddToCart = function(props) {
 
         <select value={value}
           onChange={(e) => {
-            console.log(e.target.value);
             setValue(e.target.value);
             setQty(sizes[e.target.value][0]);
             setDisabled(!Boolean(e.target.value));

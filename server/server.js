@@ -72,7 +72,6 @@ app.post('/addReview', (req, res) => {
       res.status(500).json(err);
     } else {
       // res.status(200).send(data);
-      console.log('success');
       res.status(200).json(data);
     }
   });
