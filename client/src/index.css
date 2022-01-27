@@ -51,14 +51,9 @@ header .top {
   color: white;
   font-family: sans-serif;
   justify-content: space-evenly;
-<<<<<<< HEAD:client/dist/index.css
-  font-size: 7rem;
-}
-=======
   font-size: 6rem;
 }
 
->>>>>>> main:client/src/index.css
 header .top span:first-child{
   color: rgb(220, 50, 4);
 }
@@ -66,27 +61,16 @@ header .bottom {
   display: flex;
   justify-content: center;
   color: rgb(80, 78, 78);
-<<<<<<< HEAD:client/dist/index.css
-  font-size: 1.2rem;
-  font-style: italic;
-  margin-top: 20px;
-=======
   font-size: 1rem;
   font-style: italic;
   margin-top: 18px;
->>>>>>> main:client/src/index.css
 }
 header .bottom span {
   text-decoration: underline;
 }
 header input {
-<<<<<<< HEAD:client/dist/index.css
-  width: 300px;
-  height: 50px;
-=======
   width: 200px;
   height: 35px;
->>>>>>> main:client/src/index.css
   color: white;
   font-size: 1.1rem;
   border-bottom: solid 3px white;
@@ -102,23 +86,11 @@ header input {
   align-items: center;
 }
 .product-search img {
-<<<<<<< HEAD:client/dist/index.css
-  width: 40px;
-  height: 40px;
-  padding-left: 10px;
-  margin-top: 30px;
-}
-/* .logo {
-  height: 100px;
-  padding: 4px;
-} */
-=======
   width: 35px;
   height: 35px;
   padding-left: 13px;
   margin-top: 30px;
 }
->>>>>>> main:client/src/index.css
 
 #app {
   height: 100%;

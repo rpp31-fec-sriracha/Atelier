@@ -270,10 +270,7 @@ class NewReview extends React.Component {
     if (validated) {
       axios.post('/addReview', formData)
         .then(function (response) {
-<<<<<<< HEAD
-=======
           // console.log(response);
->>>>>>> main
           //get reviews and metadata again?
         })
         .catch(function (error) {
@@ -360,10 +357,7 @@ class NewReview extends React.Component {
 
   setURLs(URLs) {
 
-<<<<<<< HEAD
-=======
     // console.log('set urls: ', URLs);
->>>>>>> main
     this.setState({
       URLs: URLs
     });
