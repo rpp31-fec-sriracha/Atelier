@@ -51,12 +51,6 @@ class RatingBreakdown extends React.Component {
       twoStarCount: starCounter[2],
       oneStarCount: starCounter[1],
     });
-
-
-    // setTimeout(() => {
-    //   console.log('test', this.state);
-    //   console.log(this.state.fourStarCount);
-    // }, 1000);
   }
 
   calculateAverage() {

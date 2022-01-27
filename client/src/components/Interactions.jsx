@@ -13,10 +13,9 @@ class Interactions extends React.Component {
       let time = new Date(e.timeStamp).toISOString();
 
       axios.post('/api/interactions', { element, widget, time })
-        .then((response) => console.log(response))
+        // .then((response) => console.log(response))
         .catch((error) => console.log(error));
 
-      // console.log({ element, widget, time });
     }}>{this.props.children}</div>);
   }
 }
