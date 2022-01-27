@@ -43,7 +43,6 @@ class RatingBreakdown extends React.Component {
       starCounter[review.rating]++;
     }
 
-    // console.log('countertest', starCounter[3]);
     this.setState({
       fiveStarCount: starCounter[5],
       fourStarCount: starCounter[4],
@@ -51,12 +50,6 @@ class RatingBreakdown extends React.Component {
       twoStarCount: starCounter[2],
       oneStarCount: starCounter[1],
     });
-
-
-    // setTimeout(() => {
-    //   console.log('test', this.state);
-    //   console.log(this.state.fourStarCount);
-    // }, 1000);
   }
 
   calculateAverage() {
@@ -73,15 +66,6 @@ class RatingBreakdown extends React.Component {
     for (var review of this.props.reviews) {
       starCounter[review.rating]++;
     }
-
-    // this.state.fiveStarCount = starCounter[5];
-    // this.setState({
-    //   fiveStarCount: starCounter[5],
-    //   fourStarCount: starCounter[4],
-    //   threeStarCount: starCounter[3],
-    //   twoStarCount: starCounter[2],
-    //   oneStarCount: starCounter[1],
-    // });
 
     let fiveCount = (parseInt(this.state.fiveStarCount) * 5) || 0;
     let fourCount = (parseInt(this.state.fourStarCount) * 4) || 0;
@@ -201,21 +185,9 @@ class RatingBreakdown extends React.Component {
     return starTypes.map((currentStar, i) => {
       return <div key={i} className={currentStar}></div>;
     });
-
-    // return (
-    //   <div>
-    //     <div className={starTypes[0]}></div>
-    //     <div className={starTypes[1]}></div>
-    //     <div className={starTypes[2]}></div>
-    //     <div className={starTypes[3]}></div>
-    //     <div className={starTypes[4]}></div>
-    //   </div>
-    // );
   }
 
   render() {
-    // console.log('one star reviews:', this.state.oneStarCount);
-    // console.log('total: ', this.state.totalReviews);
     if (this.props.metadata.length === 0) {
       return <div/>;
     }
