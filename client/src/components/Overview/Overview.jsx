@@ -1,5 +1,4 @@
 import React from 'react';
-
 import ProductInfo from './ProductInfo.jsx';
 import ProductInfoBottom from './ProductInfoBottom.jsx';
 import Interactions from '../Interactions.jsx';

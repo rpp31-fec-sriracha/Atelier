@@ -153,7 +153,9 @@ class IndividualReviewTile extends React.Component {
       {this.state.showReviewLink ? <div onClick={() => this.showFullReview()}><u>Show more</u></div> : null}
       <div>{this.props.currentReview.response}</div>
       <div className="photo-list">
-        {this.props.currentReview.photos.map((photo, i) => <img className="photos" key={i} onClick= {(e) => this.setIsOpen(e)} src={photo.url}></img>)}
+        {this.props.currentReview.photos.map((photo, i) =>
+          (photo.url.includes('ucare')) ? <img className="photos" key={i} onClick={(e) => this.setIsOpen(e)} src={`${photo.url}-/preview/300x300/-/quality/lighter/-/format/webp/`}></img>
+            : <img className="photos" key={i} onClick={(e) => this.setIsOpen(e)} src={photo.url}></img>)}
         <EnlargePhoto isOpen={this.state.isOpen} currentURL={this.state.currentURL} onClose={this.onClose}></EnlargePhoto>
       </div>
       {this.props.currentReview.recommend ? <div>{`${String.fromCharCode(10004)} I recommend this product`}</div> : null}
