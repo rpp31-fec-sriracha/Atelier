@@ -161,46 +161,6 @@ app.post('/upload', upload.single('photos'), (req, res) => {
     .catch(err => res.status(500).json(err));
 });
 
-// app.get('/questions', (req, res) => {
-//   let productId = req.query.productId;
-//   let page = 1;
-//   let count = 5;
-//   if (req.query.page) {
-//     page = page;
-//   }
-//   if (req.query.count) {
-//     count = count;
-//   }
-
-//   api.getQuestions(productId, page, count, (err, data) => {
-//     if (err) {
-//       res.status(500).json(err);
-//     } else {
-//       res.status(200).json(data);
-//     }
-//   });
-// });
-
-// app.get('/answers', (req, res) => {
-//   let productId = req.query.productId;
-//   let page = 1;
-//   let count = 5;
-//   if (req.body.page) {
-//     page = page;
-//   }
-//   if (req.body.count) {
-//     count = count;
-//   }
-
-//   api.getAnswers(productId, page, count, (err, data) => {
-//     if (err) {
-//       res.status(500).json(err);
-//     } else {
-//       res.status(200).json(data);
-//     }
-//   });
-// });
-
 // app.get(/\/\d+\/?/, (req, res) => {
 //   res.sendFile('index.html');
 // });
