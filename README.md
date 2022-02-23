@@ -12,9 +12,9 @@ This web application is a storefront for a fictional company, consisting of prod
 
 1. Clone the repository.<br>
     ```bash
-    git clone https://github.com/rpp31-fec-sriracha/project-atelier/
+    git clone https://github.com/rpp31-fec-sriracha/Atelier
     ```
-2. To access the API, acquire a personal access token from https://github.com/ and insert the token into .env file.
+2. To access the Data API, acquire github's a personal access token from https://github.com, create `.env` file, and insert the token into `.env` file.
 `API_KEY=your_github_apikey`<br>
 `UPLOADCARE_KEY=your_api_key`
 4. Install NPM packages that require to run the application. <br>
