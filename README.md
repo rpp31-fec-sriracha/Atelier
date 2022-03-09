@@ -1,7 +1,7 @@
 # Atelier
 
 ## Overview
-This web application is a storefront for a fictional company, consisting of product overviews, a question and answer section, and a detailed reviews breakdown.
+A single-page application for e-commerce consisting of product overviews, a question and answer section, and a detailed reviews breakdown.
 
 > Check out demo video
 > https://www.youtube.com/watch?v=_sSzk-McQtM
