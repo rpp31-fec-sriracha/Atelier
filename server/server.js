@@ -115,11 +115,4 @@ app.post('/upload', upload.single('photos'), (req, res) => {
     .catch(err => res.status(500).json(err));
 });
 
-<<<<<<< HEAD
-=======
-// app.get(/\/\d+\/?/, (req, res) => {
-//   res.sendFile('index.html');
-// });
-
->>>>>>> main
 app.listen(3000, () => console.log('Running server on http://localhost:3000'));
