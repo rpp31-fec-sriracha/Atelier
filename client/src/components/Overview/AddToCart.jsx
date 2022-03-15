@@ -9,7 +9,6 @@ const QtyOptions = function(props) {
 };
 
 const AddToCart = function(props) {
-  // These buttons will be changing to select elements
   const [sizeQty, setQty] = useState(1);
   const [value, setValue] = useState('');
   const [selectedQty, setSelectedQty] = useState('');

@@ -14,7 +14,6 @@ app.use(express.static(path.resolve(__dirname, '../client/dist')));
 app.use(/^\/\d+/, express.static(path.resolve(__dirname, '../client/dist')));
 
 app.all('/api/*', (req, res, next) => {
-  // console.log('hitting local server', req);
   let method = req.method;
   let reqUrl = (req.url.replace(/^\/api/, ''));
   reqUrl = reqUrl.replace(/\?.*$/, '');
@@ -31,51 +30,6 @@ app.all('/api/*', (req, res, next) => {
     }
   });
 });
-
-// app.get('/products', (req, res) => {
-//   let page = 1;
-//   let count = 15;
-//   if (req.query.page) {
-//     page = page;
-//   }
-//   if (req.body.count) {
-//     count = count;
-//   }
-
-//   api.getProductList(page, count, (err, data) => {
-//     if (err) {
-//       res.status(500).json(err);
-//     } else {
-//       res.status(200).json(data);
-//     }
-//   });
-// });
-
-// app.get('/productInfo', (req, res) => {
-//   // console.log(req.url);
-//   // console.log(req.query);
-//   let productId = req.query.productId;
-
-//   api.getProductInfo(productId, (err, data) => {
-//     if (err) {
-//       res.status(500).json(err);
-//     } else {
-//       res.status(200).json(data);
-//     }
-//   });
-// });
-
-// app.get('/productStyles', (req, res) => {
-//   let productId = req.query.productId;
-
-//   api.getProductStyles(productId, (err, data) => {
-//     if (err) {
-//       res.status(500).json(err);
-//     } else {
-//       res.status(200).json(data);
-//     }
-//   });
-// });
 
 app.get('/reviews', (req, res) => {
   let productId = req.query.productId;
@@ -160,9 +114,5 @@ app.post('/upload', upload.single('photos'), (req, res) => {
     .then((uuid) => res.status(200).json(uuid))
     .catch(err => res.status(500).json(err));
 });
-
-// app.get(/\/\d+\/?/, (req, res) => {
-//   res.sendFile('index.html');
-// });
 
 app.listen(3000, () => console.log('Running server on http://localhost:3000'));
