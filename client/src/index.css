@@ -55,7 +55,7 @@ header .top {
 }
 
 header .top span:first-child{
-  color: rgb(220, 50, 4);
+  color: rgb(239, 239, 238);
 }
 header .bottom {
   display: flex;
