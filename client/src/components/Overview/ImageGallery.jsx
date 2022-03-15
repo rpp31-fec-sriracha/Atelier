@@ -38,7 +38,6 @@ class ImageGallery extends React.Component {
     this.mouseOut = this.mouseOut.bind(this);
     this.setExpanded = this.setExpanded.bind(this);
     this.handleMouseMove = this.handleMouseMove.bind(this);
-    // this.getGalleryBoundingRect = this.getGalleryBoundingRect.bind(this);
   }
 
   handleMouseMove(e) {
@@ -104,7 +103,6 @@ class ImageGallery extends React.Component {
         backgroundRepeat: 'no-repeat',
         backgroundSize: `${this.state.zoomed ? '250%' : 'contain'}`,
         backgroundPosition: (this.state.zoomed ? `${this.state.offsetX} ${this.state.offsetY}` : 'center'),
-        // transition: 0,
       }}>
       <div className="thumb-container">
         <div className="thumb-arrow">
