@@ -9,7 +9,6 @@ class Slider extends React.Component {
   }
 
   renderSwitch(characteristic) {
-    // console.log(characteristic); - why is this logging twice?
     switch (characteristic) {
     case ('Size'):
       return (
@@ -62,11 +61,8 @@ class Slider extends React.Component {
       <div className="slidecontainer">
         <input type="range" min="1" max="5" defaultValue={this.props.charValue} className="slider" id="myRange" disabled></input>
       </div>
-      {/* <div className="flex-row-reviews-min-max"> */}
       {this.renderSwitch(this.props.name)}
-      {/* </div> */}
     </div>);
   }
-
 }
 export default Slider;

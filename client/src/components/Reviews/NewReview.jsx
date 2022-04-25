@@ -19,7 +19,6 @@ class NewReview extends React.Component {
       URLs: []
     };
 
-    // this.handleFormSubmit = this.props.updateSortType.bind(this);
     this.setRecommend = this.setRecommend.bind(this);
     this.setCharacteristic = this.setCharacteristic.bind(this);
     this.checkReviewLength = this.checkReviewLength.bind(this);
@@ -74,21 +73,16 @@ class NewReview extends React.Component {
     this.setState({
       starRating: newRating
     });
-
-    // this.setRating(value + 1);
   }
 
   setStarAndRating(value) {
-    // console.log(value);
     this.setStarRating(value + 1);
     this.setRating(value + 1);
   }
 
-
   componentDidMount() {
     this.setStarRating();
   }
-
 
   setRating(value) {
     let description = '';
@@ -104,23 +98,6 @@ class NewReview extends React.Component {
     } else if (value === 1) {
       description = 'Poor';
     }
-    // switch (value) {
-    // case ('1'):
-    //   description = 'Poor';
-    //   break;
-    // case ('2'):
-    //   description = 'Fair';
-    //   break;
-    // case ('3'):
-    //   description = 'Average';
-    //   break;
-    // case ('4'):
-    //   description = 'Good';
-    //   break;
-    // case ('5'):
-    //   description = 'Great';
-    //   break;
-    // }
 
     this.setState({
       rating: Number(value)
@@ -251,7 +228,6 @@ class NewReview extends React.Component {
 
   handleFormSubmit(e) {
     e.preventDefault();
-    // console.log('You have submitted the form');
     let formData = {
       // eslint-disable-next-line camelcase
       product_id: Number(this.props.productID),
@@ -266,12 +242,9 @@ class NewReview extends React.Component {
     };
 
     let validated = this.validate(formData);
-    // console.log(formData.photos);
     if (validated) {
       axios.post('/addReview', formData)
         .then(function (response) {
-          // console.log(response);
-          //get reviews and metadata again?
         })
         .catch(function (error) {
           console.log(error);
@@ -356,8 +329,6 @@ class NewReview extends React.Component {
   }
 
   setURLs(URLs) {
-
-    // console.log('set urls: ', URLs);
     this.setState({
       URLs: URLs
     });
@@ -396,40 +367,15 @@ class NewReview extends React.Component {
               <h4 className="modal-subtitle">About the {this.props.productName}.</h4>
               <div>Overall Rating*   <span>{this.state.starDescription}</span></div>
               <div>{this.state.starRating}</div>
-
-              {/* <div onChange={this.setRating}>
-                <label>Overall rating</label><span id="mandatory-asterisk">*</span>
-                <label>
-                  <input type="radio" id="1" name="rating" value="1"></input>
-                  1
-                </label>
-                <label>
-                  <input type="radio" id="2" name="rating" value="2"></input>
-                  2
-                </label>
-                <label>
-                  <input type="radio" id="3" name="rating" value="3"></input>
-                  3
-                </label>
-                <label>
-                  <input type="radio" id="4" name="rating" value="4"></input>
-                  4
-                </label>
-                <label>
-                  <input type="radio" id="5" name="rating" value="5"></input>
-                  5
-                </label>
-                <span>{this.state.starDescription}</span>
-              </div> */}
               <div onChange={this.setRecommend}>
                 <label>Do you recommend this product?</label><span id="mandatory-asterisk">*</span>
                 <label>
                   <input type="radio" id="yes" name="recommend" value="Yes"></input>
-                Yes
+                  Yes
                 </label>
                 <label>
                   <input type="radio" id="no" name="recommend" value="No"></input>
-                No
+                  No
                 </label>
               </div>
               <div>
@@ -478,7 +424,6 @@ class NewReview extends React.Component {
                   {this.state.photos.map((photo, i) => <img src={photo} className="thumbnails" key={i} ></img>)}
                 </div>
                 {(this.state.photos.length >= 5) ? <div></div> : <input className="input-file" type="file" name="photos" accept="image/*" multiple onChange={this.handleFileUpload}></input>}
-                {/* <input type="file" name="photos"></input> */}
               </div>
               <div onChange={this.setName}>
                 <label>What is your nickname?</label><span id="mandatory-asterisk">*</span>

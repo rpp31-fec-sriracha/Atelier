@@ -17,7 +17,7 @@ const QuestionModal = ({ isOpen, productInfo, handleAddQuestion, closeModal }) =
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
-  };
+  }; 
   const handleValidate = (e) => {
     if (Object.values(values).every((v) => v !== '')) {
       handleAddQuestion(values);
