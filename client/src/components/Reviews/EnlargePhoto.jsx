@@ -18,7 +18,6 @@ const EnlargePhoto = function(props) {
         </div>
       </div>
     </>
-
   );
 };
 
